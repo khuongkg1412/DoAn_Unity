@@ -1,0 +1,27 @@
+*Gợi ý chỉnh Usecase:
+1. Guest: 
+-Thêm các event PR, Marketing cho sản phẩm
+-Cho xuất hiện các chương trình khuyến mãi, vòng quay thử, sự kiện mang tính thu hút để lôi kéo khách(chưa phải là user) đăng kí tài khoản.
+
+2. Player:
+-Thêm Share thành tích đã hết dịch khu vực nào. 
+-Ranking cho tăng tính cạnh tranh và gạ chơi
+-Cân nhắc sâu hơn về chức năng "Chat" (tránh các tiêu cực, rác...)
+
+3. IT:
+4. Director: Xoáy sâu vào phân tích người chơi và game
+-Người chơi: giới tính, độ tuổi, địa chỉ, mức độ đóng góp(nạp bn, time chơi, mời dc bn người)
+-Game: level nào thua nhiều, pass nhiều, số ng đạt tới các level
+
+Thêm role Game master
+
+*Gợi ý chỉnh sửa Prototype:
+Chỉnh sửa backround cho dễ nhìn hơn
+Bảng thông số bị chìm (có thể xem xét để dọc theo phần virut)
+Thêm animation cho các virut (khi bị nhắm bắn, các tương tác khi virut đứng gần nhau)
+
+
+Task tiếp theo 9h Chủ Nhật 5/9: 
+Hoàn thiện Usecase
+Làm bộ prototype các trang còn lại của player.
+

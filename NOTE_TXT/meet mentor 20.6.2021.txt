@@ -1,0 +1,30 @@
+Game sẽ đánh ở nước ngoài trước, đa ngôn ngữ, có map thế giới
+
+Viết bằng Android, nếu thành công thì viết IOS.
+
+Muốn hấp dẫn thì nên chơi COOP, và là game online.
+
+Phải thuê server làm game online.
+
+Trả lời các ý:
+Nhu cầu
+Tính mới: có gì mới, phải khác biệt với thị trường 
+Hình thức game
+Tính khả thi
+
+Nhân vật và virut phải vẻ lại, phong cảnh phải sửa lại hết.
+
+Money:
+Dự trụ kinh phí
+Dự tính thời gian hòa vốn
+Thu tiền bằng cách nào (quảng cáo hoặc mua vật phẩm trong game)
+
+Mục tiêu của game:
+Nâng cao ý thức
+Tinh thần trách nhiệm
+Đoàn kết, nhân ái
+
+Nhắm tới đối tượng nào:
+Trẻ trâu, trung học hay cấp 3.
+
+Nghiên cứu 3 đến 5 công nghệ.
