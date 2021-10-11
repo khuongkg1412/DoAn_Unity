@@ -1,0 +1,19 @@
+Điều kiện thắng và thua nên thêm vô dạng tỉ lệ, đạt được 80 90% vẫn qua.
+
+Coop 2 người
+
+Suy nghĩ về cheating
+
+Tập trung làm giao diện của game
+
+Cần bàn thêm về quỹ đạo của Đạn
+
+Đầu tư prototype cho chi tiết để sau này đỡ phải edit.
+
+Thứ 4 tuần sau đưa usecase tổng, tập trung (customer) và prototype gameplay
+
+Bản beta, giai đoạn 1 cho toàn SE
+				 giai đoạn 2 cho toàn trường
+				 giai đoạn 3 cho toàn quốc
+
+

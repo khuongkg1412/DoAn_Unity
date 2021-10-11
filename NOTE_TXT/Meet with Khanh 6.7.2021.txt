@@ -1,0 +1,42 @@
+Note metting với A.Khanh ngày 6.7.2021
+
+Né ra dụ tạo virut nhân tạo để trục lợi.
+
+Lối chơi theo kiểu chiến thuật, điều binh, xây dựng..
+
+Sức mạnh quốc gia: 
+	-người dân: tạo ra tiền
+	-bác sĩ, quân đội: chữa trị, tạo vaccin, đấu với virut
+	-nhà máy: tạo khẩu trang, nước rửa tay,.. (dạng theo level để có thể phòng ngự, muốn mua liền thì phải dùng tiền để mua)
+
+nếu các nhà xung quanh bị nhiễm bệnh thì mình qua cứu trợ lẫn nhau ()
+
+tạo các loại quốc gia, sẽ có các thuộc tính khác nhau của các nước
+
+Cứ mỗi người nhiễm bệnh sẽ gây thiệt hại tài sản, level
+
+Ví dụ về phòng ngự: có khẩu trang, giáp này nọ thì chịu dc sát thương nhiều hơn.
+
+Các loại tấn công: vừa đánh virut bên A, vừa trị liệu cho cánh quân B
+
+Tạo được càng nhiều vaccin thì bắn virut càng nhanh.
+
+Có nhiều cấp bậc Vaccin: ảnh hưởng đến damage và tỉ lệ chống nhiễm sẽ tăng dần
+
+Mình có thể cho bạn bè mượn quân để đánh virut, xung quanh ít người nhiễm sẽ an toàn hơn.
+
+Thay đổi hình thức chiến đấu khi đụng độ Virut: chèn kiểu chơi candy rush, xếp gạch, xếp hình, ở trên nó sẽ thở hơi virut ra tràn xuống, mình phải hoàn thành nhanh để thằng (giống game bắn trứng). Tuy nhiên, chốt lại chỉ tập trung vào 1 hình thức để tránh bị tạp nham.
+
+Các gợi ý chữa trị cho dân:
+	-Cung cấp thuốc: kiểu dân có 10 máu bị nhiểm virut thì còn 7 máu, uống thuốc vô thì nó đầy máu lại.
+	-Bắt nó tập thể dục.
+
+Khuyến khích người chơi giúp đỡ người chơi khác để nhận thưởng nhiều hơn.
+
+Trên bản đồ sẽ có các chấm đỏ thể hiện khu vực nhiễm virut.
+Bản đồ sẽ cố định vị trí Quốc gia, nhưng phải tích hợp AI random vị trí nhiễm bệnh giữa các người chơi để tránh sự đơn giản, gây nhàm chán khi tạo acc chơi lại lần 2.
+
+Cốt truyện sẽ show ra khi mở vùng mới hoặc lên cấp.
+
+
+
