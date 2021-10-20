@@ -1,0 +1,36 @@
+Gợi ý sửa database:
+- Virus: thêm mô tả, hình, type, màu, animation, hp
+Để hiện hình ảnh thì thông qua đường dẫn
+Database có thêm bảng verison để đối chiếu với máy người chơi.
+
+- Country: thêm hình backround, lá cờ, thông tin ng nhiễm
+
+- Login phone: lưu file config để check session từ đó đưa ra thời hạn của session này. Khi ng dùng nghỉ chơi lâu ngày thì từ session đã lưu ta bắt nó đăng nhập lại.
+
+- Bổ sung bảng Bullet tương tự Virus
+
+- Tạo thêm bảng Item để móc vào Inventory
+
+- Tách bảng phụ để nối quan hệ nhiều nhiều của các bảng.
+
+_ Archievement cũng thiếu nhiều phần: image, time...
+
+Gợi ý sửa prototype:
+- Tạm ổn, chau chuốt thêm
+
+- Sửa gameplay:
++ Thêm khẩu trang và có chức năng xịn dần theo cấp, có tái sử dụng dc ko
++ Lối chơi di chuyển đi bắn virus
++ Đạn tăng tấn công
++ Trang bị tăng phòng thủ
+
+
+- Random bày trận
+Cùng level, cùng độ khó, màn hình mỗi ng chơi là khác nhau.
+
+Deadline 3/10/2021: 
+Sửa database, sửa gameplay
+
+Code giao diện giống prototype.
+
+Các hằng số, dữ liệu. giá trị tất cả lưu vào file txt.

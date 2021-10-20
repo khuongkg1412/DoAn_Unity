@@ -1,0 +1,23 @@
+Trong luận văn ko yêu cầu Game Master
+
+Gợi ý chỉnh sửa đăng nhập
++ Thêm đăng nhập bằng SDT thông qua OTP
+- Bỏ đăng nhập Google
+
+
+Gợi ý prototype:
+
+- Phần của Duy sửa lại nhiều, chưa có tính đồng bộ
+- Phần Leader Board thêm cờ quốc gia, chỉnh tên cụ thể và avatar đa dạng
+- Phần Notify thêm Dialog khi nhấn vào
+- Đổi Ngôn ngữ thể hiện bằng icon riêng biệt để tối ưu dễ dàng cho người dùng
+- Phần Khánh cố gắng hoàn thành
+
+
+Task đến 19.5.2021
+1. Hoàn thành prototype theo style Khương-Long
+2. Tạo được database
+
+
+
+

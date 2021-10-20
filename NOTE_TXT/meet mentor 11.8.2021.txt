@@ -1,0 +1,45 @@
+Gợi ý của thầy:
+Phải khác về hình ảnh, hình thức chơi. Vì nếu giống ngta khi trình bày sẽ bị nói là đạo văn gây mất điểm.
+ Tập trung vào lõi chính là mục tiêu diệt virus
+ Về phương án làm nhóm thì có thể chia team ra làm 2 để làm việc đồng thời
+
+
+Lối chơi:
+	Tại sao các game như candy rush lại hấp dẫn?
+	Nghiên cứu những cái lạ lạ để cho ngta thích
+	Nhạc nền và hình ảnh cũng là 1 yếu tố
+	Virus của mình có đẻ ra thêm ko, nếu có thì nó đẻ kiểu gì
+	Chuỗi combo diệt virut của mình ntn
+	Thuốc, đạn để bắn virus nó ra sao, có trộn màu với nhau ko vì virus có nhiều màu mà?
+	Kiểu hình khi các loại đạn, thuốc nâng cấp dung hợp với nhau thì ra màu gì, việc trộn thuốc để ra loại đạn khác
+	Sẽ có các loại đạn đặc biệt ko, kiểu đạn đó là phần thưởng của màn trước hoặc trả phí để mua.
+
+
+
+Luật chơi, cách tấn công của virus
+	-Quân địch:
+		Các loại virus tấn công thì mình mất máu bn
+		Cách sinh soi và xuất hiện của boss
+
+ 	-Quân mình: các loại đạn hiệu ứng tấn công
+ 				combo đánh virus ra sao
+ 				có đồng minh gì ko
+
+*Trong tháng sau
+Chia nhóm làm đôi: 3 đứa code game và hiệu ứng đồ lun, 2 đứa code map và kịch bản lớn như tính năng đăng nhập.
+
+Nói về 4 loại virut cơ bản :
+	Vidu chia ra A, B, C, D
+	A đứng yên
+	B bắn nhiều lần
+	C đổi màu
+	D di chuyển, copy tính năng của dạng khác
+	Đạn cùng màu thì bắn nó mới chết, nếu ko giết ngay thì sẽ đổi thành dạng cao hơn
+	Sẽ có dấu hiệu khi virus cbi đổi dạng
+	Các loại virus sẽ nâng cấp dần nếu ko giết ngay
+	Có thêm loại gọi là 5+ dành cho các con BOSS
+
+	Tránh cạn ý tưởng 
+
+
+Dealine: Chủ nhật tuần này a hy vọng ra kịch bản hoàn chỉnh.

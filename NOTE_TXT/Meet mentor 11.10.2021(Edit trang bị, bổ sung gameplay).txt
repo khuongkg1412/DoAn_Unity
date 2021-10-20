@@ -1,0 +1,29 @@
+* ERD: 
+	Nhận xét: ổn
+	Góp ý: 
+	Bảng virus: image -> object 
+
+*Gameplay: 
+	Cơ chế cứu người thay đổi: 
+	+ Chia loại người ra để cứu theo màu tóc, sẽ làm cho người chơi đưa ra quyết định nên cứu ai trước (các loại người như có tính tích cực, tiêu cực, phá hoại, ...)
+	+ nguyên tắc mất máu của người dân sẽ giống người chơi
+	+ thể hiện trạng thái người dân bằng màu sắc HP
+	+ Hp người dân sẽ khác nhau dựa vào chiều dài thanh máu
+	+ tạo tính chiến thuật về việc cứu người
+	+ Thêm chức năng tầm bắn cho nhân vật
+*Unity: tạm ổn
+
+*Bảng thông số excel: 
+	Bảng trang bị: suy nghĩ sâu hơn về các vật phẩm, theo góc nhìn của cửa hàng.
+
+
+
+
+Deadline: 24/10/2021
+
++ Làm hết scenes.
++ Làm các event nút liên kết.
++ Nên làm sớm cách di chuyển, để tìm dc các phát sinh lỗi càng sớm, tiết kiệm thời gian.
+
+
+

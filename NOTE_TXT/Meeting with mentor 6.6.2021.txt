@@ -1,0 +1,26 @@
+Cải tiến cái đã có, đánh giá cao sáng tạo
+40% nghiên cứu, 60% ứng dụng
+
+Game: 2D
+	  Kịch bản phải hấp dẫn
+	  Nếu up được lên store thì sẽ dc cao phần ứng dụng
+	  Tiêu chí chấm điểm dựa vào thỏa thuận ban đầu với giảng viên
+
+	  Tiêu chí game: game có ý nghĩa, tính nhân vân (ví dụ bác sĩ đi bắn Covid)
+	  Ví dụ game ý tưởng dễ nhưng hấp dẫn như 2048, piano, flapy bird...
+
+Có thể làm 2d kiểu chơi cốt truyện qua màn. Nên dùng Unity code C#
+Nhiệm vụ, lây bệnh, ko đeo khẩu trang thì bị công an bắt.
+Viết thành 1 câu chuyện, theo dạng rẻ nhánh câu hỏi.
+
+Nghiên cứu Unity
+Hiện tại 2 tuần họp 1 lần
+Tháng 9 thì 1 tuần họp 1 lần
+
+Học youtube chung 1 list trong nhóm.
+Viết game nhỏ để có thể làm game to.
+
+
+
+
+
