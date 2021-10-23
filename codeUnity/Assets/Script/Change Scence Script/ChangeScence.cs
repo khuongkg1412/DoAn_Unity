@@ -12,11 +12,32 @@ public class ChangeScence : MonoBehaviour
 
     }
 
+
     public void achiveOpening()
     {
         SceneManager.LoadScene(2);
 
 
+    }
+
+    public void howToPlayOpening() //khuong
+    {
+        SceneManager.LoadScene(3);
+    }
+
+    public void leaderGlobalOpening() //khuong
+    {
+        SceneManager.LoadScene(4);
+    }
+
+    public void leaderLocalOpening() //khuong
+    {
+        SceneManager.LoadScene(5);
+    }
+
+    public void notificationOpening() //khuong
+    {
+        SceneManager.LoadScene(6);
     }
 
     public void backtoMainPage()
