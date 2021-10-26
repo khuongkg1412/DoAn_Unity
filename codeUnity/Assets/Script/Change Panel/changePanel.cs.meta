@@ -3,7 +3,8 @@ guid: c302118acfed64c4db5671eec7b69f14
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - chat_popup: {fileID: 188050, guid: b06f0e6c1dfa4356ac918da1bb32c603, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
