@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class changePanel : MonoBehaviour
 {
-    
 
-    
+
+
 
 
 }
