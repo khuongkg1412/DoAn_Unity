@@ -4,18 +4,20 @@ using UnityEngine;
 
 public class changePanel : MonoBehaviour
 {
-    public GameObject chat_popup;
 
-    public void openChatPopup()
+    public GameObject popup;
+
+
+    public void openPopupPanel()
     {
-        if (chat_popup != null)
+        if (popup != null)
         {
-            chat_popup.SetActive(true);
+            popup.SetActive(true);
         }
     }
-    public void closeChatPopup()
+    public void closePopupPanel()
     {
-            chat_popup.SetActive(false);
+        popup.SetActive(false);
     }
 
 
