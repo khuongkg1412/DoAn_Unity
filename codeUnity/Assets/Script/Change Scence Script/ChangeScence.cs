@@ -23,4 +23,9 @@ public class ChangeScence : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
+
+    public void bopenProfile()
+    {
+        SceneManager.LoadScene(7);
+    }
 }
