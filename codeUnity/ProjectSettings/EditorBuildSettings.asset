@@ -29,4 +29,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Notification.unity
     guid: 629b368e67b170c44972391dfc4252ce
+  - enabled: 1
+    path: Assets/Scenes/Profile/Main screen.unity
+    guid: 5b640944b665c7c4f91e9187960b5b47
+  - enabled: 1
+    path: Assets/Scenes/Profile/Friend list.unity
+    guid: c543c632e5d768940a75139fadd72e41
   m_configObjects: {}
