@@ -10,7 +10,7 @@ public class DataConnect : MonoBehaviour
 {
     private Players data;
     public GameObject playerName;
-    private string dataURL = "https://ltd2k-fptk14-default-rtdb.asia-southeast1.firebasedatabase.app/";
+    //private string dataURL = "https://ltd2k-fptk14-default-rtdb.asia-southeast1.firebasedatabase.app/";
 
 
     // Start is called before the first frame update
