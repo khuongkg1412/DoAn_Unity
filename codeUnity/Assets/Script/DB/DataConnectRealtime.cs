@@ -6,7 +6,7 @@ using Firebase.Database;
 using Firebase.Extensions;
 using UnityEngine.UI;
 //using Firebase.Unity.Editor;
-public class DataConnect : MonoBehaviour
+public class DataConnectRealtime : MonoBehaviour
 {
     private Players data;
     public GameObject playerName;
