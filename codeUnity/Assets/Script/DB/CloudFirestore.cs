@@ -9,6 +9,9 @@ public class CloudFirestore : MonoBehaviour
 {
     Dictionary<string, object> playerr;
 
+    [SerializeField]
+    private string addressPath = "player/ID";
+
     //FirebaseFirestore db = FirebaseFirestore.DefaultInstance;
     //public GameObject playerName;
     // Start is called before the first frame upd ate
@@ -23,12 +26,12 @@ public class CloudFirestore : MonoBehaviour
 
     public void readData()
     {
-        FirebaseFirestore db = FirebaseFirestore.DefaultInstance; //hình như ko đọc dc cái này
+        //FirebaseFirestore db = FirebaseFirestore.DefaultInstance; //hình như ko đọc dc cái này
+        var db = FirebaseFirestore.DefaultInstance;
         db
-            .Collection("player")
-            .Document("ID")
+            .Document(addressPath)
             .GetSnapshotAsync()
-            .ContinueWith((task) =>
+            .ContinueWithOnMainThread((task) =>
             {
                 DocumentSnapshot snapshot = task.Result;
                 if (snapshot.Exists)
