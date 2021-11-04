@@ -259,6 +259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abe7ee49a9547654b96234645b404478, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerName: {fileID: 794386490}
   addressPath: player/ID
 --- !u!1 &134091993
 GameObject:
