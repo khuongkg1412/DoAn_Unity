@@ -4,10 +4,15 @@ using System.Collections.Generic;
 using Firebase.Extensions;
 using Firebase.Firestore;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CloudFirestore : MonoBehaviour
 {
     Dictionary<string, object> playerr;
+
+    public Text playerName;
+
+    FirebaseFirestore db;
 
     [SerializeField]
     private string addressPath = "player/ID";
@@ -27,7 +32,7 @@ public class CloudFirestore : MonoBehaviour
     public void readData()
     {
         //FirebaseFirestore db = FirebaseFirestore.DefaultInstance; //hình như ko đọc dc cái này
-        var db = FirebaseFirestore.DefaultInstance;
+        db = FirebaseFirestore.DefaultInstance;
         db
             .Document(addressPath)
             .GetSnapshotAsync()
@@ -39,7 +44,12 @@ public class CloudFirestore : MonoBehaviour
                     playerr = snapshot.ToDictionary();
                     foreach (KeyValuePair<string, object> pair in playerr)
                     {
-                        Debug.Log(("{0}: {1}", pair.Key, pair.Value));
+                        //Debug.Log(("{0}: {1}", pair.Key, pair.Value));
+                        if (pair.Key == "playerName")
+                        {
+                            Debug.Log("Name: " + pair.Value);
+                            playerName.text = (string) pair.Value;
+                        }
                     }
                 }
                 else
@@ -47,6 +57,5 @@ public class CloudFirestore : MonoBehaviour
                     Debug.Log(String.Format("snapshot không tồn tại!"));
                 }
             });
-        Debug.Log(String.Format("nguyên block task ko chạy"));
     }
 }
