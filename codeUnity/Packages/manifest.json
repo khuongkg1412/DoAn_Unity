@@ -4,6 +4,7 @@
     "com.google.firebase.app": "file:../tgz/com.google.firebase.app-8.5.0.tgz",
     "com.google.firebase.auth": "file:../tgz/com.google.firebase.auth-8.5.0.tgz",
     "com.google.firebase.database": "file:../tgz/com.google.firebase.database-8.5.0.tgz",
+    "com.google.firebase.firestore": "file:../tgz/com.google.firebase.firestore-8.5.0.tgz",
     "com.unity.2d.animation": "6.0.7",
     "com.unity.2d.pixel-perfect": "5.0.0",
     "com.unity.2d.psdimporter": "5.0.4",
