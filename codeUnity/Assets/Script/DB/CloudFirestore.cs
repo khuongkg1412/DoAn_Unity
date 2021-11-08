@@ -22,6 +22,7 @@ public class CloudFirestore : MonoBehaviour
     // Start is called before the first frame upd ate
     void Start()
     {
+        
     }
 
     // Update is called once per frame
@@ -47,7 +48,6 @@ public class CloudFirestore : MonoBehaviour
                         //Debug.Log(("{0}: {1}", pair.Key, pair.Value));
                         if (pair.Key == "playerName")
                         {
-                            Debug.Log("Name: " + pair.Value);
                             playerName.text = (string) pair.Value;
                         }
                     }
