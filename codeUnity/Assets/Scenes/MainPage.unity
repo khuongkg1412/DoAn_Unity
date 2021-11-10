@@ -260,11 +260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerName: {fileID: 794386490}
-<<<<<<< HEAD
   addressPath: player/ID
-=======
-  addressPath: player/ID2
->>>>>>> master
 --- !u!1 &134091993
 GameObject:
   m_ObjectHideFlags: 0
