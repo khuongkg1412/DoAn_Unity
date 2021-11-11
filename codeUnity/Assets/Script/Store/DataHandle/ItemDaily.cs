@@ -41,26 +41,46 @@ public class ItemDaily : MonoBehaviour
     //Let Coroutine run
     bool isRun = false;
 
-    //TextTure,RawImage,Text
+    // //TextTure,RawImage,Text
     public RawImage itemImage;
 
-    public RawImage itemImage2;
+    // public RawImage itemImage2;
 
-    public RawImage itemImage3;
+    // public RawImage itemImage3;
 
     public TMPro.TMP_Text itemName;
 
-    public TMPro.TMP_Text itemName2;
+    // public TMPro.TMP_Text itemName2;
 
-    public TMPro.TMP_Text itemName3;
+    // public TMPro.TMP_Text itemName3;
+
+    public GameObject prefab; // This is our prefab object that will be exposed in the inspector
+
+    public int numberToCreate; // number of objects to create. Exposed in inspector
 
     //Start Program
     private void Start()
     {
-        Debug.Log("Run");
+       
 
         //AddData();
         StartCoroutine(setDatatoGO());
+    }
+
+    void Populate(Texture2D texture,string name)
+    {
+        GameObject newObj; // Create GameObject instance
+
+        // for (int i = 0; i < numberToCreate; i++)
+        // {
+            // Create new instances of our prefab until we've created as many as we specified
+            itemImage.texture = texture;
+            itemName.text = name;
+            newObj = (GameObject) Instantiate(prefab, transform);
+            Debug.Log("Run");
+            
+
+        //}
     }
 
     /*
@@ -92,17 +112,21 @@ public class ItemDaily : MonoBehaviour
             .ContinueWithOnMainThread(task =>
             {
                 QuerySnapshot allItemQuerySnapshot = task.Result;
-                foreach (DocumentSnapshot documentSnapshot  in allItemQuerySnapshot.Documents)
+                foreach (DocumentSnapshot
+                    documentSnapshot
+                    in
+                    allItemQuerySnapshot.Documents
+                )
                 {
                     objectData = documentSnapshot.ConvertTo<ItemDailyStruct>();
-                    listData.Add(objectData);
+                    listData.Add (objectData);
                 }
                 isRun = true;
             });
         yield return null;
     }
 
-    IEnumerator GetImage(string dataImage, RawImage UIImage)
+    IEnumerator GetImage(string dataImage,string dataName)
     {
         Debug.Log("Image Downloading");
 
@@ -128,23 +152,27 @@ public class ItemDaily : MonoBehaviour
                     byte[] fileContents = task.Result;
                     Texture2D texture = new Texture2D(1, 1);
                     texture.LoadImage (fileContents);
-                    UIImage.texture = texture;
+                    //UIImage.texture = texture;
+                    Populate(texture,dataName);
                 }
             });
         yield return null;
     }
 
-    IEnumerator setDatatoGO() 
+    IEnumerator setDatatoGO()
     {
         StartCoroutine(GetData());
         yield return new WaitUntil(() => isRun == true);
+
         //Wait for data has been load from firebase
-        StartCoroutine(GetImage(listData[0].itemImage, itemImage));
-        itemName.text = listData[0].itemName;
-        StartCoroutine(GetImage(listData[1].itemImage, itemImage2));
-        itemName2.text = listData[1].itemName;
-        StartCoroutine(GetImage(listData[2].itemImage, itemImage3));
-        itemName3.text = listData[2].itemName;
+        StartCoroutine(GetImage(listData[0].itemImage, listData[0].itemName));
+        StartCoroutine(GetImage(listData[1].itemImage, listData[1].itemName));
+        StartCoroutine(GetImage(listData[2].itemImage, listData[2].itemName));
+
+
+        // itemName2.text = listData[1].itemName;
+
+        // itemName3.text = listData[2].itemName;
         yield return null;
     }
 }
