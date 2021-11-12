@@ -18,6 +18,8 @@ public class leaderBoardData : MonoBehaviour
 
     bool isRun = false;
 
+    int count = 0;
+
     public RawImage flagImage;
 
     public RawImage playerAvatar;
@@ -50,22 +52,16 @@ public class leaderBoardData : MonoBehaviour
         StartCoroutine(setDatatoGO());
     }
 
-    void Populate( // Texture2D textureFlag,
-        Texture2D textureAvatar,
-        // Texture2D textureRank,
-        // string textLevel,
-        // string textMap,
+    void Populate(
+        int textLevel,
+        int textMap,
         string textName
     )
     {
         GameObject newObj;
 
-        // flagImage.texture = textureFlag;
-        playerAvatar.texture = textureAvatar;
-
-        // playerRank.texture = textureRank;
-        // playerLevel.text = textLevel;
-        // playerMap.text = textMap;
+        playerLevel.text = textLevel.ToString();
+        playerMap.text = textMap.ToString();
         playerName.text = textName;
         newObj = (GameObject) Instantiate(prefab, transform);
         Debug.Log("Run");
@@ -75,7 +71,7 @@ public class leaderBoardData : MonoBehaviour
     {
         //db connection
         db = FirebaseFirestore.DefaultInstance;
-        Debug.Log("Database Reading");
+        Debug.Log("Database Reading " + Time.time);
 
         Query leaderQuery = db.Collection("leaderBoard");
         leaderQuery
@@ -98,15 +94,13 @@ public class leaderBoardData : MonoBehaviour
         yield return null;
     }
 
-    IEnumerator GetImage(string dataAvatar, string dataName)
+    IEnumerator GetImage(string dataImage, int num)
     {
-        Debug.Log("Image Downloading");
-
         // Get a reference to the storage service, using the default Firebase App
         FirebaseStorage storage = FirebaseStorage.DefaultInstance;
 
         // Create a storage reference from our storage service
-        StorageReference storageRef = storage.GetReference(dataAvatar);
+        StorageReference storageRef = storage.GetReference(dataImage);
 
         // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
         const long maxAllowedSize = 1 * 1024 * 1024;
@@ -121,12 +115,25 @@ public class leaderBoardData : MonoBehaviour
                 }
                 else
                 {
+                    Debug.Log("Image Downloaded " + Time.time);
                     byte[] fileContents = task.Result;
-                    Texture2D textureAvatar = new Texture2D(1, 1);
-                    textureAvatar.LoadImage (fileContents);
-
-                    //UIImage.texture = texture;
-                    Populate (textureAvatar, dataName);
+                    Texture2D texture = new Texture2D(1, 1);
+                    texture.LoadImage (fileContents);
+                    if (num == 1)
+                    {
+                        playerAvatar.texture = texture;
+                        count++;
+                    }
+                    else if (num == 2)
+                    {
+                        playerRank.texture = texture;
+                        count++;
+                    }
+                    else
+                    {
+                        flagImage.texture = texture;
+                        count++;
+                    }
                 }
             });
         yield return null;
@@ -138,9 +145,18 @@ public class leaderBoardData : MonoBehaviour
         yield return new WaitUntil(() => isRun == true);
 
         //Wait for data has been load from firebase
-        StartCoroutine(GetImage(listData[0].playerAvatar,
-        listData[0].playerName));
+        StartCoroutine(GetImage(listData[0].playerAvatar, 1));
+        StartCoroutine(GetImage(listData[0].playerRank, 2));
+        StartCoroutine(GetImage(listData[0].flagImage, 3));
 
+        yield return new WaitUntil(() => count == 3);
+        Debug.Log("Done" + Time.time);
+
+        //UIImage.texture = texture;
+        Populate(
+        listData[0].playerLevel,
+        listData[0].playerMap,
+        listData[0].playerName);
         yield return null;
     }
 }
