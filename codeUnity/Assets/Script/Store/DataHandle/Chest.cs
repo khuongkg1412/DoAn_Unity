@@ -8,7 +8,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ItemDaily : MonoBehaviour
+public class Chest : MonoBehaviour
 {
     //FireBase Object
     FirebaseFirestore db;
@@ -17,10 +17,12 @@ public class ItemDaily : MonoBehaviour
     private ItemDailyStruct objectData;
 
     //Store the list of data object
-    List<ItemDailyStruct> listItemDaily = new List<ItemDailyStruct>();
+
+    List<ItemDailyStruct> listItemChest = new List<ItemDailyStruct>();
 
     //Let Coroutine run
-    bool isDaily = false;
+
+    bool isChest = false;
 
     // //TextTure,RawImage,Text
     public RawImage itemImage;
@@ -32,22 +34,22 @@ public class ItemDaily : MonoBehaviour
     public int numberToCreate; // number of objects to create. Exposed in inspector
 
     // Data of Object
-    //Item Daily Data
+    //Chest
     ItemDailyStruct
-        itemDaily =
+        itemChestCommon =
             new ItemDailyStruct {
-                itemImage = "Store/ItemDaily/EnergyPills.png",
-                itemName = "EnergyPills",
-                itemType = "itemDaily",
-                quantity = 10
+                itemImage = "Store/Chest/KitCommon.png",
+                itemName = "Kit Common",
+                itemType = "Chest",
+                quantity = 40
             };
 
     ItemDailyStruct
-        itemDaily2 =
+        itemChestrare =
             new ItemDailyStruct {
-                itemImage = "Store/ItemDaily/PainKiller.png",
-                itemName = "Pain Killers",
-                itemType = "itemDaily",
+                itemImage = "Store/Chest/KitRare.png",
+                itemName = "Kit Rare",
+                itemType = "Chest",
                 quantity = 40
             };
 
@@ -83,6 +85,8 @@ public class ItemDaily : MonoBehaviour
         db = FirebaseFirestore.DefaultInstance;
 
         //Get Collection And Document
+        db.Collection("Store").AddAsync(itemChestCommon);
+        db.Collection("Store").AddAsync(itemChestrare);
     }
 
     /*
@@ -93,10 +97,9 @@ public class ItemDaily : MonoBehaviour
         //db connection
         db = FirebaseFirestore.DefaultInstance;
         Debug.Log("Database Reading");
-
-        Query itemDailyQuery =
-            db.Collection("Store").WhereEqualTo("itemType", "itemDaily");
-        itemDailyQuery
+        Query itemChestQuery =
+            db.Collection("Store").WhereEqualTo("itemType", "Chest");
+        itemChestQuery
             .GetSnapshotAsync()
             .ContinueWithOnMainThread(task =>
             {
@@ -108,10 +111,11 @@ public class ItemDaily : MonoBehaviour
                 )
                 {
                     objectData = documentSnapshot.ConvertTo<ItemDailyStruct>();
-                    listItemDaily.Add (objectData);
+                    listItemChest.Add (objectData);
                 }
-                isDaily = true;
+                isChest = true;
             });
+
         yield return null;
     }
 
@@ -152,24 +156,12 @@ public class ItemDaily : MonoBehaviour
     IEnumerator setDatatoGO()
     {
         StartCoroutine(GetData());
-
-        //Run When the data from Daily is loaded
-        yield return new WaitUntil(() => isDaily == true);
-
-        //Wait for data has been load from firebase
-        StartCoroutine(GetImage(listItemDaily[0].itemImage, listItemDaily[0].itemName));
-        StartCoroutine(GetImage(listItemDaily[1].itemImage, listItemDaily[1].itemName));
-        StartCoroutine(GetImage(listItemDaily[2].itemImage, listItemDaily[2].itemName));
-        StartCoroutine(GetImage(listItemDaily[0].itemImage, listItemDaily[0].itemName));
-        StartCoroutine(GetImage(listItemDaily[1].itemImage, listItemDaily[1].itemName));
-        StartCoroutine(GetImage(listItemDaily[2].itemImage, listItemDaily[2].itemName));
-        StartCoroutine(GetImage(listItemDaily[0].itemImage, listItemDaily[0].itemName));
-        StartCoroutine(GetImage(listItemDaily[1].itemImage, listItemDaily[1].itemName));
-        StartCoroutine(GetImage(listItemDaily[2].itemImage, listItemDaily[2].itemName));
-        // foreach (var objectItem in listItemDaily)
-        // {
-        //     StartCoroutine(GetImage(objectItem.itemImage, objectItem.itemName));
-        // }
+        //Run When the data from Chest is loaded
+        yield return new WaitUntil(() => isChest == true);
+        foreach (var objectItem in listItemChest)
+        {
+            StartCoroutine(GetImage(objectItem.itemImage, objectItem.itemName));
+        }
         yield return null;
     }
 }

@@ -8,7 +8,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ItemDaily : MonoBehaviour
+public class ItemWeekly : MonoBehaviour
 {
     //FireBase Object
     FirebaseFirestore db;
@@ -17,10 +17,11 @@ public class ItemDaily : MonoBehaviour
     private ItemDailyStruct objectData;
 
     //Store the list of data object
-    List<ItemDailyStruct> listItemDaily = new List<ItemDailyStruct>();
+    List<ItemDailyStruct> listItemWeekly = new List<ItemDailyStruct>();
 
     //Let Coroutine run
-    bool isDaily = false;
+
+    bool isWeekly = false;
 
     // //TextTure,RawImage,Text
     public RawImage itemImage;
@@ -32,22 +33,31 @@ public class ItemDaily : MonoBehaviour
     public int numberToCreate; // number of objects to create. Exposed in inspector
 
     // Data of Object
-    //Item Daily Data
+    //Item Weekly Data
     ItemDailyStruct
-        itemDaily =
+        itemWeekly =
             new ItemDailyStruct {
-                itemImage = "Store/ItemDaily/EnergyPills.png",
-                itemName = "EnergyPills",
-                itemType = "itemDaily",
-                quantity = 10
+                itemImage = "Store/ItemWeekly/blood-test (1).png",
+                itemName = "Blood Test",
+                itemType = "itemWeekly",
+                quantity = 40
             };
 
     ItemDailyStruct
-        itemDaily2 =
+        itemWeekly2 =
             new ItemDailyStruct {
-                itemImage = "Store/ItemDaily/PainKiller.png",
-                itemName = "Pain Killers",
-                itemType = "itemDaily",
+                itemImage = "Store/ItemWeekly/blood-test.png",
+                itemName = "Blood Test 2",
+                itemType = "itemWeekly",
+                quantity = 40
+            };
+
+    ItemDailyStruct
+        itemWeekly3 =
+            new ItemDailyStruct {
+                itemImage = "Store/ItemWeekly/image 58.png",
+                itemName = "Item 3",
+                itemType = "itemWeekly",
                 quantity = 40
             };
 
@@ -83,6 +93,9 @@ public class ItemDaily : MonoBehaviour
         db = FirebaseFirestore.DefaultInstance;
 
         //Get Collection And Document
+        db.Collection("Store").AddAsync(itemWeekly);
+        db.Collection("Store").AddAsync(itemWeekly2);
+        db.Collection("Store").AddAsync(itemWeekly3);
     }
 
     /*
@@ -92,11 +105,11 @@ public class ItemDaily : MonoBehaviour
     {
         //db connection
         db = FirebaseFirestore.DefaultInstance;
-        Debug.Log("Database Reading");
+        Debug.Log("Database Reading"); 
 
-        Query itemDailyQuery =
-            db.Collection("Store").WhereEqualTo("itemType", "itemDaily");
-        itemDailyQuery
+        Query itemWeeklyQuery =
+            db.Collection("Store").WhereEqualTo("itemType", "itemWeekly");
+        itemWeeklyQuery
             .GetSnapshotAsync()
             .ContinueWithOnMainThread(task =>
             {
@@ -108,10 +121,11 @@ public class ItemDaily : MonoBehaviour
                 )
                 {
                     objectData = documentSnapshot.ConvertTo<ItemDailyStruct>();
-                    listItemDaily.Add (objectData);
+                    listItemWeekly.Add (objectData);
                 }
-                isDaily = true;
+                isWeekly = true;
             });
+
         yield return null;
     }
 
@@ -153,23 +167,12 @@ public class ItemDaily : MonoBehaviour
     {
         StartCoroutine(GetData());
 
-        //Run When the data from Daily is loaded
-        yield return new WaitUntil(() => isDaily == true);
-
-        //Wait for data has been load from firebase
-        StartCoroutine(GetImage(listItemDaily[0].itemImage, listItemDaily[0].itemName));
-        StartCoroutine(GetImage(listItemDaily[1].itemImage, listItemDaily[1].itemName));
-        StartCoroutine(GetImage(listItemDaily[2].itemImage, listItemDaily[2].itemName));
-        StartCoroutine(GetImage(listItemDaily[0].itemImage, listItemDaily[0].itemName));
-        StartCoroutine(GetImage(listItemDaily[1].itemImage, listItemDaily[1].itemName));
-        StartCoroutine(GetImage(listItemDaily[2].itemImage, listItemDaily[2].itemName));
-        StartCoroutine(GetImage(listItemDaily[0].itemImage, listItemDaily[0].itemName));
-        StartCoroutine(GetImage(listItemDaily[1].itemImage, listItemDaily[1].itemName));
-        StartCoroutine(GetImage(listItemDaily[2].itemImage, listItemDaily[2].itemName));
-        // foreach (var objectItem in listItemDaily)
-        // {
-        //     StartCoroutine(GetImage(objectItem.itemImage, objectItem.itemName));
-        // }
+        //Run When the data from Weekly is loaded
+        yield return new WaitUntil(() => isWeekly == true);
+        foreach (var objectItem in listItemWeekly)
+        {
+            StartCoroutine(GetImage(objectItem.itemImage, objectItem.itemName));
+        }
         yield return null;
     }
 }
