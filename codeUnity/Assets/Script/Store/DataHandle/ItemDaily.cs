@@ -168,6 +168,12 @@ public class ItemDaily : MonoBehaviour
         StartCoroutine(GetImage(listData[0].itemImage, listData[0].itemName));
         StartCoroutine(GetImage(listData[1].itemImage, listData[1].itemName));
         StartCoroutine(GetImage(listData[2].itemImage, listData[2].itemName));
+        StartCoroutine(GetImage(listData[0].itemImage, listData[0].itemName));
+        StartCoroutine(GetImage(listData[1].itemImage, listData[1].itemName));
+        StartCoroutine(GetImage(listData[2].itemImage, listData[2].itemName));
+        StartCoroutine(GetImage(listData[0].itemImage, listData[0].itemName));
+        StartCoroutine(GetImage(listData[1].itemImage, listData[1].itemName));
+        StartCoroutine(GetImage(listData[2].itemImage, listData[2].itemName));
 
 
         // itemName2.text = listData[1].itemName;
