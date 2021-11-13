@@ -15,9 +15,9 @@ public class friendHandler : MonoBehaviour
     public GameObject content;
     List<playerStruct> listData = new List<playerStruct>();
     bool isRun = false;
-    public Image avatarPlayer;
-    public Text playerName;
-    public Text level;
+    // public Image avatarPlayer;
+    // public Text playerName;
+    // public Text level;
 
     private playerStruct objectData;
 
@@ -37,19 +37,19 @@ public class friendHandler : MonoBehaviour
     void Populate(Sprite sprite, string name, int Level)
     {
         Debug.Log("Dang o day");
-        GameObject scrollPlayer;
+        
+        // GameObject scrollPlayer;
+        // avatarPlayer.sprite = sprite;
+        // playerName.text = name;
+        // level.text = "Level "+Level;
+        // scrollPlayer = (GameObject) Instantiate(prefab, transform);
 
-        avatarPlayer.sprite = sprite;
-        playerName.text = name;
-        level.text = "Level "+Level;
-        scrollPlayer = (GameObject) Instantiate(prefab, transform);
 
-
-        // GameObject scrollItemObj = Instantiate(prefab);
-        // scrollItemObj.transform.SetParent(content.transform, false);
-        // scrollItemObj.transform.Find("/Name").gameObject.GetComponent<Text>().text = name;
-        // scrollItemObj.transform.Find("/level").gameObject.GetComponent<Text>().text = "Level " + level;
-        // scrollItemObj.transform.Find("Avatar").gameObject.GetComponent<Image>().sprite = sprite;
+        GameObject scrollItemObj = (GameObject) Instantiate(prefab, transform);
+        //scrollItemObj.transform.SetParent(content.transform, false);
+        scrollItemObj.transform.Find("Name & level/Name").gameObject.GetComponent<Text>().text = name;
+        scrollItemObj.transform.Find("Name & level/level").gameObject.GetComponent<Text>().text = "Level " + Level;
+        scrollItemObj.transform.Find("Avatar").gameObject.GetComponent<Image>().sprite = sprite;
     }
 
     IEnumerator generateItem()
