@@ -58,10 +58,10 @@ public class friendHandler : MonoBehaviour
         yield return new WaitUntil(() => isRun == true);
         Debug.Log("Database Reading  "+ listData[0].avatarUrl);
 
-        // foreach (playerStruct player in listData)
-        // {
-        StartCoroutine(GetImage(listData[0].avatarUrl, listData[0].playerName, listData[0].level));
-        //}
+        foreach (playerStruct player in listData)
+        {
+            StartCoroutine(GetImage(player.avatarUrl, player.playerName, player.level));
+        }
         yield return null;
     }
 
