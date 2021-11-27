@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
+//cmt
 public class FirebaseCheck : MonoBehaviour
 {
     public UnityEvent onFirebaseInitialized;
@@ -13,7 +14,8 @@ public class FirebaseCheck : MonoBehaviour
 
     private IEnumerator CheckAndFixDependenciesCoroutine()
     {
-        var checkDependenciesTask = Firebase.FirebaseApp.CheckAndFixDependenciesAsync();
+        var checkDependenciesTask =
+            Firebase.FirebaseApp.CheckAndFixDependenciesAsync();
         yield return new WaitUntil(() => checkDependenciesTask.IsCompleted);
 
         var dependencyStatus = checkDependenciesTask.Result;
@@ -24,7 +26,11 @@ public class FirebaseCheck : MonoBehaviour
         }
         else
         {
-            Debug.LogError(System.String.Format("Could not resolve all Firebase dependencies: {0}", dependencyStatus));
+            Debug
+                .LogError(System
+                    .String
+                    .Format("Could not resolve all Firebase dependencies: {0}",
+                    dependencyStatus));
             // Firebase Unity SDK is not safe to use here.
         }
     }
