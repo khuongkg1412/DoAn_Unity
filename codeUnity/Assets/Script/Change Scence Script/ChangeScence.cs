@@ -45,7 +45,7 @@ public class ChangeScence : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
-    public void bopenProfile()
+    public void openProfile()
     {
         SceneManager.LoadScene(7);
     }
