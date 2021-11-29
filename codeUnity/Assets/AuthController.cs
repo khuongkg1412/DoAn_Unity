@@ -3,10 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Firebase.Auth;
+using UnityEngine.SceneManagement;
 public class AuthController : MonoBehaviour
 {
     public Text emailInput, passwordInput;
 
+
+    public void goToLoginPage(){
+        SceneManager.LoadScene(1);
+    }
+    public void goToRegisterPage(){
+        SceneManager.LoadScene(2);
+    }
     public void Login()
     {
         Debug.Log("Logining. Email: " + emailInput.text + ", Password: " + passwordInput.text);
@@ -50,7 +58,7 @@ public class AuthController : MonoBehaviour
             print("Please enter a valid email and password!");
             return;
         }
-
+        
         FirebaseAuth.DefaultInstance.CreateUserWithEmailAndPasswordAsync(emailInput.text, passwordInput.text)
         .ContinueWith((task =>
         {
