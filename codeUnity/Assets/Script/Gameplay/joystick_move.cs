@@ -21,16 +21,25 @@ public class joystick_move : MonoBehaviour
     void Start()
     {
         joystickOriginalPos = joystickBG.transform.position;
-        Debug.Log("OriginalPos: "+ joystickOriginalPos);
         joystickRadius =
             joystickBG.GetComponent<RectTransform>().sizeDelta.y / 4;
     }
 
     public void PointerDown()
     {
-        joystick.transform.position = Input.mousePosition;
-        joystickBG.transform.position = Input.mousePosition;
-        joystickTouchPos = Input.mousePosition;
+        Debug.Log("Pointer Down 3");
+
+        //joystick.transform.position = new VecInput.mousePosition;
+        joystick.transform.position =
+            new Vector3(Input.mousePosition.x, Input.mousePosition.y, 100);
+        joystickBG.transform.position =
+            new Vector3(Input.mousePosition.x, Input.mousePosition.y, 100);
+        joystickTouchPos =
+            new Vector3(Input.mousePosition.x, Input.mousePosition.y, 100);
+        // joystick1.position =
+        //     new Vector3(Input.mousePosition.x, Input.mousePosition.y,100);
+        // joystick2.position =
+        //     new Vector3(Input.mousePosition.x, Input.mousePosition.y, 100);
     }
 
     public void Drag(BaseEventData baseEventData)
@@ -43,19 +52,30 @@ public class joystick_move : MonoBehaviour
         {
             joystick.transform.position =
                 joystickTouchPos + joystickVec * joystickDis;
+            joystick.transform.position =
+                new Vector3(joystick.transform.position.x,
+                    joystick.transform.position.y,
+                    100);
         }
         else
         {
             joystick.transform.position =
                 joystickTouchPos + joystickVec * joystickRadius;
+            joystick.transform.position =
+                new Vector3(joystick.transform.position.x,
+                    joystick.transform.position.y,
+                    100);
         }
-        Debug.Log("OriginalPosMove: "+ joystickOriginalPos);
     }
 
     public void PointerUp()
     {
+        Debug.Log("Pointer Up");
         joystickVec = Vector2.zero;
-        joystick.transform.position = joystickOriginalPos;
-        joystickBG.transform.position = joystickOriginalPos;
+        joystick.transform.position =
+            new Vector3(joystickOriginalPos.x, joystickOriginalPos.y, 100);
+        Debug.Log("Pointer Up X: " + joystickOriginalPos.x);
+        joystickBG.transform.position =
+            new Vector3(joystickOriginalPos.x, joystickOriginalPos.y, 100);
     }
 }
