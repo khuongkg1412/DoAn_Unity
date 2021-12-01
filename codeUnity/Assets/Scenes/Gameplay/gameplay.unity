@@ -321,7 +321,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   joystickMove: {fileID: 1125565969}
-  runSpeed: 1000
+  runSpeed: 500
+  animator: {fileID: 571074379}
 --- !u!50 &571074376
 Rigidbody2D:
   serializedVersion: 4
