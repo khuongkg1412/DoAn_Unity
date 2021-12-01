@@ -13,7 +13,10 @@ public class player_move : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height,Camera.main.transform.position.z));
         rb2d = GetComponent<Rigidbody2D>();
+        
+        //screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
     }
 
     // Update is called once per frame
@@ -29,5 +32,8 @@ public class player_move : MonoBehaviour
         {
             rb2d.velocity = Vector2.zero;
         }
+        ;
+        
+      
     }
 }

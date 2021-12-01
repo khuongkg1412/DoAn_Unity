@@ -5,8 +5,10 @@ using UnityEngine.EventSystems;
 
 public class joystick_move : MonoBehaviour
 {
+    //Joystick controller
     public GameObject joystick;
 
+    //Joystick background
     public GameObject joystickBG;
 
     public Vector2 joystickVec;
@@ -16,6 +18,8 @@ public class joystick_move : MonoBehaviour
     private Vector2 joystickOriginalPos;
 
     private float joystickRadius;
+
+    public Camera cameraMain;
 
     // Start is called before the first frame update
     void Start()
@@ -27,19 +31,16 @@ public class joystick_move : MonoBehaviour
 
     public void PointerDown()
     {
-        Debug.Log("Pointer Down 3");
-
-        //joystick.transform.position = new VecInput.mousePosition;
         joystick.transform.position =
-            new Vector3(Input.mousePosition.x, Input.mousePosition.y, 100);
+            new Vector3(Input.mousePosition.x - Screen.width / 2,
+                Input.mousePosition.y - Screen.height / 2,
+                100);
         joystickBG.transform.position =
-            new Vector3(Input.mousePosition.x, Input.mousePosition.y, 100);
+            new Vector3(Input.mousePosition.x - Screen.width / 2,
+                Input.mousePosition.y - Screen.height / 2,
+                100);
         joystickTouchPos =
             new Vector3(Input.mousePosition.x, Input.mousePosition.y, 100);
-        // joystick1.position =
-        //     new Vector3(Input.mousePosition.x, Input.mousePosition.y,100);
-        // joystick2.position =
-        //     new Vector3(Input.mousePosition.x, Input.mousePosition.y, 100);
     }
 
     public void Drag(BaseEventData baseEventData)
@@ -53,8 +54,8 @@ public class joystick_move : MonoBehaviour
             joystick.transform.position =
                 joystickTouchPos + joystickVec * joystickDis;
             joystick.transform.position =
-                new Vector3(joystick.transform.position.x,
-                    joystick.transform.position.y,
+                new Vector3(joystick.transform.position.x - Screen.width / 2,
+                    joystick.transform.position.y - Screen.height / 2,
                     100);
         }
         else
@@ -62,19 +63,17 @@ public class joystick_move : MonoBehaviour
             joystick.transform.position =
                 joystickTouchPos + joystickVec * joystickRadius;
             joystick.transform.position =
-                new Vector3(joystick.transform.position.x,
-                    joystick.transform.position.y,
+                new Vector3(joystick.transform.position.x - Screen.width / 2,
+                    joystick.transform.position.y - Screen.height / 2,
                     100);
         }
     }
 
     public void PointerUp()
     {
-        Debug.Log("Pointer Up");
         joystickVec = Vector2.zero;
         joystick.transform.position =
             new Vector3(joystickOriginalPos.x, joystickOriginalPos.y, 100);
-        Debug.Log("Pointer Up X: " + joystickOriginalPos.x);
         joystickBG.transform.position =
             new Vector3(joystickOriginalPos.x, joystickOriginalPos.y, 100);
     }
