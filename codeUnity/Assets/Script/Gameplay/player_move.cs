@@ -10,13 +10,23 @@ public class player_move : MonoBehaviour
 
     private Rigidbody2D rb2d;
 
+    public Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
         //screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height,Camera.main.transform.position.z));
         rb2d = GetComponent<Rigidbody2D>();
-        
+
         //screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+    }
+
+    // run animation for player movement
+    void Update()
+    {
+        animator.SetFloat("Horizontal", joystickMove.joystickVec.x);
+        animator.SetFloat("Vertical", joystickMove.joystickVec.y);
+        animator.SetFloat("Speed", joystickMove.joystickVec.sqrMagnitude);
     }
 
     // Update is called once per frame
@@ -32,8 +42,5 @@ public class player_move : MonoBehaviour
         {
             rb2d.velocity = Vector2.zero;
         }
-        ;
-        
-      
     }
 }
