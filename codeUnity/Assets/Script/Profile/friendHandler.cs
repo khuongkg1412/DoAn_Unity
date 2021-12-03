@@ -15,9 +15,6 @@ public class friendHandler : MonoBehaviour
     public GameObject content;
     List<playerStruct> listData = new List<playerStruct>();
     bool isRun = false;
-    // public Image avatarPlayer;
-    // public Text playerName;
-    // public Text level;
 
     private playerStruct objectData;
 
@@ -37,16 +34,9 @@ public class friendHandler : MonoBehaviour
     void Populate(Sprite sprite, string name, int Level)
     {
         Debug.Log("Dang o day");
-        
-        // GameObject scrollPlayer;
-        // avatarPlayer.sprite = sprite;
-        // playerName.text = name;
-        // level.text = "Level "+Level;
-        // scrollPlayer = (GameObject) Instantiate(prefab, transform);
-
 
         GameObject scrollItemObj = (GameObject) Instantiate(prefab, transform);
-        //scrollItemObj.transform.SetParent(content.transform, false);
+       
         scrollItemObj.transform.Find("Name & level/Name").gameObject.GetComponent<Text>().text = name;
         scrollItemObj.transform.Find("Name & level/level").gameObject.GetComponent<Text>().text = "Level " + Level;
         scrollItemObj.transform.Find("Avatar").gameObject.GetComponent<Image>().sprite = sprite;
@@ -110,7 +100,6 @@ public class friendHandler : MonoBehaviour
             {
                 if (task.IsFaulted || task.IsCanceled)
                 {
-                    // Uh-oh, an error occurred!
                     Debug.LogException(task.Exception);
                 }
                 else
@@ -119,7 +108,7 @@ public class friendHandler : MonoBehaviour
                     Texture2D texture = new Texture2D(1, 1);
                     texture.LoadImage(fileContents);
                     Sprite sprite = Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100.0f);
-                    //UIImage.texture = texture;
+
                     Populate(sprite, Name, level);
                 }
             });

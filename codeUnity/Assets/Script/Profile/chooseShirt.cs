@@ -57,11 +57,12 @@ public class chooseShirt : MonoBehaviour
         db = FirebaseFirestore.DefaultInstance;
         Debug.Log("Database Reading");
 
-        Query allItemQuery = db.Collection("outfit");
+        Query allItemQuery = db.Collection("Outfits");
         allItemQuery
             .GetSnapshotAsync()
             .ContinueWithOnMainThread(task =>
             {
+                Debug.Log("Database Reading ");
                 QuerySnapshot allItemQuerySnapshot = task.Result;
                 foreach (DocumentSnapshot
                     documentSnapshot

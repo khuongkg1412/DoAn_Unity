@@ -9,7 +9,7 @@ using Firebase.Extensions;
 public class outfitItemStruct : MonoBehaviour
 {
     [FirestoreProperty]
-    public string imgUrl { get; set; }
-    [FirestoreProperty]
     public string imgName { get; set; }
+    [FirestoreProperty]
+    public string imgUrl { get; set; }
 }
