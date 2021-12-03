@@ -1,0 +1,1644 @@
+fileFormatVersion: 2
+guid: 4d9a7c11e2bad50478169db01643759e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2731680646329071646
+    second: idle_weapon_0
+  - first:
+      213: 9098048136147785211
+    second: idle_weapon_1
+  - first:
+      213: 2112425105673986570
+    second: idle_weapon_2
+  - first:
+      213: 8237999963028524722
+    second: idle_weapon_3
+  - first:
+      213: -1559252786856795667
+    second: idle_weapon_4
+  - first:
+      213: 6418275556731452417
+    second: idle_weapon_5
+  - first:
+      213: -8769628498463669077
+    second: idle_weapon_6
+  - first:
+      213: -7742427732764759157
+    second: idle_weapon_7
+  - first:
+      213: -6634580250896418387
+    second: idle_weapon_8
+  - first:
+      213: 400852756890430107
+    second: idle_weapon_9
+  - first:
+      213: 4337305940252190952
+    second: idle_weapon_10
+  - first:
+      213: 9006430496957735709
+    second: idle_weapon_11
+  - first:
+      213: -4310367431202159570
+    second: idle_weapon_12
+  - first:
+      213: 3191833160833570876
+    second: idle_weapon_13
+  - first:
+      213: 7821068370549519425
+    second: idle_weapon_14
+  - first:
+      213: -8952757245595948202
+    second: idle_weapon_15
+  - first:
+      213: 2299703690185552861
+    second: idle_weapon_16
+  - first:
+      213: -2300378774256088434
+    second: idle_weapon_17
+  - first:
+      213: -7523457183680076608
+    second: idle_weapon_18
+  - first:
+      213: 843933104276934013
+    second: idle_weapon_19
+  - first:
+      213: 7005493205392705763
+    second: idle_weapon_20
+  - first:
+      213: -3482105476829921471
+    second: idle_weapon_21
+  - first:
+      213: 7177888505833515947
+    second: idle_weapon_22
+  - first:
+      213: -1205856975139778331
+    second: idle_weapon_23
+  - first:
+      213: -8881993247193285874
+    second: idle_weapon_24
+  - first:
+      213: 6780229668573469589
+    second: idle_weapon_25
+  - first:
+      213: -5421267599902431827
+    second: idle_weapon_26
+  - first:
+      213: -3648050137154016916
+    second: idle_weapon_27
+  - first:
+      213: 3621552824839658525
+    second: idle_weapon_28
+  - first:
+      213: 3030841272940426142
+    second: idle_weapon_29
+  - first:
+      213: -6910710581208988565
+    second: idle_weapon_30
+  - first:
+      213: -6911995256617338067
+    second: idle_weapon_31
+  - first:
+      213: 1315135706564789777
+    second: idle_weapon_32
+  - first:
+      213: -7012846326166771326
+    second: idle_weapon_33
+  - first:
+      213: -4349393525797093329
+    second: idle_weapon_34
+  - first:
+      213: 6863023136440050115
+    second: idle_weapon_35
+  - first:
+      213: 3317237464013595864
+    second: idle_weapon_36
+  - first:
+      213: 6058167527746724373
+    second: idle_weapon_37
+  - first:
+      213: -8374125689625428660
+    second: idle_weapon_38
+  - first:
+      213: -920612323916010846
+    second: idle_weapon_39
+  - first:
+      213: -7672632710481511577
+    second: idle_weapon_40
+  - first:
+      213: 8015298045470927798
+    second: idle_weapon_41
+  - first:
+      213: -3751793922585326660
+    second: idle_weapon_42
+  - first:
+      213: -6103492265816445287
+    second: idle_weapon_43
+  - first:
+      213: 3464656701996784708
+    second: idle_weapon_44
+  - first:
+      213: 8454120798113908700
+    second: idle_weapon_45
+  - first:
+      213: 7748111430310252547
+    second: idle_weapon_46
+  - first:
+      213: -8950142067968251646
+    second: idle_weapon_47
+  - first:
+      213: -1336864180336905242
+    second: idle_weapon_48
+  - first:
+      213: 8061651009616503787
+    second: idle_weapon_49
+  - first:
+      213: 1653375890457061180
+    second: idle_weapon_50
+  - first:
+      213: -6104270164839363722
+    second: idle_weapon_51
+  - first:
+      213: 8168516445788901873
+    second: idle_weapon_52
+  - first:
+      213: 2904319611640916033
+    second: idle_weapon_53
+  - first:
+      213: 4848785640520017418
+    second: idle_weapon_54
+  - first:
+      213: 6408186996760830472
+    second: idle_weapon_55
+  - first:
+      213: 1040273209835756615
+    second: idle_weapon_56
+  - first:
+      213: -6050541737341296822
+    second: idle_weapon_57
+  - first:
+      213: -2658029750227601495
+    second: idle_weapon_58
+  - first:
+      213: 7276631505365412665
+    second: idle_weapon_59
+  - first:
+      213: -4033032852741877531
+    second: idle_weapon_60
+  - first:
+      213: -6284453019989712440
+    second: idle_weapon_61
+  - first:
+      213: -4369291918928108762
+    second: idle_weapon_62
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 130
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: idle_weapon_0
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 1497
+        width: 139
+        height: 209
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e70fbbdcee171ad0800000000000000
+      internalID: -2731680646329071646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_1
+      rect:
+        serializedVersion: 2
+        x: 475
+        y: 1497
+        width: 137
+        height: 209
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf55e788392c24e70800000000000000
+      internalID: 9098048136147785211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_2
+      rect:
+        serializedVersion: 2
+        x: 834
+        y: 1500
+        width: 141
+        height: 206
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a02a0560177d05d10800000000000000
+      internalID: 2112425105673986570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_3
+      rect:
+        serializedVersion: 2
+        x: 1194
+        y: 1500
+        width: 139
+        height: 208
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2be0fffc151435270800000000000000
+      internalID: 8237999963028524722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_4
+      rect:
+        serializedVersion: 2
+        x: 1556
+        y: 1509
+        width: 137
+        height: 199
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de1ec540adb6c5ae0800000000000000
+      internalID: -1559252786856795667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_5
+      rect:
+        serializedVersion: 2
+        x: 1915
+        y: 1501
+        width: 137
+        height: 209
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10cfc850d9b421950800000000000000
+      internalID: 6418275556731452417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_6
+      rect:
+        serializedVersion: 2
+        x: 2275
+        y: 1497
+        width: 139
+        height: 213
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba44ee818550c4680800000000000000
+      internalID: -8769628498463669077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_7
+      rect:
+        serializedVersion: 2
+        x: 2635
+        y: 1497
+        width: 139
+        height: 215
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8b6c698ffe5d8490800000000000000
+      internalID: -7742427732764759157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_8
+      rect:
+        serializedVersion: 2
+        x: 2994
+        y: 1509
+        width: 139
+        height: 203
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da93f7fc96c3de3a0800000000000000
+      internalID: -6634580250896418387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_9
+      rect:
+        serializedVersion: 2
+        x: 3354
+        y: 1509
+        width: 139
+        height: 203
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9aa0b5657d109500800000000000000
+      internalID: 400852756890430107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_10
+      rect:
+        serializedVersion: 2
+        x: 3715
+        y: 1509
+        width: 138
+        height: 203
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e86ceac5c4313c30800000000000000
+      internalID: 4337305940252190952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_11
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 1231
+        width: 136
+        height: 177
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d132961a1d44dfc70800000000000000
+      internalID: 9006430496957735709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_12
+      rect:
+        serializedVersion: 2
+        x: 475
+        y: 1231
+        width: 131
+        height: 181
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2448cb98af7e24c0800000000000000
+      internalID: -4310367431202159570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_13
+      rect:
+        serializedVersion: 2
+        x: 834
+        y: 1231
+        width: 134
+        height: 181
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c381cc5495bab4c20800000000000000
+      internalID: 3191833160833570876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_14
+      rect:
+        serializedVersion: 2
+        x: 1194
+        y: 1231
+        width: 133
+        height: 181
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 144b5a6ce340a8c60800000000000000
+      internalID: 7821068370549519425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_15
+      rect:
+        serializedVersion: 2
+        x: 1556
+        y: 1231
+        width: 131
+        height: 179
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65be2f708ba61c380800000000000000
+      internalID: -8952757245595948202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_16
+      rect:
+        serializedVersion: 2
+        x: 1915
+        y: 1231
+        width: 132
+        height: 179
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd33a2662503aef10800000000000000
+      internalID: 2299703690185552861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_17
+      rect:
+        serializedVersion: 2
+        x: 2275
+        y: 1231
+        width: 131
+        height: 177
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8a0e9751b96310e0800000000000000
+      internalID: -2300378774256088434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_18
+      rect:
+        serializedVersion: 2
+        x: 2635
+        y: 1231
+        width: 132
+        height: 177
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c463eb6d8f479790800000000000000
+      internalID: -7523457183680076608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_19
+      rect:
+        serializedVersion: 2
+        x: 2994
+        y: 1231
+        width: 133
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7d8e9edfa046bb00800000000000000
+      internalID: 843933104276934013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_20
+      rect:
+        serializedVersion: 2
+        x: 3354
+        y: 1231
+        width: 133
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e848df14f2883160800000000000000
+      internalID: 7005493205392705763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_21
+      rect:
+        serializedVersion: 2
+        x: 3715
+        y: 1231
+        width: 132
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 14f3c1f84831dafc0800000000000000
+      internalID: -3482105476829921471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_22
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 931
+        width: 143
+        height: 166
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: babe093e09bfc9360800000000000000
+      internalID: 7177888505833515947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_23
+      rect:
+        serializedVersion: 2
+        x: 467
+        y: 931
+        width: 143
+        height: 166
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e0ddd2587fe34fe0800000000000000
+      internalID: -1205856975139778331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_24
+      rect:
+        serializedVersion: 2
+        x: 827
+        y: 930
+        width: 143
+        height: 167
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0b30a35332dcb480800000000000000
+      internalID: -8881993247193285874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_25
+      rect:
+        serializedVersion: 2
+        x: 1186
+        y: 931
+        width: 143
+        height: 168
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59bd2ead5f6381e50800000000000000
+      internalID: 6780229668573469589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_26
+      rect:
+        serializedVersion: 2
+        x: 1546
+        y: 931
+        width: 143
+        height: 168
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da52b7b47d9c3c4b0800000000000000
+      internalID: -5421267599902431827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_27
+      rect:
+        serializedVersion: 2
+        x: 1908
+        y: 931
+        width: 141
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c69ae1c7ab58f5dc0800000000000000
+      internalID: -3648050137154016916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_28
+      rect:
+        serializedVersion: 2
+        x: 2267
+        y: 931
+        width: 139
+        height: 172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1c51eb3b17524230800000000000000
+      internalID: 3621552824839658525
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_29
+      rect:
+        serializedVersion: 2
+        x: 2627
+        y: 931
+        width: 139
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e93f4346416bf0a20800000000000000
+      internalID: 3030841272940426142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_30
+      rect:
+        serializedVersion: 2
+        x: 2986
+        y: 931
+        width: 138
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b64418547593810a0800000000000000
+      internalID: -6910710581208988565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_31
+      rect:
+        serializedVersion: 2
+        x: 3346
+        y: 931
+        width: 137
+        height: 178
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2b73287fe8a310a0800000000000000
+      internalID: -6911995256617338067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_32
+      rect:
+        serializedVersion: 2
+        x: 3707
+        y: 931
+        width: 136
+        height: 178
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1160a3d05fc404210800000000000000
+      internalID: 1315135706564789777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_33
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 631
+        width: 132
+        height: 178
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2892d680c6d5dae90800000000000000
+      internalID: -7012846326166771326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_34
+      rect:
+        serializedVersion: 2
+        x: 475
+        y: 631
+        width: 131
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f200b72e1a9d3a3c0800000000000000
+      internalID: -4349393525797093329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_35
+      rect:
+        serializedVersion: 2
+        x: 827
+        y: 631
+        width: 137
+        height: 178
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c1ebc44e2b5e3f50800000000000000
+      internalID: 6863023136440050115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_36
+      rect:
+        serializedVersion: 2
+        x: 1186
+        y: 631
+        width: 138
+        height: 178
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d4e526e5e1390e20800000000000000
+      internalID: 3317237464013595864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_37
+      rect:
+        serializedVersion: 2
+        x: 1546
+        y: 631
+        width: 137
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5126629d44fe21450800000000000000
+      internalID: 6058167527746724373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_38
+      rect:
+        serializedVersion: 2
+        x: 1908
+        y: 631
+        width: 137
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4d3765ad0129cb80800000000000000
+      internalID: -8374125689625428660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_39
+      rect:
+        serializedVersion: 2
+        x: 2267
+        y: 631
+        width: 137
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2aaa32118f35933f0800000000000000
+      internalID: -920612323916010846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_40
+      rect:
+        serializedVersion: 2
+        x: 2627
+        y: 631
+        width: 140
+        height: 172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76bf4bf7335558590800000000000000
+      internalID: -7672632710481511577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_41
+      rect:
+        serializedVersion: 2
+        x: 2986
+        y: 631
+        width: 142
+        height: 168
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6bb6d210b1f0c3f60800000000000000
+      internalID: 8015298045470927798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_42
+      rect:
+        serializedVersion: 2
+        x: 3346
+        y: 631
+        width: 143
+        height: 168
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cbb05d52e43feebc0800000000000000
+      internalID: -3751793922585326660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_43
+      rect:
+        serializedVersion: 2
+        x: 3707
+        y: 631
+        width: 142
+        height: 167
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99eaaa63f1a0c4ba0800000000000000
+      internalID: -6103492265816445287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_44
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 332
+        width: 132
+        height: 164
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44cd137f9eee41030800000000000000
+      internalID: 3464656701996784708
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_45
+      rect:
+        serializedVersion: 2
+        x: 475
+        y: 332
+        width: 131
+        height: 162
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd742d3f212135570800000000000000
+      internalID: 8454120798113908700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_46
+      rect:
+        serializedVersion: 2
+        x: 834
+        y: 332
+        width: 134
+        height: 162
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30059cb6b42d68b60800000000000000
+      internalID: 7748111430310252547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_47
+      rect:
+        serializedVersion: 2
+        x: 1194
+        y: 332
+        width: 133
+        height: 162
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 209e8758535bac380800000000000000
+      internalID: -8950142067968251646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_48
+      rect:
+        serializedVersion: 2
+        x: 1556
+        y: 332
+        width: 131
+        height: 164
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e3331a6c11827de0800000000000000
+      internalID: -1336864180336905242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_49
+      rect:
+        serializedVersion: 2
+        x: 1915
+        y: 332
+        width: 132
+        height: 164
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be36c5b71ecb0ef60800000000000000
+      internalID: 8061651009616503787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_50
+      rect:
+        serializedVersion: 2
+        x: 2275
+        y: 332
+        width: 131
+        height: 166
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3763e6cc98f1f610800000000000000
+      internalID: 1653375890457061180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_51
+      rect:
+        serializedVersion: 2
+        x: 2635
+        y: 332
+        width: 132
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67b0cbb70a6494ba0800000000000000
+      internalID: -6104270164839363722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_52
+      rect:
+        serializedVersion: 2
+        x: 2994
+        y: 332
+        width: 133
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f11f25cd666c5170800000000000000
+      internalID: 8168516445788901873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_53
+      rect:
+        serializedVersion: 2
+        x: 3354
+        y: 332
+        width: 133
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 148ae0e8c473e4820800000000000000
+      internalID: 2904319611640916033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_54
+      rect:
+        serializedVersion: 2
+        x: 3715
+        y: 332
+        width: 132
+        height: 177
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a06e53f99d85a4340800000000000000
+      internalID: 4848785640520017418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_55
+      rect:
+        serializedVersion: 2
+        x: 1194
+        y: 32
+        width: 133
+        height: 178
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 802e43c1f147ee850800000000000000
+      internalID: 6408186996760830472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_56
+      rect:
+        serializedVersion: 2
+        x: 1556
+        y: 32
+        width: 131
+        height: 178
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74c9d9509facf6e00800000000000000
+      internalID: 1040273209835756615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_57
+      rect:
+        serializedVersion: 2
+        x: 1915
+        y: 32
+        width: 132
+        height: 178
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4fd817d858280ca0800000000000000
+      internalID: -6050541737341296822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_58
+      rect:
+        serializedVersion: 2
+        x: 2275
+        y: 32
+        width: 131
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a773476608cc1bd0800000000000000
+      internalID: -2658029750227601495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_59
+      rect:
+        serializedVersion: 2
+        x: 2635
+        y: 32
+        width: 132
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93ba8b60dc9cbf460800000000000000
+      internalID: 7276631505365412665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_60
+      rect:
+        serializedVersion: 2
+        x: 2994
+        y: 32
+        width: 133
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e017d40df9c708c0800000000000000
+      internalID: -4033032852741877531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_61
+      rect:
+        serializedVersion: 2
+        x: 3354
+        y: 32
+        width: 133
+        height: 166
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c1e1e7564329c8a0800000000000000
+      internalID: -6284453019989712440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_weapon_62
+      rect:
+        serializedVersion: 2
+        x: 3715
+        y: 31
+        width: 132
+        height: 165
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6232e4436282d53c0800000000000000
+      internalID: -4369291918928108762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

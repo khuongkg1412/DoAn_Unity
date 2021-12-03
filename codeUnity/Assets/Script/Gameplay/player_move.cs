@@ -12,6 +12,10 @@ public class player_move : MonoBehaviour
 
     public Animator animator;
 
+    public Camera cam;
+
+    Vector2 mousePos;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +31,8 @@ public class player_move : MonoBehaviour
         animator.SetFloat("Horizontal", joystickMove.joystickVec.x);
         animator.SetFloat("Vertical", joystickMove.joystickVec.y);
         animator.SetFloat("Speed", joystickMove.joystickVec.sqrMagnitude);
+
+        mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
     }
 
     // Update is called once per frame
@@ -41,6 +47,10 @@ public class player_move : MonoBehaviour
         else
         {
             rb2d.velocity = Vector2.zero;
+            Vector2 lookDir = mousePos - rb2d.position;
+            float angle =
+                Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 270f;
+            rb2d.rotation = angle;
         }
     }
 }
