@@ -15,24 +15,24 @@ public class ChangeScence : MonoBehaviour
 
     public void achiveOpening()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(5);
 
 
     }
 
     public void howToPlayOpening() //khuong
     {
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(6);
     }
 
     public void leaderGlobalOpening() //khuong
     {
-        SceneManager.LoadScene(4);
+        SceneManager.LoadScene(7);
     }
 
     public void leaderLocalOpening() //khuong
     {
-        SceneManager.LoadScene(5);
+        SceneManager.LoadScene(8);
     }
 
     public void notificationOpening() //khuong
@@ -42,11 +42,11 @@ public class ChangeScence : MonoBehaviour
 
     public void backtoMainPage()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(3);
     }
 
     public void bopenProfile()
     {
-        SceneManager.LoadScene(7);
+        SceneManager.LoadScene(10);
     }
 }

@@ -1,33 +1,42 @@
 {
   "project_info": {
-    "project_number": "975160707211",
-    "project_id": "coviddefusegame",
-    "storage_bucket": "coviddefusegame.appspot.com"
+    "project_number": "390092557592",
+    "firebase_url": "https://ltd2k-fptk14-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "ltd2k-fptk14",
+    "storage_bucket": "ltd2k-fptk14.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:975160707211:android:6766014523ff5c61916c8e",
+        "mobilesdk_app_id": "1:390092557592:android:61dbcad05d52ddfeab626d",
         "android_client_info": {
           "package_name": "com.LTD2K.CovidRefuse"
         }
       },
       "oauth_client": [
         {
-          "client_id": "975160707211-nhomu4c54bmb1caba50m5s8m951cmdcg.apps.googleusercontent.com",
+          "client_id": "390092557592-akm2ojvh2hkcpag5s3h84g79gjmra3lf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.LTD2K.CovidRefuse",
+            "certificate_hash": "e0ad654ea31d55c1d6a29e258c4a49ebb1455934"
+          }
+        },
+        {
+          "client_id": "390092557592-eci2mnduuve1id5i25dgv7mnit96pg83.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBZyeRiO_TZC-cz-mTG-m3J4RqQ3XglMdc"
+          "current_key": "AIzaSyAGYUKR0KqH1JnVG0xkiyxTNhVfLHWZw5o"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "975160707211-nhomu4c54bmb1caba50m5s8m951cmdcg.apps.googleusercontent.com",
+              "client_id": "390092557592-eci2mnduuve1id5i25dgv7mnit96pg83.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

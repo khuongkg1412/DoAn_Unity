@@ -6,17 +6,24 @@ using Firebase.Auth;
 using UnityEngine.SceneManagement;
 public class AuthController : MonoBehaviour
 {
-    public Text emailInput, passwordInput;
+    public Text emailInput, passwordInput, debugMessage;
 
 
-    public void goToLoginPage(){
+    public void goToLoginPage()
+    {
         SceneManager.LoadScene(1);
     }
-    public void goToRegisterPage(){
+    public void goToRegisterPage()
+    {
         SceneManager.LoadScene(2);
+    }
+    public void goToMainPage()
+    {
+        SceneManager.LoadScene(3);
     }
     public void Login()
     {
+
         Debug.Log("Logining. Email: " + emailInput.text + ", Password: " + passwordInput.text);
         FirebaseAuth.DefaultInstance.SignInWithEmailAndPasswordAsync
         (emailInput.text, passwordInput.text).ContinueWith((task =>
@@ -24,6 +31,10 @@ public class AuthController : MonoBehaviour
             Debug.Log("Start Login: Email: " + emailInput.text + ", Password: " + passwordInput.text);
             if (task.IsCanceled)
             {
+                Firebase.FirebaseException e = task.Exception.Flatten().InnerExceptions[0]
+                as Firebase.FirebaseException;
+
+                GetErrorMessage((AuthError)e.ErrorCode);
                 return;
             }
 
@@ -32,18 +43,20 @@ public class AuthController : MonoBehaviour
                 Debug.Log("Login failed");
                 Firebase.FirebaseException e = task.Exception.Flatten().InnerExceptions[0]
                 as Firebase.FirebaseException;
-
                 GetErrorMessage((AuthError)e.ErrorCode);
                 return;
             }
 
             if (task.IsCompleted)
             {
+                print("Login Completed!");
 
             }
-
+            SceneManager.LoadScene(3);
 
         }));
+
+
     }
 
     public void Login_Anonymous()
@@ -58,7 +71,7 @@ public class AuthController : MonoBehaviour
             print("Please enter a valid email and password!");
             return;
         }
-        
+
         FirebaseAuth.DefaultInstance.CreateUserWithEmailAndPasswordAsync(emailInput.text, passwordInput.text)
         .ContinueWith((task =>
         {
@@ -76,7 +89,6 @@ public class AuthController : MonoBehaviour
             {
                 Firebase.FirebaseException e = task.Exception.Flatten().InnerExceptions[0]
                 as Firebase.FirebaseException;
-
                 GetErrorMessage((AuthError)e.ErrorCode);
                 return;
             }
@@ -84,9 +96,11 @@ public class AuthController : MonoBehaviour
             if (task.IsCompleted)
             {
                 print("Registration Completed!");
+
             }
 
         }));
+        goToMainPage();
     }
     public void Logout()
     {
@@ -96,8 +110,21 @@ public class AuthController : MonoBehaviour
     {
         string msg = "";
         msg = errCode.ToString();
+        // switch(errCode){
+        //     case AuthError.AccountExistsWithDifferentCredentials: 
+        //     break;
+        //     case AuthError.MissingPassword:
+        //     break;
+        //     case AuthError.WrongPassword:
+        //     break;
+        //     case AuthError.InvalidEmail:
+        //     break;
+        //     case AuthError.UserDisabled:
+        //     break;
+        //     case AuthError.MissingEmail:
+        //     break;
 
-
+        // }
         print(msg);
 
     }
