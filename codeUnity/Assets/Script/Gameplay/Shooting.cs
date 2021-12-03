@@ -10,6 +10,8 @@ public class Shooting : MonoBehaviour
 
     public float bulletSpeed = 1000;
 
+    public float fireSpeed = 5f;
+
     // Start is called before the first frame update
     void Start()
     {
