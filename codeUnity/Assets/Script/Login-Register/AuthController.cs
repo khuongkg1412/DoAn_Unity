@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class AuthController : MonoBehaviour
 {
     public Text emailInput, passwordInput, debugMessage;
-
+    bool isDone = false;
 
     public void goToLoginPage()
     {
@@ -21,9 +21,7 @@ public class AuthController : MonoBehaviour
     {
         SceneManager.LoadScene(3);
     }
-    public void Login()
-    {
-
+    IEnumerator LoginEmail(){
         Debug.Log("Logining. Email: " + emailInput.text + ", Password: " + passwordInput.text);
         FirebaseAuth.DefaultInstance.SignInWithEmailAndPasswordAsync
         (emailInput.text, passwordInput.text).ContinueWith((task =>
@@ -50,12 +48,18 @@ public class AuthController : MonoBehaviour
             if (task.IsCompleted)
             {
                 print("Login Completed!");
-
+                isDone = true;
             }
-            SceneManager.LoadScene(3);
-
         }));
-
+        yield return new WaitUntil(() => isDone == true);
+        goToMainPage();
+        yield return null;
+    }
+    public void Login()
+    {
+        
+        StartCoroutine("LoginEmail");
+            
 
     }
 
