@@ -48,9 +48,9 @@ public class player_move : MonoBehaviour
         {
             rb2d.velocity = Vector2.zero;
             Vector2 lookDir = mousePos - rb2d.position;
-            float angle =
-                Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 270f;
-            rb2d.rotation = angle;
+            // float angle =
+            //     Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 270f;
+            // rb2d.rotation = angle;
         }
     }
 }
