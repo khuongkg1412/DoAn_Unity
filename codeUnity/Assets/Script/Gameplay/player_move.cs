@@ -14,6 +14,8 @@ public class player_move : MonoBehaviour
 
     public Camera cam;
 
+    public bool shoot = false;
+
     Vector2 mousePos;
 
     // Start is called before the first frame update
@@ -38,6 +40,7 @@ public class player_move : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        shoot = false;
         if (joystickMove.joystickVec.y != 0)
         {
             rb2d.velocity =
@@ -51,6 +54,8 @@ public class player_move : MonoBehaviour
             float angle =
                 Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 270f;
             rb2d.rotation = angle;
+            
+            shoot = true; 
         }
     }
 }
