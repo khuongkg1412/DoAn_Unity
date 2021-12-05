@@ -388,6 +388,7 @@ MonoBehaviour:
   runSpeed: 500
   animator: {fileID: 571074379}
   cam: {fileID: 1299645170}
+  shoot: 0
 --- !u!50 &571074376
 Rigidbody2D:
   serializedVersion: 4
@@ -10407,11 +10408,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3617683341387958443, guid: 03c20b675f5302f448e46cb6532905f2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -486
+      value: -345
       objectReference: {fileID: 0}
     - target: {fileID: 3617683341387958443, guid: 03c20b675f5302f448e46cb6532905f2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -15
+      value: -35
       objectReference: {fileID: 0}
     - target: {fileID: 3617683341387958443, guid: 03c20b675f5302f448e46cb6532905f2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -10448,6 +10449,10 @@ PrefabInstance:
     - target: {fileID: 3617683341387958444, guid: 03c20b675f5302f448e46cb6532905f2, type: 3}
       propertyPath: m_Name
       value: Enemies
+      objectReference: {fileID: 0}
+    - target: {fileID: 7548057774870982859, guid: 03c20b675f5302f448e46cb6532905f2, type: 3}
+      propertyPath: m_BodyType
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03c20b675f5302f448e46cb6532905f2, type: 3}
