@@ -20,9 +20,9 @@ public class SystemNotificationData : MonoBehaviour
     bool isRun = false;
 
     int count = 0;
-    RawImage notificationIcon;
-    Text notificationContent;
-    bool notificationStatus;
+    public RawImage notificationIcon;
+    public Text notificationContent;
+    public bool notificationStatus;
 
     public GameObject prefab;
 
@@ -33,8 +33,8 @@ public class SystemNotificationData : MonoBehaviour
 
     noti1 = new SystemNotificationStruct
     {
-        notificationIcon = "",
-        notificationContent = "",
+        notificationIcon = "Notification/SystemNotification/noti1/achievement_icon.png",
+        notificationContent = "You got a new achievement",
         notificationStatus = false
     };
 

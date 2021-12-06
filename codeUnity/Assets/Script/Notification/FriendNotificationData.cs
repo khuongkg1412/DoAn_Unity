@@ -24,17 +24,15 @@ public class FriendNotificationData : MonoBehaviour
 
     public int numberToCreate;
 
-
-    FriendNotificationStruct
-
-    noti1 = new FriendNotificationStruct
-    {
-        notificationImage = "Notification/FriendNotification/noti1/2.png",
-        notificationIcon = "Notification/FriendNotification/noti1/mail-icon.png",
-        notificationContent = "Gurdeep Crane has sent you a message.",
-        notificationSenderID = "a123",
-        notificationStatus = false
-    };
+    // FriendNotificationStruct
+    // noti1 = new FriendNotificationStruct
+    // {
+    //     notificationImage = "Notification/FriendNotification/noti1/2.png",
+    //     notificationIcon = "Notification/FriendNotification/noti1/mail-icon.png",
+    //     notificationContent = "Gurdeep Crane has sent you a message.",
+    //     notificationSenderID = "a123",
+    //     notificationStatus = false
+    // };
 
     private void Start()
     {
@@ -86,6 +84,7 @@ public class FriendNotificationData : MonoBehaviour
     Sprite icon;
     IEnumerator GetImage(string avatarImage, string iconImage, string content)
     {
+        Debug.Log("Currently at GetImage");
         // Get a reference to the storage service, using the default Firebase App
         FirebaseStorage storage = FirebaseStorage.DefaultInstance;
 
@@ -143,18 +142,23 @@ public class FriendNotificationData : MonoBehaviour
 
     IEnumerator setDatatoGO()
     {
+        Debug.Log("Currently at setDatatoGo");
         StartCoroutine(GetData());
         yield return new WaitUntil(() => isRun == true);
+         foreach (FriendNotificationStruct noti in listData)
+        {
+            StartCoroutine(GetImage(noti.notificationImage, noti.notificationIcon, 
+            noti.notificationContent));
+        }
+        // //Wait for data has been load from firebase
+        // StartCoroutine(GetImage(listData[0].notificationImage,
+        //     listData[0].notificationIcon, listData[0].notificationContent));
 
-        //Wait for data has been load from firebase
-        StartCoroutine(GetImage(listData[0].notificationImage,
-            listData[0].notificationIcon, listData[0].notificationContent));
+        // yield return new WaitUntil(() => count == 3);
+        // Debug.Log("Done" + Time.time);
 
-        yield return new WaitUntil(() => count == 3);
-        Debug.Log("Done" + Time.time);
-
-        //UIImage.texture = texture;
-        // Populate(sprite,listData[0].notificationContent);
+        // //UIImage.texture = texture;
+        // // Populate(sprite,listData[0].notificationContent);
         yield return null;
     }
 }

@@ -12,4 +12,5 @@ public class FriendNotificationStruct : MonoBehaviour
    [FirestoreProperty] public string notificationContent {get;set;}
    [FirestoreProperty] public string notificationSenderID {get;set;}
    [FirestoreProperty] public bool notificationStatus {get;set;}
+   
 }
