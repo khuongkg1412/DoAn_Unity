@@ -23,6 +23,7 @@ public class changePanel : MonoBehaviour
     }
     public void closePopupPanel()
     {
+        popup.transform.position = new Vector3(1900,0,0);
        // popup.transform.position = orinPos.position;
     }
 

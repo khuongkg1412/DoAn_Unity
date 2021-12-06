@@ -22,31 +22,31 @@ public class ChangeScence : MonoBehaviour
 
     public void howToPlayOpening() //khuong
     {
-        SceneManager.LoadScene(6);
+        SceneManager.LoadScene(3);
     }
 
     public void leaderGlobalOpening() //khuong
     {
-        SceneManager.LoadScene(7);
+        SceneManager.LoadScene(4);
     }
 
     public void leaderLocalOpening() //khuong
     {
-        SceneManager.LoadScene(8);
+        SceneManager.LoadScene(5);
     }
 
     public void notificationOpening() //khuong
     {
-        SceneManager.LoadScene(6);
+        SceneManager.LoadScene(3);
     }
 
     public void backtoMainPage()
     {
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(0);
     }
 
     public void bopenProfile()
     {
-        SceneManager.LoadScene(10);
+        SceneManager.LoadScene(7);
     }
 }

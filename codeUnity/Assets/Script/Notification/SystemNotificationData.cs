@@ -118,7 +118,7 @@ public class SystemNotificationData : MonoBehaviour
         yield return new WaitUntil(() => isRun == true);
 
         //Wait for data has been load from firebase
-        StartCoroutine(GetImage(listData[0].notificationIcon, 2));
+        StartCoroutine(GetImage(listData[0].notificationIcon,1));
 
         yield return new WaitUntil(() => count == 3);
         Debug.Log("Done" + Time.time);
