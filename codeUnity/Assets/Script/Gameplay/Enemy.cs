@@ -40,9 +40,9 @@ public class Enemy : MonoBehaviour
             if (waiToFolllow <= 0)
             {
                 isFollow = true;
+                Debug.Log("Continute");
             }
         }
-
         //Follow if in range
         if (
             Vector3.Distance(target.position, transform.position) <= range &&

@@ -420,7 +420,7 @@ MonoBehaviour:
   runSpeed: 500
   animator: {fileID: 571074379}
   cam: {fileID: 1299645170}
-  shoot: 0
+  isShoot: 0
   firePoint: {fileID: 263468293}
   bulletPrefab: {fileID: 7104374684683533559, guid: b33ae7b6cba70d746b8f145a02237b8d, type: 3}
   bulletSpeed: 1000
@@ -543,9 +543,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.008980506, y: -0.15623027}
+  m_Offset: {x: -0.04704421, y: -0.12354933}
   serializedVersion: 2
-  m_Radius: 0.5118623
+  m_Radius: 0.600568
 --- !u!114 &571074382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -764,6 +764,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 180b1beb2e998c2449b881406eff6b85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 571074373}
+  Reloading: 0
 --- !u!1 &1125565966
 GameObject:
   m_ObjectHideFlags: 0
@@ -2167,7 +2169,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!156049354 &1857260213
 Grid:
   m_ObjectHideFlags: 0

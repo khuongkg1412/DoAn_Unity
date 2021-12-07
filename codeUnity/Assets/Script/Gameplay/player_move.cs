@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class player_move : MonoBehaviour
-{ //Joystick Controller
+{
+    //Joystick Controller
     public joystick_move joystickMove;
 
     public float runSpeed;
@@ -14,7 +15,7 @@ public class player_move : MonoBehaviour
 
     public Camera cam;
 
-    public bool shoot = false;
+    public bool isShoot = true;
 
     Vector2 mousePos;
 
@@ -40,18 +41,21 @@ public class player_move : MonoBehaviour
     {
         //Increase shooterTimer
         shootTimer += Time.deltaTime;
+
         //if (shootTimer > coolDownTime && Input.GetKey(KeyCode.Space))
         //Shooting every time shootTimer reaches the coolDownTime
         if (shootTimer > coolDownTime)
         {
             //Reset time shooter
             shootTimer = 0f;
+
             //Creating bullet
             GameObject bullet =
                 Instantiate(bulletPrefab,
                 firePoint.position,
                 firePoint.rotation);
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+
             //Pull bullet out at fire point
             rb.AddForce(firePoint.up * bulletSpeed, ForceMode2D.Impulse);
         }
@@ -65,7 +69,10 @@ public class player_move : MonoBehaviour
         animator.SetFloat("Speed", joystickMove.joystickVec.sqrMagnitude);
 
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-        Shoot();
+        if (isShoot)
+        {
+            Shoot();
+        }
     }
 
     // Update is called once per frame
