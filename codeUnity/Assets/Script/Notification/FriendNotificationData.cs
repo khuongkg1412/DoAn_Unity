@@ -181,19 +181,20 @@ public class FriendNotificationData : MonoBehaviour
     public bool notificationStatus;
     public GameObject prefab;
 
-    
-    FriendNotificationStruct rank1 =
+
+    FriendNotificationStruct noti1=
             new FriendNotificationStruct
             {
                 notificationImage = "Notification/FriendNotification/noti1/2.png",
                 notificationIcon = "Notification/FriendNotification/noti1/mail-icon.png",
                 notificationContent = "Gurdeep Crane has sent you a message.",
-                notificationSenderID = "a123",
+                notificationSenderId = "a123",
                 notificationStatus = false
             };
 
     private void Start()
     {
+        // AddData();
         Debug.Log("Friend Notification is running!");
         StartCoroutine(setDatatoGO());
     }
@@ -213,6 +214,16 @@ public class FriendNotificationData : MonoBehaviour
         Debug.Log("Friend Notification Run");
     }
 
+    // public void AddData()
+    // {
+    //     Debug.Log("Database Added");
+
+    //     //db connection
+    //     db = FirebaseFirestore.DefaultInstance;
+
+    //     //Get Collection And Document
+    //     db.Collection("FriendNotification").AddAsync(noti1);
+    // }
     IEnumerator GetData()
     {
         //db connection
@@ -225,16 +236,22 @@ public class FriendNotificationData : MonoBehaviour
             .GetSnapshotAsync()
             .ContinueWithOnMainThread(task =>
             {
+                Debug.Log("FriendNoti Query is running!");
                 QuerySnapshot leaderQuerySnapshot = task.Result;
+
                 foreach (DocumentSnapshot
                     documentSnapshot
                     in
                     leaderQuerySnapshot.Documents
                 )
                 {
+                    Debug.Log("Loop is running!");
                     objectData =
                         documentSnapshot.ConvertTo<FriendNotificationStruct>();
+                    Debug.Log("Create object complete!");
                     listData.Add(objectData);
+                    Debug.Log("Add data complete!");
+
                 }
                 Debug.Log("Reading Database Completed!");
                 isRun = true;
@@ -302,7 +319,7 @@ public class FriendNotificationData : MonoBehaviour
         //UIImage.texture = texture;
         Populate(
         listData[0].notificationContent,
-        listData[0].notificationSenderID,
+        listData[0].notificationSenderId,
         listData[0].notificationStatus);
         yield return null;
     }
