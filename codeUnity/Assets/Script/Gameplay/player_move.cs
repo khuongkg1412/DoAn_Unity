@@ -65,7 +65,7 @@ public class player_move : MonoBehaviour
         animator.SetFloat("Speed", joystickMove.joystickVec.sqrMagnitude);
 
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-        //Shoot();
+        Shoot();
     }
 
     // Update is called once per frame
