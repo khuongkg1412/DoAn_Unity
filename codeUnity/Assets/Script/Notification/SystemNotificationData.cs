@@ -26,8 +26,6 @@ public class SystemNotificationData : MonoBehaviour
 
     public GameObject prefab;
 
-    public int numberToCreate;
-
 
     SystemNotificationStruct noti1 = new SystemNotificationStruct
     {

@@ -181,8 +181,6 @@ public class FriendNotificationData : MonoBehaviour
     public bool notificationStatus;
     public GameObject prefab;
 
-    public int numberToCreate;
-
     
     FriendNotificationStruct rank1 =
             new FriendNotificationStruct

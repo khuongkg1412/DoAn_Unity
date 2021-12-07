@@ -29,10 +29,6 @@ public class SocialNotificationData : MonoBehaviour
 
     public bool notificationStatus;
     public GameObject prefab;
-
-    public int numberToCreate;
-
-
     SocialNotificationStruct rank1 =
             new SocialNotificationStruct
             {
