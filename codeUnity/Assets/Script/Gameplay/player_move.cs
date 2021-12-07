@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class player_move : MonoBehaviour
-{
+{ //Joystick Controller
     public joystick_move joystickMove;
 
     public float runSpeed;
@@ -18,13 +18,43 @@ public class player_move : MonoBehaviour
 
     Vector2 mousePos;
 
+    public Transform firePoint;
+
+    [SerializeField]
+    public GameObject bulletPrefab;
+
+    public float bulletSpeed = 1000;
+
+    [SerializeField]
+    private float coolDownTime = 0.5f;
+
+    private float shootTimer;
+
     // Start is called before the first frame update
     void Start()
     {
-        //screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height,Camera.main.transform.position.z));
         rb2d = GetComponent<Rigidbody2D>();
+    }
 
-        //screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+    void Shoot()
+    {
+        //Increase shooterTimer
+        shootTimer += Time.deltaTime;
+        //if (shootTimer > coolDownTime && Input.GetKey(KeyCode.Space))
+        //Shooting every time shootTimer reaches the coolDownTime
+        if (shootTimer > coolDownTime)
+        {
+            //Reset time shooter
+            shootTimer = 0f;
+            //Creating bullet
+            GameObject bullet =
+                Instantiate(bulletPrefab,
+                firePoint.position,
+                firePoint.rotation);
+            Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+            //Pull bullet out at fire point
+            rb.AddForce(firePoint.up * bulletSpeed, ForceMode2D.Impulse);
+        }
     }
 
     // run animation for player movement
@@ -35,12 +65,12 @@ public class player_move : MonoBehaviour
         animator.SetFloat("Speed", joystickMove.joystickVec.sqrMagnitude);
 
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+        //Shoot();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        shoot = false;
         if (joystickMove.joystickVec.y != 0)
         {
             rb2d.velocity =
@@ -54,8 +84,6 @@ public class player_move : MonoBehaviour
             float angle =
                 Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 270f;
             rb2d.rotation = angle;
-            
-            shoot = true; 
         }
     }
 }

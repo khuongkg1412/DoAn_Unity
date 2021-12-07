@@ -15,12 +15,10 @@ public class Enemy : MonoBehaviour
     Transform originalPos;
 
     //Speed to Move
-    [SerializeField]
-    private float speed = 50f;
+    private float speed = 200f;
 
     //Range to Move
-    [SerializeField]
-    private float range = 900f;
+    private float range = 300f;
 
     //Decide whether enemy is following player
     public bool isFollow = true;
@@ -96,8 +94,8 @@ public class Enemy : MonoBehaviour
         else if (other.gameObject.tag == "Player")
         {
             //Hit the Player
-            Rigidbody2D rd =  gameObject.GetComponent<Rigidbody2D>();
-            rd.AddForce(gameObject.transform.position,ForceMode2D.Impulse);
+            // Rigidbody2D rd =  gameObject.GetComponent<Rigidbody2D>();
+            // rd.AddForce(gameObject.transform.position,ForceMode2D.Impulse);
         }
         // else if(other.gameObject.tag == "Player"){
         //     Debug.Log("ComeBack");
