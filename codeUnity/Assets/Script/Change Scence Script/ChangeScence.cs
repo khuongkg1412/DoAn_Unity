@@ -5,23 +5,28 @@ using UnityEngine.SceneManagement;
 
 public class ChangeScence : MonoBehaviour
 {
-    [SerializeField]
-    GameObject player;
     //Reload the scence cause you lost the game
     public bool Reloading = false;
 
     //Wait for reoading excutes
     private float waitToLoad;
+
     public void reloadScence(){
-        while(true)
-        {
-            waitToLoad += Time.deltaTime;
-            if (waitToLoad >= 5f)
-            {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name,LoadSceneMode.Single);
-                break;
-            }
-        }
+        // while(true)
+        // {
+        //     waitToLoad += Time.deltaTime;
+        //     if (waitToLoad >= 5f)
+        //     {
+        //         SceneManager.LoadScene(SceneManager.GetActiveScene().name,LoadSceneMode.Single);
+        //         break;
+        //     }
+        // }
+        StartCoroutine(reloading());
+    }
+    IEnumerator reloading(){
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name,LoadSceneMode.Single);
+        yield return null;
     }
     public void storeOpening()
     {

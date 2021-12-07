@@ -6,8 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class Player_HP : MonoBehaviour
 {
-    private const bool V = false;
-
+    public Canvas canvas;
     //Reload the scence cause you lost the game
     public bool Reloading = false;
 
@@ -29,20 +28,6 @@ public class Player_HP : MonoBehaviour
         currentHP = maxHP;
     }
 
-    private void reloadScence()
-    {
-        if (Reloading)
-        {
-            waitToLoad += Time.deltaTime;
-            if (waitToLoad >= 2f)
-            {
-                maxHP = 50f;
-                currentHP = maxHP;
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            }
-        }
-    }
-
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.tag == "Enemy")
@@ -54,9 +39,9 @@ public class Player_HP : MonoBehaviour
                 Debug.Log("Death");
                 Reloading = true;
                 isDead = true;
-                ChangeScence scence = new ChangeScence();
-                scence.reloadScence();
                 gameObject.SetActive(false);
+                ChangeScence scence= canvas.GetComponent<ChangeScence>();
+                scence.reloadScence();
                 // //Make object comes invisible
                 // Renderer render = gameObject.GetComponentInChildren<Renderer>();
                 // render.enabled = false;
