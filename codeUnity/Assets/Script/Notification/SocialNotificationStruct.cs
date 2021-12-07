@@ -1,18 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using Firebase.Extensions;
+using Firebase.Firestore;
 using UnityEngine;
 
 public class SocialNotificationStruct : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [FirestoreProperty] public string notificationImage { get; set; }
+    [FirestoreProperty] public string notificationIcon { get; set; }
+    [FirestoreProperty] public string notificationContent { get; set; }
+    [FirestoreProperty] public string notificationSenderID { get; set; }
+    [FirestoreProperty] public bool notificationStatus { get; set; }
 }

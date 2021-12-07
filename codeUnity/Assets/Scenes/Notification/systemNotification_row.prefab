@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -203, y: -0.000013351}
+  m_AnchoredPosition: {x: -193.7, y: 0}
   m_SizeDelta: {x: 58.5174, y: 58.517}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3280136449349014850
@@ -150,7 +150,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: You have achieved new achievement.
+  m_Text: 
 --- !u!1 &6301143592296182423
 GameObject:
   m_ObjectHideFlags: 0

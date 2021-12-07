@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 public class SystemNotificationData : MonoBehaviour
 {
-    
+
     FirebaseFirestore db;
 
     private SystemNotificationStruct objectData;
@@ -29,9 +29,7 @@ public class SystemNotificationData : MonoBehaviour
     public int numberToCreate;
 
 
-    SystemNotificationStruct
-
-    noti1 = new SystemNotificationStruct
+    SystemNotificationStruct noti1 = new SystemNotificationStruct
     {
         notificationIcon = "Notification/SystemNotification/noti1/achievement_icon.png",
         notificationContent = "You got a new achievement",
@@ -40,22 +38,25 @@ public class SystemNotificationData : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log("SystemNotification is running");
         StartCoroutine(setDatatoGO());
     }
 
     void Populate(string notiContent)
     {
+        Debug.Log("SystemNotification Populate is running");
         GameObject newObj;
         notificationContent.text = notiContent;
         newObj = (GameObject)Instantiate(prefab, transform);
-        Debug.Log("Run");
+        Debug.Log("SystemNotification Run");
     }
 
     IEnumerator GetData()
     {
         //db connection
+
         db = FirebaseFirestore.DefaultInstance;
-        Debug.Log("Database Reading " + Time.time);
+        Debug.Log("SystemNotification Database Reading");
 
         Query leaderQuery = db.Collection("systemNotification");
         leaderQuery
@@ -73,11 +74,12 @@ public class SystemNotificationData : MonoBehaviour
                         documentSnapshot.ConvertTo<SystemNotificationStruct>();
                     listData.Add(objectData);
                 }
+                Debug.Log("Add data complete!");
                 isRun = true;
             });
         yield return null;
     }
-    IEnumerator GetImage(string dataImage, int num)
+    IEnumerator GetImage(string dataImage)
     {
         // Get a reference to the storage service, using the default Firebase App
         FirebaseStorage storage = FirebaseStorage.DefaultInstance;
@@ -98,15 +100,13 @@ public class SystemNotificationData : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Image Downloaded " + Time.time);
+                    Debug.Log("SystemNotification Image Downloaded ");
                     byte[] fileContents = task.Result;
                     Texture2D texture = new Texture2D(1, 1);
                     texture.LoadImage(fileContents);
-                    if (num == 1)
-                    {
-                        notificationIcon.texture = texture;
-                        count++;
-                    }
+                    notificationIcon.texture = texture;
+                    count++;
+                    Debug.Log("SystemNotification Image is loaded");
                 }
             });
         yield return null;
@@ -118,7 +118,7 @@ public class SystemNotificationData : MonoBehaviour
         yield return new WaitUntil(() => isRun == true);
 
         //Wait for data has been load from firebase
-        StartCoroutine(GetImage(listData[0].notificationIcon,1));
+        StartCoroutine(GetImage(listData[0].notificationIcon));
 
         yield return new WaitUntil(() => count == 3);
         Debug.Log("Done" + Time.time);

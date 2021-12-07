@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 3836661738778115630}
   - component: {fileID: 3836661738778115629}
   m_Layer: 5
-  m_Name: friendNotification_row
+  m_Name: socialNotification_row
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
