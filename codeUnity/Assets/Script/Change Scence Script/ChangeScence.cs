@@ -11,7 +11,8 @@ public class ChangeScence : MonoBehaviour
     //Wait for reoading excutes
     private float waitToLoad;
 
-    public void reloadScence(){
+    public void reloadScence()
+    {
         // while(true)
         // {
         //     waitToLoad += Time.deltaTime;
@@ -23,22 +24,24 @@ public class ChangeScence : MonoBehaviour
         // }
         StartCoroutine(reloading());
     }
-    IEnumerator reloading(){
+
+    IEnumerator reloading()
+    {
         yield return new WaitForSeconds(2);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name,LoadSceneMode.Single);
+        SceneManager
+            .LoadScene(SceneManager.GetActiveScene().name,
+            LoadSceneMode.Single);
         yield return null;
     }
+
     public void storeOpening()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
-
     public void achiveOpening()
     {
         SceneManager.LoadScene(2);
-
-
     }
 
     public void howToPlayOpening() //khuong
@@ -69,5 +72,10 @@ public class ChangeScence : MonoBehaviour
     public void openProfile()
     {
         SceneManager.LoadScene(7);
+    }
+
+    public void gameplayOpening()
+    {
+        SceneManager.LoadScene(12);
     }
 }

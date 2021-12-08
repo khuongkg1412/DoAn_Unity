@@ -44,4 +44,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Login/Register by Email.unity
     guid: 3c47ce129fba9184c99638600d06ad1f
+  - enabled: 1
+    path: Assets/Scenes/Gameplay/gameplay.unity
+    guid: 8c308f6d2c8bd474383c65ffe22c719a
   m_configObjects: {}
