@@ -8,13 +8,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class leaderBoardData : MonoBehaviour
+public class leaderBoardGlobalData : MonoBehaviour
 {
     FirebaseFirestore db;
 
-    private leaderBoardStruct objectData;
+    private leaderBoardGlobalStruct objectData;
 
-    List<leaderBoardStruct> listData = new List<leaderBoardStruct>();
+    List<leaderBoardGlobalStruct> listData = new List<leaderBoardGlobalStruct>();
 
     bool isRun = false;
 
@@ -36,15 +36,15 @@ public class leaderBoardData : MonoBehaviour
 
     public int numberToCreate;
 
-    leaderBoardStruct
+    leaderBoardGlobalStruct
         rank1 =
-            new leaderBoardStruct {
-                flagImage = "LeaderBoard/Local/Rank1/VN.png",
-                playerAvatar = "LeaderBoard/Local/Rank1/top1_avatar.png",
-                playerLevel = 99,
-                playerMap = 99,
-                playerName = "Minh Hai",
-                playerRank = "LeaderBoard/Local/Rank1/cup1.png"
+            new leaderBoardGlobalStruct {
+                flagImage = "LeaderBoard/Global/Rank1/USA.png",
+                playerAvatar = "LeaderBoard/Global/Rank1/TonySam.png",
+                playerLevel = 40,
+                playerMap = 40,
+                playerName = "Tony Sam",
+                playerRank = "LeaderBoard/Global/Rank1/cup1.png"
             };
 
     private void Start()
@@ -73,7 +73,7 @@ public class leaderBoardData : MonoBehaviour
         db = FirebaseFirestore.DefaultInstance;
         Debug.Log("Database Reading " + Time.time);
 
-        Query leaderQuery = db.Collection("leaderBoard");
+        Query leaderQuery = db.Collection("leaderboardGlobal");
         leaderQuery
             .GetSnapshotAsync()
             .ContinueWithOnMainThread(task =>
@@ -86,7 +86,7 @@ public class leaderBoardData : MonoBehaviour
                 )
                 {
                     objectData =
-                        documentSnapshot.ConvertTo<leaderBoardStruct>();
+                        documentSnapshot.ConvertTo<leaderBoardGlobalStruct>();
                     listData.Add (objectData);
                 }
                 isRun = true;
@@ -142,6 +142,8 @@ public class leaderBoardData : MonoBehaviour
     IEnumerator setDatatoGO()
     {
         StartCoroutine(GetData());
+        yield return new WaitUntil(() => isRun == true);
+
         //Wait for data has been load from firebase
         StartCoroutine(GetImage(listData[0].playerAvatar, 1));
         StartCoroutine(GetImage(listData[0].playerRank, 2));

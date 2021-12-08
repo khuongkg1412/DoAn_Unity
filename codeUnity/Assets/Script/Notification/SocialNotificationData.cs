@@ -8,89 +8,98 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class leaderBoardData : MonoBehaviour
+public class SocialNotificationData : MonoBehaviour
 {
     FirebaseFirestore db;
 
-    private leaderBoardStruct objectData;
+    private SocialNotificationStruct objectData;
 
-    List<leaderBoardStruct> listData = new List<leaderBoardStruct>();
+    List<SocialNotificationStruct> listData = new List<SocialNotificationStruct>();
 
     bool isRun = false;
 
     int count = 0;
 
-    public RawImage flagImage;
+    public RawImage notificationImage;
 
-    public RawImage playerAvatar;
+    public RawImage notificationIcon;
 
-    public RawImage playerRank;
+    public Text notificationContent;
+    private Text notificationSenderId;
 
-    public Text playerLevel;
-
-    public Text playerMap;
-
-    public Text playerName;
-
+    public bool notificationStatus;
     public GameObject prefab;
 
-    public int numberToCreate;
 
-    leaderBoardStruct
-        rank1 =
-            new leaderBoardStruct {
-                flagImage = "LeaderBoard/Local/Rank1/VN.png",
-                playerAvatar = "LeaderBoard/Local/Rank1/top1_avatar.png",
-                playerLevel = 99,
-                playerMap = 99,
-                playerName = "Minh Hai",
-                playerRank = "LeaderBoard/Local/Rank1/cup1.png"
+    SocialNotificationStruct noti1 =
+            new SocialNotificationStruct
+            {
+                notificationImage = "Notification/SocialNotification/noti6/VN.png",
+                notificationIcon = "SocialNotification/noti6/mail-icon.png",
+                notificationContent = "ToiyeuVn has sent you a mail!",
+                notificationSenderId = "a123",
+                notificationStatus = false
             };
 
     private void Start()
     {
+        //AddData();
+        //Social Noti is starting
         StartCoroutine(setDatatoGO());
     }
 
     void Populate(
-        int textLevel,
-        int textMap,
-        string textName
+        string notiContent,
+        string notiSenderId,
+        bool notiStatus
     )
     {
+        Debug.Log("Social Populate is running");
         GameObject newObj;
-
-        playerLevel.text = textLevel.ToString();
-        playerMap.text = textMap.ToString();
-        playerName.text = textName;
-        newObj = (GameObject) Instantiate(prefab, transform);
-        Debug.Log("Run");
+        notificationContent.text = notiContent;
+        //notificationSenderId.text = notiSenderId; 
+        notificationStatus = notiStatus;
+        newObj = (GameObject)Instantiate(prefab, transform);
     }
 
+    public void AddData()
+    {
+
+
+        //db connection
+        db = FirebaseFirestore.DefaultInstance;
+
+        //Get Collection And Document
+        db.Collection("SocialNotification").AddAsync(noti1);
+    }
     IEnumerator GetData()
     {
         //db connection
         db = FirebaseFirestore.DefaultInstance;
-        Debug.Log("Database Reading " + Time.time);
+        Query leaderQuery = db.Collection("SocialNotification");
 
-        Query leaderQuery = db.Collection("leaderBoard");
         leaderQuery
             .GetSnapshotAsync()
             .ContinueWithOnMainThread(task =>
             {
+
                 QuerySnapshot leaderQuerySnapshot = task.Result;
+
                 foreach (DocumentSnapshot
                     documentSnapshot
                     in
                     leaderQuerySnapshot.Documents
                 )
                 {
+
                     objectData =
-                        documentSnapshot.ConvertTo<leaderBoardStruct>();
-                    listData.Add (objectData);
+                        documentSnapshot.ConvertTo<SocialNotificationStruct>();
+
+                    listData.Add(objectData);
                 }
                 isRun = true;
             });
+
         yield return null;
     }
 
@@ -101,7 +110,6 @@ public class leaderBoardData : MonoBehaviour
 
         // Create a storage reference from our storage service
         StorageReference storageRef = storage.GetReference(dataImage);
-
         // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
         const long maxAllowedSize = 1 * 1024 * 1024;
         storageRef
@@ -115,46 +123,42 @@ public class leaderBoardData : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Image Downloaded " + Time.time);
                     byte[] fileContents = task.Result;
                     Texture2D texture = new Texture2D(1, 1);
-                    texture.LoadImage (fileContents);
+                    texture.LoadImage(fileContents);
                     if (num == 1)
                     {
-                        playerAvatar.texture = texture;
+                        notificationImage.texture = texture;
                         count++;
                     }
                     else if (num == 2)
                     {
-                        playerRank.texture = texture;
-                        count++;
-                    }
-                    else
-                    {
-                        flagImage.texture = texture;
+                        notificationIcon.texture = texture;
                         count++;
                     }
                 }
+
             });
         yield return null;
     }
 
     IEnumerator setDatatoGO()
     {
+
         StartCoroutine(GetData());
-        //Wait for data has been load from firebase
-        StartCoroutine(GetImage(listData[0].playerAvatar, 1));
-        StartCoroutine(GetImage(listData[0].playerRank, 2));
-        StartCoroutine(GetImage(listData[0].flagImage, 3));
+        yield return new WaitUntil(() => isRun == true);
 
-        yield return new WaitUntil(() => count == 3);
-        Debug.Log("Done" + Time.time);
-
-        //UIImage.texture = texture;
-        Populate(
-        listData[0].playerLevel,
-        listData[0].playerMap,
-        listData[0].playerName);
+        foreach (var objectItem in listData)
+        {
+            StartCoroutine(GetImage(objectItem.notificationImage, 1));
+            StartCoroutine(GetImage(objectItem.notificationIcon, 2));
+            yield return new WaitUntil(() => count == 2);
+            Populate(
+        objectItem.notificationContent,
+        objectItem.notificationSenderId,
+        objectItem.notificationStatus);
+            count = 0;
+        }
         yield return null;
     }
 }

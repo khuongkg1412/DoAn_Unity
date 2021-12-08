@@ -27,7 +27,7 @@ EditorBuildSettings:
     path: Assets/Scenes/LeaderBorad/Leaderboard Local.unity
     guid: 37ee91d63a419894d81d0cb458651de5
   - enabled: 1
-    path: Assets/Scenes/Notification.unity
+    path: Assets/Scenes/Notification/Notification.unity
     guid: 629b368e67b170c44972391dfc4252ce
   - enabled: 1
     path: Assets/Scenes/Profile/Main screen.unity
@@ -35,4 +35,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Profile/Friend list.unity
     guid: c543c632e5d768940a75139fadd72e41
+  - enabled: 1
+    path: Assets/Scenes/Login/Login - Main theme.unity
+    guid: bbc263638d538e3498c2eba07a79ca3d
+  - enabled: 1
+    path: Assets/Scenes/Login/Login by Email.unity
+    guid: e8bec9158455bf847b1f8fd1873bc5ec
+  - enabled: 1
+    path: Assets/Scenes/Login/Register by Email.unity
+    guid: 3c47ce129fba9184c99638600d06ad1f
   m_configObjects: {}
