@@ -888,6 +888,10 @@ PrefabInstance:
       propertyPath: originalPos
       value: 
       objectReference: {fileID: 1902960996}
+    - target: {fileID: 3617683340215423016, guid: 03c20b675f5302f448e46cb6532905f2, type: 3}
+      propertyPath: gamePlay
+      value: 
+      objectReference: {fileID: 881436829}
     - target: {fileID: 3617683341387958443, guid: 03c20b675f5302f448e46cb6532905f2, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1373,6 +1377,10 @@ PrefabInstance:
       propertyPath: originalPos
       value: 
       objectReference: {fileID: 983889451}
+    - target: {fileID: 3617683340215423016, guid: 03c20b675f5302f448e46cb6532905f2, type: 3}
+      propertyPath: gamePlay
+      value: 
+      objectReference: {fileID: 881436829}
     - target: {fileID: 3617683341387958443, guid: 03c20b675f5302f448e46cb6532905f2, type: 3}
       propertyPath: m_RootOrder
       value: 0
