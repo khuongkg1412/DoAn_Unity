@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 
@@ -22,18 +23,27 @@ public class Player_HP : MonoBehaviour
     //Max Health Point
     public float maxHP;
 
+    public Slider HealthBar;  
+    
+    public Text HPText;
     private void Start()
     {
         maxHP = 50f;
         currentHP = maxHP;
     }
 
+    private void getDamage(){
+        HealthBar.maxValue = maxHP;
+        HealthBar.value = currentHP;
+        HPText.text = currentHP + " / " + maxHP;
+    }
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.tag == "Enemy")
         {
             currentHP -= other.gameObject.GetComponent<Enemy>().dameGiven;
-            Debug.Log("Current HP: " + currentHP);
+            getDamage();
+
             if (currentHP == 0)
             {
                 Debug.Log("Death");
