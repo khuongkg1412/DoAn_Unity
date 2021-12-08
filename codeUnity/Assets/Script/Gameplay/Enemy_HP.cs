@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Enemy_HP : MonoBehaviour
 {
+    public Canvas gamePlay;
     //Cureent Health Point
     public float currentHP;
 
@@ -40,6 +41,8 @@ public class Enemy_HP : MonoBehaviour
                         HealthBar.transform.transform.localScale.y,
                         HealthBar.transform.transform.localScale.z);
                 Destroy (gameObject);
+                //gamePlay.GetComponent<Game_Start>().score += 100f;
+                gamePlay.GetComponent<Game_Start>().UpdateScore();
             }
         }
     }

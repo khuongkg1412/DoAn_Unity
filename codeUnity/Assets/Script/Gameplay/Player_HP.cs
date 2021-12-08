@@ -38,8 +38,7 @@ public class Player_HP : MonoBehaviour
         if (isDead)
         {
             gameObject.SetActive(false);
-            ChangeScence scence = canvas.GetComponent<ChangeScence>();
-            scence.reloadScence();
+            canvas.GetComponent<Game_Start>().GameOVer();
         }
     }
 
@@ -59,10 +58,8 @@ public class Player_HP : MonoBehaviour
 
             if (currentHP == 0)
             {
-                Debug.Log("Death");
                 Reloading = true;
                 isDead = true;
-
                 // //Make object comes invisible
                 // Renderer render = gameObject.GetComponentInChildren<Renderer>();
                 // render.enabled = false;

@@ -37,9 +37,7 @@ public class Enemy : MonoBehaviour
             waiToFolllow -= Time.deltaTime;
             if (waiToFolllow <= 0)
             {
-                isFollow = true;
-                Debug.Log("Continute");
-            }
+                isFollow = true;         }
         }
 
         //Follow if in range

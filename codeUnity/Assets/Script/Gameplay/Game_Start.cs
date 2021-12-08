@@ -1,12 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Game_Start : MonoBehaviour
 {
+    public float score;
+
     public GameObject Player;
-    float timeRemaining = 10;
+
+    public GameObject pannelGameover;
+
+    [SerializeField]
+    private TextMeshProUGUI textMeshPro;
+
+    float timeRemaining = 180;
 
     public bool timerIsRunning = false;
 
@@ -18,8 +27,23 @@ public class Game_Start : MonoBehaviour
         timerIsRunning = true;
     }
 
+    public void GameOVer()
+    {
+        pannelGameover.SetActive(true);
+        Player.GetComponent<Player_HP>().isDead = true;
+        gameObject.GetComponent<ChangeScence>().reloadScence();
+    }
+
+    public void UpdateScore()
+    {
+        Debug.Log("Score: "+ score);
+        score +=100f;
+        textMeshPro.text = score.ToString();
+    }
+
     void Update()
     {
+        //UpdateScore();
         if (timerIsRunning)
         {
             if (timeRemaining > 0)
@@ -29,14 +53,17 @@ public class Game_Start : MonoBehaviour
             }
             else
             {
-                Debug.Log("Time has run out!");
                 timeRemaining = 0;
                 timerIsRunning = false;
             }
-        }else{
-            Debug.Log("GameOver!!");
-            Player.GetComponent<Player_HP>().isDead = true;
-            gameObject.GetComponent<ChangeScence>().reloadScence();
+        }
+        else
+        // else if(Player.GetComponent<Player_HP>().isDead)
+        // {
+        //     GameOVer();
+        // }
+        {
+            GameOVer();
         }
     }
 
