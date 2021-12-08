@@ -142,8 +142,6 @@ public class leaderBoardData : MonoBehaviour
     IEnumerator setDatatoGO()
     {
         StartCoroutine(GetData());
-        yield return new WaitUntil(() => isRun == true);
-
         //Wait for data has been load from firebase
         StartCoroutine(GetImage(listData[0].playerAvatar, 1));
         StartCoroutine(GetImage(listData[0].playerRank, 2));

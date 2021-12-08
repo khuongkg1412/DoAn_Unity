@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2952587669335151470}
   - component: {fileID: 2176548581993126072}
   m_Layer: 5
-  m_Name: friendNotificationImage_img
+  m_Name: socialNotificationImage_img
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -233,7 +233,7 @@ GameObject:
   - component: {fileID: 3836661739944796612}
   - component: {fileID: 3836661739944796615}
   m_Layer: 5
-  m_Name: friendNotificationContent_txt
+  m_Name: socialNotificationContent_txt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -312,7 +312,7 @@ GameObject:
   - component: {fileID: 6376718872424702387}
   - component: {fileID: 4808877265585608273}
   m_Layer: 5
-  m_Name: friendNotificationIcon_img
+  m_Name: socialNotificationIcon_img
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -11,15 +11,15 @@ public class AuthController : MonoBehaviour
 
     public void goToLoginPage()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(10);
     }
     public void goToRegisterPage()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(11);
     }
     public void goToMainPage()
     {
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(0);
     }
     IEnumerator LoginEmail(){
         Debug.Log("Logining. Email: " + emailInput.text + ", Password: " + passwordInput.text);
@@ -129,6 +129,7 @@ public class AuthController : MonoBehaviour
         //     break;
 
         // }
+        debugMessage.text = msg;
         print(msg);
 
     }

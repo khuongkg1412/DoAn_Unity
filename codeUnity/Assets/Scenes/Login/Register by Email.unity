@@ -193,7 +193,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Login
+  m_Text: LOGIN
 --- !u!222 &115440794
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1538,7 +1538,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Register
+  m_Text: REGISTER
 --- !u!222 &1106126180
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1657,6 +1657,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   emailInput: {fileID: 1160472750}
   passwordInput: {fileID: 551265887}
+  debugMessage: {fileID: 0}
 --- !u!4 &1273714474
 Transform:
   m_ObjectHideFlags: 0

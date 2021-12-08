@@ -4,7 +4,8 @@ using Firebase.Extensions;
 using Firebase.Firestore;
 using UnityEngine;
 
-public class SystemNotificationStruct : MonoBehaviour
+[FirestoreData]
+public class SystemNotificationStruct 
 {
     [FirestoreProperty] public string notificationIcon { get; set; }
     [FirestoreProperty] public string notificationContent { get; set; }

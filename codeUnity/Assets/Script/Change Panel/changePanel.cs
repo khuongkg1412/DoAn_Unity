@@ -5,28 +5,17 @@ using UnityEngine;
 public class changePanel : MonoBehaviour
 {
 
-    public GameObject popup;
-
-    Transform orinPos;
-    private void Start() {
-         //orinPos.position = popup.transform.position;
-    }
-
-    public void openPopupPanel()
+    public GameObject oldPopUp;
+    public GameObject newPopUp;
+    private void Start()
     {
-        // if (popup != null)
-        // {
-        //     popup.SetActive(true);
-        // }
-
-        popup.transform.position = new Vector3(0,0,0);
+        //orinPos.position = oldPopUp.transform.position;
     }
-    public void closePopupPanel()
+    public void openPopUp()
     {
-        popup.transform.position = new Vector3(1900,0,0);
-       // popup.transform.position = orinPos.position;
-    }
-
+        oldPopUp.transform.position = new Vector3(1900, 0, 0);    
+        newPopUp.transform.position = new Vector3(0, 0, 0);
+    }    
 
 
 }

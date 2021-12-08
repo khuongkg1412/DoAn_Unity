@@ -10,7 +10,6 @@ using UnityEngine.UI;
 
 public class SystemNotificationData : MonoBehaviour
 {
-
     FirebaseFirestore db;
 
     private SystemNotificationStruct objectData;
@@ -21,70 +20,93 @@ public class SystemNotificationData : MonoBehaviour
 
     int count = 0;
     public RawImage notificationIcon;
-    public Text notificationContent;
-    public bool notificationStatus;
 
+    public Text notificationContent;
+
+    public bool notificationStatus;
     public GameObject prefab;
 
 
-    SystemNotificationStruct noti1 = new SystemNotificationStruct
-    {
-        notificationIcon = "Notification/SystemNotification/noti1/achievement_icon.png",
-        notificationContent = "You got a new achievement",
-        notificationStatus = false
-    };
+    SystemNotificationStruct noti1 =
+            new SystemNotificationStruct
+            {
+                notificationIcon = "Notification/SystemNotification/noti6/achievement_icon.png",
+                notificationContent = "You got a new achievement: Sniper",
+                notificationStatus = false
+            };
 
     private void Start()
     {
-        Debug.Log("SystemNotification is running");
+        // Debug.Log("System Add data is running");
+        //AddData();
+        // Debug.Log("System Notification is running!");
         StartCoroutine(setDatatoGO());
     }
 
-    void Populate(string notiContent)
+    void Populate(
+        string notiContent,
+        bool notiStatus
+    )
     {
-        Debug.Log("SystemNotification Populate is running");
         GameObject newObj;
+
         notificationContent.text = notiContent;
+        notificationStatus = notiStatus;
         newObj = (GameObject)Instantiate(prefab, transform);
-        Debug.Log("SystemNotification Run");
+
     }
 
+    public void AddData()
+    {
+
+        //db connection
+        db = FirebaseFirestore.DefaultInstance;
+
+        //Get Collection And Document
+        db.Collection("SystemNotification").AddAsync(noti1);
+    }
     IEnumerator GetData()
     {
         //db connection
 
         db = FirebaseFirestore.DefaultInstance;
-        Debug.Log("SystemNotification Database Reading");
 
-        Query leaderQuery = db.Collection("systemNotification");
+
+        Query leaderQuery = db.Collection("SystemNotification");
         leaderQuery
             .GetSnapshotAsync()
             .ContinueWithOnMainThread(task =>
             {
+     
+
                 QuerySnapshot leaderQuerySnapshot = task.Result;
+
                 foreach (DocumentSnapshot
                     documentSnapshot
                     in
                     leaderQuerySnapshot.Documents
                 )
                 {
+
                     objectData =
                         documentSnapshot.ConvertTo<SystemNotificationStruct>();
+
                     listData.Add(objectData);
+
                 }
-                Debug.Log("Add data complete!");
                 isRun = true;
             });
+
         yield return null;
     }
-    IEnumerator GetImage(string dataImage)
+
+    IEnumerator GetImage(string dataImage, string notiContent, bool notiStatus)
     {
         // Get a reference to the storage service, using the default Firebase App
         FirebaseStorage storage = FirebaseStorage.DefaultInstance;
 
         // Create a storage reference from our storage service
         StorageReference storageRef = storage.GetReference(dataImage);
-
         // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
         const long maxAllowedSize = 1 * 1024 * 1024;
         storageRef
@@ -98,32 +120,33 @@ public class SystemNotificationData : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("SystemNotification Image Downloaded ");
+
                     byte[] fileContents = task.Result;
                     Texture2D texture = new Texture2D(1, 1);
                     texture.LoadImage(fileContents);
                     notificationIcon.texture = texture;
                     count++;
-                    Debug.Log("SystemNotification Image is loaded");
+                    Populate(notiContent, notiStatus);
                 }
+
             });
         yield return null;
     }
 
     IEnumerator setDatatoGO()
     {
+
         StartCoroutine(GetData());
         yield return new WaitUntil(() => isRun == true);
 
-        //Wait for data has been load from firebase
-        StartCoroutine(GetImage(listData[0].notificationIcon));
+        foreach (var objectItem in listData)
+        {
+            StartCoroutine(GetImage(objectItem.notificationIcon, 
+            objectItem.notificationContent, objectItem.notificationStatus));
 
-        yield return new WaitUntil(() => count == 3);
-        Debug.Log("Done" + Time.time);
-
-        //UIImage.texture = texture;
-        Populate(
-        listData[0].notificationContent);
+            count = 0;
+        }
         yield return null;
     }
+
 }

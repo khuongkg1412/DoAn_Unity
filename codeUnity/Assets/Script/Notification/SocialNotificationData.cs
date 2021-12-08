@@ -29,19 +29,22 @@ public class SocialNotificationData : MonoBehaviour
 
     public bool notificationStatus;
     public GameObject prefab;
-    SocialNotificationStruct rank1 =
+
+
+    SocialNotificationStruct noti1 =
             new SocialNotificationStruct
             {
-                notificationImage = "Notification/SocialNotification/noti1/2.png",
-                notificationIcon = "Notification/SocialNotification/noti1/mail-icon.png",
-                notificationContent = "Gurdeep Crane has sent you a message.",
-                notificationSenderID = "a123",
+                notificationImage = "Notification/SocialNotification/noti6/VN.png",
+                notificationIcon = "SocialNotification/noti6/mail-icon.png",
+                notificationContent = "ToiyeuVn has sent you a mail!",
+                notificationSenderId = "a123",
                 notificationStatus = false
             };
 
     private void Start()
     {
-        Debug.Log("Social Notification is running!");
+        //AddData();
+        //Social Noti is starting
         StartCoroutine(setDatatoGO());
     }
 
@@ -51,53 +54,62 @@ public class SocialNotificationData : MonoBehaviour
         bool notiStatus
     )
     {
+        Debug.Log("Social Populate is running");
         GameObject newObj;
-        Debug.Log("Social Notification's Populate is running!");
-        notificationContent.text = notiContent.ToString();
-        notificationSenderId.text = notiSenderId.ToString();
+        notificationContent.text = notiContent;
+        //notificationSenderId.text = notiSenderId; 
         notificationStatus = notiStatus;
         newObj = (GameObject)Instantiate(prefab, transform);
-        Debug.Log("Social Notification Run");
     }
 
+    public void AddData()
+    {
+
+
+        //db connection
+        db = FirebaseFirestore.DefaultInstance;
+
+        //Get Collection And Document
+        db.Collection("SocialNotification").AddAsync(noti1);
+    }
     IEnumerator GetData()
     {
         //db connection
-        Debug.Log("Social Notification's GetData is running!");
         db = FirebaseFirestore.DefaultInstance;
-        Debug.Log("Database Reading " + Time.time);
+        Query leaderQuery = db.Collection("SocialNotification");
 
-        Query leaderQuery = db.Collection("socialNotification");
         leaderQuery
             .GetSnapshotAsync()
             .ContinueWithOnMainThread(task =>
             {
+
                 QuerySnapshot leaderQuerySnapshot = task.Result;
+
                 foreach (DocumentSnapshot
                     documentSnapshot
                     in
                     leaderQuerySnapshot.Documents
                 )
                 {
+
                     objectData =
                         documentSnapshot.ConvertTo<SocialNotificationStruct>();
+
                     listData.Add(objectData);
                 }
-                Debug.Log("Reading Database Completed!");
                 isRun = true;
             });
+
         yield return null;
     }
 
     IEnumerator GetImage(string dataImage, int num)
     {
-        Debug.Log("Social Notification's GetImage is running!");
         // Get a reference to the storage service, using the default Firebase App
         FirebaseStorage storage = FirebaseStorage.DefaultInstance;
 
         // Create a storage reference from our storage service
         StorageReference storageRef = storage.GetReference(dataImage);
-        Debug.Log("Getting Image");
         // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
         const long maxAllowedSize = 1 * 1024 * 1024;
         storageRef
@@ -106,14 +118,11 @@ public class SocialNotificationData : MonoBehaviour
             {
                 if (task.IsFaulted || task.IsCanceled)
                 {
-                    Debug.Log("Task Fault/Canceled");
                     // Uh-oh, an error occurred!
                     Debug.LogException(task.Exception);
                 }
                 else
                 {
-                    Debug.Log("Task accept");
-                    Debug.Log("Image Downloading ");
                     byte[] fileContents = task.Result;
                     Texture2D texture = new Texture2D(1, 1);
                     texture.LoadImage(fileContents);
@@ -127,7 +136,6 @@ public class SocialNotificationData : MonoBehaviour
                         notificationIcon.texture = texture;
                         count++;
                     }
-                    Debug.Log("Image Downloaded!");
                 }
 
             });
@@ -136,21 +144,21 @@ public class SocialNotificationData : MonoBehaviour
 
     IEnumerator setDatatoGO()
     {
-        Debug.Log("Social Notification's setDatatoGo is running!");
+
         StartCoroutine(GetData());
         yield return new WaitUntil(() => isRun == true);
 
-        //Wait for data has been load from firebase
-        StartCoroutine(GetImage(listData[0].notificationImage, 1));
-        StartCoroutine(GetImage(listData[0].notificationIcon, 2));
-        yield return new WaitUntil(() => count == 3);
-        Debug.Log("Set Data Done!");
-
-        //UIImage.texture = texture;
-        Populate(
-        listData[0].notificationContent,
-        listData[0].notificationSenderID,
-        listData[0].notificationStatus);
+        foreach (var objectItem in listData)
+        {
+            StartCoroutine(GetImage(objectItem.notificationImage, 1));
+            StartCoroutine(GetImage(objectItem.notificationIcon, 2));
+            yield return new WaitUntil(() => count == 2);
+            Populate(
+        objectItem.notificationContent,
+        objectItem.notificationSenderId,
+        objectItem.notificationStatus);
+            count = 0;
+        }
         yield return null;
     }
 }

@@ -4,8 +4,8 @@ using Firebase.Extensions;
 using Firebase.Firestore;
 using UnityEngine;
 
-
-public class FriendNotificationStruct : MonoBehaviour
+[FirestoreData]
+public class FriendNotificationStruct
 {
     [FirestoreProperty] public string notificationContent { get; set; }
     [FirestoreProperty] public string notificationIcon { get; set; }

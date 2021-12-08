@@ -15,7 +15,7 @@ public class ChangeScence : MonoBehaviour
 
     public void achiveOpening()
     {
-        SceneManager.LoadScene(5);
+        SceneManager.LoadScene(2);
 
 
     }
@@ -37,7 +37,7 @@ public class ChangeScence : MonoBehaviour
 
     public void notificationOpening() //khuong
     {
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(6);
     }
 
     public void backtoMainPage()
