@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
- //Player target to enemy move forward
+    //Player target to enemy move forward
     public Transform target;
 
     //Distance from player to enemy
-
     //public Vector3 distancePlayer = new Vector3(10,10,0);
     //The orginal position of enemy, after out of range with player, enemy would comeback here
     [SerializeField]
@@ -35,7 +34,6 @@ public class Enemy : MonoBehaviour
         if (!isFollow)
         {
             //Count to follow
-
             waiToFolllow -= Time.deltaTime;
             if (waiToFolllow <= 0)
             {
@@ -43,6 +41,7 @@ public class Enemy : MonoBehaviour
                 Debug.Log("Continute");
             }
         }
+
         //Follow if in range
         if (
             Vector3.Distance(target.position, transform.position) <= range &&
@@ -50,9 +49,8 @@ public class Enemy : MonoBehaviour
         )
         {
             followPlayer();
-        }
-        else //Out range then comeback to home position
-        if (Vector3.Distance(target.position, transform.position) >= range)
+        } //Out range then comeback to home position
+        else if (Vector3.Distance(target.position, transform.position) >= range)
         {
             comeBackPos();
         }
@@ -87,15 +85,11 @@ public class Enemy : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         isFollow = false;
-        if (other.gameObject.tag == "Bullet")
-        {
-            Destroy (gameObject);
-        }
-        else if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
             //Hit the Player
-            Rigidbody2D rd =  gameObject.GetComponent<Rigidbody2D>();
-            rd.AddForce(gameObject.transform.position,ForceMode2D.Impulse);
+            Rigidbody2D rd = gameObject.GetComponent<Rigidbody2D>();
+            rd.AddForce(gameObject.transform.position, ForceMode2D.Impulse);
         }
         // else if(other.gameObject.tag == "Player"){
         //     Debug.Log("ComeBack");

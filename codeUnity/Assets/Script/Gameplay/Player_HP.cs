@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.UI;
 
 public class Player_HP : MonoBehaviour
 {
     public Canvas canvas;
+
     //Reload the scence cause you lost the game
     public bool Reloading = false;
 
@@ -23,20 +23,33 @@ public class Player_HP : MonoBehaviour
     //Max Health Point
     public float maxHP;
 
-    public Slider HealthBar;  
-    
+    public Slider HealthBar;
+
     public Text HPText;
+
     private void Start()
     {
         maxHP = 50f;
         currentHP = maxHP;
     }
 
-    private void getDamage(){
+    private void Update()
+    {
+        if (isDead)
+        {
+            gameObject.SetActive(false);
+            ChangeScence scence = canvas.GetComponent<ChangeScence>();
+            scence.reloadScence();
+        }
+    }
+
+    private void getDamage()
+    {
         HealthBar.maxValue = maxHP;
         HealthBar.value = currentHP;
         HPText.text = currentHP + " / " + maxHP;
     }
+
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.tag == "Enemy")
@@ -49,9 +62,7 @@ public class Player_HP : MonoBehaviour
                 Debug.Log("Death");
                 Reloading = true;
                 isDead = true;
-                gameObject.SetActive(false);
-                ChangeScence scence= canvas.GetComponent<ChangeScence>();
-                scence.reloadScence();
+
                 // //Make object comes invisible
                 // Renderer render = gameObject.GetComponentInChildren<Renderer>();
                 // render.enabled = false;
@@ -59,5 +70,4 @@ public class Player_HP : MonoBehaviour
             }
         }
     }
-    
 }

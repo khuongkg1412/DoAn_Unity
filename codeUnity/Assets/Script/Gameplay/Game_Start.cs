@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class Game_Start : MonoBehaviour
 {
-    float timeRemaining = 90;
+    public GameObject Player;
+    float timeRemaining = 10;
 
     public bool timerIsRunning = false;
 
@@ -32,6 +33,10 @@ public class Game_Start : MonoBehaviour
                 timeRemaining = 0;
                 timerIsRunning = false;
             }
+        }else{
+            Debug.Log("GameOver!!");
+            Player.GetComponent<Player_HP>().isDead = true;
+            gameObject.GetComponent<ChangeScence>().reloadScence();
         }
     }
 
