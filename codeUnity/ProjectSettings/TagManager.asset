@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Outfit
   - item
+  - Bullet
+  - Building
+  - Enemy
   layers:
   - Default
   - TransparentFX
