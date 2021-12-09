@@ -41,41 +41,41 @@ public class ChangeScence : MonoBehaviour
 
     public void achiveOpening()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene("ACHIEVEMENT");
     }
 
     public void howToPlayOpening() //khuong
     {
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene("how to play");
     }
 
     public void leaderGlobalOpening() //khuong
     {
-        SceneManager.LoadScene(4);
+        SceneManager.LoadScene("Leaderboard Global");
     }
 
     public void leaderLocalOpening() //khuong
     {
-        SceneManager.LoadScene(5);
+        SceneManager.LoadScene("Leaderboard Local");
     }
 
     public void notificationOpening() //khuong
     {
-        SceneManager.LoadScene(6);
+        SceneManager.LoadScene("Notification");
     }
 
     public void backtoMainPage()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 
     public void openProfile()
     {
-        SceneManager.LoadScene(7);
+        SceneManager.LoadScene("Main screen");
     }
 
     public void gameplayOpening()
     {
-        SceneManager.LoadScene(12);
+        SceneManager.LoadScene("gameplay");
     }
 }
