@@ -19,6 +19,6 @@ public class ProfileChangeScene : MonoBehaviour
 
     public void backtoMainPage()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("MainPage");
     }
 }

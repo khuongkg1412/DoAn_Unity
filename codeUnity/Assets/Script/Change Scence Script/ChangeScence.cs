@@ -36,7 +36,7 @@ public class ChangeScence : MonoBehaviour
 
     public void storeOpening()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("Store");
     }
 
     public void achiveOpening()
@@ -66,7 +66,7 @@ public class ChangeScence : MonoBehaviour
 
     public void backtoMainPage()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("MainPage");
     }
 
     public void openProfile()
