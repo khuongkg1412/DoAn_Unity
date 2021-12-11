@@ -8,12 +8,16 @@ public class Camera_Follow : MonoBehaviour
 
     public BoxCollider2D mapBounds;
 
-    private float xMin,
+    private float
+
+            xMin,
             xMax,
             yMin,
             yMax;
 
-    private float camY,
+    private float
+
+            camY,
             camX;
 
     private float camOrthsize;
@@ -21,6 +25,10 @@ public class Camera_Follow : MonoBehaviour
     private float cameraRatio;
 
     private Camera mainCam;
+
+    private Vector3 smoothPos;
+
+    public float smoothSpeed = 0.5f;
 
     private void Start()
     {
@@ -31,10 +39,6 @@ public class Camera_Follow : MonoBehaviour
         mainCam = GetComponent<Camera>();
         camOrthsize = mainCam.orthographicSize;
         cameraRatio = camOrthsize * mainCam.aspect;
-        //cameraRatio = 1000;
-        Debug.Log("Bound X Max-" + xMax + " minX-" +xMin);
-        Debug.Log("Bound Y Max-" + yMax + " minY-" +yMin);
-        Debug.Log("cameraRatio "+ cameraRatio);
     }
 
     // Update is called once per frame
@@ -50,7 +54,11 @@ public class Camera_Follow : MonoBehaviour
                 .Clamp(followTransform.position.x,
                 xMin + cameraRatio,
                 xMax - cameraRatio);
-        this.transform.position =
-            new Vector3(camX, camY, this.transform.position.z);
+        smoothPos =
+            Vector3
+                .Lerp(this.transform.position,
+                new Vector3(camX, camY, this.transform.position.z),
+                smoothSpeed);
+        this.transform.position = smoothPos;
     }
 }

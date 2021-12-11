@@ -31,7 +31,17 @@ public class joystick_move : MonoBehaviour
 
     public void PointerDown()
     {
-        joystick.transform.position =
+        // joystick.transform.position =
+        //     new Vector3(Input.mousePosition.x - Screen.width / 2,
+        //         Input.mousePosition.y - Screen.height / 2,
+        //         100);
+        // joystickBG.transform.position =
+        //     new Vector3(Input.mousePosition.x - Screen.width / 2,
+        //         Input.mousePosition.y - Screen.height / 2,
+        //         100);
+        // joystickTouchPos =
+        //     new Vector3(Input.mousePosition.x, Input.mousePosition.y, 100);
+                joystick.transform.position =
             new Vector3(Input.mousePosition.x - Screen.width / 2,
                 Input.mousePosition.y - Screen.height / 2,
                 100);
@@ -51,21 +61,21 @@ public class joystick_move : MonoBehaviour
         float joystickDis = Vector2.Distance(dragPos, joystickTouchPos);
         if (joystickDis < joystickRadius)
         {
-            joystick.transform.position =
+             joystick.transform.position =
                 joystickTouchPos + joystickVec * joystickDis;
-            joystick.transform.position =
-                new Vector3(joystick.transform.position.x - Screen.width / 2,
-                    joystick.transform.position.y - Screen.height / 2,
-                    100);
+            // joystick.transform.position =
+            //     new Vector3(joystick.transform.position.x - Screen.width / 2,
+            //         joystick.transform.position.y - Screen.height / 2,
+            //         100);
         }
         else
         {
             joystick.transform.position =
                 joystickTouchPos + joystickVec * joystickRadius;
-            joystick.transform.position =
-                new Vector3(joystick.transform.position.x - Screen.width / 2,
-                    joystick.transform.position.y - Screen.height / 2,
-                    100);
+            // joystick.transform.position =
+            //     new Vector3(joystick.transform.position.x - Screen.width / 2,
+            //         joystick.transform.position.y - Screen.height / 2,
+            //         100);
         }
     }
 
