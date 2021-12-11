@@ -14,22 +14,4 @@ public class Bullet : MonoBehaviour
     {
         Destroy (gameObject);
     }
-
-    private void FixedUpdate()
-    {
-        if (
-            gameObject.transform.position.x > 580f ||
-            gameObject.transform.position.x < -580f
-        )
-        {
-            Destroy (gameObject);
-        }
-        else if (
-            gameObject.transform.position.y > 1020f ||
-            gameObject.transform.position.y < -1020f
-        )
-        {
-            Destroy (gameObject);
-        }
-    }
 }
