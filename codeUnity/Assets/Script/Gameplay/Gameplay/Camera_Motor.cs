@@ -47,6 +47,7 @@ public class Camera_Motor : MonoBehaviour
     //    Debug.Log("DeltaY: " + deltaY);
     //    Debug.Log("boundX: " + boundX);
     //    Debug.Log("boundY: " + boundY);
+    // GameObject cameraMain = GameObject.Find("Resolution");
      transform.position = new Vector3(  lookAt.position.x+ offsetX,  lookAt.position.y + offsetY,  0);
    }
 

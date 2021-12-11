@@ -21,10 +21,13 @@ public class Boundary : MonoBehaviour
         //         .ScreenToWorldPoint(new Vector3(Screen.width,
         //             Screen.height,
         //             MainCamera.transform.position.z));
-        mapSize = GameObject.Find("MapSize");
+        mapSize = GameObject.Find("Resolution");
+        RectTransform rect = (RectTransform) mapSize.transform;
+        screenBounds = MainCamera.ScreenToWorldPoint( new Vector3( rect.rect.width, rect.rect.height, 10));
         objectWidth = transform.GetComponent<SpriteRenderer>().bounds.extents.x; //extents = size of width / 2
         objectHeight =
             transform.GetComponent<SpriteRenderer>().bounds.extents.y; //extents = size of height / 2
+            Debug.Log("Resolution: "+ screenBounds);
     }
 
     // Update is called once per frame
