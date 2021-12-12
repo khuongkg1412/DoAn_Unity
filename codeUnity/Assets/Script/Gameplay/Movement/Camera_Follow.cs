@@ -30,6 +30,8 @@ public class Camera_Follow : MonoBehaviour
 
     public float smoothSpeed = 0.5f;
 
+    public float offSetX,offSetY;
+
     private void Start()
     {
         CameraSetting();
@@ -61,7 +63,7 @@ public class Camera_Follow : MonoBehaviour
         smoothPos =
             Vector3
                 .Lerp(this.transform.position,
-                new Vector3(camX, camY, this.transform.position.z),
+                new Vector3(camX + offSetX , camY + offSetY, this.transform.position.z),
                 smoothSpeed);
         this.transform.position = smoothPos;
     }

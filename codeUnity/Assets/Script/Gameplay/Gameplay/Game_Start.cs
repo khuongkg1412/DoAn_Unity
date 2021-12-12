@@ -13,7 +13,7 @@ public class Game_Start : MonoBehaviour
     public GameObject pannelGameover;
 
     [SerializeField]
-    private TextMeshProUGUI textMeshPro;
+    private TextMeshProUGUI scoreResult, scoreRunning;
 
     float timeRemaining = 180;
 
@@ -38,12 +38,12 @@ public class Game_Start : MonoBehaviour
     {
         Debug.Log("Score: "+ score);
         score +=100f;
-        textMeshPro.text = score.ToString();
+        scoreRunning.text = "Score: " + score.ToString();
+        scoreResult.text = score.ToString();
     }
 
     void Update()
     {
- 
         //UpdateScore();
         if (timerIsRunning)
         {
