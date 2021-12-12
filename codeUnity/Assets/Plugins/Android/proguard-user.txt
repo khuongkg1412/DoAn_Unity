@@ -1,0 +1,1 @@
+-keep class com.memes.trollfootball.data.db.model.** { *; }
