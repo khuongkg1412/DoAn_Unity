@@ -30,8 +30,12 @@ public class Camera_Follow : MonoBehaviour
 
     public float smoothSpeed = 0.5f;
 
-    private void Start()
-    {
+    // private void Start()
+    // {
+        
+    // }
+
+    public void CameraSetting(){
         xMin = mapBounds.bounds.min.x;
         xMax = mapBounds.bounds.max.x;
         yMin = mapBounds.bounds.min.y;

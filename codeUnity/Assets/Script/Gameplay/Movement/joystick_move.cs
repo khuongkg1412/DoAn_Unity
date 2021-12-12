@@ -15,7 +15,8 @@ public class joystick_move : MonoBehaviour
 
     private Vector2 joystickTouchPos;
 
-    private Vector2 joystickOriginalPos;
+    [SerializeField]
+    private Transform joystickOriginalPos;
 
     private float joystickRadius;
 
@@ -24,67 +25,89 @@ public class joystick_move : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        joystickOriginalPos = joystickBG.transform.position;
         joystickRadius =
             joystickBG.GetComponent<RectTransform>().sizeDelta.y / 4;
     }
 
     public void PointerDown()
     {
-        // joystick.transform.position =
-        //     new Vector3(Input.mousePosition.x - Screen.width / 2,
-        //         Input.mousePosition.y - Screen.height / 2,
-        //         100);
-        // joystickBG.transform.position =
-        //     new Vector3(Input.mousePosition.x - Screen.width / 2,
-        //         Input.mousePosition.y - Screen.height / 2,
-        //         100);
-        // joystickTouchPos =
-        //     new Vector3(Input.mousePosition.x, Input.mousePosition.y, 100);
-                joystick.transform.position =
-            new Vector3(Input.mousePosition.x - Screen.width / 2,
-                Input.mousePosition.y - Screen.height / 2,
-                100);
+        joystick.transform.position =
+            new Vector3(cameraMain.ScreenToWorldPoint(Input.mousePosition).x,
+                cameraMain.ScreenToWorldPoint(Input.mousePosition).y,
+                10);
+
         joystickBG.transform.position =
-            new Vector3(Input.mousePosition.x - Screen.width / 2,
-                Input.mousePosition.y - Screen.height / 2,
-                100);
+            new Vector3(cameraMain.ScreenToWorldPoint(Input.mousePosition).x,
+                cameraMain.ScreenToWorldPoint(Input.mousePosition).y,
+                10);
+
         joystickTouchPos =
-            new Vector3(Input.mousePosition.x, Input.mousePosition.y, 100);
+            new Vector3(cameraMain.ScreenToWorldPoint(Input.mousePosition).x,
+                cameraMain.ScreenToWorldPoint(Input.mousePosition).y,
+                10);
     }
 
     public void Drag(BaseEventData baseEventData)
     {
         PointerEventData pointerEventData = baseEventData as PointerEventData;
-        Vector2 dragPos = pointerEventData.position;
+
+        Vector2 dragPos =
+            new Vector2(cameraMain
+                    .ScreenToWorldPoint(pointerEventData.position)
+                    .x,
+                cameraMain.ScreenToWorldPoint(pointerEventData.position).y);
+        
+       // Debug.Log("joystickTouchPos: " + joystickTouchPos);
         joystickVec = (dragPos - joystickTouchPos).normalized;
+
+        Debug.Log("joystickVec :" + joystickVec);
+
         float joystickDis = Vector2.Distance(dragPos, joystickTouchPos);
+        //Debug.Log("joystickDis :" + joystickDis);
+        //Debug.Log("joystickRadius :" + joystickRadius);
+
+
         if (joystickDis < joystickRadius)
         {
-             joystick.transform.position =
+            Debug.Log("Keo nho hon: ");
+            joystick.transform.position =
                 joystickTouchPos + joystickVec * joystickDis;
+
             // joystick.transform.position =
-            //     new Vector3(joystick.transform.position.x - Screen.width / 2,
-            //         joystick.transform.position.y - Screen.height / 2,
-            //         100);
+            //     new Vector3(cameraMain
+            //             .ScreenToWorldPoint(joystick.transform.position)
+            //             .x -
+            //         Screen.width,
+            //         cameraMain
+            //             .ScreenToWorldPoint(joystick.transform.position)
+            //             .y -
+            //         Screen.height,
+            //         10);
+            joystick.transform.position =
+                new Vector3(joystick.transform.position.x,
+                    joystick.transform.position.y,
+                    10);
         }
         else
         {
+            Debug.Log("Keo dai hon");
             joystick.transform.position =
                 joystickTouchPos + joystickVec * joystickRadius;
             // joystick.transform.position =
-            //     new Vector3(joystick.transform.position.x - Screen.width / 2,
-            //         joystick.transform.position.y - Screen.height / 2,
-            //         100);
+            //     joystickTouchPos + joystickVec * joystickDis;
+            joystick.transform.position =
+                new Vector3(joystick.transform.position.x,
+                    joystick.transform.position.y,
+                    10);
         }
     }
 
     public void PointerUp()
     {
         joystickVec = Vector2.zero;
-        joystick.transform.position =
-            new Vector3(joystickOriginalPos.x, joystickOriginalPos.y, 100);
-        joystickBG.transform.position =
-            new Vector3(joystickOriginalPos.x, joystickOriginalPos.y, 100);
+
+        joystick.transform.position = joystickOriginalPos.position;
+
+        joystickBG.transform.position = joystickOriginalPos.position;
     }
 }

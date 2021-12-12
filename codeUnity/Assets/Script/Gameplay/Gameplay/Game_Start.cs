@@ -21,10 +21,17 @@ public class Game_Start : MonoBehaviour
 
     public Text timeText;
 
+    private void Awake() {
+        
+    }
     private void Start()
     {
+         Screen.orientation = ScreenOrientation.Portrait;
+       GameObject.Find("Camera").GetComponent<Camera_Follow>().CameraSetting();
         // Starts the timer automatically
         timerIsRunning = true;
+
+      
     }
 
     public void GameOVer()
@@ -43,6 +50,7 @@ public class Game_Start : MonoBehaviour
 
     void Update()
     {
+ 
         //UpdateScore();
         if (timerIsRunning)
         {
