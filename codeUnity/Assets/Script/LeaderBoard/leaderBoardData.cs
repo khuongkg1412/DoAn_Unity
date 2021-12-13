@@ -69,6 +69,7 @@ public class leaderBoardData : MonoBehaviour
 
     IEnumerator GetData()
     {
+        isRun = false;
         //db connection
         db = FirebaseFirestore.DefaultInstance;
         Debug.Log("Database Reading " + Time.time);
