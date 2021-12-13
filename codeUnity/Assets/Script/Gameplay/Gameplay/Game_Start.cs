@@ -44,7 +44,7 @@ public class Game_Start : MonoBehaviour
 
     void Update()
     {
-        transform.position =new Vector3(cameraMain.transform.position.x,    cameraMain.transform.position.y, 10) ;
+       //transform.position =new Vector3(cameraMain.transform.position.x,    cameraMain.transform.position.y, 10) ;
         //UpdateScore();
         if (timerIsRunning)
         {
