@@ -73,8 +73,7 @@ public class joystick_move : MonoBehaviour
         if (joystickDist < joystickRadius)
         {
             //Set joystick controller to the draggin position
-            circle.transform.position = getTouchPosition(joystickTouchPos + joystickVec * joystickDist)
-                ;
+            circle.transform.position = getTouchPosition(joystickTouchPos + joystickVec * joystickDist);
 
             //Change the Z-axis that it would be visible on camera
             circle.transform.position =
@@ -85,7 +84,7 @@ public class joystick_move : MonoBehaviour
         else if(joystickDist >= joystickRadius)
         {
             //Set joystick controller to the draggin position
-            circle.transform.position = getTouchPosition( joystickTouchPos + joystickVec * joystickRadius);
+            circle.transform.position = getTouchPosition( joystickTouchPos + joystickVec * (joystickDist-joystickRadius));
 
             //Change the Z-axis that it would be visible on camera
             circle.transform.position =

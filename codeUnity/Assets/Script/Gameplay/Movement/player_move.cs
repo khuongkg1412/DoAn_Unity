@@ -41,6 +41,7 @@ public class player_move : MonoBehaviour
     {
         //Increase shooterTimer
         shootTimer += Time.deltaTime;
+
         //Shooting every time shootTimer reaches the coolDownTime
         if (shootTimer > coolDownTime)
         {
@@ -62,9 +63,9 @@ public class player_move : MonoBehaviour
     // run animation for player movement
     void Update()
     {
-       animator.SetFloat("Horizontal", joystickMove.joystickVec.x);
-       animator.SetFloat("Vertical", joystickMove.joystickVec.y);
-       animator.SetFloat("Speed", joystickMove.joystickVec.sqrMagnitude);
+        animator.SetFloat("Horizontal", joystickMove.joystickVec.x);
+        animator.SetFloat("Vertical", joystickMove.joystickVec.y);
+        animator.SetFloat("Speed", joystickMove.joystickVec.sqrMagnitude);
 
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
         if (isShoot)
@@ -77,7 +78,7 @@ public class player_move : MonoBehaviour
     void FixedUpdate()
     {
         if (joystickMove.joystickVec.y != 0)
-        {   
+        {
             rb2d.velocity =
                 new Vector2(joystickMove.joystickVec.x * runSpeed,
                     joystickMove.joystickVec.y * runSpeed);
@@ -88,7 +89,7 @@ public class player_move : MonoBehaviour
             Vector2 lookDir = mousePos - rb2d.position;
             float angle =
                 Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 270f;
-          //  rb2d.rotation = angle;
+            //  rb2d.rotation = angle;
         }
     }
 }
