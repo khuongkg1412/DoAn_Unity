@@ -21,6 +21,7 @@ public class Game_Start : MonoBehaviour
 
     public Text timeText;
 
+    public Camera cameraMain;
     private void Start()
     {
         // Starts the timer automatically
@@ -36,7 +37,6 @@ public class Game_Start : MonoBehaviour
 
     public void UpdateScore()
     {
-        Debug.Log("Score: "+ score);
         score +=100f;
         scoreRunning.text = "Score: " + score.ToString();
         scoreResult.text = score.ToString();
@@ -44,6 +44,7 @@ public class Game_Start : MonoBehaviour
 
     void Update()
     {
+        transform.position =new Vector3(cameraMain.transform.position.x,    cameraMain.transform.position.y, 10) ;
         //UpdateScore();
         if (timerIsRunning)
         {

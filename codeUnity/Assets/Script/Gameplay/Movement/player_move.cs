@@ -78,14 +78,12 @@ public class player_move : MonoBehaviour
     {
         if (joystickMove.joystickVec.y != 0)
         {   
-            Debug.Log("Run");
             rb2d.velocity =
                 new Vector2(joystickMove.joystickVec.x * runSpeed,
                     joystickMove.joystickVec.y * runSpeed);
         }
         else
         {
-                        Debug.Log("Not Run");
             rb2d.velocity = Vector2.zero;
             Vector2 lookDir = mousePos - rb2d.position;
             float angle =

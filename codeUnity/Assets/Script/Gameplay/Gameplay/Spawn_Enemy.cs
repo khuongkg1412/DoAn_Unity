@@ -20,7 +20,6 @@ public class Spawn_Enemy : MonoBehaviour
     {
         if (numberOfEnemies > 0)
         {
-            Debug.Log("Spawn");
             int randSpawnLocation = Random.Range(0, positionSpawn.Length);
 
             //Check for position has been spawned
