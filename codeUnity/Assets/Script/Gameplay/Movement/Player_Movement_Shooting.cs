@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class player_move : MonoBehaviour
+public class Player_Movement_Shooting : MonoBehaviour
 {
     //Joystick Controller
     public joystick_move joystickMove;
