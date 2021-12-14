@@ -85,7 +85,9 @@ public class Player_Movement : MonoBehaviour
 
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 90;
 
-        if (shootJoystick.InputDir != Vector3.zero)
+        if (shootJoystick.InputDir != Vector3.zero){
+
+        
             angle =
                 Mathf
                     .Atan2(shootJoystick.InputDir.y, shootJoystick.InputDir.x) *
@@ -93,9 +95,10 @@ public class Player_Movement : MonoBehaviour
                 90;
 
         Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        
+
         transform.rotation =
             Quaternion.Slerp(transform.rotation, rotation, 10 * Time.deltaTime);
+            }
     }
 
     void TimeShooting()
