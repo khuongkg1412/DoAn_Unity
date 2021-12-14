@@ -66,6 +66,7 @@ public class ChangeScence : MonoBehaviour
 
     public void backtoMainPage()
     {
+        Screen.orientation = ScreenOrientation.Portrait;
         SceneManager.LoadScene("MainPage");
     }
 
