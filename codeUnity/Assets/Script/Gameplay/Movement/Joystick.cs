@@ -4,9 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class
-Joystick
-: MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
+public class Joystick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
     private Image joystickBackground;
 
@@ -23,27 +21,42 @@ Joystick
         Vector2 position = Vector2.zero;
         if (
             RectTransformUtility
-                .ScreenPointToLocalPointInRectangle(  joystickBackground.rectTransform,
+                .ScreenPointToLocalPointInRectangle(joystickBackground
+                    .rectTransform,
                 eventData.position,
-                eventData.pressEventCamera, out position)
+                eventData.pressEventCamera,
+                out position)
         )
         {
-            position.x = (position.x / joystickBackground.rectTransform.sizeDelta.x);
-            position.y = (position.y / joystickBackground.rectTransform.sizeDelta.y);
+            position.x =
+                (position.x / joystickBackground.rectTransform.sizeDelta.x);
+            position.y =
+                (position.y / joystickBackground.rectTransform.sizeDelta.y);
 
-            float x = (joystickBackground.rectTransform.pivot.x == 1f) ? position.x * 2 +1 : position.x * 2 -1;
-            float y = (joystickBackground.rectTransform.pivot.x == 1f) ? position.y * 2 +1 : position.y * 2 -1;
+            float x =
+                (joystickBackground.rectTransform.pivot.x == 1f)
+                    ? position.x * 2 + 1
+                    : position.x * 2 - 1;
+            float y =
+                (joystickBackground.rectTransform.pivot.x == 1f)
+                    ? position.y * 2 + 1
+                    : position.y * 2 - 1;
 
-            InputDir = new Vector3(x,y,0);
-            InputDir = (InputDir.magnitude > 1) ? InputDir.normalized : InputDir; 
+            InputDir = new Vector3(x, y, 0);
+            InputDir =
+                (InputDir.magnitude > 1) ? InputDir.normalized : InputDir;
         }
-        
-        joystickTouch.rectTransform.anchoredPosition = new Vector3(InputDir.x * (joystickBackground.rectTransform.sizeDelta.x / 2.5f), InputDir.y * (joystickBackground.rectTransform.sizeDelta.y / 2.5f));
+
+        joystickTouch.rectTransform.anchoredPosition =
+            new Vector3(InputDir.x *
+                (joystickBackground.rectTransform.sizeDelta.x / 2.5f),
+                InputDir.y *
+                (joystickBackground.rectTransform.sizeDelta.y / 2.5f));
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        OnDrag(eventData);
+        OnDrag (eventData);
     }
 
     public void OnPointerUp(PointerEventData eventData)
