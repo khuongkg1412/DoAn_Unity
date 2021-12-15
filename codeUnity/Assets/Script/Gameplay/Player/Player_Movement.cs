@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player_Movement : MonoBehaviour
 {
@@ -65,6 +66,9 @@ public class Player_Movement : MonoBehaviour
         //Shooting after time
         TimeShooting();
 
+        //Detect citizen
+        DetectCitizen();
+
         //Rotation by the touch in joystick shooting
         if (GetComponent<Player_HP>().currentHP > 0)
         {
@@ -87,7 +91,6 @@ public class Player_Movement : MonoBehaviour
     void Movement()
     {
         //Getting hortizontal and vertical axis means x,y and store in vector
-
         Vector2 moveInput =
             new Vector2(Input.GetAxisRaw("Horizontal"),
                 Input.GetAxisRaw("Vertical"));
@@ -171,6 +174,21 @@ public class Player_Movement : MonoBehaviour
 
     void DetectCitizen()
     {
-        GameObject button = GameObject.Find("HelpButton");
+        float range = 100f;
+        Button button = GameObject.Find("HelpButton").GetComponent<Button>();
+
+        GameObject citizen = GameObject.Find("Citizen");
+
+        if (
+            Vector2.Distance(citizen.transform.position, transform.position) <=
+            range
+        )
+        {
+            button.interactable = true;
+        }
+        else
+        {
+            button.interactable = false;
+        }
     }
 }
