@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class Player_Movement : MonoBehaviour
@@ -172,23 +173,26 @@ public class Player_Movement : MonoBehaviour
         rb.AddForce(firePoint.up * bulletSpeed, ForceMode2D.Impulse);
     }
 
-    void DetectCitizen()
+    public void DetectCitizen()
     {
         float range = 100f;
         Button button = GameObject.Find("HelpButton").GetComponent<Button>();
 
         GameObject citizen = GameObject.Find("Citizen");
-
-        if (
-            Vector2.Distance(citizen.transform.position, transform.position) <=
-            range
-        )
+        if (citizen.active)
         {
-            button.interactable = true;
-        }
-        else
-        {
-            button.interactable = false;
+            if (
+                Vector2
+                    .Distance(citizen.transform.position, transform.position) <=
+                range
+            )
+            {
+                button.interactable = true;
+            }
+            else
+            {
+                button.interactable = false;
+            }
         }
     }
 }

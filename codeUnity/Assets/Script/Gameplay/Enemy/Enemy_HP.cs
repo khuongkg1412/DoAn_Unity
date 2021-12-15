@@ -44,7 +44,7 @@ public class Enemy_HP : MonoBehaviour
                         HealthBar.transform.transform.localScale.z);
                 Destroy (gameObject);
                 //gamePlay.GetComponent<Game_Start>().score += 100f;
-                gamePlay.GetComponent<Game_Start>().UpdateScore();
+                gamePlay.GetComponent<Game_Start>().UpdateScore(10f);
             }
         }
     }
