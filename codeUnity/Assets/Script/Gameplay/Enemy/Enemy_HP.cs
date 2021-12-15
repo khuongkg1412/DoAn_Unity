@@ -13,11 +13,13 @@ public class Enemy_HP : MonoBehaviour
 
     public GameObject HealthBar;
 
+    float maxHPsize;
     // public GameObject HPText;
     private void Start()
     {
         maxHP = 30f;
         currentHP = maxHP;
+        maxHPsize= HealthBar.transform.localScale.x;
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -29,7 +31,7 @@ public class Enemy_HP : MonoBehaviour
             {
                 
                 HealthBar.transform.localScale =
-                    new Vector3((currentHP/ maxHP)* HealthBar.transform.transform.localScale.x,
+                    new Vector3((currentHP/ maxHP)* maxHPsize,
                         HealthBar.transform.transform.localScale.y,
                         HealthBar.transform.transform.localScale.z);
             }
