@@ -10,6 +10,7 @@ public class Citizen_Helping : MonoBehaviour
     //Max Health Point
     public float maxHP;
 
+    //Helth bar object
     public GameObject HealthBar;
 
     float timerGetSick = 0f;

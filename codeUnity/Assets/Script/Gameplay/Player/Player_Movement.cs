@@ -39,6 +39,9 @@ public class Player_Movement : MonoBehaviour
     */
     public Camera cameraMain;
 
+    /*
+     Help People
+    */
     private void Awake()
     {
         myBody = GetComponent<Rigidbody2D>();
@@ -124,5 +127,9 @@ public class Player_Movement : MonoBehaviour
 
         //Pull bullet out at fire point
         rb.AddForce(firePoint.up * bulletSpeed, ForceMode2D.Impulse);
+    }
+
+    void DetectCitizen(){
+        GameObject button = GameObject.Find("HelpButton");
     }
 }
