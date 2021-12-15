@@ -3186,9 +3186,10 @@ MonoBehaviour:
   maxHP: 0
   HealthBar: {fileID: 415918645}
   TimeHealingBar: {fileID: 409151956}
-  hpText: {fileID: 0}
+  hpText: {fileID: 828492649}
   isSicked: 1
   isHeal: 0
+  isDoneHealing: 0
 --- !u!1 &1299645169
 GameObject:
   m_ObjectHideFlags: 0
