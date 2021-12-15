@@ -7,31 +7,43 @@ public class Player_Movement : MonoBehaviour
     /* 
         Moving Part
     */
+    //Joystick controller (core of joystick)
+    //Joystick object
     public Joystick moveJoystick;
 
+    //Velocity movement for player
     public Vector2 moveVelocity;
 
+    //Rigid body of Player
     private Rigidbody2D myBody;
 
+    //Movement speed of player
     public float speed = 300f;
 
     /* 
        Shooting Part
     */
+    //The fire point, when bullet come out
     public Transform firePoint;
 
+    //Bullet Prefab
     [SerializeField]
     public GameObject bulletPrefab;
 
+    //Bullet speed
     public float bulletSpeed = 1000;
 
+    //Time CD for every shot
     [SerializeField]
     private float coolDownTime = 0.5f;
 
+    //Time Player need to wait for next shot
     private float shootTimer;
 
+    //Shoot Joystick object
     public Joystick shootJoystick;
 
+    //Detemin people can shoot or not
     public bool canShoot;
 
     /*
@@ -44,12 +56,16 @@ public class Player_Movement : MonoBehaviour
     */
     private void Awake()
     {
+        //Getting RigidBody
         myBody = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
     {
+        //Shooting after time
         TimeShooting();
+
+        //Rotation by the touch in joystick shooting
         if (GetComponent<Player_HP>().currentHP > 0)
         {
             Rotation();
@@ -58,52 +74,73 @@ public class Player_Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //Movement by the touch in joystick movement
         if (GetComponent<Player_HP>().currentHP > 0)
         {
             Movement();
         }
     }
 
+    /*
+        Method for movement of player
+    */
     void Movement()
     {
+        //Getting hortizontal and vertical axis means x,y and store in vector
+
         Vector2 moveInput =
             new Vector2(Input.GetAxisRaw("Horizontal"),
                 Input.GetAxisRaw("Vertical"));
 
+        //If joystick has been dragging, then move the player
         if (moveJoystick.InputDir != Vector3.zero)
         {
+            //Direction dragging
             moveInput = moveJoystick.InputDir;
 
+            //Velocity for dragging
             moveVelocity = moveInput.normalized * speed;
+
+            //Move the Player by the Velocity* Time
             myBody
                 .MovePosition(myBody.position + moveVelocity * Time.deltaTime);
         }
     }
 
+    /*
+        Rotation Player by the touch in Shooting Joystick
+    */
     void Rotation()
     {
+        //Get the touching position on screen
         Vector2 dir =
             cameraMain.ScreenToWorldPoint(Input.mousePosition) -
             transform.position;
 
+        //Calculate the angle of rotation
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 90;
 
-        if (shootJoystick.InputDir != Vector3.zero){
-
-        
+        //If joystick has been dragging, then rotate the player
+        if (shootJoystick.InputDir != Vector3.zero)
+        {
+            //Calculate the angle of rotation
             angle =
                 Mathf
                     .Atan2(shootJoystick.InputDir.y, shootJoystick.InputDir.x) *
                 Mathf.Rad2Deg +
                 90;
 
-        Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
-        transform.rotation =
-            Quaternion.Slerp(transform.rotation, rotation, 10 * Time.deltaTime);
-            }
+            //Rotation
+            Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            transform.rotation =
+                Quaternion
+                    .Slerp(transform.rotation, rotation, 10 * Time.deltaTime);
+        }
     }
 
+    /*
+    Shooting timer countdown
+    */
     void TimeShooting()
     {
         //Increase shooterTimer
@@ -118,6 +155,9 @@ public class Player_Movement : MonoBehaviour
         }
     }
 
+    /*
+     Shooting action
+    */
     void Shooting()
     {
         //Creating bullet
@@ -129,7 +169,8 @@ public class Player_Movement : MonoBehaviour
         rb.AddForce(firePoint.up * bulletSpeed, ForceMode2D.Impulse);
     }
 
-    void DetectCitizen(){
+    void DetectCitizen()
+    {
         GameObject button = GameObject.Find("HelpButton");
     }
 }
