@@ -20,7 +20,7 @@ public class Player_Movement : MonoBehaviour
     private Rigidbody2D myBody;
 
     //Movement speed of player
-    public float speed = 300f;
+    public float speed = 500f;
 
     /* 
        Shooting Part
@@ -178,25 +178,24 @@ public class Player_Movement : MonoBehaviour
     {
         float range = 100f;
         Button button = GameObject.Find("HelpButton").GetComponent<Button>();
-
+        bool check = false;
         GameObject[] citizen = GameObject.FindGameObjectsWithTag("Citizen");
         foreach (var i in citizen)
         {
-            if (Vector2
-                    .Distance(i.transform.position, transform.position) <=
+            if (
+                Vector2.Distance(i.transform.position, transform.position) <=
                 range &&
                 citizen != null
             )
             {
+                check = true;
                 button.interactable = true;
-                button
-                    .GetComponent<Citizen_Healing>()
-                    .setCitizenObject(i);
+                button.GetComponent<Citizen_Healing>().setCitizenObject(i);
             }
-            else 
-            {
-                button.interactable = false;
-            }
+        }
+        if (!check)
+        {
+            button.interactable = false;
         }
     }
 }
