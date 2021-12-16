@@ -18,12 +18,17 @@ public class Citizen_Healing : MonoBehaviour
         citizen = sentCitizen;
     }
 
+    public void disableCitizenObject()
+    {
+        citizen = null;
+        TimeHealingBar.SetActive(false);
+    }
+
     [System.Obsolete]
     public void selectedUpdate()
     {
         if (citizen != null)
         {
-            Debug.Log("Run");
             if (citizen.GetComponent<Citizen_Helping>().isSicked == true)
             {
                 TimeHealingBar.SetActive(true);
@@ -34,6 +39,10 @@ public class Citizen_Healing : MonoBehaviour
                 citizen.GetComponent<Citizen_Helping>().isHeal = true;
 
                 citizen.GetComponent<Citizen_Helping>().getHeal();
+            }
+            else if (citizen.GetComponent<Citizen_Helping>().isDoneHealing)
+            {
+                TimeHealingBar.SetActive(false);
             }
         }
     }
@@ -48,9 +57,13 @@ public class Citizen_Healing : MonoBehaviour
 
             citizen.GetComponent<Citizen_Helping>().isHeal = false;
 
+            citizen.GetComponent<Citizen_Helping>().timerGetHeal = 0f;
+
             GameObject myEventSystem = GameObject.Find("EventSystem");
-            
-            myEventSystem.GetComponent<UnityEngine.EventSystems.EventSystem>().SetSelectedGameObject(null);
+
+            myEventSystem
+                .GetComponent<UnityEngine.EventSystems.EventSystem>()
+                .SetSelectedGameObject(null);
         }
     }
 }

@@ -23,7 +23,7 @@ public class Citizen_Helping : MonoBehaviour
     //Time to manipulate when people get sick
     float timerGetSick = 0f;
 
-    float timerGetHeal = 7f;
+    public float timerGetHeal = 7f;
 
     //Max size of health bar
     float Healthbarmaxsize;
@@ -55,8 +55,7 @@ public class Citizen_Helping : MonoBehaviour
         //Set Timehealing bar
         TimeHealingBar.GetComponent<Slider>().maxValue = 7f;
         TimeHealingBar.GetComponent<Slider>().value = 0;
-       // TimeHealingBar.SetActive(false);
-
+        // TimeHealingBar.SetActive(false);
     }
 
     private void Update()
@@ -64,20 +63,14 @@ public class Citizen_Helping : MonoBehaviour
         //If people are get sicked, we decrease HP of them
         if (isSicked)
         {
-           // TimeHealingBar.SetActive(false);
-
+            // TimeHealingBar.SetActive(false);
             //Decrease HP of them
             getSicked();
         }
         else if (isHeal && !isDoneHealing)
         {
-           // TimeHealingBar.SetActive(true);
+            // TimeHealingBar.SetActive(true);
             getHeal();
-        }
-        else if (isDoneHealing)
-        {
-            //TimeHealingBar.SetActive(false);
-            timerGetHeal = 0f;
         }
 
         //Display HP to healthbar
@@ -139,6 +132,11 @@ public class Citizen_Helping : MonoBehaviour
                 .Find("Canvas")
                 .GetComponent<Game_Start>()
                 .UpdateScore(100f);
+            timerGetHeal = 0f;
+            Button button =
+                GameObject.Find("HelpButton").GetComponent<Button>();
+            button.interactable = false;
+            TimeHealingBar.SetActive(false);
 
             //Detroy Object
             Destroy (gameObject);
