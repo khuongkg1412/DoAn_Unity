@@ -13,7 +13,8 @@ public class Citizen_Healing : MonoBehaviour
 
     public GameObject citizen = null;
 
-    public void setCitizenObject(GameObject sentCitizen){
+    public void setCitizenObject(GameObject sentCitizen)
+    {
         citizen = sentCitizen;
     }
 
@@ -21,23 +22,18 @@ public class Citizen_Healing : MonoBehaviour
     public void selectedUpdate()
     {
         if (citizen != null)
-        {    Debug.Log("Run");
-            if (GameObject.Find("Citizen").GetComponent<Citizen_Helping>().isSicked == true)
+        {
+            Debug.Log("Run");
+            if (citizen.GetComponent<Citizen_Helping>().isSicked == true)
             {
                 TimeHealingBar.SetActive(true);
                 countTime += Time.deltaTime;
-                GameObject
-                    .Find("Citizen")
-                    .GetComponent<Citizen_Helping>()
-                    .isSicked = false;
-                GameObject
-                    .Find("Citizen")
-                    .GetComponent<Citizen_Helping>()
-                    .isHeal = true;
-                GameObject
-                    .Find("Citizen")
-                    .GetComponent<Citizen_Helping>()
-                    .getHeal();
+
+                citizen.GetComponent<Citizen_Helping>().isSicked = false;
+
+                citizen.GetComponent<Citizen_Helping>().isHeal = true;
+
+                citizen.GetComponent<Citizen_Helping>().getHeal();
             }
         }
     }
@@ -48,16 +44,13 @@ public class Citizen_Healing : MonoBehaviour
         if (citizen != null)
         {
             countTime = 0f;
-            GameObject
-                .Find("Citizen")
-                .GetComponent<Citizen_Helping>()
-                .isSicked = true;
-            GameObject.Find("Citizen").GetComponent<Citizen_Helping>().isHeal =
-                false;
+            citizen.GetComponent<Citizen_Helping>().isSicked = true;
+
+            citizen.GetComponent<Citizen_Helping>().isHeal = false;
+
             GameObject myEventSystem = GameObject.Find("EventSystem");
-            myEventSystem
-                .GetComponent<UnityEngine.EventSystems.EventSystem>()
-                .SetSelectedGameObject(null);
+            
+            myEventSystem.GetComponent<UnityEngine.EventSystems.EventSystem>().SetSelectedGameObject(null);
         }
     }
 }
