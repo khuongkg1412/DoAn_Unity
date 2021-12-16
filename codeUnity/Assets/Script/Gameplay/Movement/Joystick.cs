@@ -72,9 +72,4 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
         joystickTouch = transform.GetChild(0).GetComponent<Image>();
         InputDir = Vector3.zero;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
 }

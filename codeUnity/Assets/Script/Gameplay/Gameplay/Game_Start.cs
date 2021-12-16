@@ -8,12 +8,17 @@ public class Game_Start : MonoBehaviour
 {
     public float score;
 
+    public bool isVictory = false;
+
     public GameObject Player;
 
     public GameObject pannelGameover;
 
     [SerializeField]
-    private TextMeshProUGUI scoreResult, scoreRunning;
+    private TextMeshProUGUI
+
+            scoreResult,
+            scoreRunning;
 
     float timeRemaining = 180;
 
@@ -22,6 +27,7 @@ public class Game_Start : MonoBehaviour
     public Text timeText;
 
     public Camera cameraMain;
+
     private void Start()
     {
         // Starts the timer automatically
@@ -35,18 +41,18 @@ public class Game_Start : MonoBehaviour
         gameObject.GetComponent<ChangeScence>().reloadScence();
     }
 
-    public void UpdateScore()
+    public void UpdateScore(float scorePlus)
     {
-        score +=100f;
+        score += scorePlus;
         scoreRunning.text = "Score: " + score.ToString();
         scoreResult.text = score.ToString();
     }
 
     void Update()
     {
-       //transform.position =new Vector3(cameraMain.transform.position.x,    cameraMain.transform.position.y, 10) ;
+        //transform.position =new Vector3(cameraMain.transform.position.x,    cameraMain.transform.position.y, 10) ;
         //UpdateScore();
-        if (timerIsRunning)
+        if (timerIsRunning || !isVictory)
         {
             if (timeRemaining > 0)
             {
@@ -60,10 +66,6 @@ public class Game_Start : MonoBehaviour
             }
         }
         else
-        // else if(Player.GetComponent<Player_HP>().isDead)
-        // {
-        //     GameOVer();
-        // }
         {
             GameOVer();
         }
