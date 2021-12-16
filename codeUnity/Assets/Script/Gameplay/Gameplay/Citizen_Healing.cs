@@ -8,20 +8,23 @@ public class Citizen_Healing : MonoBehaviour
 {
     float countTime = 0f;
 
+    //Helth bar object
+    public GameObject TimeHealingBar;
+
+    public GameObject citizen = null;
+
+    public void setCitizenObject(GameObject sentCitizen){
+        citizen = sentCitizen;
+    }
+
     [System.Obsolete]
     public void selectedUpdate()
     {
-        var citizen = GameObject.Find("Citizen");
         if (citizen != null)
-        {
-            if (
-                GameObject
-                    .Find("Citizen")
-                    .GetComponent<Citizen_Helping>()
-                    .isSicked ==
-                true
-            )
+        {    Debug.Log("Run");
+            if (GameObject.Find("Citizen").GetComponent<Citizen_Helping>().isSicked == true)
             {
+                TimeHealingBar.SetActive(true);
                 countTime += Time.deltaTime;
                 GameObject
                     .Find("Citizen")
@@ -41,7 +44,7 @@ public class Citizen_Healing : MonoBehaviour
 
     public void pointerUp()
     {
-        var citizen = GameObject.Find("Citizen");
+        TimeHealingBar.SetActive(false);
         if (citizen != null)
         {
             countTime = 0f;

@@ -8,6 +8,8 @@ public class Game_Start : MonoBehaviour
 {
     public float score;
 
+    public bool isVictory = false;
+
     public GameObject Player;
 
     public GameObject pannelGameover;
@@ -50,7 +52,7 @@ public class Game_Start : MonoBehaviour
     {
         //transform.position =new Vector3(cameraMain.transform.position.x,    cameraMain.transform.position.y, 10) ;
         //UpdateScore();
-        if (timerIsRunning)
+        if (timerIsRunning || !isVictory)
         {
             if (timeRemaining > 0)
             {

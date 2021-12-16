@@ -56,6 +56,7 @@ public class Player_Movement : MonoBehaviour
     /*
      Help People
     */
+    //public GameObject citizen;
     private void Awake()
     {
         //Getting RigidBody
@@ -178,18 +179,21 @@ public class Player_Movement : MonoBehaviour
         float range = 100f;
         Button button = GameObject.Find("HelpButton").GetComponent<Button>();
 
-        var citizen = GameObject.Find("Citizen");
-        if (citizen != null)
+        GameObject[] citizen = GameObject.FindGameObjectsWithTag("Citizen");
+        foreach (var i in citizen)
         {
-            if (
-                Vector2
-                    .Distance(citizen.transform.position, transform.position) <=
-                range
+            if (Vector2
+                    .Distance(i.transform.position, transform.position) <=
+                range &&
+                citizen != null
             )
             {
                 button.interactable = true;
+                button
+                    .GetComponent<Citizen_Healing>()
+                    .setCitizenObject(i);
             }
-            else
+            else 
             {
                 button.interactable = false;
             }

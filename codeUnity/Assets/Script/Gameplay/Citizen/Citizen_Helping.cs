@@ -55,7 +55,8 @@ public class Citizen_Helping : MonoBehaviour
         //Set Timehealing bar
         TimeHealingBar.GetComponent<Slider>().maxValue = 7f;
         TimeHealingBar.GetComponent<Slider>().value = 0;
-        TimeHealingBar.SetActive(false);
+       // TimeHealingBar.SetActive(false);
+
     }
 
     private void Update()
@@ -63,19 +64,19 @@ public class Citizen_Helping : MonoBehaviour
         //If people are get sicked, we decrease HP of them
         if (isSicked)
         {
-            TimeHealingBar.SetActive(false);
+           // TimeHealingBar.SetActive(false);
 
             //Decrease HP of them
             getSicked();
         }
         else if (isHeal && !isDoneHealing)
         {
-            TimeHealingBar.SetActive(true);
+           // TimeHealingBar.SetActive(true);
             getHeal();
         }
         else if (isDoneHealing)
         {
-            TimeHealingBar.SetActive(false);
+            //TimeHealingBar.SetActive(false);
             timerGetHeal = 0f;
         }
 
