@@ -1284,7 +1284,6 @@ MonoBehaviour:
   shootJoystick: {fileID: 354764381}
   canShoot: 0
   cameraMain: {fileID: 1299645170}
-  citizen: {fileID: 1172515324}
 --- !u!50 &571074376
 Rigidbody2D:
   serializedVersion: 4
