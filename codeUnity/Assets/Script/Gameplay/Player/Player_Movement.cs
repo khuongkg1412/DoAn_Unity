@@ -178,8 +178,8 @@ public class Player_Movement : MonoBehaviour
         float range = 100f;
         Button button = GameObject.Find("HelpButton").GetComponent<Button>();
 
-        GameObject citizen = GameObject.Find("Citizen");
-        if (citizen.active)
+        var citizen = GameObject.Find("Citizen");
+        if (citizen != null)
         {
             if (
                 Vector2

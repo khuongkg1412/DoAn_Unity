@@ -11,7 +11,8 @@ public class Citizen_Healing : MonoBehaviour
     [System.Obsolete]
     public void selectedUpdate()
     {
-        if (GameObject.Find("Citizen").active)
+        var citizen = GameObject.Find("Citizen");
+        if (citizen != null)
         {
             if (
                 GameObject
@@ -40,7 +41,8 @@ public class Citizen_Healing : MonoBehaviour
 
     public void pointerUp()
     {
-        if (GameObject.Find("Citizen").active)
+        var citizen = GameObject.Find("Citizen");
+        if (citizen != null)
         {
             countTime = 0f;
             GameObject

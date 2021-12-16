@@ -140,8 +140,7 @@ public class Citizen_Helping : MonoBehaviour
                 .UpdateScore(100f);
 
             //Detroy Object
-            //Destroy (gameObject);
-           // gameObject.SetActive(false);
+            Destroy (gameObject);
         }
     }
 
@@ -179,8 +178,7 @@ public class Citizen_Helping : MonoBehaviour
                     HealthBar.transform.transform.localScale.z);
 
             //Detroy Object
-            //Destroy (gameObject);
-           // gameObject.SetActive(false);
+            Destroy (gameObject);
         }
     }
 }
