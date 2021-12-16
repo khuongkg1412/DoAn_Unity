@@ -20,7 +20,7 @@ public class Player_Movement : MonoBehaviour
     private Rigidbody2D myBody;
 
     //Movement speed of player
-    public float speed = 500f;
+    public float speed = 300f;
 
     /* 
        Shooting Part
@@ -70,7 +70,6 @@ public class Player_Movement : MonoBehaviour
 
         //Detect citizen
         DetectCitizen();
-
         //Rotation by the touch in joystick shooting
         if (GetComponent<Player_HP>().currentHP > 0)
         {
@@ -176,7 +175,7 @@ public class Player_Movement : MonoBehaviour
 
     public void DetectCitizen()
     {
-        float range = 100f;
+        float range = 150f;
         Button button = GameObject.Find("HelpButton").GetComponent<Button>();
         bool check = false;
         GameObject[] citizen = GameObject.FindGameObjectsWithTag("Citizen");
@@ -189,11 +188,27 @@ public class Player_Movement : MonoBehaviour
             )
             {
                 check = true;
-                button.interactable = true;
-                button.GetComponent<Citizen_Healing>().setCitizenObject(i);
+                //button.interactable = true;
+                //button.GetComponent<Citizen_Healing>().setCitizenObject(i);
             }
         }
         if (!check)
+        {
+            button.GetComponent<Citizen_Healing>().disableCitizenObject();
+            button.interactable = false;
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        Button button = GameObject.Find("HelpButton").GetComponent<Button>();
+        if (other.gameObject.tag == "Citizen")
+        {
+            button.interactable = true;
+            button
+                .GetComponent<Citizen_Healing>()
+                .setCitizenObject(other.gameObject);
+        }
+        else
         {
             button.interactable = false;
         }

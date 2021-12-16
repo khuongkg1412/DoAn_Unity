@@ -664,7 +664,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 2144293340}
   m_HandleRect: {fileID: 0}
@@ -1277,7 +1277,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveJoystick: {fileID: 714834913}
   moveVelocity: {x: 0, y: 0}
-  speed: 300
+  speed: 300.03
   firePoint: {fileID: 263468293}
   bulletPrefab: {fileID: 7104374684683533559, guid: b33ae7b6cba70d746b8f145a02237b8d, type: 3}
   bulletSpeed: 1000
