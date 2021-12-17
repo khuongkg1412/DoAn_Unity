@@ -45,6 +45,7 @@ public class Enemy_HP : MonoBehaviour
                 Destroy (gameObject);
                 //gamePlay.GetComponent<Game_Start>().score += 100f;
                 gamePlay.GetComponent<Game_Start>().UpdateScore(10f);
+                gamePlay.GetComponent<Game_Start>().UpdateEnemyNumber(1);
             }
         }
     }

@@ -27,7 +27,7 @@ public class ChangeScence : MonoBehaviour
 
     IEnumerator reloading()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(5);
         SceneManager
             .LoadScene(SceneManager.GetActiveScene().name,
             LoadSceneMode.Single);
