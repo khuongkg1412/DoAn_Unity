@@ -67,7 +67,7 @@ public class Game_Start : MonoBehaviour
     {
         pannelGameover.SetActive(true);
         Player.GetComponent<Player_HP>().isDead = true;
-        gameObject.GetComponent<ChangeScence>().reloadScence();
+        gameObject.GetComponent<ChangeScence>().gameResultOn();
     }
 
     public void UpdateScore(float scorePlus)
