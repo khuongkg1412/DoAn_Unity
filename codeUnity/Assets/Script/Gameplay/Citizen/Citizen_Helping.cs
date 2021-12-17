@@ -20,7 +20,7 @@ public class Citizen_Helping : MonoBehaviour
 
     public TextMeshProUGUI hpText;
 
-    //Time to manipulate when people get sick
+    //Time to manipulate when people get sick and get heal
     float timerGetSick = 0f;
 
     public float timerGetHeal = 7f;
@@ -63,13 +63,11 @@ public class Citizen_Helping : MonoBehaviour
         //If people are get sicked, we decrease HP of them
         if (isSicked)
         {
-            // TimeHealingBar.SetActive(false);
             //Decrease HP of them
             getSicked();
         }
         else if (isHeal && !isDoneHealing)
         {
-            // TimeHealingBar.SetActive(true);
             getHeal();
         }
 
