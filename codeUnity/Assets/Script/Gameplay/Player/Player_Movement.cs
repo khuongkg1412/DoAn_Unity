@@ -46,7 +46,7 @@ public class Player_Movement : MonoBehaviour
     public Joystick shootJoystick;
 
     //Detemin people can shoot or not
-    public bool canShoot;
+    public bool canShoot = true;
 
     /*
     Camera Main
@@ -61,15 +61,20 @@ public class Player_Movement : MonoBehaviour
     {
         //Getting RigidBody
         myBody = GetComponent<Rigidbody2D>();
+        canShoot = true;
     }
 
     private void Update()
     {
-        //Shooting after time
-        TimeShooting();
+        if (canShoot)
+        {
+            //Shooting after time
+            TimeShooting();
+        }
 
         //Detect citizen
         DetectCitizen();
+
         //Rotation by the touch in joystick shooting
         if (GetComponent<Player_HP>().currentHP > 0)
         {
@@ -198,6 +203,7 @@ public class Player_Movement : MonoBehaviour
             button.interactable = false;
         }
     }
+
     private void OnCollisionEnter2D(Collision2D other)
     {
         Button button = GameObject.Find("HelpButton").GetComponent<Button>();
