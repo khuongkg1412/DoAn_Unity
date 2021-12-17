@@ -28,7 +28,6 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log("Hit Effect");
         GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
         effect.transform.position = new Vector3(effect.transform.position.x,effect.transform.position.y, 1);
         Destroy(effect,0.5f);

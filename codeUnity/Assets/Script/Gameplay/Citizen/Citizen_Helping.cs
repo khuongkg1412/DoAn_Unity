@@ -130,6 +130,10 @@ public class Citizen_Helping : MonoBehaviour
                 .Find("Canvas")
                 .GetComponent<Game_Start>()
                 .UpdateScore(100f);
+            GameObject
+                .Find("Canvas")
+                .GetComponent<Game_Start>()
+                .UpdateCitizen(1);
             timerGetHeal = 0f;
             Button button =
                 GameObject.Find("HelpButton").GetComponent<Button>();
@@ -173,7 +177,13 @@ public class Citizen_Helping : MonoBehaviour
                 new Vector3(0,
                     HealthBar.transform.transform.localScale.y,
                     HealthBar.transform.transform.localScale.z);
-
+            GameObject
+                .Find("Canvas")
+                .GetComponent<Game_Start>()
+                .UpdateCitizen(1);
+            GameObject.Find("Canvas").GetComponent<Game_Start>().isVictory =
+                false;
+            GameObject.Find("Canvas").GetComponent<Game_Start>().isGameOver = true;
             //Detroy Object
             Destroy (gameObject);
         }

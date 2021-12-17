@@ -13,6 +13,8 @@ public class Citizen_Healing : MonoBehaviour
 
     public GameObject citizen = null;
 
+    private GameObject player;
+
     public void setCitizenObject(GameObject sentCitizen)
     {
         citizen = sentCitizen;
@@ -22,6 +24,11 @@ public class Citizen_Healing : MonoBehaviour
     {
         citizen = null;
         TimeHealingBar.SetActive(false);
+    }
+
+    private void Start()
+    {
+        player = GameObject.FindWithTag("Player");
     }
 
     [System.Obsolete]
@@ -40,7 +47,10 @@ public class Citizen_Healing : MonoBehaviour
 
                 citizen.GetComponent<Citizen_Helping>().getHeal();
 
-                GameObject.FindWithTag("Player").GetComponent<Player_Movement>().canShoot = false;
+                if (player != null)
+                {
+                    player.GetComponent<Player_Movement>().canShoot = false;
+                }
             }
             else if (citizen.GetComponent<Citizen_Helping>().isDoneHealing)
             {
@@ -52,7 +62,11 @@ public class Citizen_Healing : MonoBehaviour
     public void pointerUp()
     {
         TimeHealingBar.SetActive(false);
-        GameObject.FindWithTag("Player").GetComponent<Player_Movement>().canShoot = true;
+        if (player != null)
+        {
+            player.GetComponent<Player_Movement>().canShoot = true;
+        }
+
         if (citizen != null)
         {
             countTime = 0f;

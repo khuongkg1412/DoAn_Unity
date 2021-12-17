@@ -2,36 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ChangeScence : MonoBehaviour
 {
-    //Reload the scence cause you lost the game
-    public bool Reloading = false;
-
     //Wait for reoading excutes
     private float waitToLoad;
 
-    public void reloadScence()
+    Button replayButton;
+
+
+    public void gameResultOn()
     {
-        // while(true)
-        // {
-        //     waitToLoad += Time.deltaTime;
-        //     if (waitToLoad >= 5f)
-        //     {
-        //         SceneManager.LoadScene(SceneManager.GetActiveScene().name,LoadSceneMode.Single);
-        //         break;
-        //     }
-        // }
-        StartCoroutine(reloading());
+        replayButton = GameObject.Find("Replay_Button").GetComponent<Button>();
+        replayButton.onClick.AddListener (reloadScence);
     }
 
-    IEnumerator reloading()
+    void reloadScence()
     {
-        yield return new WaitForSeconds(2);
         SceneManager
             .LoadScene(SceneManager.GetActiveScene().name,
             LoadSceneMode.Single);
-        yield return null;
     }
 
     public void storeOpening()
@@ -80,5 +71,4 @@ public class ChangeScence : MonoBehaviour
         Screen.orientation = ScreenOrientation.Landscape;
         SceneManager.LoadScene("gameplay");
     }
-    
 }
