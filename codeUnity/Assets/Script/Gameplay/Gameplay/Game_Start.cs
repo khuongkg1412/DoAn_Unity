@@ -37,19 +37,19 @@ public class Game_Start : MonoBehaviour
 
             enemyNumber,
             enemyNumberStart,
-            citizenNumber,
+            citizenSaveNumber,
             citizenNumberStart;
 
     private void Start()
     {
         // Starts the timer automatically
         timerIsRunning = true;
+        citizenSaveNumber = 0;
         citizenNumberStart =
             GameObject
                 .Find("Spawning Citizen")
                 .GetComponent<Spawn_Enemy>()
                 .numberOfEnemies + 1;
-        citizenNumber = citizenNumberStart;
         enemyNumberStart =
             GameObject
                 .Find("Spawning Enemy")
@@ -59,7 +59,7 @@ public class Game_Start : MonoBehaviour
         UpdateCitizen(0);
         UpdateEnemyNumber(0);
 
-        isVictory = true;
+        isVictory = false;
         isGameOver = false;
     }
 
@@ -95,10 +95,10 @@ public class Game_Start : MonoBehaviour
 
     public void UpdateCitizen(float number)
     {
-        citizenNumber -= number;
+        citizenSaveNumber += number;
         citizenCount.text =
-            "Citizen: " + citizenNumber.ToString() + "/" + citizenNumberStart;
-        if (citizenNumber == 0 && isVictory)
+            "Citizen: " + citizenSaveNumber.ToString() + "/" + citizenNumberStart;
+        if (citizenSaveNumber == citizenNumberStart && isVictory)
         {
             citizenCount.color = new Color(0, 1, 0);
         }
@@ -137,14 +137,15 @@ public class Game_Start : MonoBehaviour
         }else{
             gameplayResult.text = "GAMEOVER";
         }
-        enemyKillResult.text = (enemyNumberStart - enemyNumber + 1).ToString();
-        citizenSaveResult.text = (citizenNumberStart - citizenNumber + 1).ToString();
+        enemyKillResult.text = (enemyNumberStart - enemyNumber).ToString();
+        citizenSaveResult.text =  citizenSaveNumber.ToString();
     }
     void ConditionToVictory()
     {
-        if (enemyNumber == 0 || citizenNumber == 0)
+        if (enemyNumber == 0 || citizenSaveNumber == citizenNumberStart)
         {
             isGameOver = true;
+            isVictory = true;
         }
     }
 
