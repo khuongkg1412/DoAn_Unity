@@ -9,11 +9,13 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
+/[Pp]roject[Ss]ettings/GvhProjectSettings.xml
 /codeUnity/Assets/Plugins/Android/FirebaseApp.androidlib/res/values/google-services.xml
 /codeUnity/Assets/StreamingAssets/google-services-desktop.json
 /codeUnity/Assets/StreamingAssets/google-services-desktop.json.meta
 /codeUnity/Assets/StreamingAssets/google-services-desktop.json
 /codeUnity/Assets/StreamingAssets/google-services-desktop.json.meta
+
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
