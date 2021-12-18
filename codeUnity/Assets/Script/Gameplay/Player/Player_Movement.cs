@@ -173,6 +173,7 @@ public class Player_Movement : MonoBehaviour
         GameObject bullet =
             Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+        bullet.GetComponent<Bullet>().setPositionStartShooting(firePoint);
 
         //Pull bullet out at fire point
         rb.AddForce(firePoint.up * bulletSpeed, ForceMode2D.Impulse);
