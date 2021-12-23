@@ -93,7 +93,6 @@ public class ItemDaily : MonoBehaviour
         //db connection
         db = FirebaseFirestore.DefaultInstance;
         Debug.Log("Database Reading");
-
         Query itemDailyQuery =
             db.Collection("Store").WhereEqualTo("itemType", "itemDaily");
         itemDailyQuery
