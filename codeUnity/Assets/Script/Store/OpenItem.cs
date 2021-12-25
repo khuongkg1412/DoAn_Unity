@@ -30,6 +30,10 @@ public class OpenItem : MonoBehaviour
     //         }
     //     }
     // }
+    void SettingImage()
+    {
+    }
+
     public void OpenPannelItem()
     {
         switch (dataItem.type_Item)
@@ -38,17 +42,23 @@ public class OpenItem : MonoBehaviour
                 blurBG.SetActive(true);
                 pannel.SetActive(true);
                 pannel.GetComponent<LoadingItem>().dataItem = dataItem;
+                pannel.GetComponent<LoadingItem>().loadingData();
                 pannelChest.SetActive(false);
                 break;
             case "Medicine_WeeklyItem":
                 blurBG.SetActive(true);
                 pannel.SetActive(true);
+                pannel.GetComponent<LoadingItem>().dataItem = dataItem;
+                pannel.GetComponent<LoadingItem>().loadingData();
                 pannelChest.SetActive(false);
                 break;
             case "Chest":
                 blurBG.SetActive(true);
                 pannel.SetActive(false);
+
                 pannelChest.SetActive(true);
+                pannelChest.GetComponent<LoadingItem>().dataItem = dataItem;
+                pannelChest.GetComponent<LoadingItem>().loadingData();
                 break;
             default:
                 break;
