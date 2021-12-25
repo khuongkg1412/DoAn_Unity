@@ -39,9 +39,10 @@ public class Game_Start : MonoBehaviour
             enemyNumberStart,
             citizenSaveNumber,
             citizenNumberStart;
-
+    
     private void Start()
     {
+        Time.timeScale = 1f;
         // Starts the timer automatically
         timerIsRunning = true;
         citizenSaveNumber = 0;

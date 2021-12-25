@@ -18,7 +18,7 @@ public class ChangeScence : MonoBehaviour
         replayButton.onClick.AddListener (reloadScence);
     }
 
-    void reloadScence()
+    public void reloadScence()
     {
         SceneManager
             .LoadScene(SceneManager.GetActiveScene().name,
