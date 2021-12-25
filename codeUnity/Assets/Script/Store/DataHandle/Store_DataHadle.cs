@@ -325,21 +325,24 @@ public class Store_DataHadle : MonoBehaviour
         {
             Populate(objectItem.name_Item,
             objectItem.image_Item,
-            verticalDaily);
+            verticalDaily,
+            objectItem);
         }
 
         foreach (var objectItem in listDataItemWeekly)
         {
             Populate(objectItem.name_Item,
             objectItem.image_Item,
-            verticalWeekly);
+            verticalWeekly,
+            objectItem);
         }
 
         foreach (var objectItem in listDataItemChest)
         {
             Populate(objectItem.name_Item,
             objectItem.image_Item,
-            verticalChest);
+            verticalChest,
+            objectItem);
         }
         yield return null;
     }
@@ -353,12 +356,19 @@ public class Store_DataHadle : MonoBehaviour
         return null;
     }
 
-    void Populate(string name, string filePath, GameObject verticalObject)
+    void Populate(
+        string name,
+        string filePath,
+        GameObject verticalObject,
+        ItemStruct typeItem
+    )
     {
         GameObject prefab = GameObject.Find("BoxItem"); // Create GameObject instance
+
         dataImage.texture = loadingImageFromFilePath(filePath);
         dataImage.SetNativeSize();
         itemName.text = name;
-        Instantiate(prefab, verticalObject.transform);
+        GameObject item = Instantiate(prefab, verticalObject.transform);
+        item.GetComponent<OpenItem>().dataItem = typeItem;
     }
 }
