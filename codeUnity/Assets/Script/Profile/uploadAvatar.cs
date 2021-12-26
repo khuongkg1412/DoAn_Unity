@@ -8,7 +8,7 @@ using Firebase.Extensions;
 using Firebase.Storage;
 //For Picking files
 using System.Threading.Tasks;
-using UnityEngine.Windows;
+//using UnityEngine.Windows;
 using UnityEngine.SceneManagement;
 public class uploadAvatar : MonoBehaviour
 {
@@ -88,9 +88,9 @@ public class uploadAvatar : MonoBehaviour
     IEnumerator ReviewImageFromLocal(string localFilePath){
          //Review image before upload
 
-        byte[] fileContents = File.ReadAllBytes(localFilePath);
+        //byte[] fileContents = File.ReadAllBytes(localFilePath);
         Texture2D texture = new Texture2D(1, 1);
-        texture.LoadImage(fileContents);
+        //texture.LoadImage(fileContents);
         Sprite sprite = Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100.0f);
         localImg.GetComponent<Image>().sprite = sprite;
         reviewImgActived = true;
@@ -107,7 +107,7 @@ public class uploadAvatar : MonoBehaviour
         // File located on disk
         string[] fName = localFilePath.Split('/');
         string fileName = fName[fName.Length - 1];
-        byte[] fileContents = File.ReadAllBytes(localFilePath);
+        //byte[] fileContents = File.ReadAllBytes(localFilePath);
 
         // Create a reference to the file you want to upload
         StorageReference newAvatarsRef = storageReference.Child(fileName);

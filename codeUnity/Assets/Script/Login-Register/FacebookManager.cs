@@ -48,6 +48,7 @@ public class FacebookManager : MonoBehaviour
     }
     private void AuthCallback(ILoginResult result)
     {
+        FirebaseAuth auth = FirebaseAuth.DefaultInstance;
         if (result.Error != null)
         {
             Debug.Log(result.Error);
@@ -59,10 +60,13 @@ public class FacebookManager : MonoBehaviour
                 // AccessToken class will have session details
                 var aToken = Facebook.Unity.AccessToken.CurrentAccessToken;
                 // Print current access token's User ID
+                Debug.Log("I am here");
                 Debug.Log(aToken.UserId);
-                AccessToken token = AccessToken.CurrentAccessToken;
-                Firebase.Auth.Credential credential = Firebase.Auth.FacebookAuthProvider.GetCredential(token.TokenString);
+
+                var credential = Firebase.Auth.FacebookAuthProvider.GetCredential(aToken.TokenString);
+                Debug.Log("Taoj credential thanh cong");
                 accessToken(credential);
+                
             }
             else
             {
@@ -77,6 +81,7 @@ public class FacebookManager : MonoBehaviour
         Debug.Log("Auth CurrentUser: " + FirebaseAuth.DefaultInstance.CurrentUser);
         if (!FB.IsLoggedIn)
         {
+            FB.ActivateApp();
             return;
         }
 
@@ -92,7 +97,7 @@ public class FacebookManager : MonoBehaviour
         //             return;
         //         }
         //     });
-            
+
         //     auth.CurrentUser.LinkWithCredentialAsync(firebaseResult).ContinueWith(task =>
         //     {
         //         if (task.IsCanceled || task.IsFaulted)
@@ -108,20 +113,23 @@ public class FacebookManager : MonoBehaviour
         //             SceneManager.LoadScene(0);
         //     });
         // }
-        // else
-        
+        else
+        {
             auth.SignInWithCredentialAsync(firebaseResult).ContinueWith(task =>
             {
+                Debug.Log("da den day");
                 if (task.IsCanceled || task.IsFaulted)
                 {
                     Debug.LogError("SignInWithCredentialAsync encountered an error: " + task.Exception);
                     // TODO: Show error message to player
                     return;
                 }
-                FirebaseUser newUser = task.Result;
-                Debug.LogFormat("Credentials successfully created Firebase user: {0} ({1})", newUser.DisplayName, newUser.UserId);
-                    SceneManager.LoadScene(0);
+                else
+                {
+                    FirebaseUser newUser = task.Result;
+                    Debug.LogFormat("Credentials successfully created Firebase user: {0} ({1})", newUser.DisplayName, newUser.UserId);
+                }
             });
-        
+        }
     }
 }
