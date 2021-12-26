@@ -69,6 +69,6 @@ public class ChangeScence : MonoBehaviour
     public void gameplayOpening()
     {
         Screen.orientation = ScreenOrientation.Landscape;
-        SceneManager.LoadScene("gameplay");
+        SceneManager.LoadScene("Stage1");
     }
 }
