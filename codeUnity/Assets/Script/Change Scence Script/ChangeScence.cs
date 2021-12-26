@@ -18,7 +18,7 @@ public class ChangeScence : MonoBehaviour
         replayButton.onClick.AddListener (reloadScence);
     }
 
-    void reloadScence()
+    public void reloadScence()
     {
         SceneManager
             .LoadScene(SceneManager.GetActiveScene().name,
@@ -69,6 +69,6 @@ public class ChangeScence : MonoBehaviour
     public void gameplayOpening()
     {
         Screen.orientation = ScreenOrientation.Landscape;
-        SceneManager.LoadScene("gameplay");
+        SceneManager.LoadScene("Stage1");
     }
 }

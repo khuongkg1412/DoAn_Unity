@@ -1,41 +1,75 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class OpenItem : MonoBehaviour
 {
+    [SerializeField]
+    GameObject dataHandeling;
+
+    public ItemStruct dataItem;
+
     public GameObject blurBG;
+
     public GameObject pannel;
+
     public GameObject pannelChest;
-    public void OpenPannelItem(int i){
-        if(pannel != null){
-            if(i>0){
-            blurBG.SetActive(true);
-            pannel.SetActive(false);
-            pannelChest.SetActive(true);
-            }else{
-            blurBG.SetActive(true);
-            pannel.SetActive(true);
-            pannelChest.SetActive(false);
-            }
-           
+
+    // public void OpenPannelItem(int i){
+    //     if(pannel != null){
+    //         if(i>0){
+    //         blurBG.SetActive(true);
+    //         pannel.SetActive(false);
+    //         pannelChest.SetActive(true);
+    //         }else{
+    //         blurBG.SetActive(true);
+    //         pannel.SetActive(true);
+    //         pannelChest.SetActive(false);
+    //         }
+    //     }
+    // }
+    void SettingImage()
+    {
+    }
+
+    public void OpenPannelItem()
+    {
+        switch (dataItem.type_Item)
+        {
+            case "Medicine_DailyItem":
+                blurBG.SetActive(true);
+                pannel.SetActive(true);
+                pannel.GetComponent<LoadingItem>().dataItem = dataItem;
+                pannel.GetComponent<LoadingItem>().loadingData();
+                pannelChest.SetActive(false);
+                break;
+            case "Medicine_WeeklyItem":
+                blurBG.SetActive(true);
+                pannel.SetActive(true);
+                pannel.GetComponent<LoadingItem>().dataItem = dataItem;
+                pannel.GetComponent<LoadingItem>().loadingData();
+                pannelChest.SetActive(false);
+                break;
+            case "Chest":
+                blurBG.SetActive(true);
+                pannel.SetActive(false);
+
+                pannelChest.SetActive(true);
+                pannelChest.GetComponent<LoadingItem>().dataItem = dataItem;
+                pannelChest.GetComponent<LoadingItem>().loadingData();
+                break;
+            default:
+                break;
         }
     }
 
-    public void ClosedPannelItem(){
-        if(pannel != null){
+    public void ClosedPannelItem()
+    {
+        if (pannel != null)
+        {
             blurBG.SetActive(false);
         }
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
