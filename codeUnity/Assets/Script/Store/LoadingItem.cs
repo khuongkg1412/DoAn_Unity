@@ -6,10 +6,7 @@ using UnityEngine.UI;
 public class LoadingItem : MonoBehaviour
 {
     public ItemStruct dataItem;
-
-    TMPro.TMP_Text
-
-            name,
+    private TMPro.TMP_Text name,
             type,
             description;
 
