@@ -11,13 +11,6 @@ public class ChangeScence : MonoBehaviour
 
     Button replayButton;
 
-
-    public void gameResultOn()
-    {
-        replayButton = GameObject.Find("Replay_Button").GetComponent<Button>();
-        replayButton.onClick.AddListener (reloadScence);
-    }
-
     public void reloadScence()
     {
         SceneManager

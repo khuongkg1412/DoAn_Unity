@@ -42,6 +42,7 @@ public class Game_Start : MonoBehaviour
     
     private void Start()
     {
+        Screen.orientation = ScreenOrientation.Landscape;
         Time.timeScale = 1f;
         // Starts the timer automatically
         timerIsRunning = true;
@@ -68,13 +69,12 @@ public class Game_Start : MonoBehaviour
     {
         pannelGameover.SetActive(true);
         Player.GetComponent<Player_HP>().isDead = true;
-        gameObject.GetComponent<ChangeScence>().gameResultOn();
     }
 
     public void UpdateScore(float scorePlus)
     {
         score += scorePlus;
-        scoreRunning.text = "Score: " + score.ToString();
+        scoreRunning.text = score.ToString();
         scoreResult.text = score.ToString();
     }
 
@@ -88,10 +88,6 @@ public class Game_Start : MonoBehaviour
         {
             enemyCount.color = new Color(0, 1, 0);
         }
-        else
-        {
-            enemyCount.color = new Color(1, 0, 0);
-        }
     }
 
     public void UpdateCitizen(float number)
@@ -102,10 +98,6 @@ public class Game_Start : MonoBehaviour
         if (citizenSaveNumber == citizenNumberStart && isVictory)
         {
             citizenCount.color = new Color(0, 1, 0);
-        }
-        else
-        {
-            citizenCount.color = new Color(1, 0, 0);
         }
     }
 
