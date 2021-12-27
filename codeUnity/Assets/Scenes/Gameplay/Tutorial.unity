@@ -97565,18 +97565,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1172515329, guid: 6080bb2a2cf7c3a44b5aefcf5701690d, type: 3}
-      propertyPath: m_BodyType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1172515329, guid: 6080bb2a2cf7c3a44b5aefcf5701690d, type: 3}
-      propertyPath: m_Constraints
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1172515329, guid: 6080bb2a2cf7c3a44b5aefcf5701690d, type: 3}
-      propertyPath: m_UseFullKinematicContacts
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5399668668997907519, guid: 6080bb2a2cf7c3a44b5aefcf5701690d, type: 3}
       propertyPath: hpText
       value: 
