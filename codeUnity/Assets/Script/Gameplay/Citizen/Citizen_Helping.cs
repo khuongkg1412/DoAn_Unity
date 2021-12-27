@@ -49,7 +49,7 @@ public class Citizen_Helping : MonoBehaviour
         Healthbarmaxsize = HealthBar.transform.localScale.x;
 
         //When game start people are not sicked
-        isSicked = true;
+        isSicked = false;
         isHeal = false;
 
         //Set Timehealing bar

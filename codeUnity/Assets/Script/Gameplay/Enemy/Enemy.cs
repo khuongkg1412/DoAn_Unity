@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     //Player target to enemy move forward
-    public Transform target;
+    public Transform target, target2;
 
     //Distance from player to enemy
     //public Vector3 distancePlayer = new Vector3(10,10,0);
@@ -37,23 +37,47 @@ public class Enemy : MonoBehaviour
             waiToFolllow -= Time.deltaTime;
             if (waiToFolllow <= 0)
             {
-                isFollow = true;         }
+                isFollow = true;         
+                }
         }
 
         //Follow if in range
         if (
-            Vector3.Distance(target.position, transform.position) <= range &&
+            distanceToPlayer() &&
             isFollow
         )
         {
             followPlayer();
-        } //Out range then comeback to home position
-        else if (Vector3.Distance(target.position, transform.position) >= range)
+        } 
+        else if (
+            distanceToCitizen() &&
+            isFollow
+        )
+        {
+            followCitizen();
+        }
+        //Out range then comeback to home position
+        else
         {
             comeBackPos();
         }
     }
 
+    bool distanceToPlayer(){
+        if (Vector3.Distance(target.position, transform.position) <= range )
+        {
+            return true;
+        }
+        return false;
+    }
+
+     bool distanceToCitizen(){
+        if (Vector3.Distance(target2.position, transform.position) <= range )
+        {
+            return true;
+        }
+        return false;
+    }
     //Comeback home position
     public void comeBackPos()
     {
@@ -80,14 +104,27 @@ public class Enemy : MonoBehaviour
                 speed * Time.deltaTime);
     }
 
+    public void followCitizen()
+    {
+        transform.position =
+            Vector3
+                .MoveTowards(transform.position,
+                target2.position,
+                speed * Time.deltaTime);
+    }
+
     private void OnCollisionEnter2D(Collision2D other)
     {
         isFollow = false;
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" || other.gameObject.tag == "Citizen")
         {
             //Hit the Player
             Rigidbody2D rd = gameObject.GetComponent<Rigidbody2D>();
             rd.AddForce(gameObject.transform.position, ForceMode2D.Impulse);
+            Debug.Log("Hit");
+            if(other.gameObject.tag == "Citizen"){
+                other.gameObject.GetComponent<Citizen_Helping>().isSicked = true;
+            }
         }
         // else if(other.gameObject.tag == "Player"){
         //     Debug.Log("ComeBack");
