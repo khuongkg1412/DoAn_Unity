@@ -51,7 +51,7 @@ public class Player_HP : MonoBehaviour
             Player Get Hurt then stop the player movement
         */
         GetComponent<Player_Movement>().isMoving = false;
-        Invoke("allowMoving", 1f);
+        Invoke("allowMoving", 0.5f);
     }
 
     void allowMoving()

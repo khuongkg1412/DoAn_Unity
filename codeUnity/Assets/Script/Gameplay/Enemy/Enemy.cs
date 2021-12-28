@@ -35,9 +35,13 @@ public class Enemy : MonoBehaviour
         {
             //Count to follow
             waiToFolllow += Time.deltaTime;
-            if (waiToFolllow >= 1f)
+            if (waiToFolllow >= 0.5f)
             {
                 waiToFolllow = 0;
+                //Stop Enemy Moving After Beeing Hit
+                Rigidbody2D rd = gameObject.GetComponent<Rigidbody2D>();
+                rd.velocity = Vector2.zero;
+                //Allow it follow player or Citizen
                 isFollow = true;
             }
         }
@@ -97,13 +101,22 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+        //When being hit, enemy cannot move around
         isFollow = false;
+        // force is how forcefully we will push the player away from the enemy.
+        float force = 10000;
+        // If the object we hit is the enemy
         if (other.gameObject.tag == "Player" || other.gameObject.tag == "Citizen")
         {
-            //Hit the Player
+            // Calculate Angle Between the collision point and the player
+            Vector2 dir = other.contacts[0].point - (Vector2)transform.position;
+            // We then get the opposite (-Vector3) and normalize it
+            dir = -dir.normalized;
+            // And finally we add force in the direction of dir and multiply it by force.
+            // This will push back the player
             Rigidbody2D rd = gameObject.GetComponent<Rigidbody2D>();
-            rd.AddForce(gameObject.transform.position, ForceMode2D.Impulse);
-
+            rd.AddForce(dir * force);
+            //Hit citizen , then decrease HP from zitizen
             if (other.gameObject.tag == "Citizen")
             {
                 other.gameObject.GetComponent<Citizen_Helping>().isSicked = true;
