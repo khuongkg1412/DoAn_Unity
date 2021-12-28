@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,16 +5,9 @@ public class Tutorial : MonoBehaviour
 {
     public GameObject[] pannelArray;
 
-    public GameObject
+    public GameObject enemy1, enemy2, citizen;
 
-            enemy1,
-            enemy2,
-            citizen;
-
-    public GameObject
-
-            conditionPos,
-            Player;
+    public GameObject conditionPos, Player;
 
     public Text text1;
 
@@ -45,18 +36,11 @@ public class Tutorial : MonoBehaviour
         {
             enemy1.SetActive(true);
         }
-        if (
-            GameObject.Find("Canvas").GetComponent<Game_Start>().score > 0 &&
-            indexPannel == 4
-        )
+        if (GameObject.Find("Canvas").GetComponent<Game_Start>().score > 0 &&
+            indexPannel == 4)
         {
             conditionPos.SetActive(true);
-            if (
-                Vector3
-                    .Distance(Player.transform.position,
-                    conditionPos.transform.position) <
-                50f
-            )
+            if (Vector3.Distance(Player.transform.position, conditionPos.transform.position) < 50f)
             {
                 increaseIndex();
                 conditionPos.SetActive(false);

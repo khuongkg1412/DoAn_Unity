@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour
     public bool isFollow = true;
 
     //Time before enemy continute follow player after a collision
-    float waiToFolllow = 0.5f;
+    float waiToFolllow = 0f;
 
     //Dame enemy give to player
     public float dameGiven = 10f;
@@ -34,45 +34,45 @@ public class Enemy : MonoBehaviour
         if (!isFollow)
         {
             //Count to follow
-            waiToFolllow -= Time.deltaTime;
-            if (waiToFolllow <= 0)
+            waiToFolllow += Time.deltaTime;
+            if (waiToFolllow >= 1f)
             {
-                isFollow = true;         
-                }
+                waiToFolllow = 0;
+                isFollow = true;
+            }
         }
-
-        //Follow if in range
-        if (
-            distanceToPlayer() &&
-            isFollow
-        )
-        {
-            followPlayer();
-        } 
-        else if (
-            distanceToCitizen() &&
-            isFollow
-        )
-        {
-            followCitizen();
-        }
-        //Out range then comeback to home position
         else
         {
-            comeBackPos();
+            //Follow if in range
+            if (distanceToPlayer())
+            {
+                followPlayer();
+            }
+            else if (distanceToCitizen())
+            {
+                followCitizen();
+            }
+            //Out range then comeback to home position
+            else
+            {
+                comeBackPos();
+            }
         }
+
     }
 
-    bool distanceToPlayer(){
-        if (Vector3.Distance(target.position, transform.position) <= range )
+    bool distanceToPlayer()
+    {
+        if (Vector3.Distance(target.position, transform.position) <= range)
         {
             return true;
         }
         return false;
     }
 
-     bool distanceToCitizen(){
-        if (Vector3.Distance(target2.position, transform.position) <= range )
+    bool distanceToCitizen()
+    {
+        if (Vector3.Distance(target2.position, transform.position) <= range)
         {
             return true;
         }
@@ -81,36 +81,18 @@ public class Enemy : MonoBehaviour
     //Comeback home position
     public void comeBackPos()
     {
-        transform.position =
-            Vector3
-                .MoveTowards(transform.position,
-                originalPos.position,
-                speed * Time.deltaTime);
-
-        // //Make Enemy Follow Player After Comeback to Position
-        // if (transform.position == originalPos.position)
-        // {
-        //     isFollow = true;
-        // }
+        transform.position = Vector3.MoveTowards(transform.position, originalPos.position, speed * Time.deltaTime);
     }
 
     //Following p;ayer
     public void followPlayer()
     {
-        transform.position =
-            Vector3
-                .MoveTowards(transform.position,
-                target.position,
-                speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
     }
 
     public void followCitizen()
     {
-        transform.position =
-            Vector3
-                .MoveTowards(transform.position,
-                target2.position,
-                speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, target2.position, speed * Time.deltaTime);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -121,19 +103,11 @@ public class Enemy : MonoBehaviour
             //Hit the Player
             Rigidbody2D rd = gameObject.GetComponent<Rigidbody2D>();
             rd.AddForce(gameObject.transform.position, ForceMode2D.Impulse);
-            Debug.Log("Hit");
-            if(other.gameObject.tag == "Citizen"){
+
+            if (other.gameObject.tag == "Citizen")
+            {
                 other.gameObject.GetComponent<Citizen_Helping>().isSicked = true;
             }
         }
-        // else if(other.gameObject.tag == "Player"){
-        //     Debug.Log("ComeBack");
-        //     // Renderer render =
-        //     //     other.gameObject.GetComponentInChildren<Renderer>();
-        //     //     Debug.Log("Enable: "+ render.enabled);
-        //     // if(render.enabled == false){
-        //         comeBackPos();
-        //     // }
-        // }
     }
 }

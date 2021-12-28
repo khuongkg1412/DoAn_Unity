@@ -20,7 +20,9 @@ public class Player_Movement : MonoBehaviour
     private Rigidbody2D myBody;
 
     //Movement speed of player
-    public float speed = 300f;
+    float speed = 300f;
+    //Moving State
+    public bool isMoving;
 
     /* 
        Shooting Part
@@ -29,15 +31,13 @@ public class Player_Movement : MonoBehaviour
     public Transform firePoint;
 
     //Bullet Prefab
-    [SerializeField]
-    public GameObject bulletPrefab;
+    [SerializeField] public GameObject bulletPrefab;
 
     //Bullet speed
     public float bulletSpeed = 1000;
 
     //Time CD for every shot
-    [SerializeField]
-    private float coolDownTime = 0.5f;
+    [SerializeField] private float coolDownTime = 0.5f;
 
     //Time Player need to wait for next shot
     private float shootTimer;
@@ -62,6 +62,7 @@ public class Player_Movement : MonoBehaviour
         //Getting RigidBody
         myBody = GetComponent<Rigidbody2D>();
         canShoot = true;
+        isMoving = true;
     }
 
     private void Update()
@@ -76,7 +77,7 @@ public class Player_Movement : MonoBehaviour
         DetectCitizen();
 
         //Rotation by the touch in joystick shooting
-        if (GetComponent<Player_HP>().currentHP > 0)
+        if (!GetComponent<Player_HP>().isDead)
         {
             Rotation();
         }
@@ -85,7 +86,7 @@ public class Player_Movement : MonoBehaviour
     private void FixedUpdate()
     {
         //Movement by the touch in joystick movement
-        if (GetComponent<Player_HP>().currentHP > 0)
+        if (!GetComponent<Player_HP>().isDead && isMoving)
         {
             Movement();
         }
@@ -97,9 +98,7 @@ public class Player_Movement : MonoBehaviour
     void Movement()
     {
         //Getting hortizontal and vertical axis means x,y and store in vector
-        Vector2 moveInput =
-            new Vector2(Input.GetAxisRaw("Horizontal"),
-                Input.GetAxisRaw("Vertical"));
+        Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
         //If joystick has been dragging, then move the player
         if (moveJoystick.InputDir != Vector3.zero)
@@ -111,8 +110,7 @@ public class Player_Movement : MonoBehaviour
             moveVelocity = moveInput.normalized * speed;
 
             //Move the Player by the Velocity* Time
-            myBody
-                .MovePosition(myBody.position + moveVelocity * Time.deltaTime);
+            myBody.MovePosition(myBody.position + moveVelocity * Time.deltaTime);
         }
     }
 
@@ -122,9 +120,7 @@ public class Player_Movement : MonoBehaviour
     void Rotation()
     {
         //Get the touching position on screen
-        Vector2 dir =
-            cameraMain.ScreenToWorldPoint(Input.mousePosition) -
-            transform.position;
+        Vector2 dir = cameraMain.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
         //Calculate the angle of rotation
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 90;
@@ -133,17 +129,11 @@ public class Player_Movement : MonoBehaviour
         if (shootJoystick.InputDir != Vector3.zero)
         {
             //Calculate the angle of rotation
-            angle =
-                Mathf
-                    .Atan2(shootJoystick.InputDir.y, shootJoystick.InputDir.x) *
-                Mathf.Rad2Deg +
-                90;
+            angle = Mathf.Atan2(shootJoystick.InputDir.y, shootJoystick.InputDir.x) * Mathf.Rad2Deg + 90;
 
             //Rotation
             Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-            transform.rotation =
-                Quaternion
-                    .Slerp(transform.rotation, rotation, 10 * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 10 * Time.deltaTime);
         }
     }
 
@@ -170,8 +160,7 @@ public class Player_Movement : MonoBehaviour
     void Shooting()
     {
         //Creating bullet
-        GameObject bullet =
-            Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         bullet.GetComponent<Bullet>().setPositionStartShooting(firePoint);
 

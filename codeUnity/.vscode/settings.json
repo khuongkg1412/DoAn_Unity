@@ -1,4 +1,8 @@
-﻿{
+{
+    "editor.formatOnSave": true,
+    "[csharp]": {
+      "editor.defaultFormatter": "ms-dotnettools.csharp"
+    },
     "files.exclude":
     {
         "**/.DS_Store":true,
@@ -53,4 +57,5 @@
         "temp/":true,
         "Temp/":true
     }
+    
 }
