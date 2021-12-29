@@ -83,6 +83,8 @@ public class Tutorial : MonoBehaviour
             if (indexPannel == 3)
             {
                 enemy1.SetActive(true);
+                textContent.text = "This is the enemy that needs to be destroyed.";
+                textTile.text = "Shoot";
             }
             if (GameObject.Find("Canvas").GetComponent<Game_Start>().score > 0 &&
                 indexPannel == 4)
