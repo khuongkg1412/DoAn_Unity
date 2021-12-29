@@ -4,11 +4,11 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Game_Start : MonoBehaviour
+public class Game_Tutorial : MonoBehaviour
 {
     private float score;
 
-    public bool isVictory = false, isGameOver;
+    public bool isGameOver;
 
     public GameObject Player;
 
@@ -23,14 +23,6 @@ public class Game_Start : MonoBehaviour
             enemyCount,
             citizenCount;
 
-    public float timeRemaining = 180;
-
-    private bool timerIsRunning = false;
-
-    public Text timeText;
-
-    private Camera cameraMain;
-
     private float enemyNumber,
             enemyNumberStart,
             citizenSaveNumber,
@@ -40,45 +32,23 @@ public class Game_Start : MonoBehaviour
     {
         //Convert to landscape mode in gameplay
         Screen.orientation = ScreenOrientation.Landscape;
-
-        // Starts the timer automatically
-        timerIsRunning = true;
         /*
         Set and get number citizen follow by spawning
         */
         citizenSaveNumber = 0;
-        citizenNumberStart = GameObject.Find("Spawning Citizen").GetComponent<Spawn_Enemy>().numberOfEnemies + 1;
-        enemyNumberStart = GameObject.Find("Spawning Enemy").GetComponent<Spawn_Enemy>().numberOfEnemies + 1;
+        citizenNumberStart = 1;
+        enemyNumberStart = 2;
         enemyNumber = 0;
         //Update citizen in Quest pannel
         UpdateCitizen(0);
         UpdateEnemyNumber(0);
         //Set value for two variable which decide game end and victory
-        isVictory = false;
         isGameOver = false;
     }
 
     void Update()
     {
-        //Check condition victory in every frame
-        ConditionToVictory();
-        //Continute runing time whilke game is not oer
-        if (timerIsRunning && isGameOver != true)
-        {
-            //Time is not end
-            if (timeRemaining > 0)
-            {
-                timeRemaining -= Time.deltaTime;
-                DisplayTime(timeRemaining);
-            }
-            else
-            {
-                //Time's up
-                timeRemaining = 0;
-                timerIsRunning = false;
-            }
-        }
-        else
+        if (isGameOver == true)
         {
             //Game end. Display result and end the gameplay
             DisplayResultPannel();
@@ -107,7 +77,7 @@ public class Game_Start : MonoBehaviour
         enemyNumber += number;
         enemyCount.text = "Enemy: " + enemyNumber.ToString() + "/" + enemyNumberStart;
         //Turn green color when completed task
-        if (enemyNumber == 0)
+        if (enemyNumber == enemyNumberStart)
         {
             enemyCount.color = new Color(0, 1, 0);
         }
@@ -119,7 +89,7 @@ public class Game_Start : MonoBehaviour
         citizenSaveNumber += number;
         citizenCount.text = "Citizen: " + citizenSaveNumber.ToString() + "/" + citizenNumberStart;
         //Turn green color when completed task
-        if (citizenSaveNumber == citizenNumberStart && isVictory)
+        if (citizenSaveNumber == citizenNumberStart)
         {
             citizenCount.color = new Color(0, 1, 0);
         }
@@ -127,37 +97,10 @@ public class Game_Start : MonoBehaviour
     //Display resukt
     void DisplayResultPannel()
     {
-        //Check victory
-        if (isVictory)
-        {
-            gameplayResult.text = "VICTORY";
-        }
-        else
-        {
-            gameplayResult.text = "GAMEOVER";
-        }
+        gameplayResult.text = "VICTORY";
+
         enemyKillResult.text = enemyNumber.ToString();
         citizenSaveResult.text = citizenSaveNumber.ToString();
-    }
-    //Condition to victory
-    void ConditionToVictory()
-    {
-        //Check condition victory
-        if (enemyNumber == enemyNumberStart || citizenSaveNumber == citizenNumberStart)
-        {
-            isGameOver = true;
-            isVictory = true;
-        }
-    }
-    //Method display time
-    void DisplayTime(float timeToDisplay)
-    {   //Increase time by 1
-        timeToDisplay += 1;
-        //Convert to minut and second
-        float minutes = Mathf.FloorToInt(timeToDisplay / 60);
-        float seconds = Mathf.FloorToInt(timeToDisplay % 60);
-        //Set to text
-        timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
     //Return score public method
     public float returnScore()
