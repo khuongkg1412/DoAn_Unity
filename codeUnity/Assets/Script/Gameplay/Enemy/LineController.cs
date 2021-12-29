@@ -5,12 +5,12 @@ using System.Collections;
 [RequireComponent(typeof(LineRenderer))]
 public class LineController : MonoBehaviour
 {
-    //[Range(0, 50)]
-    public int segments = 50;
-    //[Range(0, 5)]
-    public float xradius = 300;
-    //[Range(0, 5)]
-    public float yradius = 300;
+    [Range(0, 500)]
+    int segments = 500;
+    [Range(0, 100)]
+    float xradius = 100;
+    [Range(0, 100)]
+    float yradius = 100;
     LineRenderer line;
 
     [System.Obsolete]
@@ -19,6 +19,9 @@ public class LineController : MonoBehaviour
         //Get the LineRenderer component
         line = gameObject.GetComponent<LineRenderer>();
 
+        Color c1 = new Color(1f, 0f, 0f, 0.75f);
+        line.SetColors(c1, c1);
+        line.SetWidth(5f, 5f);
         line.SetVertexCount(segments + 1);
         line.useWorldSpace = false;
         CreatePoints();

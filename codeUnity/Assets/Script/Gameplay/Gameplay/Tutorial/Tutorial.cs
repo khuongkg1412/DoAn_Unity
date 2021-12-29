@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class Tutorial : MonoBehaviour
 {
-    public GameObject[] pannelArray;
+    public GameObject pannelTutorial;
 
     public GameObject enemy1, enemy2, citizen;
 
@@ -15,23 +15,7 @@ public class Tutorial : MonoBehaviour
 
     private void Update()
     {
-        for (int i = 0; i < pannelArray.Length; i++)
-        {
-            if (indexPannel == i)
-            {
-                if (pannelArray[i] != null)
-                {
-                    pannelArray[i].SetActive(true);
-                }
-            }
-            else
-            {
-                if (pannelArray[i] != null)
-                {
-                    pannelArray[i].SetActive(false);
-                }
-            }
-        }
+
         if (indexPannel == 3)
         {
             enemy1.SetActive(true);
