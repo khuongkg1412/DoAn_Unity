@@ -42,17 +42,16 @@ public class Store_DataHadle : MonoBehaviour
             };
 
     ItemStruct
-        item2 =
-            new ItemStruct
-            {
-                paymethod_Item = 0,
-                description_Item = "Energy Pills is name of Item",
-                image_Item = "Item_Image/EnergyPills",
-                name_Item = "Energy Pills",
-                price_Item = 200,
-                rate_Item = 2,
-                type_Item = "Medicine_DailyItem",
-                numeral_Item =
+        item2 = new ItemStruct
+        {
+            paymethod_Item = 0,
+            description_Item = "Energy Pills is name of Item",
+            image_Item = "Item_Image/EnergyPills",
+            name_Item = "Energy Pills",
+            price_Item = 200,
+            rate_Item = 2,
+            type_Item = "Medicine_DailyItem",
+            numeral_Item =
                     new NumeralStruct
                     {
                         ATK_Numeral = 0,
@@ -60,7 +59,7 @@ public class Store_DataHadle : MonoBehaviour
                         HP_Numeral = 20,
                         SPD_Numeral = 0
                     }
-            };
+        };
 
     ItemStruct
         item3 =

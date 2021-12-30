@@ -6,14 +6,9 @@ using UnityEngine.UI;
 public class LoadingItem : MonoBehaviour
 {
     public ItemStruct dataItem;
-    private TMPro.TMP_Text name,
-            type,
-            description;
+    private TMPro.TMP_Text name, type, description;
 
-    GameObject
-
-            diamond,
-            coin;
+    GameObject diamond, coin;
 
     RawImage dataImage;
 
