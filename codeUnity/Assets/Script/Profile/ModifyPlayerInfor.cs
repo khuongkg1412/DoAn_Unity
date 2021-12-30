@@ -36,9 +36,9 @@ public class ModifyPlayerInfor : MonoBehaviour
         //yield return new WaitUntil(() => isUpDone == true);
         //yield return new WaitWhile(() => isUpDone == true)
         yield return new WaitForSeconds(7);
-        Debug.Log("isModify 2: " + player.avatarUrl);
+        Debug.Log("isModify 2: " + player.avatar_Player);
 
-        StartCoroutine(GetImage(player.avatarUrl));
+        StartCoroutine(GetImage(player.avatar_Player));
     }
     IEnumerator updatePlayerInfor()
     {
@@ -57,7 +57,7 @@ public class ModifyPlayerInfor : MonoBehaviour
 
                 }
                 player = snapshot.ConvertTo<playerStruct>();
-                Debug.Log("Player : " + player.avatarUrl);
+                Debug.Log("Player : " + player.avatar_Player);
             }
             else
             {

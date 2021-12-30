@@ -2,12 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using Facebook.Unity;
 using Firebase.Auth;
+using Firebase.Extensions;
+using Firebase.Firestore;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class FacebookManager : MonoBehaviour
 {
-    void Awake()
+
+    bool IsOld = true;
+    bool isDone = false;
+    private void Awake()
     {
         if (!FB.IsInitialized)
         {
@@ -66,7 +71,7 @@ public class FacebookManager : MonoBehaviour
                 var credential = Firebase.Auth.FacebookAuthProvider.GetCredential(aToken.TokenString);
                 Debug.Log("Taoj credential thanh cong");
                 accessToken(credential);
-                
+
             }
             else
             {
@@ -128,8 +133,39 @@ public class FacebookManager : MonoBehaviour
                 {
                     FirebaseUser newUser = task.Result;
                     Debug.LogFormat("Credentials successfully created Firebase user: {0} ({1})", newUser.DisplayName, newUser.UserId);
+
+                    StartCoroutine(changeSnece(newUser.UserId));
                 }
             });
         }
+    }
+
+    IEnumerator checkOldPlayer(string IDPlayer)
+    {
+        FirebaseFirestore db = FirebaseFirestore.DefaultInstance;
+        Debug.Log("Da vo đay");
+        DocumentReference docRef = db.Collection("Player").Document(IDPlayer);
+        docRef.GetSnapshotAsync().ContinueWithOnMainThread(task =>
+        {
+            Debug.Log("Dang check");
+            DocumentSnapshot snapshot = task.Result;
+            if (snapshot.Exists)
+            {
+                IsOld = true;isDone = true;
+            }
+            else
+            {
+                IsOld = false;isDone = true;
+            }
+            
+        });
+        yield return null;
+    }
+    IEnumerator changeSnece(string IDPlayer)
+    {
+        StartCoroutine(checkOldPlayer(IDPlayer));
+        yield return new WaitUntil(() => isDone == true);
+        if (!IsOld) SceneManager.LoadScene("Register by Email");
+        else SceneManager.LoadScene("MainPage");
     }
 }
