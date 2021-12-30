@@ -60,13 +60,15 @@ public class Game_Tutorial : MonoBehaviour
     {
         //Player dead and set active for pannel result
         pannelGameover.SetActive(true);
-        Player.GetComponent<Player_HP>().isDead = true;
+        Button nextBtn = GameObject.Find("Next_Button").GetComponent<Button>();
+        nextBtn.interactable = true;
     }
     //Update score
     public void UpdateScore(float scorePlus)
     {
         //Set score
         score += scorePlus;
+        Debug.Log("Score Update " + score);
         scoreRunning.text = score.ToString();
         scoreResult.text = score.ToString();
     }
@@ -97,7 +99,8 @@ public class Game_Tutorial : MonoBehaviour
     //Display resukt
     void DisplayResultPannel()
     {
-        gameplayResult.text = "VICTORY";
+        gameplayResult.text = "TUTORIAL COMPLETED";
+        gameplayResult.fontSize = 27;
 
         enemyKillResult.text = enemyNumber.ToString();
         citizenSaveResult.text = citizenSaveNumber.ToString();

@@ -49,6 +49,7 @@ public class Tutorial : MonoBehaviour
         {
             case 0: //Movement tutorial
                 textContent.text = "Dragging the joystick area would allow you to move around.";
+                GameObject.FindWithTag("Player").GetComponent<Player_Movement>().canShoot = false;
                 break;
             case 1:  //Map tutorial
                 textContent.text = "Look at the map area that would tell you about the surrounding objects.";
@@ -65,7 +66,7 @@ public class Tutorial : MonoBehaviour
                 textContent.text = "They'll attack if someone is in the red circle. You should use your weapon to kill them before they hurt people.";
                 break;
             case 5:
-
+                GameObject.FindWithTag("Player").GetComponent<Player_Movement>().canShoot = true;
                 if (GameObject.Find("Canvas").GetComponent<Game_Start>().returnScore() > 0)
                 {
                     conditionPos.SetActive(true);
@@ -74,7 +75,6 @@ public class Tutorial : MonoBehaviour
                         increaseIndex();
                         tutorialPopup.SetActive(true);
                         conditionPos.SetActive(false);
-                        enemy2.SetActive(true);
                         citizen.SetActive(true);
                     }
                 }
@@ -88,14 +88,17 @@ public class Tutorial : MonoBehaviour
                 break;
             case 7:
                 textContent.text = "They are under attack of virus. They would lose by 2 HP for a second, and they'll die if HP is 0. Keep them alive or you would lose.";
+                enemy2.SetActive(true);
+                enemy2.transform.GetChild(0).gameObject.GetComponent<Enemy>().isFollow = false;
                 break;
             case 8:
-                textContent.text = "You must help them by touching them and holding the help button. Hold it for 7 seconds, they would be saved. Releasing the button would count from 0.";
+                textContent.text = "You must help them by touching them and holding the help button for 7 seconds. Releasing the button would count from 0.";
+                enemy2.transform.GetChild(0).gameObject.GetComponent<Enemy>().isFollow = false;
                 break;
             case 9:
                 if (GameObject.Find("Canvas").GetComponent<Game_Start>().returnScore() > 100)
                 {
-
+                    GameObject.Find("Canvas").GetComponent<Game_Tutorial>().isGameOver = true;
                 }
                 else
                 {
@@ -103,11 +106,6 @@ public class Tutorial : MonoBehaviour
                 }
                 break;
         }
-    }
-
-    void playerGetDame()
-    {
-        textContent.text = "You must help them by touching them and holding the help button. Hold it for 7 seconds, they would be saved. Releasing the button would count from 0.";
     }
     //Move : This is the control button that allows your character to move.
     //Map : This is a map used to observe the targets around you.
