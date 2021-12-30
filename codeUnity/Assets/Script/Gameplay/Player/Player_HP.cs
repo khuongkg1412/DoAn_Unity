@@ -38,7 +38,16 @@ public class Player_HP : MonoBehaviour
         if (isDead)
         {
             gameObject.SetActive(false);
-            canvas.GetComponent<Game_Start>().GameOVer();
+            if (canvas.GetComponent<Game_Start>() != null)
+            {
+                canvas.GetComponent<Game_Start>().GameOVer();
+
+            }
+            else
+            {
+                canvas.GetComponent<Game_Tutorial>().GameOVer();
+            }
+
         }
     }
 

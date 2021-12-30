@@ -15,8 +15,7 @@ public class Game_Tutorial : MonoBehaviour
     public GameObject pannelGameover;
 
     [SerializeField]
-    private TextMeshProUGUI scoreResult,
-            enemyKillResult,
+    private TextMeshProUGUI scoreResult, enemyKillResult,
             citizenSaveResult,
             gameplayResult,
             scoreRunning,
@@ -30,6 +29,7 @@ public class Game_Tutorial : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1f;
         //Convert to landscape mode in gameplay
         Screen.orientation = ScreenOrientation.Landscape;
         /*
@@ -60,8 +60,10 @@ public class Game_Tutorial : MonoBehaviour
     {
         //Player dead and set active for pannel result
         pannelGameover.SetActive(true);
+        DisplayResultPannel();
         Button nextBtn = GameObject.Find("Next_Button").GetComponent<Button>();
         nextBtn.interactable = true;
+
     }
     //Update score
     public void UpdateScore(float scorePlus)
@@ -101,7 +103,11 @@ public class Game_Tutorial : MonoBehaviour
     {
         gameplayResult.text = "TUTORIAL COMPLETED";
         gameplayResult.fontSize = 27;
-
+        Time.timeScale = 0f;
+        if (Player.GetComponent<Player_HP>().isDead == true || citizenSaveNumber == 0)
+        {
+            gameplayResult.text = "TUTORIAL FAILED";
+        }
         enemyKillResult.text = enemyNumber.ToString();
         citizenSaveResult.text = citizenSaveNumber.ToString();
     }

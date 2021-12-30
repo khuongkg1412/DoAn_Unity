@@ -3429,7 +3429,6 @@ GameObject:
   - component: {fileID: 881436827}
   - component: {fileID: 881436830}
   - component: {fileID: 881436833}
-  - component: {fileID: 881436831}
   - component: {fileID: 881436832}
   m_Layer: 0
   m_Name: Canvas
@@ -3545,31 +3544,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 180b1beb2e998c2449b881406eff6b85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &881436831
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 881436825}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ed6472e86706314f83718ff277dc57e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isVictory: 0
-  isGameOver: 0
-  Player: {fileID: 571074373}
-  pannelGameover: {fileID: 311377380}
-  scoreResult: {fileID: 1649712451}
-  enemyKillResult: {fileID: 1338867570}
-  citizenSaveResult: {fileID: 1372796524}
-  gameplayResult: {fileID: 1488405684}
-  scoreRunning: {fileID: 542576247}
-  enemyCount: {fileID: 1540450786}
-  citizenCount: {fileID: 579710479}
-  timeRemaining: 600
-  timeText: {fileID: 620428237}
 --- !u!114 &881436832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8482,7 +8456,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1551918705
 RectTransform:
   m_ObjectHideFlags: 0

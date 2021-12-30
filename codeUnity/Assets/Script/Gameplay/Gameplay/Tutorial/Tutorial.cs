@@ -13,7 +13,11 @@ public class Tutorial : MonoBehaviour
 
     private bool isIncrease = true;
     int indexPannel = 0;
-
+    private GameObject player;
+    private void Start()
+    {
+        player = GameObject.FindWithTag("Player");
+    }
     private void Update()
     {
         //Check Increase condition
@@ -66,8 +70,8 @@ public class Tutorial : MonoBehaviour
                 textContent.text = "They'll attack if someone is in the red circle. You should use your weapon to kill them before they hurt people.";
                 break;
             case 5:
-                GameObject.FindWithTag("Player").GetComponent<Player_Movement>().canShoot = true;
-                if (GameObject.Find("Canvas").GetComponent<Game_Start>().returnScore() > 0)
+                player.GetComponent<Player_Movement>().canShoot = true;
+                if (GameObject.Find("Canvas").GetComponent<Game_Tutorial>().returnScore() > 0)
                 {
                     conditionPos.SetActive(true);
                     if (Vector3.Distance(Player.transform.position, conditionPos.transform.position) < 50f)
@@ -76,6 +80,8 @@ public class Tutorial : MonoBehaviour
                         tutorialPopup.SetActive(true);
                         conditionPos.SetActive(false);
                         citizen.SetActive(true);
+                        player.GetComponent<Player_Movement>().canShoot = false;
+                        player.GetComponent<Player_Movement>().isMoving = false;
                     }
                 }
                 else
@@ -96,13 +102,15 @@ public class Tutorial : MonoBehaviour
                 enemy2.transform.GetChild(0).gameObject.GetComponent<Enemy>().isFollow = false;
                 break;
             case 9:
-                if (GameObject.Find("Canvas").GetComponent<Game_Start>().returnScore() > 100)
+                player.GetComponent<Player_Movement>().isMoving = true;
+                player.GetComponent<Player_Movement>().canShoot = true;
+                tutorialPopup.SetActive(false);
+                increaseIndex();
+                break;
+            case 10:
+                if (GameObject.Find("Canvas").GetComponent<Game_Tutorial>().returnScore() > 100)
                 {
                     GameObject.Find("Canvas").GetComponent<Game_Tutorial>().isGameOver = true;
-                }
-                else
-                {
-                    tutorialPopup.SetActive(false);
                 }
                 break;
         }

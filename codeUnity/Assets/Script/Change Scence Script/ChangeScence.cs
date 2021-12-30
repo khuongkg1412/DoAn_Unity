@@ -9,13 +9,10 @@ public class ChangeScence : MonoBehaviour
     //Wait for reoading excutes
     private float waitToLoad;
 
-    Button replayButton;
-
     public void reloadScence()
     {
-        SceneManager
-            .LoadScene(SceneManager.GetActiveScene().name,
-            LoadSceneMode.Single);
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
     }
 
     public void storeOpening()

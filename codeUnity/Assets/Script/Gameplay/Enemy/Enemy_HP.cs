@@ -40,9 +40,17 @@ public class Enemy_HP : MonoBehaviour
                         HealthBar.transform.transform.localScale.y,
                         HealthBar.transform.transform.localScale.z);
                 Destroy(gameObject);
-                //gamePlay.GetComponent<Game_Start>().score += 100f;
-                gamePlay.GetComponent<Game_Start>().UpdateScore(10f);
-                gamePlay.GetComponent<Game_Start>().UpdateEnemyNumber(1);
+                if (gamePlay.GetComponent<Game_Start>() != null)
+                {
+                    gamePlay.GetComponent<Game_Start>().UpdateScore(10f);
+                    gamePlay.GetComponent<Game_Start>().UpdateEnemyNumber(1);
+                }
+                else
+                {
+                    gamePlay.GetComponent<Game_Tutorial>().UpdateScore(10f);
+                    gamePlay.GetComponent<Game_Tutorial>().UpdateEnemyNumber(1);
+                }
+
             }
         }
     }
