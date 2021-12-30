@@ -18,10 +18,10 @@ public class Player_HP : MonoBehaviour
     public bool isDead = false;
 
     //Cureent Health Point
-    public float currentHP;
+    private float currentHP;
 
     //Max Health Point
-    public float maxHP;
+    private float maxHP;
 
     public Slider HealthBar;
 
@@ -38,7 +38,16 @@ public class Player_HP : MonoBehaviour
         if (isDead)
         {
             gameObject.SetActive(false);
-            canvas.GetComponent<Game_Start>().GameOVer();
+            if (canvas.GetComponent<Game_Start>() != null)
+            {
+                canvas.GetComponent<Game_Start>().GameOVer();
+
+            }
+            else
+            {
+                canvas.GetComponent<Game_Tutorial>().GameOVer();
+            }
+
         }
     }
 
@@ -47,8 +56,17 @@ public class Player_HP : MonoBehaviour
         HealthBar.maxValue = maxHP;
         HealthBar.value = currentHP;
         HPText.text = currentHP + " / " + maxHP;
+        /*
+            Player Get Hurt then stop the player movement
+        */
+        GetComponent<Player_Movement>().isMoving = false;
+        Invoke("allowMoving", 0.5f);
     }
 
+    void allowMoving()
+    {
+        GetComponent<Player_Movement>().isMoving = true;
+    }
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.tag == "Enemy")
@@ -60,10 +78,6 @@ public class Player_HP : MonoBehaviour
             {
                 Reloading = true;
                 isDead = true;
-                // //Make object comes invisible
-                // Renderer render = gameObject.GetComponentInChildren<Renderer>();
-                // render.enabled = false;
-                // other.gameObject.GetComponent<Enemy>().comeBackPos();
             }
         }
     }

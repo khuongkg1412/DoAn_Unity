@@ -6,18 +6,16 @@ using UnityEngine.UI;
 
 public class Game_Start : MonoBehaviour
 {
-    public float score;
+    private float score;
 
-    public bool isVictory = false , isGameOver;
+    public bool isVictory = false, isGameOver;
 
     public GameObject Player;
 
     public GameObject pannelGameover;
 
     [SerializeField]
-    private TextMeshProUGUI
-
-            scoreResult,
+    private TextMeshProUGUI scoreResult,
             enemyKillResult,
             citizenSaveResult,
             gameplayResult,
@@ -25,137 +23,147 @@ public class Game_Start : MonoBehaviour
             enemyCount,
             citizenCount;
 
-    float timeRemaining = 180;
+    public float timeRemaining = 180;
 
-    public bool timerIsRunning = false;
+    private bool timerIsRunning = false;
 
     public Text timeText;
 
-    public Camera cameraMain;
+    private Camera cameraMain;
 
-    private float
-
-            enemyNumber,
+    private float enemyNumber,
             enemyNumberStart,
             citizenSaveNumber,
             citizenNumberStart;
 
     private void Start()
     {
+        Time.timeScale = 1f;
+        //Convert to landscape mode in gameplay
+        Screen.orientation = ScreenOrientation.Landscape;
+
         // Starts the timer automatically
         timerIsRunning = true;
+        /*
+        Set and get number citizen follow by spawning
+        */
         citizenSaveNumber = 0;
-        citizenNumberStart =
-            GameObject
-                .Find("Spawning Citizen")
-                .GetComponent<Spawn_Enemy>()
-                .numberOfEnemies + 1;
-        enemyNumberStart =
-            GameObject
-                .Find("Spawning Enemy")
-                .GetComponent<Spawn_Enemy>()
-                .numberOfEnemies + 1;
-        enemyNumber = enemyNumberStart;
+        citizenNumberStart = GameObject.Find("Spawning Citizen").GetComponent<Spawn_Enemy>().numberOfEnemies + 1;
+        enemyNumberStart = GameObject.Find("Spawning Enemy").GetComponent<Spawn_Enemy>().numberOfEnemies + 1;
+        enemyNumber = 0;
+        //Update citizen in Quest pannel
         UpdateCitizen(0);
         UpdateEnemyNumber(0);
-
+        //Set value for two variable which decide game end and victory
         isVictory = false;
         isGameOver = false;
     }
 
-    public void GameOVer()
-    {
-        pannelGameover.SetActive(true);
-        Player.GetComponent<Player_HP>().isDead = true;
-        gameObject.GetComponent<ChangeScence>().gameResultOn();
-    }
-
-    public void UpdateScore(float scorePlus)
-    {
-        score += scorePlus;
-        scoreRunning.text = "Score: " + score.ToString();
-        scoreResult.text = score.ToString();
-    }
-
-    public void UpdateEnemyNumber(float number)
-    {
-        enemyNumber -= number;
-        enemyCount.text =
-            "Enemy: " + enemyNumber.ToString() + "/" + enemyNumberStart;
-
-        if (enemyNumber == 0)
-        {
-            enemyCount.color = new Color(0, 1, 0);
-        }
-        else
-        {
-            enemyCount.color = new Color(1, 0, 0);
-        }
-    }
-
-    public void UpdateCitizen(float number)
-    {
-        citizenSaveNumber += number;
-        citizenCount.text =
-            "Citizen: " + citizenSaveNumber.ToString() + "/" + citizenNumberStart;
-        if (citizenSaveNumber == citizenNumberStart && isVictory)
-        {
-            citizenCount.color = new Color(0, 1, 0);
-        }
-        else
-        {
-            citizenCount.color = new Color(1, 0, 0);
-        }
-    }
-
     void Update()
     {
+        //Check condition victory in every frame
         ConditionToVictory();
-        if ( timerIsRunning && isGameOver != true)
+        //Continute runing time whilke game is not oer
+        if (timerIsRunning && isGameOver != true)
         {
+            //Time is not end
             if (timeRemaining > 0)
             {
                 timeRemaining -= Time.deltaTime;
-                DisplayTime (timeRemaining);
+                DisplayTime(timeRemaining);
             }
             else
             {
+                //Time's up
                 timeRemaining = 0;
                 timerIsRunning = false;
             }
         }
         else
         {
+            //Game end. Display result and end the gameplay
             DisplayResultPannel();
-            GameOVer();   
+            GameOVer();
         }
     }
-
-    void DisplayResultPannel(){
-        if(isVictory){
+    //Method Game over
+    public void GameOVer()
+    {
+        //Player dead and set active for pannel result
+        Time.timeScale = 0f;
+        pannelGameover.SetActive(true);
+        Player.GetComponent<Player_HP>().isDead = true;
+    }
+    //Update score
+    public void UpdateScore(float scorePlus)
+    {
+        //Set score
+        score += scorePlus;
+        scoreRunning.text = score.ToString();
+        scoreResult.text = score.ToString();
+    }
+    //Update enemy
+    public void UpdateEnemyNumber(float number)
+    {
+        //Set enemy number
+        enemyNumber += number;
+        enemyCount.text = "Enemy: " + enemyNumber.ToString() + "/" + enemyNumberStart;
+        //Turn green color when completed task
+        if (enemyNumber == 0)
+        {
+            enemyCount.color = new Color(0, 1, 0);
+        }
+    }
+    //Update citizen
+    public void UpdateCitizen(float number)
+    {
+        //Set citizen number
+        citizenSaveNumber += number;
+        citizenCount.text = "Citizen: " + citizenSaveNumber.ToString() + "/" + citizenNumberStart;
+        //Turn green color when completed task
+        if (citizenSaveNumber == citizenNumberStart && isVictory)
+        {
+            citizenCount.color = new Color(0, 1, 0);
+        }
+    }
+    //Display resukt
+    void DisplayResultPannel()
+    {
+        //Check victory
+        if (isVictory)
+        {
             gameplayResult.text = "VICTORY";
-        }else{
+        }
+        else
+        {
             gameplayResult.text = "GAMEOVER";
         }
-        enemyKillResult.text = (enemyNumberStart - enemyNumber).ToString();
-        citizenSaveResult.text =  citizenSaveNumber.ToString();
+        enemyKillResult.text = enemyNumber.ToString();
+        citizenSaveResult.text = citizenSaveNumber.ToString();
     }
+    //Condition to victory
     void ConditionToVictory()
     {
-        if (enemyNumber == 0 || citizenSaveNumber == citizenNumberStart)
+        //Check condition victory
+        if (enemyNumber == enemyNumberStart || citizenSaveNumber == citizenNumberStart)
         {
             isGameOver = true;
             isVictory = true;
         }
     }
-
+    //Method display time
     void DisplayTime(float timeToDisplay)
-    {
+    {   //Increase time by 1
         timeToDisplay += 1;
-
+        //Convert to minut and second
         float minutes = Mathf.FloorToInt(timeToDisplay / 60);
         float seconds = Mathf.FloorToInt(timeToDisplay % 60);
-
+        //Set to text
         timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+    //Return score public method
+    public float returnScore()
+    {
+        return score;
     }
 }

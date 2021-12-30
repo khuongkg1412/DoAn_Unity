@@ -19,7 +19,7 @@ public class Enemy_HP : MonoBehaviour
     {
         maxHP = 30f;
         currentHP = maxHP;
-        maxHPsize= HealthBar.transform.localScale.x;
+        maxHPsize = HealthBar.transform.localScale.x;
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -29,11 +29,8 @@ public class Enemy_HP : MonoBehaviour
             currentHP -= other.gameObject.GetComponent<Bullet>().dameGiven;
             if (currentHP > 0)
             {
-                
-                HealthBar.transform.localScale =
-                    new Vector3((currentHP/ maxHP)* maxHPsize,
-                        HealthBar.transform.transform.localScale.y,
-                        HealthBar.transform.transform.localScale.z);
+
+                HealthBar.transform.localScale = new Vector3((currentHP / maxHP) * maxHPsize, HealthBar.transform.transform.localScale.y, HealthBar.transform.transform.localScale.z);
             }
             else
             {
@@ -42,10 +39,18 @@ public class Enemy_HP : MonoBehaviour
                     new Vector3(0,
                         HealthBar.transform.transform.localScale.y,
                         HealthBar.transform.transform.localScale.z);
-                Destroy (gameObject);
-                //gamePlay.GetComponent<Game_Start>().score += 100f;
-                gamePlay.GetComponent<Game_Start>().UpdateScore(10f);
-                gamePlay.GetComponent<Game_Start>().UpdateEnemyNumber(1);
+                Destroy(gameObject);
+                if (gamePlay.GetComponent<Game_Start>() != null)
+                {
+                    gamePlay.GetComponent<Game_Start>().UpdateScore(10f);
+                    gamePlay.GetComponent<Game_Start>().UpdateEnemyNumber(1);
+                }
+                else
+                {
+                    gamePlay.GetComponent<Game_Tutorial>().UpdateScore(10f);
+                    gamePlay.GetComponent<Game_Tutorial>().UpdateEnemyNumber(1);
+                }
+
             }
         }
     }

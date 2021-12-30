@@ -9,20 +9,10 @@ public class ChangeScence : MonoBehaviour
     //Wait for reoading excutes
     private float waitToLoad;
 
-    Button replayButton;
-
-
-    public void gameResultOn()
+    public void reloadScence()
     {
-        replayButton = GameObject.Find("Replay_Button").GetComponent<Button>();
-        replayButton.onClick.AddListener (reloadScence);
-    }
-
-    void reloadScence()
-    {
-        SceneManager
-            .LoadScene(SceneManager.GetActiveScene().name,
-            LoadSceneMode.Single);
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
     }
 
     public void storeOpening()
@@ -69,6 +59,6 @@ public class ChangeScence : MonoBehaviour
     public void gameplayOpening()
     {
         Screen.orientation = ScreenOrientation.Landscape;
-        SceneManager.LoadScene("gameplay");
+        SceneManager.LoadScene("Tutorial");
     }
 }
