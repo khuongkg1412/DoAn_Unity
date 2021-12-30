@@ -4641,7 +4641,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ed6472e86706314f83718ff277dc57e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 0
   isVictory: 0
   isGameOver: 0
   Player: {fileID: 571074373}
@@ -4653,9 +4652,8 @@ MonoBehaviour:
   scoreRunning: {fileID: 542576247}
   enemyCount: {fileID: 1540450786}
   citizenCount: {fileID: 579710479}
-  timerIsRunning: 0
+  timeRemaining: 180
   timeText: {fileID: 620428237}
-  cameraMain: {fileID: 1299645170}
 --- !u!114 &881436832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11217,19 +11215,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11d17649475233545a81a53d89d7a190, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pannelArray:
-  - {fileID: 1584389241}
-  - {fileID: 1272186471}
-  - {fileID: 218754232}
-  - {fileID: 712714933}
-  - {fileID: 0}
-  - {fileID: 1582044819}
+  pointerTutorial: []
   enemy1: {fileID: 946611837}
   enemy2: {fileID: 0}
   citizen: {fileID: 1172515324}
   conditionPos: {fileID: 306270544}
   Player: {fileID: 571074373}
-  text1: {fileID: 209953405}
+  tutorialPopup: {fileID: 0}
+  textContent: {fileID: 0}
 --- !u!1 &1715848578
 GameObject:
   m_ObjectHideFlags: 0

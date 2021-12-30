@@ -22,7 +22,8 @@ public class Store_DataHadle : MonoBehaviour
     //Item Daily Data
     ItemStruct
         item1 =
-            new ItemStruct {
+            new ItemStruct
+            {
                 paymethod_Item = 1,
                 description_Item = "Heal Pills is name of Item",
                 image_Item = "Item_Image/HealPills",
@@ -31,7 +32,8 @@ public class Store_DataHadle : MonoBehaviour
                 rate_Item = 1,
                 type_Item = "Medicine_DailyItem",
                 numeral_Item =
-                    new NumeralStruct {
+                    new NumeralStruct
+                    {
                         ATK_Numeral = 0,
                         DEF_Numeral = 0,
                         HP_Numeral = 10,
@@ -41,7 +43,8 @@ public class Store_DataHadle : MonoBehaviour
 
     ItemStruct
         item2 =
-            new ItemStruct {
+            new ItemStruct
+            {
                 paymethod_Item = 0,
                 description_Item = "Energy Pills is name of Item",
                 image_Item = "Item_Image/EnergyPills",
@@ -50,7 +53,8 @@ public class Store_DataHadle : MonoBehaviour
                 rate_Item = 2,
                 type_Item = "Medicine_DailyItem",
                 numeral_Item =
-                    new NumeralStruct {
+                    new NumeralStruct
+                    {
                         ATK_Numeral = 0,
                         DEF_Numeral = 0,
                         HP_Numeral = 20,
@@ -60,7 +64,8 @@ public class Store_DataHadle : MonoBehaviour
 
     ItemStruct
         item3 =
-            new ItemStruct {
+            new ItemStruct
+            {
                 paymethod_Item = 0,
                 description_Item = "Pain Killers is name of Item",
                 image_Item = "Item_Image/PainKiller",
@@ -69,7 +74,8 @@ public class Store_DataHadle : MonoBehaviour
                 rate_Item = 2,
                 type_Item = "Medicine_DailyItem",
                 numeral_Item =
-                    new NumeralStruct {
+                    new NumeralStruct
+                    {
                         ATK_Numeral = 0,
                         DEF_Numeral = 0,
                         HP_Numeral = 30,
@@ -79,7 +85,8 @@ public class Store_DataHadle : MonoBehaviour
 
     ItemStruct
         item4 =
-            new ItemStruct {
+            new ItemStruct
+            {
                 paymethod_Item = 0,
                 description_Item = "Yellow Tube is name of Item",
                 image_Item = "Item_Image/blood-test (1)",
@@ -88,7 +95,8 @@ public class Store_DataHadle : MonoBehaviour
                 rate_Item = 2,
                 type_Item = "Medicine_WeeklyItem",
                 numeral_Item =
-                    new NumeralStruct {
+                    new NumeralStruct
+                    {
                         ATK_Numeral = 0,
                         DEF_Numeral = 0,
                         HP_Numeral = 30,
@@ -98,7 +106,8 @@ public class Store_DataHadle : MonoBehaviour
 
     ItemStruct
         item5 =
-            new ItemStruct {
+            new ItemStruct
+            {
                 paymethod_Item = 0,
                 description_Item = "Test Kit is name of Item",
                 image_Item = "Item_Image/image 58",
@@ -107,7 +116,8 @@ public class Store_DataHadle : MonoBehaviour
                 rate_Item = 2,
                 type_Item = "Medicine_WeeklyItem",
                 numeral_Item =
-                    new NumeralStruct {
+                    new NumeralStruct
+                    {
                         ATK_Numeral = 0,
                         DEF_Numeral = 0,
                         HP_Numeral = 30,
@@ -117,7 +127,8 @@ public class Store_DataHadle : MonoBehaviour
 
     ItemStruct
         item6 =
-            new ItemStruct {
+            new ItemStruct
+            {
                 paymethod_Item = 0,
                 description_Item = "Test Sample is name of Item",
                 image_Item = "Item_Image/blood-test",
@@ -126,7 +137,8 @@ public class Store_DataHadle : MonoBehaviour
                 rate_Item = 2,
                 type_Item = "Medicine_WeeklyItem",
                 numeral_Item =
-                    new NumeralStruct {
+                    new NumeralStruct
+                    {
                         ATK_Numeral = 0,
                         DEF_Numeral = 0,
                         HP_Numeral = 30,
@@ -136,7 +148,8 @@ public class Store_DataHadle : MonoBehaviour
 
     ItemStruct
         item7 =
-            new ItemStruct {
+            new ItemStruct
+            {
                 paymethod_Item = 0,
                 description_Item = "Common Chest is name of Item",
                 image_Item = "Item_Image/KitCommon",
@@ -145,7 +158,8 @@ public class Store_DataHadle : MonoBehaviour
                 rate_Item = 2,
                 type_Item = "Chest",
                 numeral_Item =
-                    new NumeralStruct {
+                    new NumeralStruct
+                    {
                         ATK_Numeral = 0,
                         DEF_Numeral = 0,
                         HP_Numeral = 0,
@@ -155,7 +169,8 @@ public class Store_DataHadle : MonoBehaviour
 
     ItemStruct
         item8 =
-            new ItemStruct {
+            new ItemStruct
+            {
                 paymethod_Item = 0,
                 description_Item = "Rare Chest is name of Item",
                 image_Item = "Item_Image/KitRare",
@@ -164,7 +179,8 @@ public class Store_DataHadle : MonoBehaviour
                 rate_Item = 2,
                 type_Item = "Chest",
                 numeral_Item =
-                    new NumeralStruct {
+                    new NumeralStruct
+                    {
                         ATK_Numeral = 0,
                         DEF_Numeral = 0,
                         HP_Numeral = 0,
@@ -201,21 +217,21 @@ public class Store_DataHadle : MonoBehaviour
 
         //Get Collection And Document
         DocumentReference doc = db.Collection("Item").Document();
-        doc.SetAsync (item1);
+        doc.SetAsync(item1);
         doc = db.Collection("Item").Document();
-        doc.SetAsync (item2);
+        doc.SetAsync(item2);
         doc = db.Collection("Item").Document();
-        doc.SetAsync (item3);
+        doc.SetAsync(item3);
         doc = db.Collection("Item").Document();
-        doc.SetAsync (item4);
+        doc.SetAsync(item4);
         doc = db.Collection("Item").Document();
-        doc.SetAsync (item5);
+        doc.SetAsync(item5);
         doc = db.Collection("Item").Document();
-        doc.SetAsync (item6);
+        doc.SetAsync(item6);
         doc = db.Collection("Item").Document();
-        doc.SetAsync (item7);
+        doc.SetAsync(item7);
         doc = db.Collection("Item").Document();
-        doc.SetAsync (item8);
+        doc.SetAsync(item8);
     }
 
     IEnumerator GetDataDaily()
@@ -242,7 +258,7 @@ public class Store_DataHadle : MonoBehaviour
                 {
                     ItemStruct objectData =
                         documentSnapshot.ConvertTo<ItemStruct>();
-                    listDataItemDaily.Add (objectData);
+                    listDataItemDaily.Add(objectData);
                 }
                 isDaily = true;
             });
@@ -273,7 +289,7 @@ public class Store_DataHadle : MonoBehaviour
                 {
                     ItemStruct objectData =
                         documentSnapshot.ConvertTo<ItemStruct>();
-                    listDataItemWeekly.Add (objectData);
+                    listDataItemWeekly.Add(objectData);
                 }
                 isWeekly = true;
             });
@@ -302,7 +318,7 @@ public class Store_DataHadle : MonoBehaviour
                 {
                     ItemStruct objectData =
                         documentSnapshot.ConvertTo<ItemStruct>();
-                    listDataItemChest.Add (objectData);
+                    listDataItemChest.Add(objectData);
                 }
                 isChest = true;
             });
