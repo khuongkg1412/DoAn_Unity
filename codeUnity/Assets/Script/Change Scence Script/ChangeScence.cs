@@ -87,7 +87,6 @@ public class ChangeScence : MonoBehaviour
             DocumentSnapshot snapshot = task.Result;
             if (snapshot.Exists)
             {
-                Debug.Log("Dang check");
                 playerStruct player = snapshot.ConvertTo<playerStruct>();
                 Coin.text = "" + player.coin_Player;
                 Diamond.text = "" + player.diamond_Player;
@@ -101,7 +100,6 @@ public class ChangeScence : MonoBehaviour
 
     IEnumerator GetImage(string dataImage)
     {
-        Debug.Log("Image Downloading");
 
         // Get a reference to the storage service, using the default Firebase App
         FirebaseStorage storage = FirebaseStorage.DefaultInstance;

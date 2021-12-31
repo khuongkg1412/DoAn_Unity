@@ -99,8 +99,6 @@ public class DataHandle : MonoBehaviour
 
     private void AddDataPlayer()
     {
-
-
         //FireBase Object
         FirebaseFirestore db;
 
