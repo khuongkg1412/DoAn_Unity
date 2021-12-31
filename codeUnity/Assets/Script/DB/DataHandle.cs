@@ -94,7 +94,7 @@ public class DataHandle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        loadDataPlayer();
     }
 
     private void AddDataPlayer()
@@ -156,17 +156,32 @@ public class DataHandle : MonoBehaviour
 
         //db connection
         db = FirebaseFirestore.DefaultInstance;
-        Query itemDailyQuery = db.Collection("KhongCoTonTai");
-        itemDailyQuery.GetSnapshotAsync().ContinueWithOnMainThread(task =>
+        // Query itemDailyQuery = db.Collection("Player").Document("nZ1TJd9hBrL6Kb9MEQol");
+        DocumentReference doc = db.Collection("Player").Document("nZ1TJd9hBrL6Kb9MEQol");
+        doc.GetSnapshotAsync().ContinueWithOnMainThread(task =>
             {
-                QuerySnapshot allItemQuerySnapshot = task.Result;
-                foreach (DocumentSnapshot
-                    documentSnapshot
-                    in
-                    allItemQuerySnapshot.Documents
-                )
+                var snapshot = task.Result;
+                if (snapshot.Exists)
                 {
+                    PlayerStruct playerStruct = snapshot.ConvertTo<PlayerStruct>();
+                }
+            });
+    }
+    private void loadDataAchiement()
+    {
+        //FireBase Object
+        FirebaseFirestore db;
 
+        //db connection
+        db = FirebaseFirestore.DefaultInstance;
+        // Query itemDailyQuery = db.Collection("Player").Document("nZ1TJd9hBrL6Kb9MEQol");
+        DocumentReference doc = db.Collection("Player").Document("nZ1TJd9hBrL6Kb9MEQol");
+        doc.GetSnapshotAsync().ContinueWithOnMainThread(task =>
+            {
+                var snapshot = task.Result;
+                if (snapshot.Exists)
+                {
+                    PlayerStruct playerStruct = snapshot.ConvertTo<PlayerStruct>();
                 }
             });
     }
