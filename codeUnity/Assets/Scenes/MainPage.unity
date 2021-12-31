@@ -2896,6 +2896,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 180b1beb2e998c2449b881406eff6b85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Coin: {fileID: 419534732}
+  Diamond: {fileID: 230302782}
+  Life: {fileID: 930264375}
+  Name: {fileID: 794386490}
+  avatar: {fileID: 298995280}
 --- !u!1 &1956427812
 GameObject:
   m_ObjectHideFlags: 0

@@ -46,11 +46,11 @@ public class friendHandler : MonoBehaviour
     {
         StartCoroutine(GetFriendData());
         yield return new WaitUntil(() => isRun == true);
-        Debug.Log("Database Reading  "+ listData[0].avatarUrl);
+        Debug.Log("Database Reading  "+ listData[0].avatar_Player);
 
         foreach (playerStruct player in listData)
         {
-            StartCoroutine(GetImage(player.avatarUrl, player.playerName, player.level));
+            StartCoroutine(GetImage(player.avatar_Player, player.name_Player, player.level_Player));
         }
         yield return null;
     }
@@ -75,7 +75,7 @@ public class friendHandler : MonoBehaviour
                 )
                 {
                     objectData = documentSnapshot.ConvertTo<playerStruct>();
-                    Debug.Log("Database Reading 1 " + objectData.avatarUrl);
+                    Debug.Log("Database Reading 1 " + objectData.avatar_Player);
                     listData.Add(objectData);
                 }
                 isRun = true;

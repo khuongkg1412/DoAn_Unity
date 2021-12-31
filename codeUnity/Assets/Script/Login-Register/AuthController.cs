@@ -7,167 +7,167 @@ using UnityEngine.UI;
 
 public class AuthController : MonoBehaviour
 {
-    public Text
+    public InputField emailLogin, passwordLogin, emailReg, passwordReg, confirmPasswordReg;
 
-            emailInput,
-            passwordInput,
-            debugMessage;
+    public Text debugMessage;
+    public static string ID;
+    bool isDone;
 
-    bool isDone = false;
-
-    public void goToLoginPage()
+    IEnumerator LoginbyEmailandPass(string email, string pass)
     {
-        SceneManager.LoadScene(10);
-    }
-
-    public void goToRegisterPage()
-    {
-        SceneManager.LoadScene(11);
-    }
-
-    public void goToMainPage()
-    {
-        SceneManager.LoadScene(1);
-    }
-
-    IEnumerator LoginEmail()
-    {
-        Debug
-            .Log("Logining. Email: " +
-            emailInput.text +
-            ", Password: " +
-            passwordInput.text);
-        FirebaseAuth
-            .DefaultInstance
-            .SignInWithEmailAndPasswordAsync(emailInput.text,
-            passwordInput.text)
-            .ContinueWith((
-            task =>
+        isDone = false;
+        Firebase.Auth.FirebaseAuth auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
+        auth.SignInWithEmailAndPasswordAsync(email, pass).ContinueWith(task =>
+        {
+            if (task.IsCanceled)
             {
-                Debug
-                    .Log("Start Login: Email: " +
-                    emailInput.text +
-                    ", Password: " +
-                    passwordInput.text);
-                if (task.IsCanceled)
-                {
-                    Firebase.FirebaseException e =
-                        task.Exception.Flatten().InnerExceptions[0] as
-                        Firebase.FirebaseException;
-
-                    GetErrorMessage((AuthError) e.ErrorCode);
-                    return;
-                }
-
-                if (task.IsFaulted)
-                {
-                    Debug.Log("Login failed");
-                    Firebase.FirebaseException e =
-                        task.Exception.Flatten().InnerExceptions[0] as
-                        Firebase.FirebaseException;
-                    GetErrorMessage((AuthError) e.ErrorCode);
-                    return;
-                }
-
-                if (task.IsCompleted)
-                {
-                    print("Login Completed!");
-                    isDone = true;
-                }
+                Debug.LogError("SignInWithEmailAndPasswordAsync was canceled.");
+                return;
             }
-            ));
+            if (task.IsFaulted)
+            {
+                Debug.LogError("SignInWithEmailAndPasswordAsync encountered an error: " + task.Exception);
+                return;
+            }
+
+            Firebase.Auth.FirebaseUser newUser = task.Result;
+            Debug.LogFormat("User signed in successfully: {0} ({1})", newUser.DisplayName, newUser.UserId);
+            isDone = true;
+            ID = auth.CurrentUser.UserId;
+        });
         yield return new WaitUntil(() => isDone == true);
-        goToMainPage();
+        SceneManager.LoadScene("MainPage");
+    }
+
+    IEnumerator RegisterbyEmailandPass(string email, string pass)
+    {
+        isDone = false;
+        Firebase.Auth.FirebaseAuth auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
+        auth.CreateUserWithEmailAndPasswordAsync(email, pass).ContinueWith(task =>
+        {
+            if (task.IsCanceled)
+            {
+                Firebase.FirebaseException e = task.Exception.Flatten().InnerExceptions[0] as Firebase.FirebaseException;
+
+                GetErrorMessage((AuthError)e.ErrorCode);
+                return;
+            }
+
+            if (task.IsFaulted)
+            {
+                Firebase.FirebaseException e = task.Exception.Flatten().InnerExceptions[0] as Firebase.FirebaseException;
+
+                GetErrorMessage((AuthError)e.ErrorCode);
+                return;
+            }
+
+            if (task.IsCompleted)
+            {
+                print("Registration Completed!");
+                ID = auth.CurrentUser.UserId;
+                isDone = true;
+            }
+        });
+
         yield return null;
     }
 
     public void Login()
     {
-        StartCoroutine("LoginEmail");
-    }
+        string email = emailLogin.text.Trim();
+        string pass = passwordLogin.text.Trim();
 
-    public void Login_Anonymous()
-    {
+        if (Validation.checkNullData(new string[] { email, pass }))
+        {
+            if (email.Length == 0)
+            {
+                debugMessage.text = "Email cannot be empty! Please input!";
+            }
+            if (pass.Length == 0)
+            {
+                debugMessage.text = "Password cannot be empty! Please input!";
+            }
+        }
+        else
+        {
+            StartCoroutine(LoginbyEmailandPass(email, pass));
+        }
     }
 
     public void Register()
     {
-        Debug
-            .Log("Registering: Email: " +
-            emailInput.text +
-            ", Password: " +
-            passwordInput.text);
-        if (emailInput.text.Equals("") && passwordInput.Equals(""))
+        string email = emailReg.text.Trim();
+        string password = passwordReg.text.Trim();
+        string confirmPassword = confirmPasswordReg.text.Trim();
+
+        if (Validation.checkNullData(new string[] { email, password, confirmPassword }))
         {
-            print("Please enter a valid email and password!");
-            return;
-        }
 
-        FirebaseAuth
-            .DefaultInstance
-            .CreateUserWithEmailAndPasswordAsync(emailInput.text,
-            passwordInput.text)
-            .ContinueWith((
-            task =>
+            if (email.Length == 0)
             {
-                Debug
-                    .Log("Start Register: Email: " +
-                    emailInput.text +
-                    ", Password: " +
-                    passwordInput.text);
-                if (task.IsCanceled)
-                {
-                    Firebase.FirebaseException e =
-                        task.Exception.Flatten().InnerExceptions[0] as
-                        Firebase.FirebaseException;
-
-                    GetErrorMessage((AuthError) e.ErrorCode);
-                    return;
-                }
-
-                if (task.IsFaulted)
-                {
-                    Firebase.FirebaseException e =
-                        task.Exception.Flatten().InnerExceptions[0] as
-                        Firebase.FirebaseException;
-                    GetErrorMessage((AuthError) e.ErrorCode);
-                    return;
-                }
-
-                if (task.IsCompleted)
-                {
-                    print("Registration Completed!");
-                }
+                Debug.Log("Email cannot be empty! Please input!");
             }
-            ));
-        goToMainPage();
+
+            if (password.Length == 0)
+            {
+                Debug.Log("Password cannot be empty! Please input!");
+            }
+
+            if (confirmPassword.Length == 0)
+            {
+                Debug.Log("Confirm password cannot be empty! Please input!");
+            }
+        }
+        else if (!Validation.checkRegisterFormat(email, password, confirmPassword))
+        {
+
+            if (!Validation.checkEmailFormat(email))
+            {
+                Debug.Log("Email must be in correct format. (Ex: thanh@gmail.com)");
+            }
+
+            if (!Validation.checkStrongPassword(password))
+            {
+                Debug.Log("Your password is not strong enough. It must contain at least 1 uppercase, 1 lowercase letter, 1 digit, and 1 special character.");
+            }
+
+            if (!Validation.checkConfirmPassword(password, confirmPassword))
+            {
+                Debug.Log("The confirm password did not match.");
+            }
+
+        }
+        else StartCoroutine(changeSnece(email, password));
     }
 
-    public void Logout()
+    IEnumerator changeSnece(string email, string password)
     {
+        StartCoroutine(RegisterbyEmailandPass(email, password));
+        yield return new WaitUntil(() => isDone == true);
+        SceneManager.LoadScene("Register by Email");
+        yield return null;
     }
+
 
     void GetErrorMessage(AuthError errCode)
     {
         string msg = "";
         msg = errCode.ToString();
 
-        // switch(errCode){
-        //     case AuthError.AccountExistsWithDifferentCredentials:
-
-        //     break;
-        //     case AuthError.MissingPassword:
-        //     break;
-        //     case AuthError.WrongPassword:
-        //     break;
-        //     case AuthError.InvalidEmail:
-        //     break;
-        //     case AuthError.UserDisabled:
-        //     break;
-        //     case AuthError.MissingEmail:
-        //     break;
-        // }
+        switch (errCode)
+        {
+            case AuthError.MissingPassword:
+                break;
+            case AuthError.WrongPassword:
+                break;
+            case AuthError.InvalidEmail:
+                break;
+            case AuthError.UserDisabled:
+                break;
+            case AuthError.MissingEmail:
+                break;
+        }
         debugMessage.text = msg;
-        print (msg);
+        print(msg);
     }
 }
