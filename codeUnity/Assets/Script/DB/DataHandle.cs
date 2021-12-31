@@ -149,19 +149,16 @@ public class DataHandle : MonoBehaviour
         db = FirebaseFirestore.DefaultInstance;
         db.Collection("SystemNotification").AddAsync(systemNotification1);
     }
-    private void loadData()
+    private void loadDataPlayer()
     {
         //FireBase Object
         FirebaseFirestore db;
 
         //db connection
         db = FirebaseFirestore.DefaultInstance;
-        Query itemDailyQuery =
-            db.Collection("KhongCoTonTai");
-        itemDailyQuery
-            .GetSnapshotAsync().ContinueWithOnMainThread(task =>
+        Query itemDailyQuery = db.Collection("KhongCoTonTai");
+        itemDailyQuery.GetSnapshotAsync().ContinueWithOnMainThread(task =>
             {
-                Debug.Log("Task: " + task.Result);
                 QuerySnapshot allItemQuerySnapshot = task.Result;
                 foreach (DocumentSnapshot
                     documentSnapshot
