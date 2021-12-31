@@ -87,11 +87,17 @@ public class ChangeScence : MonoBehaviour
             DocumentSnapshot snapshot = task.Result;
             if (snapshot.Exists)
             {
-                playerStruct player = snapshot.ConvertTo<playerStruct>();
+                PlayerStruct player = snapshot.ConvertTo<PlayerStruct>();
                 Coin.text = "" + player.coin_Player;
                 Diamond.text = "" + player.diamond_Player;
                 Life.text = "" + player.energy_Player;
                 Name.text = "" + player.name_Player;
+                Debug.Log("Data Save");
+                //Write File
+                SaveSystem.SaveDataPlayer(player);
+                //Load File
+                PlayerStruct data = SaveSystem.LoadDataPlayer();
+                Debug.Log("Save File :" + data.name_Player);
                 StartCoroutine(GetImage(player.avatar_Player));
             }
         });

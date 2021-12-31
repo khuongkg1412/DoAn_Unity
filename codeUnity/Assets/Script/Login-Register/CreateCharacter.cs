@@ -38,17 +38,25 @@ public class CreateCharacter : MonoBehaviour
         if (IDPlayer == null) IDPlayer = FacebookManager.ID;
         Debug.Log(IDPlayer);
         DocumentReference docRef = db.Collection("Player").Document(IDPlayer);
-        playerStruct newPlayer = new playerStruct
+        PlayerStruct newPlayer = new PlayerStruct()
         {
             avatar_Player = "",
-            coin_Player = 50,
-            diamond_Player = 10,
-            energy_Player = 10,
-            gender_Player = male,
+            coin_Player = 0,
+            diamond_Player = 0,
+            energy_Player = 5,
+            gender_Player = 0,
             level_Player = 0,
-            name_Player = characterName.text,
+            name_Player = "User02",
             stage_Player = 0,
-            xp_Player = 0
+            xp_Player = 0,
+            numeral_Player =
+                     new NumeralStruct
+                     {
+                         ATK_Numeral = 2,
+                         DEF_Numeral = 2,
+                         HP_Numeral = 2,
+                         SPD_Numeral = 2
+                     }
         };
 
         docRef.SetAsync(newPlayer).ContinueWithOnMainThread(task =>

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Firebase.Extensions;
 using Firebase.Firestore;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 public class DataHandle : MonoBehaviour
 {
@@ -35,6 +37,7 @@ public class DataHandle : MonoBehaviour
         title_Notification = "This is title of the first notification",
         type_Notification = 0
     };
+
     PlayerStruct playerExample = new PlayerStruct()
     {
         avatar_Player = "",
@@ -43,9 +46,17 @@ public class DataHandle : MonoBehaviour
         energy_Player = 5,
         gender_Player = 0,
         level_Player = 0,
-        name_Player = "User01",
+        name_Player = "User02",
         stage_Player = 0,
-        xp_Player = 0
+        xp_Player = 0,
+        numeral_Player =
+                    new NumeralStruct
+                    {
+                        ATK_Numeral = 2,
+                        DEF_Numeral = 2,
+                        HP_Numeral = 2,
+                        SPD_Numeral = 2
+                    }
     };
 
     /*
@@ -91,10 +102,18 @@ public class DataHandle : MonoBehaviour
         content_SystemNotification = "Welcome to our new game. Wish you could enjoy happily this.",
         title_SystemNotification = "Welcome to Covid Refuse"
     };
+
+
+    public static List<AchievementStruct> listAchievement = new List<AchievementStruct>();
+    public static PlayerStruct playerData;
     // Start is called before the first frame update
+    PlayerData player = new PlayerData()
+    {
+        name_Player = "Testing Data"
+    };
     void Start()
     {
-        loadDataPlayer();
+
     }
 
     private void AddDataPlayer()
@@ -106,21 +125,22 @@ public class DataHandle : MonoBehaviour
         db = FirebaseFirestore.DefaultInstance;
 
         //Get Collection And Document
-        // DocumentReference doc = db.Collection("Player").Document();
-        // doc.SetAsync(playerExample);
+        DocumentReference doc = db.Collection("Player").Document("7xv28G3fCIf2UoO0rV2SFV5tTr62");
+        doc.SetAsync(playerExample);
 
-        // DocumentReference doc = db.Collection("Player").Document("nZ1TJd9hBrL6Kb9MEQol").Collection("Inventory_Player").Document();
-        // doc.SetAsync(inventory_Player);
-        DocumentReference doc = db.Collection("Player").Document("nZ1TJd9hBrL6Kb9MEQol").Collection("SystemNotification").Document();
+        doc = db.Collection("Player").Document("7xv28G3fCIf2UoO0rV2SFV5tTr62").Collection("Inventory_Player").Document();
+        doc.SetAsync(inventory_Player);
+
+        doc = db.Collection("Player").Document("7xv28G3fCIf2UoO0rV2SFV5tTr62").Collection("SystemNotification").Document();
         doc.SetAsync(systemNotification);
 
-        doc = db.Collection("Player").Document("nZ1TJd9hBrL6Kb9MEQol").Collection("Friend_Player").Document();
+        doc = db.Collection("Player").Document("7xv28G3fCIf2UoO0rV2SFV5tTr62").Collection("Friend_Player").Document();
         doc.SetAsync(friend_Player);
 
-        doc = db.Collection("Player").Document("nZ1TJd9hBrL6Kb9MEQol").Collection("Achievement_Player").Document();
+        doc = db.Collection("Player").Document("7xv28G3fCIf2UoO0rV2SFV5tTr62").Collection("Achievement_Player").Document();
         doc.SetAsync(achievement_Player);
 
-        doc = db.Collection("Player").Document("nZ1TJd9hBrL6Kb9MEQol").Collection("Notification_Player").Document();
+        doc = db.Collection("Player").Document("7xv28G3fCIf2UoO0rV2SFV5tTr62").Collection("Notification_Player").Document();
         doc.SetAsync(notification_Player);
 
     }
@@ -165,22 +185,41 @@ public class DataHandle : MonoBehaviour
                 }
             });
     }
-    private void loadDataAchiement()
+
+
+    private void loadDataAchievement()
     {
         //FireBase Object
         FirebaseFirestore db;
 
         //db connection
         db = FirebaseFirestore.DefaultInstance;
-        // Query itemDailyQuery = db.Collection("Player").Document("nZ1TJd9hBrL6Kb9MEQol");
-        DocumentReference doc = db.Collection("Player").Document("nZ1TJd9hBrL6Kb9MEQol");
-        doc.GetSnapshotAsync().ContinueWithOnMainThread(task =>
+
+        Query allCitiesQuery = db.Collection("Achievement");
+        allCitiesQuery.GetSnapshotAsync().ContinueWithOnMainThread(task =>
+        {
+            QuerySnapshot allCitiesQuerySnapshot = task.Result;
+            foreach (DocumentSnapshot documentSnapshot in allCitiesQuerySnapshot.Documents)
             {
-                var snapshot = task.Result;
-                if (snapshot.Exists)
-                {
-                    PlayerStruct playerStruct = snapshot.ConvertTo<PlayerStruct>();
-                }
-            });
+                AchievementStruct objectData = documentSnapshot.ConvertTo<AchievementStruct>();
+                listAchievement.Add(objectData);
+            }
+            if (task.IsCanceled)
+            {
+                Debug.LogError("loadDataAchievement Error");
+            }
+            else if (task.IsFaulted)
+            {
+                Debug.LogError("loadDataAchievement Faulted");
+            }
+        });
+    }
+
+    void readData()
+    {
+        foreach (var item in listAchievement)
+        {
+            Debug.Log("Test Data" + item.title_Achievement);
+        }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Firebase.Extensions;
 using Firebase.Firestore;
 using UnityEngine;
-
+[System.Serializable]
 [FirestoreData]
 public class NumeralStruct
 {

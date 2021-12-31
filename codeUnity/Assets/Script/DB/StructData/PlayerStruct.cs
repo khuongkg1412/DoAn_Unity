@@ -53,6 +53,7 @@ public class Notification_Player
 
 
 [FirestoreData]
+[System.Serializable]
 public class PlayerStruct
 {
     [FirestoreProperty]
@@ -73,5 +74,7 @@ public class PlayerStruct
     public float stage_Player { get; set; }
     [FirestoreProperty]
     public float xp_Player { get; set; }
+    [FirestoreProperty]
+    public NumeralStruct numeral_Player { get; set; }
 }
 
