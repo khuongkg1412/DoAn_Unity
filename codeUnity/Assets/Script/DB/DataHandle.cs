@@ -6,6 +6,9 @@ using Firebase.Firestore;
 
 public class DataHandle : MonoBehaviour
 {
+    /*
+    Player
+    */
     Inventory_Player inventory_Player = new Inventory_Player()
     {
         quantity = 0
@@ -45,15 +48,58 @@ public class DataHandle : MonoBehaviour
         xp_Player = 0
     };
 
+    /*
+     Achievement
+    */
+    AchievementStruct achievementStruct = new AchievementStruct()
+    {
+        description_Achievement = "Kill totally 10 virus.",
+        goal_Achievement = 10,
+        rewardType_Achievement = 0,
+        reward_Achievement = 100,
+        title_Achievement = "Virus Slayer 1"
+    };
+    AchievementStruct achievementStruct1 = new AchievementStruct()
+    {
+        description_Achievement = "Save 5 citizens.",
+        goal_Achievement = 5,
+        rewardType_Achievement = 1,
+        reward_Achievement = 20,
+        title_Achievement = "Hero Path"
+    };
+    AchievementStruct achievementStruct2 = new AchievementStruct()
+    {
+        description_Achievement = "Kill totally 50 virus.",
+        goal_Achievement = 50,
+        rewardType_Achievement = 0,
+        reward_Achievement = 500,
+        title_Achievement = "Virus Slayer 2"
+    };
+    AchievementStruct achievementStruct3 = new AchievementStruct()
+    {
+        description_Achievement = "Save 10 citizen.",
+        goal_Achievement = 10,
+        rewardType_Achievement = 1,
+        reward_Achievement = 50,
+        title_Achievement = "Hero Journey"
+    };
+    /*
+        SystemNotification data
+    */
+    SystemNotification_Struct systemNotification1 = new SystemNotification_Struct()
+    {
+        content_SystemNotification = "Welcome to our new game. Wish you could enjoy happily this.",
+        title_SystemNotification = "Welcome to Covid Refuse"
+    };
     // Start is called before the first frame update
     void Start()
     {
-        loadData();
+
     }
 
-    private void AddData()
+    private void AddDataPlayer()
     {
-        Debug.Log("Database Added");
+
 
         //FireBase Object
         FirebaseFirestore db;
@@ -80,7 +126,29 @@ public class DataHandle : MonoBehaviour
         doc.SetAsync(notification_Player);
 
     }
+    private void AddDataAchievement()
+    {
 
+        //FireBase Object
+        FirebaseFirestore db;
+
+        //db connection
+        db = FirebaseFirestore.DefaultInstance;
+        db.Collection("Achievement").AddAsync(achievementStruct);
+        db.Collection("Achievement").AddAsync(achievementStruct1);
+        db.Collection("Achievement").AddAsync(achievementStruct2);
+        db.Collection("Achievement").AddAsync(achievementStruct3);
+    }
+    private void AddDataSystemNotification()
+    {
+
+        //FireBase Object
+        FirebaseFirestore db;
+
+        //db connection
+        db = FirebaseFirestore.DefaultInstance;
+        db.Collection("SystemNotification").AddAsync(systemNotification1);
+    }
     private void loadData()
     {
         //FireBase Object
