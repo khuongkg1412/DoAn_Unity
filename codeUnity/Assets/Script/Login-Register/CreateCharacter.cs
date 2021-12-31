@@ -3,18 +3,20 @@ using System.Collections.Generic;
 using Firebase.Extensions;
 using Firebase.Firestore;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class CreateCharacter : MonoBehaviour
 {
-    FirebaseFirestore db= FirebaseFirestore.DefaultInstance;
+    FirebaseFirestore db = FirebaseFirestore.DefaultInstance;
     public InputField characterName;
 
     int male = 1;
 
     public void Create()
     {
-        if(characterName.text.Length == 0){
+        if (characterName.text.Length == 0)
+        {
             Debug.Log("chua co ten");
         }
         else StartCoroutine(createPlayer());
@@ -32,8 +34,10 @@ public class CreateCharacter : MonoBehaviour
 
     IEnumerator createPlayer()
     {
-        Debug.Log(AuthController.ID);
-        DocumentReference docRef = db.Collection("Player").Document(AuthController.ID);
+        string IDPlayer = AuthController.ID;
+        if (IDPlayer == null) IDPlayer = FacebookManager.ID;
+        Debug.Log(IDPlayer);
+        DocumentReference docRef = db.Collection("Player").Document(IDPlayer);
         playerStruct newPlayer = new playerStruct
         {
             avatar_Player = "",
@@ -50,6 +54,7 @@ public class CreateCharacter : MonoBehaviour
         docRef.SetAsync(newPlayer).ContinueWithOnMainThread(task =>
         {
             Debug.Log("Added data to the LA document in the cities collection.");
+            SceneManager.LoadScene("MainPage");
         });
 
         yield return null;

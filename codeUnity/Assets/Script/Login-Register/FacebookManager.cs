@@ -9,10 +9,8 @@ using UnityEngine.SceneManagement;
 
 public class FacebookManager : MonoBehaviour
 {
-
-    bool IsOld = true;
-    bool isDone = false;
-    private void Awake()
+    public static string ID;
+    private void Start()
     {
         if (!FB.IsInitialized)
         {
@@ -62,15 +60,8 @@ public class FacebookManager : MonoBehaviour
         {
             if (FB.IsLoggedIn)
             {
-                // AccessToken class will have session details
                 var aToken = Facebook.Unity.AccessToken.CurrentAccessToken;
-                // Print current access token's User ID
-                Debug.Log("I am here");
-                Debug.Log(aToken.UserId);
-
-                var credential = Firebase.Auth.FacebookAuthProvider.GetCredential(aToken.TokenString);
-                Debug.Log("Taoj credential thanh cong");
-                accessToken(credential);
+                accessToken(aToken);
 
             }
             else
@@ -80,7 +71,7 @@ public class FacebookManager : MonoBehaviour
         }
     }
 
-    public void accessToken(Credential firebaseResult)
+    void accessToken(AccessToken aToken)
     {
         FirebaseAuth auth = FirebaseAuth.DefaultInstance;
         Debug.Log("Auth CurrentUser: " + FirebaseAuth.DefaultInstance.CurrentUser);
@@ -120,9 +111,9 @@ public class FacebookManager : MonoBehaviour
         // }
         else
         {
-            auth.SignInWithCredentialAsync(firebaseResult).ContinueWith(task =>
+            var credential = Firebase.Auth.FacebookAuthProvider.GetCredential(aToken.TokenString);
+            auth.SignInWithCredentialAsync(credential).ContinueWith(task =>
             {
-                Debug.Log("da den day");
                 if (task.IsCanceled || task.IsFaulted)
                 {
                     Debug.LogError("SignInWithCredentialAsync encountered an error: " + task.Exception);
@@ -134,38 +125,32 @@ public class FacebookManager : MonoBehaviour
                     FirebaseUser newUser = task.Result;
                     Debug.LogFormat("Credentials successfully created Firebase user: {0} ({1})", newUser.DisplayName, newUser.UserId);
 
-                    StartCoroutine(changeSnece(newUser.UserId));
+                    checkOldPlayer(newUser.UserId);
                 }
             });
         }
     }
 
-    IEnumerator checkOldPlayer(string IDPlayer)
+    void checkOldPlayer(string IDPlayer)
     {
         FirebaseFirestore db = FirebaseFirestore.DefaultInstance;
-        Debug.Log("Da vo đay");
+
         DocumentReference docRef = db.Collection("Player").Document(IDPlayer);
         docRef.GetSnapshotAsync().ContinueWithOnMainThread(task =>
         {
-            Debug.Log("Dang check");
             DocumentSnapshot snapshot = task.Result;
             if (snapshot.Exists)
             {
-                IsOld = true;isDone = true;
+                SceneManager.LoadScene("MainPage");
+                ID = IDPlayer;
             }
             else
             {
-                IsOld = false;isDone = true;
+                SceneManager.LoadScene("Register by Email");
+                ID = IDPlayer;
             }
-            
+
         });
-        yield return null;
-    }
-    IEnumerator changeSnece(string IDPlayer)
-    {
-        StartCoroutine(checkOldPlayer(IDPlayer));
-        yield return new WaitUntil(() => isDone == true);
-        if (!IsOld) SceneManager.LoadScene("Register by Email");
-        else SceneManager.LoadScene("MainPage");
+
     }
 }

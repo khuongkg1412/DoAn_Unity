@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class AuthController : MonoBehaviour
 {
     public InputField emailLogin, passwordLogin, emailReg, passwordReg, confirmPasswordReg;
-    
+
     public Text debugMessage;
     public static string ID;
     bool isDone;
@@ -21,29 +21,22 @@ public class AuthController : MonoBehaviour
         {
             if (task.IsCanceled)
             {
-                Firebase.FirebaseException e = task.Exception.Flatten().InnerExceptions[0] as Firebase.FirebaseException;
-
-                GetErrorMessage((AuthError)e.ErrorCode);
+                Debug.LogError("SignInWithEmailAndPasswordAsync was canceled.");
                 return;
             }
-
             if (task.IsFaulted)
             {
-                Debug.Log("Login failed");
-                Firebase.FirebaseException e = task.Exception.Flatten().InnerExceptions[0] as Firebase.FirebaseException;
-                GetErrorMessage((AuthError)e.ErrorCode);
+                Debug.LogError("SignInWithEmailAndPasswordAsync encountered an error: " + task.Exception);
                 return;
             }
 
-            if (task.IsCompleted)
-            {
-                print("Login Completed!");
-                isDone = true;
-            }
+            Firebase.Auth.FirebaseUser newUser = task.Result;
+            Debug.LogFormat("User signed in successfully: {0} ({1})", newUser.DisplayName, newUser.UserId);
+            isDone = true;
+            ID = auth.CurrentUser.UserId;
         });
         yield return new WaitUntil(() => isDone == true);
-
-        yield return null;
+        SceneManager.LoadScene("MainPage");
     }
 
     IEnumerator RegisterbyEmailandPass(string email, string pass)
@@ -75,7 +68,7 @@ public class AuthController : MonoBehaviour
                 isDone = true;
             }
         });
-        
+
         yield return null;
     }
 
@@ -144,11 +137,12 @@ public class AuthController : MonoBehaviour
             }
 
         }
-        else StartCoroutine(changeSnece(email,password));
+        else StartCoroutine(changeSnece(email, password));
     }
 
-    IEnumerator changeSnece(string email, string password){
-        StartCoroutine (RegisterbyEmailandPass(email, password));
+    IEnumerator changeSnece(string email, string password)
+    {
+        StartCoroutine(RegisterbyEmailandPass(email, password));
         yield return new WaitUntil(() => isDone == true);
         SceneManager.LoadScene("Register by Email");
         yield return null;
