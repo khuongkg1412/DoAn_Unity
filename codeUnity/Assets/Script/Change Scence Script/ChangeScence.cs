@@ -83,7 +83,7 @@ public class ChangeScence : MonoBehaviour
     IEnumerator loadData()
     {
         FirebaseFirestore db = FirebaseFirestore.DefaultInstance;
-        string IDPlayer = AuthController.ID;
+        string IDPlayer = "7xv28G3fCIf2UoO0rV2SFV5tTr62";//AuthController.ID;
         if (IDPlayer == null) IDPlayer = FacebookManager.ID;
 
         DocumentReference docRef = db.Collection("Player").Document(IDPlayer);
