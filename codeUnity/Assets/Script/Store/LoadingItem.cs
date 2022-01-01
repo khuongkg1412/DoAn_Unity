@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class LoadingItem : MonoBehaviour
 {
     public ItemStruct dataItem;
-    private TMPro.TMP_Text name, type, description;
+    private TMPro.TMP_Text nameItem, type, description;
 
     GameObject diamond, coin;
 
@@ -19,7 +19,7 @@ public class LoadingItem : MonoBehaviour
 
     void settingObject()
     {
-        name = transform.GetChild(1).GetComponent<TMPro.TMP_Text>();
+        nameItem = transform.GetChild(1).GetComponent<TMPro.TMP_Text>();
         type = transform.GetChild(2).GetComponent<TMPro.TMP_Text>();
         description = transform.GetChild(3).GetComponent<TMPro.TMP_Text>();
         dataImage =
@@ -35,7 +35,7 @@ public class LoadingItem : MonoBehaviour
 
     void settingObjectForChest()
     {
-        name = transform.GetChild(1).GetComponent<TMPro.TMP_Text>();
+        nameItem = transform.GetChild(1).GetComponent<TMPro.TMP_Text>();
 
         //type = transform.GetChild(2).GetComponent<TMPro.TMP_Text>();
         description = transform.GetChild(3).GetComponent<TMPro.TMP_Text>();
@@ -52,7 +52,7 @@ public class LoadingItem : MonoBehaviour
 
     void dataforItem()
     {
-        name.text = dataItem.name_Item;
+        nameItem.text = dataItem.name_Item;
         type.text = dataItem.type_Item;
         description.text = dataItem.description_Item;
         dataImage.texture = loadingImageFromFilePath(dataItem.image_Item);
@@ -74,8 +74,7 @@ public class LoadingItem : MonoBehaviour
     }
     void dataforItemChest()
     {
-        name.text = dataItem.name_Item;
-        //type.text = dataItem.type_Item;
+        nameItem.text = dataItem.name_Item;
         description.text = dataItem.description_Item;
         dataImage.texture = loadingImageFromFilePath(dataItem.image_Item);
         dataImage.SetNativeSize();

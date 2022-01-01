@@ -73,7 +73,13 @@ public class ChangeScence : MonoBehaviour
     {
         StartCoroutine(loadData());
     }
-
+    void loadDataPlayerOnScence(PlayerStruct player)
+    {
+        Coin.text = "" + player.coin_Player;
+        Diamond.text = "" + player.diamond_Player;
+        Life.text = "" + player.energy_Player + "/6";
+        Name.text = "" + player.name_Player;
+    }
     IEnumerator loadData()
     {
         FirebaseFirestore db = FirebaseFirestore.DefaultInstance;
@@ -88,16 +94,11 @@ public class ChangeScence : MonoBehaviour
             if (snapshot.Exists)
             {
                 PlayerStruct player = snapshot.ConvertTo<PlayerStruct>();
-                Coin.text = "" + player.coin_Player;
-                Diamond.text = "" + player.diamond_Player;
-                Life.text = "" + player.energy_Player;
-                Name.text = "" + player.name_Player;
-                Debug.Log("Data Save");
                 //Write File
                 SaveSystem.SaveDataPlayer(player);
                 //Load File
-                PlayerStruct data = SaveSystem.LoadDataPlayer();
-                Debug.Log("Save File :" + data.name_Player);
+                loadDataPlayerOnScence(SaveSystem.LoadDataPlayer());
+
                 StartCoroutine(GetImage(player.avatar_Player));
             }
         });
@@ -109,30 +110,28 @@ public class ChangeScence : MonoBehaviour
 
         // Get a reference to the storage service, using the default Firebase App
         FirebaseStorage storage = FirebaseStorage.DefaultInstance;
-
+        Debug.Log("Path: " + dataImage);
         // Create a storage reference from our storage service
         StorageReference storageRef = storage.GetReference(dataImage);
 
         // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
         const long maxAllowedSize = 1 * 1024 * 1024;
-        storageRef
-            .GetBytesAsync(maxAllowedSize)
-            .ContinueWithOnMainThread(task =>
-            {
-                if (task.IsFaulted || task.IsCanceled)
-                {
-                    Debug.LogException(task.Exception);
-                }
-                else
-                {
-                    byte[] fileContents = task.Result;
-                    Texture2D texture = new Texture2D(1, 1);
-                    texture.LoadImage(fileContents);
-                    Sprite sprite = Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100.0f);
-                    avatar.sprite = sprite;
-                    //Populate(sprite, Name, level);
-                }
-            });
+        storageRef.GetBytesAsync(maxAllowedSize).ContinueWithOnMainThread(task =>
+           {
+               if (task.IsFaulted || task.IsCanceled)
+               {
+                   Debug.LogException(task.Exception);
+               }
+               else
+               {
+                   byte[] fileContents = task.Result;
+                   Texture2D texture = new Texture2D(1, 1);
+                   texture.LoadImage(fileContents);
+                   Sprite sprite = Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100.0f);
+                   avatar.sprite = sprite;
+                   //Populate(sprite, Name, level);
+               }
+           });
         yield return null;
     }
 }
