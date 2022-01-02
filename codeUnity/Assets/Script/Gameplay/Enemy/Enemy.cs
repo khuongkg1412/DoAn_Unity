@@ -142,7 +142,7 @@ public class Enemy : MonoBehaviour
             //Hit citizen , then decrease HP from zitizen
             if (other.gameObject.tag == "Citizen")
             {
-                other.gameObject.GetComponent<Citizen_Helping>().isSicked = true;
+                other.gameObject.GetComponent<Citizen_HP>().isSicked = true;
             }
         }
     }

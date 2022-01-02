@@ -180,16 +180,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 5399668668997908419}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87e547b6a0a43ba4e82a36ad37802c26, type: 3}
+  m_Script: {fileID: 11500000, guid: 52db97805ab6f8349882c95962f18c26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   currentHP: 0
   maxHP: 0
-  HealthBar: {fileID: 5399668669750211594}
+  HealthBar: {fileID: 5399668669916413911}
   TimeHealingBar: {fileID: 0}
   hpText: {fileID: 0}
   timerGetHeal: 7
-  isSicked: 1
+  isSicked: 0
   isHeal: 0
   isDoneHealing: 0
 --- !u!61 &5399668668997908416
