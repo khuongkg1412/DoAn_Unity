@@ -18,7 +18,7 @@ public class Selecting_Stage : MonoBehaviour
     {
         for (int i = 0; i < stageArray.Length; i++)
         {
-            if (i <= player.level_Player)
+            if (i < player.level_Player)
             {
                 enableStage(i);
             }
@@ -42,12 +42,10 @@ public class Selecting_Stage : MonoBehaviour
 
     public void loadScence(int level)
     {
-
-        Screen.orientation = ScreenOrientation.Landscape;
-
         PlayerStruct player = SaveSystem.LoadDataPlayer();
         if (level <= player.level_Player)
         {
+            Screen.orientation = ScreenOrientation.Landscape;
             SceneManager.LoadScene("Stage" + level);
         }
         else

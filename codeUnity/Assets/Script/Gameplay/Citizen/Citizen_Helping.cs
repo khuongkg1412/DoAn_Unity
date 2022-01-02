@@ -61,14 +61,14 @@ public class Citizen_Helping : MonoBehaviour
     private void Update()
     {
         //If people are get sicked, we decrease HP of them
-        if (isSicked)
+        if (isHeal && !isDoneHealing)
+        {
+            getHeal();
+        }
+        else if (isSicked)
         {
             //Decrease HP of them
             getSicked();
-        }
-        else if (isHeal && !isDoneHealing)
-        {
-            getHeal();
         }
 
         //Display HP to healthbar
@@ -139,8 +139,7 @@ public class Citizen_Helping : MonoBehaviour
                 GameObject.Find("Canvas").GetComponent<Game_Tutorial>().UpdateCitizen(1);
             }
             timerGetHeal = 0f;
-            Button button =
-                GameObject.Find("HelpButton").GetComponent<Button>();
+            Button button = GameObject.Find("HelpButton").GetComponent<Button>();
             button.interactable = false;
             TimeHealingBar.SetActive(false);
 
@@ -168,21 +167,14 @@ public class Citizen_Helping : MonoBehaviour
         if (currentHP > 0)
         {
             //Scale Healthbar
-            HealthBar.transform.localScale =
-                new Vector3((currentHP / maxHP) * Healthbarmaxsize,
-                    HealthBar.transform.transform.localScale.y,
-                    HealthBar.transform.transform.localScale.z);
+            HealthBar.transform.localScale = new Vector3((currentHP / maxHP) * Healthbarmaxsize, HealthBar.transform.transform.localScale.y, HealthBar.transform.transform.localScale.z);
         }
         else
         {
             // People's dead
             currentHP = 0;
-            HealthBar.transform.localScale =
-                new Vector3(0,
-                    HealthBar.transform.transform.localScale.y,
-                    HealthBar.transform.transform.localScale.z);
+            HealthBar.transform.localScale = new Vector3(0, HealthBar.transform.transform.localScale.y, HealthBar.transform.transform.localScale.z);
             if (GameObject.Find("Canvas").GetComponent<Game_Start>() != null)
-
             {
                 GameObject.Find("Canvas").GetComponent<Game_Start>().isVictory = false;
                 GameObject.Find("Canvas").GetComponent<Game_Start>().isGameOver = true;

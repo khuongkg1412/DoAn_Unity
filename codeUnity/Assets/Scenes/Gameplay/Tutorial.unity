@@ -9350,7 +9350,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 881436830}
         m_TargetAssemblyTypeName: ChangeScence, Assembly-CSharp
-        m_MethodName: reloadScence
+        m_MethodName: gameplayOpening
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
