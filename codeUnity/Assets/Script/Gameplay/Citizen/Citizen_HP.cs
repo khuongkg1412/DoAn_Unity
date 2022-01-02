@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Citizen_Helping : MonoBehaviour
+public class Citizen_HP : MonoBehaviour
 {
     //Cureent Health Point
     public float currentHP;
@@ -24,6 +24,8 @@ public class Citizen_Helping : MonoBehaviour
     float timerGetSick = 0f;
 
     public float timerGetHeal = 7f;
+    //Count time
+    float countTimeHealing = 0;
 
     //Max size of health bar
     float Healthbarmaxsize;
@@ -41,7 +43,7 @@ public class Citizen_Helping : MonoBehaviour
         /*
             Setting value to variable 
         */
-        //Set HP for Player
+        //Set HP for Citizen
         maxHP = 30f;
         currentHP = maxHP;
 
@@ -51,7 +53,6 @@ public class Citizen_Helping : MonoBehaviour
         //When game start people are not sicked
         isSicked = false;
         isHeal = false;
-
         //Set Timehealing bar
         TimeHealingBar.GetComponent<Slider>().maxValue = 7f;
         TimeHealingBar.GetComponent<Slider>().value = 0;
@@ -61,8 +62,14 @@ public class Citizen_Helping : MonoBehaviour
     private void Update()
     {
         //If people are get sicked, we decrease HP of them
-        if (isHeal && !isDoneHealing)
+        if (isDoneHealing)
         {
+            healingComplete();
+        }
+        else if (isHeal)
+        {
+            Debug.Log("Get Heal");
+            //Increase Hp of them
             getHeal();
         }
         else if (isSicked)
@@ -105,49 +112,73 @@ public class Citizen_Helping : MonoBehaviour
     */
     public void getHeal()
     {
-        //Count time
-        timerGetSick += Time.deltaTime;
 
+        countTimeHealing += Time.deltaTime;
+        Debug.Log("timerGetHeal" + timerGetHeal);
         //Decrease HP
-        if (timerGetSick > 1f && currentHP < maxHP)
+        if (timerGetHeal == 0f)
         {
-            //Reset time and decrese Hp
-            timerGetSick = 0;
-            currentHP += (maxHP - currentHP) / timerGetHeal;
-            timerGetHeal -= 1f;
-
-            TimeHealingBar.GetComponent<Slider>().value = (7 - timerGetHeal);
-            hpText.text = "Healing in " + (7 - timerGetHeal) + "s";
-        }
-        else if (timerGetHeal > 7f || currentHP >= maxHP)
-        {
-            //Reset time and decrese Hp
             currentHP = maxHP;
             timerGetHeal = 0f;
             isDoneHealing = true;
-            isSicked = false;
-
-            if (GameObject.Find("Canvas").GetComponent<Game_Start>() != null)
-
+        }
+        else if (countTimeHealing > 1f)
+        {
+            //Reset time and decrese Hp
+            countTimeHealing = 0;
+            if (currentHP < maxHP)
             {
-                GameObject.Find("Canvas").GetComponent<Game_Start>().UpdateScore(100f);
-                GameObject.Find("Canvas").GetComponent<Game_Start>().UpdateCitizen(1);
+                currentHP += (maxHP - currentHP) / timerGetHeal;
             }
             else
             {
-                GameObject.Find("Canvas").GetComponent<Game_Tutorial>().UpdateScore(100f);
-                GameObject.Find("Canvas").GetComponent<Game_Tutorial>().UpdateCitizen(1);
+                currentHP = maxHP;
             }
-            timerGetHeal = 0f;
-            Button button = GameObject.Find("HelpButton").GetComponent<Button>();
-            button.interactable = false;
-            TimeHealingBar.SetActive(false);
+            Debug.Log("healing");
+            timerGetHeal -= 1f;
+            //Set text for timehealing bar
+            TimeHealingBar.GetComponent<Slider>().value = (7 - timerGetHeal);
+            hpText.text = "Healing in " + (7 - timerGetHeal) + "s";
+        }
+    }
+    void healingComplete()
+    {
+        updateScoretoCanvas();
+        //Disable Help button and TimeHealingbar
+        Button button = GameObject.Find("HelpButton").GetComponent<Button>();
+        button.interactable = false;
+        TimeHealingBar.SetActive(false);
 
-            //Detroy Object
-            Destroy(gameObject);
+        //Detroy Object
+        Destroy(gameObject);
+    }
+    void updateScoretoCanvas()
+    {
+        if (GameObject.Find("Canvas").GetComponent<Game_Start>() != null)
+
+        {
+            GameObject.Find("Canvas").GetComponent<Game_Start>().UpdateScore(100f);
+            GameObject.Find("Canvas").GetComponent<Game_Start>().UpdateCitizen(1);
+        }
+        else
+        {
+            GameObject.Find("Canvas").GetComponent<Game_Tutorial>().UpdateScore(100f);
+            GameObject.Find("Canvas").GetComponent<Game_Tutorial>().UpdateCitizen(1);
         }
     }
 
+    void updateConditionVictory()
+    {
+        if (GameObject.Find("Canvas").GetComponent<Game_Start>() != null)
+        {
+            GameObject.Find("Canvas").GetComponent<Game_Start>().isVictory = false;
+            GameObject.Find("Canvas").GetComponent<Game_Start>().isGameOver = true;
+        }
+        else
+        {
+            GameObject.Find("Canvas").GetComponent<Game_Tutorial>().isGameOver = true;
+        }
+    }
     void healthHurtState()
     {
         HealthBar.GetComponent<SpriteRenderer>().color = new Color(1, 0, 0);
@@ -174,16 +205,8 @@ public class Citizen_Helping : MonoBehaviour
             // People's dead
             currentHP = 0;
             HealthBar.transform.localScale = new Vector3(0, HealthBar.transform.transform.localScale.y, HealthBar.transform.transform.localScale.z);
-            if (GameObject.Find("Canvas").GetComponent<Game_Start>() != null)
-            {
-                GameObject.Find("Canvas").GetComponent<Game_Start>().isVictory = false;
-                GameObject.Find("Canvas").GetComponent<Game_Start>().isGameOver = true;
-            }
-            else
-            {
-                GameObject.Find("Canvas").GetComponent<Game_Tutorial>().isGameOver = true;
-            }
 
+            updateConditionVictory();
             //Detroy Object
             Destroy(gameObject);
         }

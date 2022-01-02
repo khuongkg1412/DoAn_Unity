@@ -133,6 +133,8 @@ public class Game_Start : MonoBehaviour
         if (isVictory)
         {
             gameplayResult.text = "VICTORY";
+            Button nextBtn = GameObject.Find("Next_Button").GetComponent<Button>();
+            nextBtn.interactable = true;
         }
         else
         {
@@ -140,12 +142,13 @@ public class Game_Start : MonoBehaviour
         }
         enemyKillResult.text = enemyNumber.ToString();
         citizenSaveResult.text = citizenSaveNumber.ToString();
+
     }
     //Condition to victory
     void ConditionToVictory()
     {
         //Check condition victory
-        if (enemyNumber == enemyNumberStart || citizenSaveNumber == citizenNumberStart)
+        if (citizenSaveNumber == citizenNumberStart)
         {
             isGameOver = true;
             isVictory = true;

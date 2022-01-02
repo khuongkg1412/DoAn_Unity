@@ -10,7 +10,7 @@ public class Citizen_Healing : MonoBehaviour
     //Helth bar object
     public GameObject TimeHealingBar;
 
-    public GameObject citizen = null;
+    private GameObject citizen = null;
 
     private GameObject player;
 
@@ -35,28 +35,21 @@ public class Citizen_Healing : MonoBehaviour
     {
         if (citizen != null)
         {
-            if (citizen.GetComponent<Citizen_Helping>().isSicked == true)
+            if (citizen.GetComponent<Citizen_HP>().isSicked == true)
             {
+
                 TimeHealingBar.SetActive(true);
 
-                // citizen.GetComponent<Citizen_Helping>().isSicked = false;
-
-                citizen.GetComponent<Citizen_Helping>().isHeal = true;
-
-                // citizen.GetComponent<Citizen_Helping>().getHeal();
+                citizen.GetComponent<Citizen_HP>().isHeal = true;
 
                 if (player != null)
                 {
                     player.GetComponent<Player_Movement>().canShoot = false;
                 }
             }
-            else if (citizen.GetComponent<Citizen_Helping>().isSicked == false)
+            else if (citizen.GetComponent<Citizen_HP>().isSicked == false)
             {
-
-            }
-            else if (citizen.GetComponent<Citizen_Helping>().isDoneHealing)
-            {
-                TimeHealingBar.SetActive(false);
+                citizen.GetComponent<Citizen_HP>().isDoneHealing = true;
             }
         }
     }
@@ -71,11 +64,9 @@ public class Citizen_Healing : MonoBehaviour
 
         if (citizen != null)
         {
-            citizen.GetComponent<Citizen_Helping>().isSicked = true;
+            citizen.GetComponent<Citizen_HP>().isHeal = false;
 
-            citizen.GetComponent<Citizen_Helping>().isHeal = false;
-
-            citizen.GetComponent<Citizen_Helping>().timerGetHeal = 0f;
+            citizen.GetComponent<Citizen_HP>().timerGetHeal = 7f;
 
             GameObject myEventSystem = GameObject.Find("EventSystem");
 
