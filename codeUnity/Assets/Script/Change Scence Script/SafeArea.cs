@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class SafeArea : MonoBehaviour
 {
-
+    public GameObject canvas;
     RectTransform rectTransform;
     Rect safeArea;
     Vector2 minAnchor;
     Vector2 maxAnchor;
+
+
     void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
@@ -23,6 +26,18 @@ public class SafeArea : MonoBehaviour
 
         rectTransform.anchorMin = minAnchor;
         rectTransform.anchorMax = maxAnchor;
+        //Debug.Log(Screen.width);
+        if (Screen.width > 1500)
+        {
+            canvas.GetComponent<CanvasScaler>().referenceResolution = new Vector2(1100, 600);
+        }
+        else
+        {
+            canvas.GetComponent<CanvasScaler>().referenceResolution = new Vector2(800, 600);
+        }
+
+
+
     }
 
 
