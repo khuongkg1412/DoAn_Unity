@@ -5,9 +5,6 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/Login/Login - Main theme.unity
     guid: bbc263638d538e3498c2eba07a79ca3d
@@ -38,19 +35,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Profile/Friend list.unity
     guid: c543c632e5d768940a75139fadd72e41
-  - enabled: 0
-    path: Assets/Scenes/Login/Login by Email.unity
-    guid: e8bec9158455bf847b1f8fd1873bc5ec
   - enabled: 1
     path: Assets/Scenes/Login/Register by Email.unity
     guid: 3c47ce129fba9184c99638600d06ad1f
   - enabled: 1
-    path: Assets/Scenes/Gameplay/gameplay.unity
-    guid: 8c308f6d2c8bd474383c65ffe22c719a
-  - enabled: 0
-    path: Assets/Scenes/Gameplay/Stage1.unity
-    guid: 7182a464a5ca3c6408bad899ade83b7c
-  - enabled: 1
     path: Assets/Scenes/Gameplay/Tutorial.unity
     guid: a963c1d94017b1f40aa83567e519d646
+  - enabled: 1
+    path: Assets/Scenes/Gameplay/Stage/StageList.unity
+    guid: 7a4d1219f502afa4e93a3f1e8282c027
+  - enabled: 1
+    path: Assets/Scenes/Gameplay/Stage/Stage1.unity
+    guid: 1fa4f001ce1a4f3429c55e48569e9f88
   m_configObjects: {}

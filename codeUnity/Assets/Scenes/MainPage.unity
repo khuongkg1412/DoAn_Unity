@@ -2900,7 +2900,7 @@ MonoBehaviour:
   Diamond: {fileID: 230302782}
   Life: {fileID: 930264375}
   Name: {fileID: 794386490}
-  avatar: {fileID: 0}
+  avatar: {fileID: 298995280}
 --- !u!1 &1956427812
 GameObject:
   m_ObjectHideFlags: 0

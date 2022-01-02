@@ -62,7 +62,16 @@ public class ChangeScence : MonoBehaviour
     public void gameplayOpening()
     {
         Screen.orientation = ScreenOrientation.Landscape;
-        SceneManager.LoadScene("Tutorial");
+
+        PlayerStruct player = SaveSystem.LoadDataPlayer();
+        if (player.level_Player == 0)
+        {
+            SceneManager.LoadScene("Tutorial");
+        }
+        else
+        {
+            SceneManager.LoadScene("StageList");
+        }
     }
 
     public Text Coin, Diamond, Life, Name;
@@ -80,6 +89,7 @@ public class ChangeScence : MonoBehaviour
         Life.text = "" + player.energy_Player + "/6";
         Name.text = "" + player.name_Player;
     }
+
     IEnumerator loadData()
     {
         FirebaseFirestore db = FirebaseFirestore.DefaultInstance;

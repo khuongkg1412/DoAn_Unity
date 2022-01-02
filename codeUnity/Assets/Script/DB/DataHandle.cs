@@ -106,17 +106,12 @@ public class DataHandle : MonoBehaviour
 
     public static List<AchievementStruct> listAchievement = new List<AchievementStruct>();
     public static PlayerStruct playerData;
-    // Start is called before the first frame update
-    PlayerData player = new PlayerData()
-    {
-        name_Player = "Testing Data"
-    };
     void Start()
     {
 
     }
 
-    private void AddDataPlayer()
+    private void UpdatePlayer()
     {
         //FireBase Object
         FirebaseFirestore db;
@@ -213,13 +208,5 @@ public class DataHandle : MonoBehaviour
                 Debug.LogError("loadDataAchievement Faulted");
             }
         });
-    }
-
-    void readData()
-    {
-        foreach (var item in listAchievement)
-        {
-            Debug.Log("Test Data" + item.title_Achievement);
-        }
     }
 }
