@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class Citizen_Healing : MonoBehaviour
 {
-    float countTime = 0f;
 
     //Helth bar object
     public GameObject TimeHealingBar;
@@ -39,18 +38,21 @@ public class Citizen_Healing : MonoBehaviour
             if (citizen.GetComponent<Citizen_Helping>().isSicked == true)
             {
                 TimeHealingBar.SetActive(true);
-                countTime += Time.deltaTime;
 
-                citizen.GetComponent<Citizen_Helping>().isSicked = false;
+                // citizen.GetComponent<Citizen_Helping>().isSicked = false;
 
                 citizen.GetComponent<Citizen_Helping>().isHeal = true;
 
-                citizen.GetComponent<Citizen_Helping>().getHeal();
+                // citizen.GetComponent<Citizen_Helping>().getHeal();
 
                 if (player != null)
                 {
                     player.GetComponent<Player_Movement>().canShoot = false;
                 }
+            }
+            else if (citizen.GetComponent<Citizen_Helping>().isSicked == false)
+            {
+
             }
             else if (citizen.GetComponent<Citizen_Helping>().isDoneHealing)
             {
@@ -69,7 +71,6 @@ public class Citizen_Healing : MonoBehaviour
 
         if (citizen != null)
         {
-            countTime = 0f;
             citizen.GetComponent<Citizen_Helping>().isSicked = true;
 
             citizen.GetComponent<Citizen_Helping>().isHeal = false;
@@ -78,9 +79,7 @@ public class Citizen_Healing : MonoBehaviour
 
             GameObject myEventSystem = GameObject.Find("EventSystem");
 
-            myEventSystem
-                .GetComponent<UnityEngine.EventSystems.EventSystem>()
-                .SetSelectedGameObject(null);
+            myEventSystem.GetComponent<UnityEngine.EventSystems.EventSystem>().SetSelectedGameObject(null);
         }
     }
 }

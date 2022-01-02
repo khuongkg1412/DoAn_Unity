@@ -3544,6 +3544,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 180b1beb2e998c2449b881406eff6b85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Coin: {fileID: 0}
+  Diamond: {fileID: 0}
+  Life: {fileID: 0}
+  Name: {fileID: 0}
+  avatar: {fileID: 0}
 --- !u!114 &881436832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4747,6 +4752,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 180b1beb2e998c2449b881406eff6b85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Coin: {fileID: 0}
+  Diamond: {fileID: 0}
+  Life: {fileID: 0}
+  Name: {fileID: 0}
+  avatar: {fileID: 0}
 --- !u!114 &1150360890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9340,7 +9350,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 881436830}
         m_TargetAssemblyTypeName: ChangeScence, Assembly-CSharp
-        m_MethodName: reloadScence
+        m_MethodName: gameplayOpening
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
