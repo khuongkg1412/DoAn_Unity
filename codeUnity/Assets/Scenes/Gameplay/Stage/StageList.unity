@@ -2075,7 +2075,6 @@ MonoBehaviour:
   Life: {fileID: 0}
   Name: {fileID: 0}
   avatar: {fileID: 0}
-<<<<<<< Updated upstream
 --- !u!114 &881436832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2098,8 +2097,6 @@ MonoBehaviour:
   - {fileID: 1797445909}
   - {fileID: 681328890}
   - {fileID: 262738630}
-=======
->>>>>>> Stashed changes
 --- !u!1 &914458415
 GameObject:
   m_ObjectHideFlags: 0
@@ -3423,8 +3420,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -319, y: 790.42065}
-  m_SizeDelta: {x: 90, y: 90}
+  m_AnchoredPosition: {x: -319, y: 783.8}
+  m_SizeDelta: {x: 128, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1671292099
 MonoBehaviour:
@@ -3502,7 +3499,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3cda4263ef6eb15498b7cf4bccefe10e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3b5d63ee9a4b2174db35879196522c12, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
