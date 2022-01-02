@@ -1567,7 +1567,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TimeHealingBar: {fileID: 409151956}
-  citizen: {fileID: 0}
 --- !u!1 &421464867
 GameObject:
   m_ObjectHideFlags: 0
@@ -5400,6 +5399,10 @@ PrefabInstance:
       propertyPath: target2
       value: 
       objectReference: {fileID: 1172515328}
+    - target: {fileID: 8607268857364034385, guid: 28a54c95b9baaa44ebf266e3b76d76e6, type: 3}
+      propertyPath: targetPlayer
+      value: 
+      objectReference: {fileID: 571074374}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28a54c95b9baaa44ebf266e3b76d76e6, type: 3}
 --- !u!1 &1263429353
@@ -6037,6 +6040,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1372796522}
   m_CullTransparentMesh: 1
+--- !u!1 &1439377491 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5399668669750211594, guid: 6080bb2a2cf7c3a44b5aefcf5701690d, type: 3}
+  m_PrefabInstance: {fileID: 5399668670157692479}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1488405682
 GameObject:
   m_ObjectHideFlags: 0
@@ -95225,6 +95233,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 828492649}
     - target: {fileID: 5399668668997907519, guid: 6080bb2a2cf7c3a44b5aefcf5701690d, type: 3}
+      propertyPath: HealthBar
+      value: 
+      objectReference: {fileID: 1439377491}
+    - target: {fileID: 5399668668997907519, guid: 6080bb2a2cf7c3a44b5aefcf5701690d, type: 3}
       propertyPath: TimeHealingBar
       value: 
       objectReference: {fileID: 409151956}
@@ -95361,5 +95373,9 @@ PrefabInstance:
       propertyPath: target2
       value: 
       objectReference: {fileID: 1172515328}
+    - target: {fileID: 8607268857364034385, guid: 28a54c95b9baaa44ebf266e3b76d76e6, type: 3}
+      propertyPath: targetPlayer
+      value: 
+      objectReference: {fileID: 571074374}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28a54c95b9baaa44ebf266e3b76d76e6, type: 3}

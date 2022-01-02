@@ -56,7 +56,6 @@ public class Citizen_Healing : MonoBehaviour
 
     public void pointerUp()
     {
-        TimeHealingBar.SetActive(false);
         if (player != null)
         {
             player.GetComponent<Player_Movement>().canShoot = true;
@@ -64,9 +63,7 @@ public class Citizen_Healing : MonoBehaviour
 
         if (citizen != null)
         {
-            citizen.GetComponent<Citizen_HP>().isHeal = false;
-
-            citizen.GetComponent<Citizen_HP>().timerGetHeal = 7f;
+            citizen.GetComponent<Citizen_HP>().resetHealing();
 
             GameObject myEventSystem = GameObject.Find("EventSystem");
 

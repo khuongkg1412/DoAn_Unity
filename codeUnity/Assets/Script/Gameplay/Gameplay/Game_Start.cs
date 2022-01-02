@@ -82,7 +82,6 @@ public class Game_Start : MonoBehaviour
         else
         {
             //Game end. Display result and end the gameplay
-            DisplayResultPannel();
             GameOVer();
         }
     }
@@ -93,6 +92,7 @@ public class Game_Start : MonoBehaviour
         Time.timeScale = 0f;
         pannelGameover.SetActive(true);
         Player.GetComponent<Player_HP>().isDead = true;
+        DisplayResultPannel();
     }
     //Update score
     public void UpdateScore(float scorePlus)

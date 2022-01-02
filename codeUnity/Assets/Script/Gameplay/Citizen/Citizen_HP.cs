@@ -81,6 +81,15 @@ public class Citizen_HP : MonoBehaviour
         //Display HP to healthbar
         HPHealthBar();
     }
+    public void resetHealing()
+    {
+        //Reset time and decrese Hp
+        isHeal = false;
+        countTimeHealing = 0;
+        timerGetHeal = 7f;
+        hpText.text = "Healing in " + 0 + "s";
+        TimeHealingBar.SetActive(false);
+    }
 
     //Red color Hex value: 245 0 39
     //Green color Hex value: 32 255 0

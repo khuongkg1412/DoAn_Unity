@@ -79,27 +79,34 @@ public class Enemy : MonoBehaviour
     {
         //Find all citizen
         targetCitizen = GameObject.FindGameObjectsWithTag("Citizen");
-        if (targetCitizen != null)
+        if (targetCitizen.Length > 0)
         {
-            //Set minimum value for fisrt object in list of obejcts citizens
-            float minimumRange = Vector3.Distance(targetCitizen[0].transform.position, transform.position);
-            GameObject target = targetCitizen[0];
-            //Go throught list and check distance from enemy to citizens
-            foreach (var i in targetCitizen)
+            if (targetCitizen[0] != null)
             {
-                //Set Value when new minimun range is found
-                if (Vector3.Distance(i.transform.position, transform.position) < minimumRange)
+                //Set minimum value for fisrt object in list of obejcts citizens
+                float minimumRange = Vector3.Distance(targetCitizen[0].transform.position, transform.position);
+                GameObject target = targetCitizen[0];
+                //Go throught list and check distance from enemy to citizens
+                foreach (var i in targetCitizen)
                 {
-                    //Set mimum range value and object
-                    minimumRange = Vector3.Distance(i.transform.position, transform.position);
-                    target = i;
+                    if (i != null)
+                    {
+                        //Set Value when new minimun range is found
+                        if (Vector3.Distance(i.transform.position, transform.position) < minimumRange)
+                        {
+                            //Set mimum range value and object
+                            minimumRange = Vector3.Distance(i.transform.position, transform.position);
+                            target = i;
+                        }
+                    }
+                }
+                //If mimum range is in range following then return that target
+                if (minimumRange <= range)
+                {
+                    return target;
                 }
             }
-            //If mimum range is in range following then return that target
-            if (minimumRange <= range)
-            {
-                return target;
-            }
+
         }
 
         //else return null
