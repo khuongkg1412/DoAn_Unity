@@ -68,7 +68,6 @@ public class Citizen_HP : MonoBehaviour
         }
         else if (isHeal)
         {
-            Debug.Log("Get Heal");
             //Increase Hp of them
             getHeal();
         }
@@ -88,6 +87,7 @@ public class Citizen_HP : MonoBehaviour
         countTimeHealing = 0;
         timerGetHeal = 7f;
         hpText.text = "Healing in " + 0 + "s";
+        TimeHealingBar.GetComponent<Slider>().value = 0;
         TimeHealingBar.SetActive(false);
     }
 
@@ -123,7 +123,6 @@ public class Citizen_HP : MonoBehaviour
     {
 
         countTimeHealing += Time.deltaTime;
-        Debug.Log("timerGetHeal" + timerGetHeal);
         //Decrease HP
         if (timerGetHeal == 0f)
         {
@@ -143,7 +142,6 @@ public class Citizen_HP : MonoBehaviour
             {
                 currentHP = maxHP;
             }
-            Debug.Log("healing");
             timerGetHeal -= 1f;
             //Set text for timehealing bar
             TimeHealingBar.GetComponent<Slider>().value = (7 - timerGetHeal);

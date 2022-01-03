@@ -42,22 +42,22 @@ public class DataHandle : MonoBehaviour
 
     PlayerStruct playerExample = new PlayerStruct()
     {
-        avatar_Player = "",
+        avatar_Player = "PlayerAvatar/Avatar item.png",
         coin_Player = 0,
         diamond_Player = 0,
-        energy_Player = 5,
+        energy_Player = 6,
         gender_Player = 0,
         level_Player = 0,
-        name_Player = "User02",
+        name_Player = "Khuong Meo",
         stage_Player = 0,
         xp_Player = 0,
         numeral_Player =
                     new NumeralStruct
                     {
-                        ATK_Numeral = 2,
-                        DEF_Numeral = 2,
-                        HP_Numeral = 2,
-                        SPD_Numeral = 2
+                        ATK_Numeral = 10,
+                        DEF_Numeral = 10,
+                        HP_Numeral = 50,
+                        SPD_Numeral = 150
                     }
     };
 
@@ -111,45 +111,29 @@ public class DataHandle : MonoBehaviour
 
     public Text Coin, Diamond, Life, Name;
     public Image avatar;
-    void Start()
-    {
-        StartCoroutine(loadData());
-    }
+    float timeGetUpdate = 0f;
 
-    void loadDataPlayerOnScence(PlayerStruct player)
+    private void Update()
     {
+        timeGetUpdate += Time.deltaTime;
+        if (timeGetUpdate > 1f)
+        {
+            timeGetUpdate = 0;
+            loadDataPlayerOnScence();
+        }
+    }
+    void loadDataPlayerOnScence()
+    {
+
+        PlayerStruct player = Player_DataManager.Instance.Player;
+
+        StartCoroutine(GetImage(player.avatar_Player));
+
         Coin.text = "" + player.coin_Player;
         Diamond.text = "" + player.diamond_Player;
         Life.text = "" + player.energy_Player + "/6";
-        Name.text = "" + player.name_Player;
+        Name.text = "" + player.name_Player + "\n" + "LV." + player.level_Player;
     }
-
-    IEnumerator loadData()
-    {
-        FirebaseFirestore db = FirebaseFirestore.DefaultInstance;
-        string IDPlayer = "7xv28G3fCIf2UoO0rV2SFV5tTr62";//AuthController.ID;
-        if (IDPlayer == null) IDPlayer = FacebookManager.ID;
-
-        DocumentReference docRef = db.Collection("Player").Document(IDPlayer);
-        docRef.GetSnapshotAsync().ContinueWithOnMainThread(task =>
-        {
-
-            DocumentSnapshot snapshot = task.Result;
-            if (snapshot.Exists)
-            {
-                PlayerStruct player = snapshot.ConvertTo<PlayerStruct>();
-                //Write File
-                SaveSystem.SaveDataPlayer(player);
-                Debug.Log("Load data at changescence");
-                //Load File
-                loadDataPlayerOnScence(SaveSystem.LoadDataPlayer());
-
-                StartCoroutine(GetImage(player.avatar_Player));
-            }
-        });
-        yield return true;
-    }
-
     IEnumerator GetImage(string dataImage)
     {
 
@@ -219,60 +203,5 @@ public class DataHandle : MonoBehaviour
         db.Collection("Achievement").AddAsync(achievementStruct1);
         db.Collection("Achievement").AddAsync(achievementStruct2);
         db.Collection("Achievement").AddAsync(achievementStruct3);
-    }
-    private void AddDataSystemNotification()
-    {
-
-        //FireBase Object
-        FirebaseFirestore db;
-
-        //db connection
-        db = FirebaseFirestore.DefaultInstance;
-        db.Collection("SystemNotification").AddAsync(systemNotification1);
-    }
-    private void loadDataPlayer()
-    {
-        //FireBase Object
-        FirebaseFirestore db;
-
-        //db connection
-        db = FirebaseFirestore.DefaultInstance;
-        // Query itemDailyQuery = db.Collection("Player").Document("nZ1TJd9hBrL6Kb9MEQol");
-        DocumentReference doc = db.Collection("Player").Document("nZ1TJd9hBrL6Kb9MEQol");
-        doc.GetSnapshotAsync().ContinueWithOnMainThread(task =>
-            {
-                var snapshot = task.Result;
-                if (snapshot.Exists)
-                {
-                    PlayerStruct playerStruct = snapshot.ConvertTo<PlayerStruct>();
-                }
-            });
-    }
-    private void loadDataAchievement()
-    {
-        //FireBase Object
-        FirebaseFirestore db;
-
-        //db connection
-        db = FirebaseFirestore.DefaultInstance;
-
-        Query allCitiesQuery = db.Collection("Achievement");
-        allCitiesQuery.GetSnapshotAsync().ContinueWithOnMainThread(task =>
-        {
-            QuerySnapshot allCitiesQuerySnapshot = task.Result;
-            foreach (DocumentSnapshot documentSnapshot in allCitiesQuerySnapshot.Documents)
-            {
-                AchievementStruct objectData = documentSnapshot.ConvertTo<AchievementStruct>();
-                listAchievement.Add(objectData);
-            }
-            if (task.IsCanceled)
-            {
-                Debug.LogError("loadDataAchievement Error");
-            }
-            else if (task.IsFaulted)
-            {
-                Debug.LogError("loadDataAchievement Faulted");
-            }
-        });
     }
 }
