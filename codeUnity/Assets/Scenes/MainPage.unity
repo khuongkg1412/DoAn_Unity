@@ -377,6 +377,8 @@ GameObject:
   - component: {fileID: 123476454}
   - component: {fileID: 123476455}
   - component: {fileID: 123476456}
+  - component: {fileID: 123476458}
+  - component: {fileID: 123476457}
   m_Layer: 5
   m_Name: DBConnect
   m_TagString: Untagged
@@ -442,6 +444,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 19a4f9fa50b376d4b803b149e907d907, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &123476457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 123476452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 477c73935dfc7984d9fe30ad6ce59fbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &123476458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 123476452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 016a6d846951c844abba4029e518b374, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &134091993

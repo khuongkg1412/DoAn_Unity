@@ -115,6 +115,37 @@ public class DataHandle : MonoBehaviour
 
     private void Update()
     {
+        TestFireBase();
+    }
+    private void TestFireBase()
+    {
+
+        //FireBase Object
+        FirebaseFirestore db;
+
+        //db connection
+        db = FirebaseFirestore.DefaultInstance;
+
+        DocumentReference docRef = db.Collection("data").Document("one");
+        Dictionary<string, object> docData = new Dictionary<string, object>
+    {
+        { "stringExample", "Hello World" },
+        { "booleanExample", false },
+        { "numberExample", 3.14159265 },
+        { "nullExample", null },
+        { "arrayExample", new List<object>() { 5, true, "Hello" } },
+        { "objectExample", new Dictionary<string, object>
+                {
+                        { "a", 5 },
+                        { "b", true },
+                }
+        },
+    };
+
+        docRef.SetAsync(docData);
+    }
+    void update_Information()
+    {
         timeGetUpdate += Time.deltaTime;
         if (timeGetUpdate > 1f)
         {
@@ -191,17 +222,5 @@ public class DataHandle : MonoBehaviour
         doc.SetAsync(notification_Player);
 
     }
-    private void AddDataAchievement()
-    {
 
-        //FireBase Object
-        FirebaseFirestore db;
-
-        //db connection
-        db = FirebaseFirestore.DefaultInstance;
-        db.Collection("Achievement").AddAsync(achievementStruct);
-        db.Collection("Achievement").AddAsync(achievementStruct1);
-        db.Collection("Achievement").AddAsync(achievementStruct2);
-        db.Collection("Achievement").AddAsync(achievementStruct3);
-    }
 }
