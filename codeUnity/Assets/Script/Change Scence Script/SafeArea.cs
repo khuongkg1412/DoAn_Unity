@@ -33,8 +33,6 @@ public class SafeArea : MonoBehaviour
             canvas.GetComponent<CanvasScaler>().referenceResolution = new Vector2(800, 600);
         }
 
-
-
     }
 
 

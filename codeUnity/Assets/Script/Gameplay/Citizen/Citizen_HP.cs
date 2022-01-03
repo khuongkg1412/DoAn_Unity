@@ -142,7 +142,6 @@ public class Citizen_HP : MonoBehaviour
             {
                 currentHP = maxHP;
             }
-            Debug.Log("healing");
             timerGetHeal -= 1f;
             //Set text for timehealing bar
             TimeHealingBar.GetComponent<Slider>().value = (7 - timerGetHeal);
