@@ -5,20 +5,20 @@ using UnityEngine.SceneManagement;
 
 public class Selecting_Stage : MonoBehaviour
 {
-    PlayerStruct player;
+    //PlayerStruct player;
 
     [SerializeField]
     GameObject[] stageArray;
     private void Awake()
     {
-        player = SaveSystem.LoadDataPlayer();
+        //player = SaveSystem.LoadDataPlayer();
     }
 
     private void Start()
     {
         for (int i = 0; i < stageArray.Length; i++)
         {
-            if (i < player.level_Player)
+            if (i < Player_DataManager.Instance.Player.level_Player)
             {
                 enableStage(i);
             }
@@ -42,8 +42,8 @@ public class Selecting_Stage : MonoBehaviour
 
     public void loadScence(int level)
     {
-        PlayerStruct player = SaveSystem.LoadDataPlayer();
-        if (level <= player.level_Player)
+        //PlayerStruct player = SaveSystem.LoadDataPlayer();
+        if (level <= Player_DataManager.Instance.Player.level_Player)
         {
             Screen.orientation = ScreenOrientation.Landscape;
             SceneManager.LoadScene("Stage" + level);

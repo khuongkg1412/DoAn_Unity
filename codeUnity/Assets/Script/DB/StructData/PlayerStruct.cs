@@ -75,6 +75,8 @@ public class PlayerStruct
     [FirestoreProperty]
     public float xp_Player { get; set; }
     [FirestoreProperty]
+    public float currentxp_Player { get; set; }
+    [FirestoreProperty]
     public NumeralStruct numeral_Player { get; set; }
 }
 
