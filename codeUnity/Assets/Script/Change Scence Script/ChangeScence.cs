@@ -76,26 +76,26 @@ public class ChangeScence : MonoBehaviour
         }
     }
 
-    IEnumerator addOtherCollection(string ID)
-    {
-        FirebaseFirestore db = FirebaseFirestore.DefaultInstance;
+    // IEnumerator addOtherCollection(string ID)
+    // {
+    //     FirebaseFirestore db = FirebaseFirestore.DefaultInstance;
 
-        DocumentReference doc = db.Collection("Player").Document(ID).Collection("Inventory_Player").Document("Demo");
-        doc.SetAsync(inventory_Player);
+    //     DocumentReference doc = db.Collection("Player").Document(ID).Collection("Inventory_Player").Document("Demo");
+    //     doc.SetAsync(inventory_Player);
 
-        doc = db.Collection("Player").Document(ID).Collection("SystemNotification").Document("Demo");
-        doc.SetAsync(systemNotification);
+    //     doc = db.Collection("Player").Document(ID).Collection("SystemNotification").Document("Demo");
+    //     doc.SetAsync(systemNotification);
 
-        doc = db.Collection("Player").Document(ID).Collection("Friend_Player").Document("Demo");
-        doc.SetAsync(friend_Player);
+    //     doc = db.Collection("Player").Document(ID).Collection("Friend_Player").Document("Demo");
+    //     doc.SetAsync(friend_Player);
 
-        doc = db.Collection("Player").Document(ID).Collection("Achievement_Player").Document("Demo");
-        doc.SetAsync(achievement_Player);
+    //     doc = db.Collection("Player").Document(ID).Collection("Achievement_Player").Document("Demo");
+    //     doc.SetAsync(achievement_Player);
 
-        doc = db.Collection("Player").Document(ID).Collection("Notification_Player").Document("Demo");
-        doc.SetAsync(notification_Player);
+    //     doc = db.Collection("Player").Document(ID).Collection("Notification_Player").Document("Demo");
+    //     doc.SetAsync(notification_Player);
 
-        yield return null;
-    }
+    //     yield return null;
+    // }
 }
 
