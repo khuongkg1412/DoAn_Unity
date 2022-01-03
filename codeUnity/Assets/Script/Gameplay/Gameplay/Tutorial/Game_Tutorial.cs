@@ -47,7 +47,6 @@ public class Game_Tutorial : MonoBehaviour
         if (isGameOver == true)
         {
             //Game end. Display result and end the gameplay
-            DisplayResultPannel();
             GameOVer();
         }
     }
@@ -57,8 +56,6 @@ public class Game_Tutorial : MonoBehaviour
         //Player dead and set active for pannel result
         pannelGameover.SetActive(true);
         DisplayResultPannel();
-        Button nextBtn = GameObject.Find("Next_Button").GetComponent<Button>();
-        nextBtn.interactable = true;
     }
     //Update score
     public void UpdateScore(float scorePlus)
@@ -98,9 +95,12 @@ public class Game_Tutorial : MonoBehaviour
         gameplayResult.text = "TUTORIAL COMPLETED";
         gameplayResult.fontSize = 27;
         Time.timeScale = 0f;
+        Button nextBtn = GameObject.Find("Next_Button").GetComponent<Button>();
+        nextBtn.interactable = true;
         if (Player.GetComponent<Player_HP>().isDead == true || citizenSaveNumber == 0)
         {
             gameplayResult.text = "TUTORIAL FAILED";
+            nextBtn.interactable = false;
         }
         enemyKillResult.text = enemyNumber.ToString();
         citizenSaveResult.text = citizenSaveNumber.ToString();
