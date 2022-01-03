@@ -38,6 +38,7 @@ public class Player_DataManager : MonoBehaviour
     public void player_LevelUP()
     {
         Player.level_Player += 1;
+        Player_Update.UpdatePlayer();
     }
 
 
