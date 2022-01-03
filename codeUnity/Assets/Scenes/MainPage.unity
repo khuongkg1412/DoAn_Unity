@@ -2667,7 +2667,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1704570314}
         m_TargetAssemblyTypeName: ChangeScence, Assembly-CSharp
         m_MethodName: howToPlayOpening
         m_Mode: 1

@@ -445,7 +445,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 480504022}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.965824
+  m_Size: 0.6476664
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1071,11 +1071,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 180b1beb2e998c2449b881406eff6b85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Coin: {fileID: 0}
-  Diamond: {fileID: 0}
-  Life: {fileID: 0}
-  Name: {fileID: 0}
-  avatar: {fileID: 0}
 --- !u!1 &898093523
 GameObject:
   m_ObjectHideFlags: 0
@@ -2144,7 +2139,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1770551175}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73ee0a581a5c1d24e9bedd5381196402, type: 3}
+  m_Script: {fileID: 11500000, guid: 62cbc0aae0ef7cc4ea9834dbcfffefa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1834654152

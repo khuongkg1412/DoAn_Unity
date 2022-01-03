@@ -520,7 +520,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 80.99985, y: -82.00006}
+  m_AnchoredPosition: {x: 80.99988, y: -82.00006}
   m_SizeDelta: {x: 128, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &157057781
@@ -2060,6 +2060,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2088529584}
+  - component: {fileID: 2088529585}
   m_Layer: 5
   m_Name: safeArea
   m_TagString: Untagged
@@ -2092,6 +2093,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2088529585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2088529583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73ee0a581a5c1d24e9bedd5381196402, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 881436825}
 --- !u!1 &2090363137
 GameObject:
   m_ObjectHideFlags: 0
