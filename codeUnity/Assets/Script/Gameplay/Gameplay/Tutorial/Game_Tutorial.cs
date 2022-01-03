@@ -15,11 +15,7 @@ public class Game_Tutorial : MonoBehaviour
     public GameObject pannelGameover;
 
     [SerializeField]
-    private TextMeshProUGUI scoreResult, enemyKillResult,
-            citizenSaveResult,
-            gameplayResult,
-            scoreRunning,
-            enemyCount,
+    private TextMeshProUGUI scoreResult, enemyKillResult, citizenSaveResult, gameplayResult, scoreRunning, enemyCount,
             citizenCount;
 
     private float enemyNumber,
@@ -63,14 +59,12 @@ public class Game_Tutorial : MonoBehaviour
         DisplayResultPannel();
         Button nextBtn = GameObject.Find("Next_Button").GetComponent<Button>();
         nextBtn.interactable = true;
-
     }
     //Update score
     public void UpdateScore(float scorePlus)
     {
         //Set score
         score += scorePlus;
-        Debug.Log("Score Update " + score);
         scoreRunning.text = score.ToString();
         scoreResult.text = score.ToString();
     }

@@ -82,7 +82,6 @@ public class Game_Start : MonoBehaviour
         else
         {
             //Game end. Display result and end the gameplay
-            DisplayResultPannel();
             GameOVer();
         }
     }
@@ -93,6 +92,7 @@ public class Game_Start : MonoBehaviour
         Time.timeScale = 0f;
         pannelGameover.SetActive(true);
         Player.GetComponent<Player_HP>().isDead = true;
+        DisplayResultPannel();
     }
     //Update score
     public void UpdateScore(float scorePlus)
@@ -133,6 +133,8 @@ public class Game_Start : MonoBehaviour
         if (isVictory)
         {
             gameplayResult.text = "VICTORY";
+            Button nextBtn = GameObject.Find("Next_Button").GetComponent<Button>();
+            nextBtn.interactable = true;
         }
         else
         {
@@ -140,12 +142,13 @@ public class Game_Start : MonoBehaviour
         }
         enemyKillResult.text = enemyNumber.ToString();
         citizenSaveResult.text = citizenSaveNumber.ToString();
+
     }
     //Condition to victory
     void ConditionToVictory()
     {
         //Check condition victory
-        if (enemyNumber == enemyNumberStart || citizenSaveNumber == citizenNumberStart)
+        if (citizenSaveNumber == citizenNumberStart)
         {
             isGameOver = true;
             isVictory = true;

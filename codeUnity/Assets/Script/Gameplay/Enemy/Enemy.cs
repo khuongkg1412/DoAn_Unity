@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    //Player target to enemy move forward
-    public Transform target, target2;
-
+    //Player targetPlayer to enemy move forward
+    public GameObject[] targetCitizen;
+    public Transform targetPlayer;
     //Distance from player to enemy
     //public Vector3 distancePlayer = new Vector3(10,10,0);
     //The orginal position of enemy, after out of range with player, enemy would comeback here
@@ -52,9 +52,9 @@ public class Enemy : MonoBehaviour
             {
                 followPlayer();
             }
-            else if (distanceToCitizen())
+            else if (distanceToCitizen() != null)
             {
-                followCitizen();
+                followCitizen(distanceToCitizen());
             }
             //Out range then comeback to home position
             else
@@ -67,20 +67,50 @@ public class Enemy : MonoBehaviour
 
     bool distanceToPlayer()
     {
-        if (Vector3.Distance(target.position, transform.position) <= range)
+
+        if (Vector3.Distance(targetPlayer.position, transform.position) <= range)
         {
             return true;
         }
         return false;
     }
 
-    bool distanceToCitizen()
+    GameObject distanceToCitizen()
     {
-        if (Vector3.Distance(target2.position, transform.position) <= range)
+        //Find all citizen
+        targetCitizen = GameObject.FindGameObjectsWithTag("Citizen");
+        if (targetCitizen.Length > 0)
         {
-            return true;
+            if (targetCitizen[0] != null)
+            {
+                //Set minimum value for fisrt object in list of obejcts citizens
+                float minimumRange = Vector3.Distance(targetCitizen[0].transform.position, transform.position);
+                GameObject target = targetCitizen[0];
+                //Go throught list and check distance from enemy to citizens
+                foreach (var i in targetCitizen)
+                {
+                    if (i != null)
+                    {
+                        //Set Value when new minimun range is found
+                        if (Vector3.Distance(i.transform.position, transform.position) < minimumRange)
+                        {
+                            //Set mimum range value and object
+                            minimumRange = Vector3.Distance(i.transform.position, transform.position);
+                            target = i;
+                        }
+                    }
+                }
+                //If mimum range is in range following then return that target
+                if (minimumRange <= range)
+                {
+                    return target;
+                }
+            }
+
         }
-        return false;
+
+        //else return null
+        return null;
     }
     //Comeback home position
     public void comeBackPos()
@@ -91,12 +121,12 @@ public class Enemy : MonoBehaviour
     //Following p;ayer
     public void followPlayer()
     {
-        transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, targetPlayer.position, speed * Time.deltaTime);
     }
 
-    public void followCitizen()
+    public void followCitizen(GameObject citizen)
     {
-        transform.position = Vector3.MoveTowards(transform.position, target2.position, speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, citizen.transform.position, speed * Time.deltaTime);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -119,7 +149,7 @@ public class Enemy : MonoBehaviour
             //Hit citizen , then decrease HP from zitizen
             if (other.gameObject.tag == "Citizen")
             {
-                other.gameObject.GetComponent<Citizen_Helping>().isSicked = true;
+                other.gameObject.GetComponent<Citizen_HP>().isSicked = true;
             }
         }
     }

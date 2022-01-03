@@ -176,15 +176,9 @@ public class Player_Movement : MonoBehaviour
         GameObject[] citizen = GameObject.FindGameObjectsWithTag("Citizen");
         foreach (var i in citizen)
         {
-            if (
-                Vector2.Distance(i.transform.position, transform.position) <=
-                range &&
-                citizen != null
-            )
+            if (Vector2.Distance(i.transform.position, transform.position) <= range && citizen != null)
             {
                 check = true;
-                //button.interactable = true;
-                //button.GetComponent<Citizen_Healing>().setCitizenObject(i);
             }
         }
         if (!check)
@@ -200,9 +194,7 @@ public class Player_Movement : MonoBehaviour
         if (other.gameObject.tag == "Citizen")
         {
             button.interactable = true;
-            button
-                .GetComponent<Citizen_Healing>()
-                .setCitizenObject(other.gameObject);
+            button.GetComponent<Citizen_Healing>().setCitizenObject(other.gameObject);
         }
         else
         {
