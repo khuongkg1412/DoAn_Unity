@@ -119,9 +119,10 @@ public class Tutorial : MonoBehaviour
     }
     void levelUpPlayer()
     {
-        PlayerStruct player = SaveSystem.LoadDataPlayer();
-        player.level_Player += 1;
-        SaveSystem.SaveDataPlayer(player);
+        // PlayerStruct player = SaveSystem.LoadDataPlayer();
+        // player.level_Player += 1;
+        // SaveSystem.SaveDataPlayer(player);
+        Player_DataManager.Instance.player_LevelUP();
     }
     //Move : This is the control button that allows your character to move.
     //Map : This is a map used to observe the targets around you.
