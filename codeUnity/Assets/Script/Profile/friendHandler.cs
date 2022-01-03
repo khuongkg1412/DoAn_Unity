@@ -13,10 +13,10 @@ public class friendHandler : MonoBehaviour
     public GameObject prefab;
     public ScrollRect friendList;
     public GameObject content;
-    List<playerStruct> listData = new List<playerStruct>();
+    List<PlayerStruct> listData = new List<PlayerStruct>();
     bool isRun = false;
 
-    private playerStruct objectData;
+    private PlayerStruct objectData;
 
     // Start is called before the first frame update
     void Start()
@@ -31,12 +31,12 @@ public class friendHandler : MonoBehaviour
 
     }
 
-    void Populate(Sprite sprite, string name, int Level)
+    void Populate(Sprite sprite, string name, float Level)
     {
         Debug.Log("Dang o day");
 
-        GameObject scrollItemObj = (GameObject) Instantiate(prefab, transform);
-       
+        GameObject scrollItemObj = (GameObject)Instantiate(prefab, transform);
+
         scrollItemObj.transform.Find("Name & level/Name").gameObject.GetComponent<Text>().text = name;
         scrollItemObj.transform.Find("Name & level/level").gameObject.GetComponent<Text>().text = "Level " + Level;
         scrollItemObj.transform.Find("Avatar").gameObject.GetComponent<Image>().sprite = sprite;
@@ -46,9 +46,9 @@ public class friendHandler : MonoBehaviour
     {
         StartCoroutine(GetFriendData());
         yield return new WaitUntil(() => isRun == true);
-        Debug.Log("Database Reading  "+ listData[0].avatar_Player);
+        Debug.Log("Database Reading  " + listData[0].avatar_Player);
 
-        foreach (playerStruct player in listData)
+        foreach (PlayerStruct player in listData)
         {
             StartCoroutine(GetImage(player.avatar_Player, player.name_Player, player.level_Player));
         }
@@ -74,7 +74,7 @@ public class friendHandler : MonoBehaviour
                     allItemQuerySnapshot.Documents
                 )
                 {
-                    objectData = documentSnapshot.ConvertTo<playerStruct>();
+                    objectData = documentSnapshot.ConvertTo<PlayerStruct>();
                     Debug.Log("Database Reading 1 " + objectData.avatar_Player);
                     listData.Add(objectData);
                 }
@@ -82,7 +82,7 @@ public class friendHandler : MonoBehaviour
             });
         yield return null;
     }
-    IEnumerator GetImage(string dataImage, string Name, int level)
+    IEnumerator GetImage(string dataImage, string Name, float level)
     {
         Debug.Log("Image Downloading");
 

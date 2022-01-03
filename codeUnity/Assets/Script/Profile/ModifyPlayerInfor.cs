@@ -11,7 +11,7 @@ using UnityEngine.UI;
 public class ModifyPlayerInfor : MonoBehaviour
 {
     FirebaseFirestore db;
-    private playerStruct player;
+    private PlayerStruct player;
     bool isModify = uploadAvatar.isModify;
     bool isUpDone = uploadAvatar.isUpDone;
     bool isRun = false;
@@ -56,7 +56,7 @@ public class ModifyPlayerInfor : MonoBehaviour
                     Debug.Log(String.Format("{0}: {1}", pair.Key, pair.Value));
 
                 }
-                player = snapshot.ConvertTo<playerStruct>();
+                player = snapshot.ConvertTo<PlayerStruct>();
                 Debug.Log("Player : " + player.avatar_Player);
             }
             else
