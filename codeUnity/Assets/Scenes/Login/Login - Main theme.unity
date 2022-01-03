@@ -963,7 +963,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1350916065}
         m_TargetAssemblyTypeName: ChangeScence, Assembly-CSharp
         m_MethodName: backtoMainPage
         m_Mode: 1
@@ -3163,6 +3163,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1350916063}
   - component: {fileID: 1350916064}
+  - component: {fileID: 1350916065}
   m_Layer: 5
   m_Name: safeArea
   m_TagString: Untagged
@@ -3208,6 +3209,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62cbc0aae0ef7cc4ea9834dbcfffefa3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1350916065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1350916062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180b1beb2e998c2449b881406eff6b85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1353120647
