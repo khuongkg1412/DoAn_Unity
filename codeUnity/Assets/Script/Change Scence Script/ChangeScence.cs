@@ -68,6 +68,33 @@ public class ChangeScence : MonoBehaviour
     public Text Coin, Diamond, Life, Name;
     public Image avatar;
 
+    Inventory_Player inventory_Player = new Inventory_Player()
+    {
+        quantity = 0
+    };
+    SystemNotification systemNotification = new SystemNotification()
+    {
+        status_Notification = false
+    };
+    Friend_Player friend_Player = new Friend_Player()
+    {
+        accept_Friend = false,
+        notificationID = false
+    };
+    Achievement_Player achievement_Player = new Achievement_Player()
+    {
+        achived_Player = true,
+        progress_Player = 0
+    };
+    Notification_Player notification_Player = new Notification_Player()
+    {
+        content_Notification = "This is the content of the first notification",
+        sentID_Notification = "ID sent",
+        status_Notification = false,
+        title_Notification = "This is title of the first notification",
+        type_Notification = 0
+    };
+
 
     private void Start()
     {
@@ -93,6 +120,7 @@ public class ChangeScence : MonoBehaviour
                 Diamond.text = "" + player.diamond_Player;
                 Life.text = "" + player.energy_Player;
                 Name.text = "" + player.name_Player;
+                StartCoroutine(addOtherCollection(IDPlayer));
                 StartCoroutine(GetImage(player.avatar_Player));
             }
         });
@@ -126,9 +154,31 @@ public class ChangeScence : MonoBehaviour
                     texture.LoadImage(fileContents);
                     Sprite sprite = Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100.0f);
                     avatar.sprite = sprite;
-                    //Populate(sprite, Name, level);
                 }
             });
         yield return null;
     }
+
+    IEnumerator addOtherCollection(string ID)
+    {
+        FirebaseFirestore db = FirebaseFirestore.DefaultInstance;
+
+        DocumentReference doc = db.Collection("Player").Document(ID).Collection("Inventory_Player").Document("Demo");
+        doc.SetAsync(inventory_Player);
+
+        doc = db.Collection("Player").Document(ID).Collection("SystemNotification").Document("Demo");
+        doc.SetAsync(systemNotification);
+
+        doc = db.Collection("Player").Document(ID).Collection("Friend_Player").Document("Demo");
+        doc.SetAsync(friend_Player);
+
+        doc = db.Collection("Player").Document(ID).Collection("Achievement_Player").Document("Demo");
+        doc.SetAsync(achievement_Player);
+
+        doc = db.Collection("Player").Document(ID).Collection("Notification_Player").Document("Demo");
+        doc.SetAsync(notification_Player);
+
+        yield return null;
+    }
 }
+

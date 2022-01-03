@@ -8,11 +8,15 @@ using UnityEngine.UI;
 
 public class CreateCharacter : MonoBehaviour
 {
-    FirebaseFirestore db = FirebaseFirestore.DefaultInstance;
+    FirebaseFirestore db;
     public InputField characterName;
 
     int male = 1;
 
+    private void Start()
+    {
+        db = FirebaseFirestore.DefaultInstance;
+    }
     public void Create()
     {
         if (characterName.text.Length == 0)
