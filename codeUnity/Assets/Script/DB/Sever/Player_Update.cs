@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using Firebase.Firestore;
 using UnityEngine;
 
-public class Player_Update : MonoBehaviour
+public static class Player_Update
 {
-    private void UpdatePlayer(Player_DataManager data)
+    public static void UpdatePlayer()
     {
         //FireBase Object
         FirebaseFirestore db;
@@ -14,23 +14,34 @@ public class Player_Update : MonoBehaviour
         db = FirebaseFirestore.DefaultInstance;
 
         //Get Collection And Document
-        // DocumentReference doc = db.Collection("Player").Document("7xv28G3fCIf2UoO0rV2SFV5tTr62");
-        // doc.SetAsync(playerExample);
+        DocumentReference doc = db.Collection("Player").Document("7xv28G3fCIf2UoO0rV2SFV5tTr62");
+        doc.SetAsync(Player_DataManager.Instance.Player);
 
-        // doc = db.Collection("Player").Document("7xv28G3fCIf2UoO0rV2SFV5tTr62").Collection("Inventory_Player").Document();
-        // doc.SetAsync(inventory_Player);
-
-        // doc = db.Collection("Player").Document("7xv28G3fCIf2UoO0rV2SFV5tTr62").Collection("SystemNotification").Document();
-        // doc.SetAsync(systemNotification);
-
-        // doc = db.Collection("Player").Document("7xv28G3fCIf2UoO0rV2SFV5tTr62").Collection("Friend_Player").Document();
-        // doc.SetAsync(friend_Player);
-
-        // doc = db.Collection("Player").Document("7xv28G3fCIf2UoO0rV2SFV5tTr62").Collection("Achievement_Player").Document();
-        // doc.SetAsync(achievement_Player);
-
-        // doc = db.Collection("Player").Document("7xv28G3fCIf2UoO0rV2SFV5tTr62").Collection("Notification_Player").Document();
-        // doc.SetAsync(notification_Player);
+        foreach (var i in Player_DataManager.Instance.inventory_Player)
+        {
+            doc = db.Collection("Player").Document("7xv28G3fCIf2UoO0rV2SFV5tTr62").Collection("Inventory_Player").Document();
+            doc.SetAsync(i);
+        }
+        foreach (var i in Player_DataManager.Instance.systemNotification)
+        {
+            doc = db.Collection("Player").Document("7xv28G3fCIf2UoO0rV2SFV5tTr62").Collection("SystemNotification").Document();
+            doc.SetAsync(i);
+        }
+        foreach (var i in Player_DataManager.Instance.achievement_Player)
+        {
+            doc = db.Collection("Player").Document("7xv28G3fCIf2UoO0rV2SFV5tTr62").Collection("Achievement_Player").Document();
+            doc.SetAsync(i);
+        }
+        foreach (var i in Player_DataManager.Instance.friend_Player)
+        {
+            doc = db.Collection("Player").Document("7xv28G3fCIf2UoO0rV2SFV5tTr62").Collection("Friend_Player").Document();
+            doc.SetAsync(i);
+        }
+        foreach (var i in Player_DataManager.Instance.notification_Player)
+        {
+            doc = db.Collection("Player").Document("7xv28G3fCIf2UoO0rV2SFV5tTr62").Collection("Notification_Player").Document();
+            doc.SetAsync(i);
+        }
 
     }
 
