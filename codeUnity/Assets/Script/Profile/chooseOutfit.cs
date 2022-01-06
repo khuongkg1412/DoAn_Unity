@@ -7,14 +7,14 @@ using Firebase.Extensions;
 using Firebase.Firestore;
 using Firebase.Storage;
 
-public class chooseShirt : MonoBehaviour
+public class chooseOutfit : MonoBehaviour
 {
     FirebaseFirestore db;
     public GameObject prefab;
     public GameObject content;
-    List<outfitItemStruct> listShirt = new List<outfitItemStruct>();
+    List<ItemStruct> listShirt = new List<ItemStruct>();
     bool isRun = false;
-    private outfitItemStruct objectData;
+    private ItemStruct objectData;
 
     // Start is called before the first frame update
     void Start()
@@ -25,15 +25,15 @@ public class chooseShirt : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void Populate(Sprite sprite)
     {
         Debug.Log("Dang o day");
 
-        GameObject scrollItemObj = (GameObject) Instantiate(prefab, transform);
-       
+        GameObject scrollItemObj = (GameObject)Instantiate(prefab, transform);
+
         scrollItemObj.transform.Find("Image").gameObject.GetComponent<Image>().sprite = sprite;
     }
 
@@ -41,11 +41,11 @@ public class chooseShirt : MonoBehaviour
     {
         StartCoroutine(GetOutfitData());
         yield return new WaitUntil(() => isRun == true);
-        Debug.Log("Database Reading  "+ listShirt[0].imgUrl);
+        Debug.Log("Database Reading  " + listShirt[0].image_Item);
 
-        foreach (outfitItemStruct shirt in listShirt)
+        foreach (ItemStruct shirt in listShirt)
         {
-            StartCoroutine(GetImage(shirt.imgUrl));
+            StartCoroutine(GetImage(shirt.image_Item));
         }
         yield return null;
     }
@@ -70,7 +70,7 @@ public class chooseShirt : MonoBehaviour
                     allItemQuerySnapshot.Documents
                 )
                 {
-                    objectData = documentSnapshot.ConvertTo<outfitItemStruct>();
+                    objectData = documentSnapshot.ConvertTo<ItemStruct>();
                     Debug.Log("Database Reading 1 ");
                     listShirt.Add(objectData);
                 }
