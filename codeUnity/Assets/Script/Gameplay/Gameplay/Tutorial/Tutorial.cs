@@ -111,23 +111,12 @@ public class Tutorial : MonoBehaviour
                 if (GameObject.Find("Canvas").GetComponent<Game_Tutorial>().returnScore() > 100)
                 {
                     GameObject.Find("Canvas").GetComponent<Game_Tutorial>().isGameOver = true;
-                    levelUpPlayer();
+                    Player_DataManager.Instance.Player.level.stage += 1;
+                    //Call to update the information off Player
+                    Player_Update.UpdatePlayer();
                     Destroy(gameObject);
                 }
                 break;
         }
     }
-    void levelUpPlayer()
-    {
-        // PlayerStruct player = SaveSystem.LoadDataPlayer();
-        // player.level_Player += 1;
-        // SaveSystem.SaveDataPlayer(player);
-        Player_DataManager.Instance.player_LevelUP();
-    }
-    //Move : This is the control button that allows your character to move.
-    //Map : This is a map used to observe the targets around you.
-    //Shoot: This is the button to adjust the direction of the shot, use it to destroy the enemy.
-    //Virus: This is the enemy that needs to be destroyed.
-    //Citizen : + The citizen is here. You can find where he is on the map with the green icon. 
-    //+ He would get sick and lose health points while being near viruses and get attacked by them.
 }

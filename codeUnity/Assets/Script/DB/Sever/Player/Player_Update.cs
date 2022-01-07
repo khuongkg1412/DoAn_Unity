@@ -27,11 +27,6 @@ public static class Player_Update
             doc = db.Collection("Player").Document("7xv28G3fCIf2UoO0rV2SFV5tTr62").Collection("SystemNotification").Document();
             doc.SetAsync(i);
         }
-        foreach (var i in Player_DataManager.Instance.achievement_Player)
-        {
-            doc = db.Collection("Player").Document("7xv28G3fCIf2UoO0rV2SFV5tTr62").Collection("Achievement_Player").Document();
-            doc.SetAsync(i);
-        }
         foreach (var i in Player_DataManager.Instance.friend_Player)
         {
             doc = db.Collection("Player").Document("7xv28G3fCIf2UoO0rV2SFV5tTr62").Collection("Friend_Player").Document();

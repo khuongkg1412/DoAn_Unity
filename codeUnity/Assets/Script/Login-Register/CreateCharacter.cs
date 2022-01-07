@@ -40,23 +40,40 @@ public class CreateCharacter : MonoBehaviour
         DocumentReference docRef = db.Collection("Player").Document(IDPlayer);
         PlayerStruct newPlayer = new PlayerStruct()
         {
-            avatar_Player = "",
-            coin_Player = 0,
-            diamond_Player = 0,
-            energy_Player = 5,
-            gender_Player = 0,
-            level_Player = 0,
-            name_Player = "User02",
-            stage_Player = 0,
-            xp_Player = 0,
-            numeral_Player =
-                     new NumeralStruct
-                     {
-                         ATK_Numeral = 2,
-                         DEF_Numeral = 2,
-                         HP_Numeral = 2,
-                         SPD_Numeral = 2
-                     }
+            generalInformation = new GeneralInformation_Player()
+            {
+                username_Player = "Khuong Meo",
+                avatar_Player = "PlayerAvatar/Avatar item.png",
+                gender_Player = 0
+            },
+            concurrency = new Concurrency()
+            {
+                Coin = 0,
+                Diamond = 0
+            },
+            numeral = new NumeralStruct()
+            {
+                ATK_Numeral = 10,
+                DEF_Numeral = 0,
+                HP_Numeral = 10,
+                SPD_Numeral = 300
+            },
+            level = new Level()
+            {
+                currentXP = 0,
+                reachXP = 130,
+                level = 0,
+                stage = 0,
+                life = 6
+            },
+            statistic = new Dictionary<string, float>
+        {
+            {"VirusA_Killed",0},
+            {"VirusB_Killed",0},
+            {"VirusC_Killed",0},
+            {"VirusD_Killed",0},
+            {"Citizen_Saved",0}
+        }
         };
 
         docRef.SetAsync(newPlayer).ContinueWithOnMainThread(task =>

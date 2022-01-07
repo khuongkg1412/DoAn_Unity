@@ -66,35 +66,6 @@ public class Player_Loading : MonoBehaviour
             isDoneInvent = true;
         });
     }
-    private void loadDataAchievement()
-    {
-        isDoneAchive = false;
-        //FireBase Object
-        FirebaseFirestore db;
-
-        //db connection
-        db = FirebaseFirestore.DefaultInstance;
-
-        Query allCitiesQuery = db.Collection("Player").Document("7xv28G3fCIf2UoO0rV2SFV5tTr62").Collection("Achievement");
-        allCitiesQuery.GetSnapshotAsync().ContinueWithOnMainThread(task =>
-        {
-            QuerySnapshot allCitiesQuerySnapshot = task.Result;
-            foreach (DocumentSnapshot documentSnapshot in allCitiesQuerySnapshot.Documents)
-            {
-                Achievement_Player objectData = documentSnapshot.ConvertTo<Achievement_Player>();
-                Player_DataManager.Instance.achievement_Player.Add(objectData);
-            }
-            if (task.IsCanceled)
-            {
-                Debug.LogError("loadDataAchievement Error");
-            }
-            else if (task.IsFaulted)
-            {
-                Debug.LogError("loadDataAchievement Faulted");
-            }
-            isDoneAchive = true;
-        });
-    }
     private void loadDataSystemNotification()
     {
         isDoneSystemNoti = false;
@@ -188,7 +159,6 @@ public class Player_Loading : MonoBehaviour
     {
         yield return new WaitUntil(() => Player_DataManager.Instance != null);
         loadingPlayer();
-        loadDataAchievement();
         loadDataFriend();
         loadDataInvetory();
         loadDataNotification();

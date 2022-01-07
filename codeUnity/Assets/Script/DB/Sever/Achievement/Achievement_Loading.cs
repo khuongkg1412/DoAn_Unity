@@ -38,7 +38,7 @@ public class Achievement_Loading : MonoBehaviour
             foreach (DocumentSnapshot documentSnapshot in allCitiesQuerySnapshot.Documents)
             {
                 AchievementStruct objectData = documentSnapshot.ConvertTo<AchievementStruct>();
-                Achievement_DataManager.Instance.Achievement.Add(documentSnapshot.Id, objectData);
+                Achievement_DataManager.Instance.Achievement.Add(objectData, false);
             }
             if (task.IsCanceled)
             {
