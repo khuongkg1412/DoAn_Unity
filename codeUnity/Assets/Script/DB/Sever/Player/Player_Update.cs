@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Firebase.Firestore;
 using UnityEngine;
 
-public static class Player_Update
+public class Player_Update
 {
     public static void UpdatePlayer()
     {

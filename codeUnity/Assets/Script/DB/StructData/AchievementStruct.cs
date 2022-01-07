@@ -7,6 +7,7 @@ using Firebase.Firestore;
 [FirestoreData]
 public class AchievementStruct
 {
+    public string ID { get; set; }
     [FirestoreProperty]
     public string title_Achievement { get; set; }
 

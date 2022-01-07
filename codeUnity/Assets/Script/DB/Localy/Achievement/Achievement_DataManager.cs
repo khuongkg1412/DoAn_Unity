@@ -30,6 +30,7 @@ public class Achievement_DataManager : MonoBehaviour
         {
             foreach (var item in Achievement_DataManager.Instance.Achievement)
             {
+                Debug.Log("Running");
                 // Call Method base on APICaLL.Mehtod 
                 switch (item.Key.APICall.APIMethod)
                 {
@@ -37,13 +38,13 @@ public class Achievement_DataManager : MonoBehaviour
                         Save_CitizenMethod(item.Key);
                         break;
                     case "Kill_VirusMethod":
+                        Kill_VirusMethod(item.Key);
                         break;
                     default:
                         Debug.Log("Default case Achievement data");
                         break;
                 }
             }
-
         }
         else
         {
@@ -53,6 +54,7 @@ public class Achievement_DataManager : MonoBehaviour
 
     void Save_CitizenMethod(AchievementStruct item)
     {
+        Debug.Log("Save_CitizenMethod");
         //get goal that need to unlock achievement
         float goal = item.APICall.goal;
         //Total citizen that player save
@@ -66,6 +68,7 @@ public class Achievement_DataManager : MonoBehaviour
     }
     void Kill_VirusMethod(AchievementStruct item)
     {
+        Debug.Log("Kill_VirusMethod");
         //get goal that need to unlock achievement
         float goal = item.APICall.goal;
         //Get player object

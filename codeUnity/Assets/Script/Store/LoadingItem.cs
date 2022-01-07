@@ -57,20 +57,9 @@ public class LoadingItem : MonoBehaviour
         description.text = dataItem.description_Item;
         dataImage.texture = loadingImageFromFilePath(dataItem.image_Item);
         dataImage.SetNativeSize();
-        if (dataItem.paymethod_Item == 0)
-        {
-            coin.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text =
-                dataItem.price_Item.ToString();
-            diamond.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text =
-                "0";
-        }
-        else
-        {
-            diamond.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text =
-                dataItem.price_Item.ToString();
-            coin.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text =
-                "0";
-        }
+
+        diamond.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text = dataItem.concurrency.Diamond.ToString();
+        coin.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text = dataItem.concurrency.Coin.ToString();
     }
     void dataforItemChest()
     {
@@ -78,20 +67,9 @@ public class LoadingItem : MonoBehaviour
         description.text = dataItem.description_Item;
         dataImage.texture = loadingImageFromFilePath(dataItem.image_Item);
         dataImage.SetNativeSize();
-        if (dataItem.paymethod_Item == 0)
-        {
-            coin.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text =
-                dataItem.price_Item.ToString();
-            diamond.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text =
-                "0";
-        }
-        else
-        {
-            diamond.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text =
-                dataItem.price_Item.ToString();
-            coin.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text =
-                "0";
-        }
+
+        diamond.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text = dataItem.concurrency.Diamond.ToString();
+        coin.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text = dataItem.concurrency.Coin.ToString();
     }
 
     public void loadingData()

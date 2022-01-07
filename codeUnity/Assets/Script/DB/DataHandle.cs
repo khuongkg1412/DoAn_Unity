@@ -95,8 +95,6 @@ public class DataHandle : MonoBehaviour
         title_Achievement = "Save 5 citizens.",
         APICall = new APICall_Achievement
         {
-            // {"Progress" ,},
-            // {"Goal" , 5}
             APIMethod = "Save_CitizenMethod",
             goal = 5
         },
@@ -111,8 +109,6 @@ public class DataHandle : MonoBehaviour
         title_Achievement = "Kills 50 Virus",
         APICall = new APICall_Achievement
         {
-            // {"Progress" ,"Kill_VirusMethod"},
-            // {"Goal" , 50}
             APIMethod = "Kill_VirusMethod",
             goal = 50
         },
@@ -127,10 +123,8 @@ public class DataHandle : MonoBehaviour
         title_Achievement = "Save 10 citizen.",
         APICall = new APICall_Achievement
         {
-            // {"Progress" ,"Save_CitizenMethod"},
-            // {"Goal" , 10}
             APIMethod = "Save_CitizenMethod",
-            goal = 50
+            goal = 10
 
         },
         concurrency = new Concurrency()
@@ -158,7 +152,6 @@ public class DataHandle : MonoBehaviour
     private void Start()
     {
         //TestFireBase();
-
     }
 
     private void Update()
@@ -176,15 +169,17 @@ public class DataHandle : MonoBehaviour
     }
     void loadDataPlayerOnScence()
     {
+        if (Player_DataManager.Instance.Player != null)
+        {
+            PlayerStruct player = Player_DataManager.Instance.Player;
 
-        PlayerStruct player = Player_DataManager.Instance.Player;
+            StartCoroutine(GetImage(player.generalInformation.avatar_Player));
 
-        StartCoroutine(GetImage(player.generalInformation.avatar_Player));
-
-        Coin.text = "" + player.concurrency.Coin;
-        Diamond.text = "" + player.concurrency.Diamond;
-        Life.text = "" + player.level.life + "/6";
-        Name.text = "" + player.generalInformation.username_Player + "\n" + "LV." + player.level.level;
+            Coin.text = "" + player.concurrency.Coin;
+            Diamond.text = "" + player.concurrency.Diamond;
+            Life.text = "" + player.level.life + "/6";
+            Name.text = "" + player.generalInformation.username_Player + "\n" + "LV." + player.level.level;
+        }
     }
     IEnumerator GetImage(string dataImage)
     {
