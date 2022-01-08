@@ -4,9 +4,9 @@ using Firebase.Extensions;
 using Firebase.Firestore;
 using UnityEngine;
 
-public class Achievement_Loading : MonoBehaviour
+public class Item_Loading : MonoBehaviour
 {
-    private bool isDoneAchieve = false;
+    private bool isDoneItem = false;
 
     private void Start()
     {
@@ -14,42 +14,42 @@ public class Achievement_Loading : MonoBehaviour
     }
     IEnumerator LoadingDataFromSever()
     {
-        yield return new WaitUntil(() => Achievement_DataManager.Instance != null);
+        yield return new WaitUntil(() => Item_DataManager.Instance != null);
 
-        loadDataAchievement();
+        loadDataItem();
 
-        yield return new WaitUntil(() => isDoneAchieve);
+        yield return new WaitUntil(() => isDoneItem);
 
     }
 
-    private void loadDataAchievement()
+    private void loadDataItem()
     {
-        isDoneAchieve = false;
+        isDoneItem = false;
         //FireBase Object
         FirebaseFirestore db;
 
         //db connection
         db = FirebaseFirestore.DefaultInstance;
 
-        Query allCitiesQuery = db.Collection("Achievement");
+        Query allCitiesQuery = db.Collection("Item");
         allCitiesQuery.GetSnapshotAsync().ContinueWithOnMainThread(task =>
         {
             QuerySnapshot allCitiesQuerySnapshot = task.Result;
             foreach (DocumentSnapshot documentSnapshot in allCitiesQuerySnapshot.Documents)
             {
-                AchievementStruct objectData = documentSnapshot.ConvertTo<AchievementStruct>();
+                ItemStruct objectData = documentSnapshot.ConvertTo<ItemStruct>();
                 objectData.ID = documentSnapshot.Id;
-                Achievement_DataManager.Instance.Achievement.Add(objectData, false);
+                Item_DataManager.Instance.Item.Add(objectData);
             }
             if (task.IsCanceled)
             {
-                Debug.LogError("loadDataAchievement Error");
+                Debug.LogError("loadDataItem Error");
             }
             else if (task.IsFaulted)
             {
-                Debug.LogError("loadDataAchievement Faulted");
+                Debug.LogError("loadDataItem Faulted");
             }
-            isDoneAchieve = true;
+            isDoneItem = true;
         });
     }
 }

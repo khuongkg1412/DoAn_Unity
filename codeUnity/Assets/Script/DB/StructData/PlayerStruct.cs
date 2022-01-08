@@ -7,8 +7,10 @@ using Firebase.Firestore;
 [FirestoreData]
 public class Inventory_Player
 {
+    public string ID { get; set; }
+
     [FirestoreProperty]
-    public float quantity { get; set; }
+    public Dictionary<string, float> item { get; set; }
 }
 
 [FirestoreData]
@@ -23,33 +25,23 @@ public class Friend_Player
 {
     [FirestoreProperty]
     public bool accept_Friend { get; set; }
-    [FirestoreProperty]
-    public bool notificationID { get; set; }
+    public string friendID { get; set; }
 }
 
-[FirestoreData]
-public class Achievement_Player
-{
-    [FirestoreProperty]
-    public bool achived_Player { get; set; }
-    [FirestoreProperty]
-    public float progress_Player { get; set; }
-}
-
-[FirestoreData]
-public class Notification_Player
-{
-    [FirestoreProperty]
-    public string content_Notification { get; set; }
-    [FirestoreProperty]
-    public string sentID_Notification { get; set; }
-    [FirestoreProperty]
-    public bool status_Notification { get; set; }
-    [FirestoreProperty]
-    public string title_Notification { get; set; }
-    [FirestoreProperty]
-    public float type_Notification { get; set; }
-}
+// [FirestoreData]
+// public class Notification_Player
+// {
+//     [FirestoreProperty]
+//     public string content_Notification { get; set; }
+//     [FirestoreProperty]
+//     public string sentID_Notification { get; set; }
+//     [FirestoreProperty]
+//     public bool status_Notification { get; set; }
+//     [FirestoreProperty]
+//     public string title_Notification { get; set; }
+//     [FirestoreProperty]
+//     public float type_Notification { get; set; }
+// }
 
 
 [FirestoreData]
@@ -57,26 +49,45 @@ public class Notification_Player
 public class PlayerStruct
 {
     [FirestoreProperty]
-    public string avatar_Player { get; set; }
+    public GeneralInformation_Player generalInformation { get; set; }
     [FirestoreProperty]
-    public float coin_Player { get; set; }
+    public Concurrency concurrency { get; set; }
     [FirestoreProperty]
-    public float diamond_Player { get; set; }
+    public NumeralStruct numeral { get; set; }
     [FirestoreProperty]
-    public float energy_Player { get; set; }
+    public Level level { get; set; }
     [FirestoreProperty]
-    public float gender_Player { get; set; }
-    [FirestoreProperty]
-    public float level_Player { get; set; }
-    [FirestoreProperty]
-    public string name_Player { get; set; }
-    [FirestoreProperty]
-    public float stage_Player { get; set; }
-    [FirestoreProperty]
-    public float xp_Player { get; set; }
-    [FirestoreProperty]
-    public float currentxp_Player { get; set; }
-    [FirestoreProperty]
-    public NumeralStruct numeral_Player { get; set; }
+    public Dictionary<string, float> statistic { get; set; }
+
+    public string ID { get; set; }
+
 }
 
+[FirestoreData]
+public class GeneralInformation_Player
+{
+    [FirestoreProperty]
+    public string username_Player { get; set; }
+    [FirestoreProperty]
+    public string avatar_Player { get; set; }
+    [FirestoreProperty]
+    public int gender_Player { get; set; }
+}
+[FirestoreData]
+public class Concurrency
+{
+    [FirestoreProperty]
+    public float Diamond { get; set; }
+    [FirestoreProperty]
+    public float Coin { get; set; }
+}
+
+[FirestoreData]
+public class Level
+{
+    [FirestoreProperty] public float currentXP { get; set; }
+    [FirestoreProperty] public float reachXP { get; set; }
+    [FirestoreProperty] public int level { get; set; }
+    [FirestoreProperty] public int stage { get; set; }
+    [FirestoreProperty] public int life { get; set; }
+}

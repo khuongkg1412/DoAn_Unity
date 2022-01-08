@@ -23,9 +23,9 @@ public class NumeralStruct
 [FirestoreData]
 public class ItemStruct
 {
+    public string ID { get; set; }
     [FirestoreProperty]
-    public float paymethod_Item { get; set; }
-
+    public Concurrency concurrency { get; set; }
     [FirestoreProperty]
     public string description_Item { get; set; }
 
@@ -34,9 +34,6 @@ public class ItemStruct
 
     [FirestoreProperty]
     public string name_Item { get; set; }
-
-    [FirestoreProperty]
-    public float price_Item { get; set; }
 
     [FirestoreProperty]
     public float rate_Item { get; set; }

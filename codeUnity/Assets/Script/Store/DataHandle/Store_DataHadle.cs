@@ -24,11 +24,14 @@ public class Store_DataHadle : MonoBehaviour
         item1 =
             new ItemStruct
             {
-                paymethod_Item = 1,
+                concurrency = new Concurrency
+                {
+                    Coin = 100,
+                    Diamond = 0
+                },
                 description_Item = "Heal Pills is name of Item",
                 image_Item = "Item_Image/HealPills",
                 name_Item = "Heal Pills",
-                price_Item = 100,
                 rate_Item = 1,
                 type_Item = "Medicine_DailyItem",
                 numeral_Item =
@@ -44,11 +47,14 @@ public class Store_DataHadle : MonoBehaviour
     ItemStruct
         item2 = new ItemStruct
         {
-            paymethod_Item = 0,
+            concurrency = new Concurrency
+            {
+                Coin = 200,
+                Diamond = 0
+            },
             description_Item = "Energy Pills is name of Item",
             image_Item = "Item_Image/EnergyPills",
             name_Item = "Energy Pills",
-            price_Item = 200,
             rate_Item = 2,
             type_Item = "Medicine_DailyItem",
             numeral_Item =
@@ -65,11 +71,14 @@ public class Store_DataHadle : MonoBehaviour
         item3 =
             new ItemStruct
             {
-                paymethod_Item = 0,
+                concurrency = new Concurrency
+                {
+                    Coin = 250,
+                    Diamond = 0
+                },
                 description_Item = "Pain Killers is name of Item",
                 image_Item = "Item_Image/PainKiller",
                 name_Item = "Pain Killers",
-                price_Item = 250,
                 rate_Item = 2,
                 type_Item = "Medicine_DailyItem",
                 numeral_Item =
@@ -82,18 +91,19 @@ public class Store_DataHadle : MonoBehaviour
                     }
             };
 
-    ItemStruct
-        item4 =
-            new ItemStruct
-            {
-                paymethod_Item = 0,
-                description_Item = "Yellow Tube is name of Item",
-                image_Item = "Item_Image/blood-test (1)",
-                name_Item = "Yellow Tube",
-                price_Item = 250,
-                rate_Item = 2,
-                type_Item = "Medicine_WeeklyItem",
-                numeral_Item =
+    ItemStruct item4 = new ItemStruct
+    {
+        concurrency = new Concurrency
+        {
+            Coin = 250,
+            Diamond = 0
+        },
+        description_Item = "Yellow Tube is name of Item",
+        image_Item = "Item_Image/blood-test (1)",
+        name_Item = "Yellow Tube",
+        rate_Item = 2,
+        type_Item = "Medicine_WeeklyItem",
+        numeral_Item =
                     new NumeralStruct
                     {
                         ATK_Numeral = 0,
@@ -101,17 +111,20 @@ public class Store_DataHadle : MonoBehaviour
                         HP_Numeral = 30,
                         SPD_Numeral = 0
                     }
-            };
+    };
 
     ItemStruct
         item5 =
             new ItemStruct
             {
-                paymethod_Item = 0,
+                concurrency = new Concurrency
+                {
+                    Coin = 250,
+                    Diamond = 0
+                },
                 description_Item = "Test Kit is name of Item",
                 image_Item = "Item_Image/image 58",
                 name_Item = "Test Kit",
-                price_Item = 250,
                 rate_Item = 2,
                 type_Item = "Medicine_WeeklyItem",
                 numeral_Item =
@@ -128,11 +141,14 @@ public class Store_DataHadle : MonoBehaviour
         item6 =
             new ItemStruct
             {
-                paymethod_Item = 0,
+                concurrency = new Concurrency
+                {
+                    Coin = 0,
+                    Diamond = 50
+                },
                 description_Item = "Test Sample is name of Item",
                 image_Item = "Item_Image/blood-test",
                 name_Item = "Test Sample",
-                price_Item = 250,
                 rate_Item = 2,
                 type_Item = "Medicine_WeeklyItem",
                 numeral_Item =
@@ -149,11 +165,14 @@ public class Store_DataHadle : MonoBehaviour
         item7 =
             new ItemStruct
             {
-                paymethod_Item = 0,
+                concurrency = new Concurrency
+                {
+                    Coin = 0,
+                    Diamond = 50
+                },
                 description_Item = "Common Chest is name of Item",
                 image_Item = "Item_Image/KitCommon",
                 name_Item = "Common Chest",
-                price_Item = 250,
                 rate_Item = 2,
                 type_Item = "Chest",
                 numeral_Item =
@@ -170,11 +189,14 @@ public class Store_DataHadle : MonoBehaviour
         item8 =
             new ItemStruct
             {
-                paymethod_Item = 0,
+                concurrency = new Concurrency
+                {
+                    Coin = 0,
+                    Diamond = 100
+                },
                 description_Item = "Rare Chest is name of Item",
                 image_Item = "Item_Image/KitRare",
                 name_Item = "Rare Chest",
-                price_Item = 250,
                 rate_Item = 2,
                 type_Item = "Chest",
                 numeral_Item =

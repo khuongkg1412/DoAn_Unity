@@ -64,7 +64,7 @@ public class ChangeScence : MonoBehaviour
 
 
         //PlayerStruct player = SaveSystem.LoadDataPlayer();
-        if (Player_DataManager.Instance.Player.level_Player == 0)
+        if (Player_DataManager.Instance.Player.level.stage == 0)
         {
             Screen.orientation = ScreenOrientation.Landscape;
             SceneManager.LoadScene("Tutorial");
