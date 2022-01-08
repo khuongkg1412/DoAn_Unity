@@ -28,6 +28,7 @@ public class Player_Loading : MonoBehaviour
             if (snapshot.Exists)
             {
                 Player_DataManager.Instance.Player = snapshot.ConvertTo<PlayerStruct>();
+                Player_DataManager.Instance.Player.ID = snapshot.Id;
             }
             else
             {
@@ -133,15 +134,20 @@ public class Player_Loading : MonoBehaviour
 
         //db connection
         db = FirebaseFirestore.DefaultInstance;
-
-        Query allCitiesQuery = db.Collection("Player").Document("7xv28G3fCIf2UoO0rV2SFV5tTr62").Collection("Notification_Player");
+        Debug.Log("ID Player" + Player_DataManager.Instance.Player.ID);
+        Query allCitiesQuery = db.Collection("Notifcation")
+         .WhereEqualTo("sentID_Notification", Player_DataManager.Instance.Player.ID)
+        // .WhereEqualTo("receivedID_Notification", Player_DataManager.Instance.Player.ID)
+        // .OrderBy("dateCreate")
+        ;
         allCitiesQuery.GetSnapshotAsync().ContinueWithOnMainThread(task =>
         {
             QuerySnapshot allCitiesQuerySnapshot = task.Result;
             foreach (DocumentSnapshot documentSnapshot in allCitiesQuerySnapshot.Documents)
             {
-                Notification_Player objectData = documentSnapshot.ConvertTo<Notification_Player>();
+                Notification_Struct objectData = documentSnapshot.ConvertTo<Notification_Struct>();
                 Player_DataManager.Instance.notification_Player.Add(objectData);
+
             }
             if (task.IsCanceled)
             {
@@ -151,6 +157,13 @@ public class Player_Loading : MonoBehaviour
             {
                 Debug.LogError("Notification_Player Faulted");
             }
+            else if (task.IsCompleted)
+            {
+                foreach (var item in Player_DataManager.Instance.notification_Player)
+                {
+                    Debug.Log(item.type_Notification);
+                }
+            }
             isDoneNotification = true;
         });
     }
@@ -159,12 +172,13 @@ public class Player_Loading : MonoBehaviour
     {
         yield return new WaitUntil(() => Player_DataManager.Instance != null);
         loadingPlayer();
+        yield return new WaitUntil(() => isDonePlayer);
         loadDataFriend();
         loadDataInvetory();
         loadDataNotification();
         loadDataSystemNotification();
 
-        yield return new WaitUntil(() => isDonePlayer && isDoneAchive && isDoneFriend && isDoneInvent && isDoneNotification && isDoneSystemNoti);
+        yield return new WaitUntil(() => isDoneAchive && isDoneFriend && isDoneInvent && isDoneNotification && isDoneSystemNoti);
         yield return null;
     }
 }

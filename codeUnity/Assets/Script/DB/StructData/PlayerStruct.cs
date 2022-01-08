@@ -7,8 +7,10 @@ using Firebase.Firestore;
 [FirestoreData]
 public class Inventory_Player
 {
+    public string ID { get; set; }
+
     [FirestoreProperty]
-    public float quantity { get; set; }
+    public Dictionary<string, float> item { get; set; }
 }
 
 [FirestoreData]
@@ -23,24 +25,23 @@ public class Friend_Player
 {
     [FirestoreProperty]
     public bool accept_Friend { get; set; }
-    [FirestoreProperty]
-    public bool notificationID { get; set; }
+    public string friendID { get; set; }
 }
 
-[FirestoreData]
-public class Notification_Player
-{
-    [FirestoreProperty]
-    public string content_Notification { get; set; }
-    [FirestoreProperty]
-    public string sentID_Notification { get; set; }
-    [FirestoreProperty]
-    public bool status_Notification { get; set; }
-    [FirestoreProperty]
-    public string title_Notification { get; set; }
-    [FirestoreProperty]
-    public float type_Notification { get; set; }
-}
+// [FirestoreData]
+// public class Notification_Player
+// {
+//     [FirestoreProperty]
+//     public string content_Notification { get; set; }
+//     [FirestoreProperty]
+//     public string sentID_Notification { get; set; }
+//     [FirestoreProperty]
+//     public bool status_Notification { get; set; }
+//     [FirestoreProperty]
+//     public string title_Notification { get; set; }
+//     [FirestoreProperty]
+//     public float type_Notification { get; set; }
+// }
 
 
 [FirestoreData]
@@ -57,6 +58,8 @@ public class PlayerStruct
     public Level level { get; set; }
     [FirestoreProperty]
     public Dictionary<string, float> statistic { get; set; }
+
+    public string ID { get; set; }
 
 }
 

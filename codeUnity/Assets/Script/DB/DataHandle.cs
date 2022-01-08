@@ -4,6 +4,7 @@ using UnityEngine;
 using Firebase.Extensions;
 using Firebase.Firestore;
 using System.IO;
+using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using Firebase.Storage;
 using UnityEngine.UI;
@@ -15,7 +16,10 @@ public class DataHandle : MonoBehaviour
     */
     Inventory_Player inventory_Player = new Inventory_Player()
     {
-        quantity = 0
+        item = new Dictionary<string, float>
+        {
+            {"item", 0 }
+        }
     };
     SystemNotification systemNotification = new SystemNotification()
     {
@@ -24,22 +28,14 @@ public class DataHandle : MonoBehaviour
     Friend_Player friend_Player = new Friend_Player()
     {
         accept_Friend = false,
-        notificationID = false
-    };
-    Notification_Player notification_Player = new Notification_Player()
-    {
-        content_Notification = "This is the content of the first notification",
-        sentID_Notification = "ID sent",
-        status_Notification = false,
-        title_Notification = "This is title of the first notification",
-        type_Notification = 0
+        friendID = "MINSaf0TpgEPzy5JtEUM"
     };
 
     PlayerStruct newPlayer = new PlayerStruct()
     {
         generalInformation = new GeneralInformation_Player
         {
-            username_Player = "Khuong Meo",
+            username_Player = "Diep Thien",
             avatar_Player = "PlayerAvatar/Avatar item.png",
             gender_Player = 0
         },
@@ -136,12 +132,33 @@ public class DataHandle : MonoBehaviour
     /*
         SystemNotification data
     */
-    SystemNotification_Struct systemNotification1 = new SystemNotification_Struct()
+    Notification_Struct notificationSystem = new Notification_Struct()
     {
-        content_SystemNotification = "Welcome to our new game. Wish you could enjoy happily this.",
-        title_SystemNotification = "Welcome to Covid Refuse"
+        content_Notification = "Welcome to our new game. Wish you could enjoy happily this.",
+        title_Notification = "Welcome to Covid Refuse",
+        isRead_Notification = false,
+        receivedID_Notification = "7xv28G3fCIf2UoO0rV2SFV5tTr62",
+        sentID_Notification = "System_Notification",
+        type_Notification = (int)Notification.System_Notification
     };
-
+    Notification_Struct notificationSocial = new Notification_Struct()
+    {
+        content_Notification = "Welcome to our new game. Wish you could enjoy happily this.",
+        title_Notification = "Welcome to Covid Refuse",
+        isRead_Notification = false,
+        receivedID_Notification = "MINSaf0TpgEPzy5JtEUM",
+        sentID_Notification = "7xv28G3fCIf2UoO0rV2SFV5tTr62",
+        type_Notification = (int)Notification.Social_Notifacation
+    };
+    Notification_Struct notificationFriend = new Notification_Struct()
+    {
+        content_Notification = "Welcome to our new game. Wish you could enjoy happily this.",
+        title_Notification = "Welcome to Covid Refuse",
+        isRead_Notification = false,
+        receivedID_Notification = "zDIDUJhwrIgHvXuohXdN",
+        sentID_Notification = "7xv28G3fCIf2UoO0rV2SFV5tTr62",
+        type_Notification = (int)Notification.Friend_Notification
+    };
 
     public static List<AchievementStruct> listAchievement = new List<AchievementStruct>();
     public static PlayerStruct playerData;
@@ -151,7 +168,7 @@ public class DataHandle : MonoBehaviour
     float timeGetUpdate = 0f;
     private void Start()
     {
-        //TestFireBase();
+        // TestFireBase();
     }
 
     private void Update()
@@ -210,17 +227,23 @@ public class DataHandle : MonoBehaviour
     }
     private void TestFireBase()
     {
-
+        DateTime dataTime = System.DateTime.Now;
         //FireBase Object
         FirebaseFirestore db;
         db = FirebaseFirestore.DefaultInstance;
         Debug.Log("Data has been updated ");
-        db.Collection("Player").Document("7xv28G3fCIf2UoO0rV2SFV5tTr62").SetAsync(newPlayer);
+        notificationSystem.dateCreate = dataTime;
+        notificationSocial.dateCreate = dataTime;
+        notificationFriend.dateCreate = dataTime;
+        db.Collection("Notifcation").AddAsync(notificationSystem);
+        db.Collection("Notifcation").AddAsync(notificationSocial);
+        db.Collection("Notifcation").AddAsync(notificationFriend);
 
-        // db.Collection("Achievement").AddAsync(achievementStruct);
-        // db.Collection("Achievement").AddAsync(achievementStruct1);
-        // db.Collection("Achievement").AddAsync(achievementStruct2);
-        // db.Collection("Achievement").AddAsync(achievementStruct3);
+    }
 
+    public void AdddingItem()
+    {
+        // Player_DataManager.Instance.adding_Item(Item_DataManager.Instance.Item[0]);
+        // Debug.Log("Adding Item");
     }
 }
