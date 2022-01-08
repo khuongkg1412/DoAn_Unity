@@ -99,4 +99,22 @@ public class ModifyPlayerInfor : MonoBehaviour
             });
         yield return null;
     }
+
+    public static string typeOfOutfit;
+    public void openWindowForShirt()
+    {
+        typeOfOutfit = "Shirt";
+    }
+    public void openWindowForPants()
+    {
+        typeOfOutfit = "Pants";
+    }
+    public void openWindowForAccessory()
+    {
+        typeOfOutfit = "Accessory";
+    }
+    public void openWindowForShoes()
+    {
+        typeOfOutfit = "Shoes";
+    }
 }

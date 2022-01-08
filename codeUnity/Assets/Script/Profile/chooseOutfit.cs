@@ -13,20 +13,18 @@ public class chooseOutfit : MonoBehaviour
     public GameObject prefab;
     public GameObject content;
     List<ItemStruct> listShirt = new List<ItemStruct>();
+    List<ItemStruct> listPants = new List<ItemStruct>();
+    List<ItemStruct> listAccessory = new List<ItemStruct>();
+    List<ItemStruct> listShoes = new List<ItemStruct>();
     bool isRun = false;
     private ItemStruct objectData;
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(generateItem());
+        StartCoroutine(generateItem(ModifyPlayerInfor.typeOfOutfit));
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     void Populate(Sprite sprite)
     {
@@ -35,11 +33,12 @@ public class chooseOutfit : MonoBehaviour
         GameObject scrollItemObj = (GameObject)Instantiate(prefab, transform);
 
         scrollItemObj.transform.Find("Image").gameObject.GetComponent<Image>().sprite = sprite;
+        scrollItemObj.transform.Find("Outfit Item").gameObject.GetComponentInParent<Button>().enabled = false;
     }
 
-    IEnumerator generateItem()
+    IEnumerator generateItem(string typeOfItem)
     {
-        StartCoroutine(GetOutfitData());
+        StartCoroutine(GetOutfitData(typeOfItem));
         yield return new WaitUntil(() => isRun == true);
         Debug.Log("Database Reading  " + listShirt[0].image_Item);
 
@@ -51,31 +50,24 @@ public class chooseOutfit : MonoBehaviour
     }
 
 
-    IEnumerator GetOutfitData()
+    IEnumerator GetOutfitData(string typeOfItem)
     {
-        //db connection
-        db = FirebaseFirestore.DefaultInstance;
-        Debug.Log("Database Reading");
+        switch (typeOfItem)
+        {
+            case "Shirt":
+                foreach (ItemStruct item in listShirt) { }
 
-        Query allItemQuery = db.Collection("Outfits");
-        allItemQuery
-            .GetSnapshotAsync()
-            .ContinueWithOnMainThread(task =>
-            {
-                Debug.Log("Database Reading ");
-                QuerySnapshot allItemQuerySnapshot = task.Result;
-                foreach (DocumentSnapshot
-                    documentSnapshot
-                    in
-                    allItemQuerySnapshot.Documents
-                )
-                {
-                    objectData = documentSnapshot.ConvertTo<ItemStruct>();
-                    Debug.Log("Database Reading 1 ");
-                    listShirt.Add(objectData);
-                }
-                isRun = true;
-            });
+                break;
+            case "Pants":
+
+                break;
+            case "Accessory":
+
+                break;
+            case "Shoes":
+
+                break;
+        }
         yield return null;
     }
     IEnumerator GetImage(string dataImage)
@@ -105,7 +97,7 @@ public class chooseOutfit : MonoBehaviour
                     Texture2D texture = new Texture2D(1, 1);
                     texture.LoadImage(fileContents);
                     Sprite sprite = Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100.0f);
-                    //UIImage.texture = texture;
+
                     Populate(sprite);
                 }
             });
