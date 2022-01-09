@@ -15,7 +15,10 @@ public class CreateCharacter : MonoBehaviour
 
     Inventory_Player inventory_Player = new Inventory_Player()
     {
-        quantity = 0
+        item = new Dictionary<string, float>
+        {
+            {"item", 0 }
+        }
     };
     SystemNotification systemNotification = new SystemNotification()
     {
@@ -24,20 +27,7 @@ public class CreateCharacter : MonoBehaviour
     Friend_Player friend_Player = new Friend_Player()
     {
         accept_Friend = false,
-        notificationID = false
-    };
-    Achievement_Player achievement_Player = new Achievement_Player()
-    {
-        achived_Player = true,
-        progress_Player = 0
-    };
-    Notification_Player notification_Player = new Notification_Player()
-    {
-        content_Notification = "This is the content of the first notification",
-        sentID_Notification = "ID sent",
-        status_Notification = false,
-        title_Notification = "This is title of the first notification",
-        type_Notification = 0
+        friendID = "MINSaf0TpgEPzy5JtEUM"
     };
 
     private void Start()
@@ -73,7 +63,7 @@ public class CreateCharacter : MonoBehaviour
         {
             generalInformation = new GeneralInformation_Player()
             {
-                username_Player = "Khuong Meo",
+                username_Player = characterName.text,
                 avatar_Player = "PlayerAvatar/Avatar item.png",
                 gender_Player = 0
             },
@@ -116,25 +106,30 @@ public class CreateCharacter : MonoBehaviour
 
         yield return null;
     }
+
+
     IEnumerator addOtherCollection(string ID)
     {
+        Inventory_Player inventory_Player = new Inventory_Player()
+        {
+            item = new Dictionary<string, float>
+        {
+            {"item", 0 }
+        }
+        };
+        Friend_Player friend_Player = new Friend_Player()
+        {
+            accept_Friend = true,
+            friendID = "7xv28G3fCIf2UoO0rV2SFV5tTr62"
+        };
+
         FirebaseFirestore db = FirebaseFirestore.DefaultInstance;
 
-        DocumentReference doc = db.Collection("Player").Document(ID).Collection("Inventory_Player").Document("Demo");
+        DocumentReference doc = db.Collection("Player").Document(ID).Collection("Inventory_Player").Document("Outfit");
         doc.SetAsync(inventory_Player);
 
-        doc = db.Collection("Player").Document(ID).Collection("SystemNotification").Document("Demo");
-        doc.SetAsync(systemNotification);
-
-        doc = db.Collection("Player").Document(ID).Collection("Friend_Player").Document("Demo");
+        doc = db.Collection("Player").Document(ID).Collection("Friend_Player").Document(friend_Player.friendID);
         doc.SetAsync(friend_Player);
-
-        doc = db.Collection("Player").Document(ID).Collection("Achievement_Player").Document("Demo");
-        doc.SetAsync(achievement_Player);
-
-        doc = db.Collection("Player").Document(ID).Collection("Notification_Player").Document("Demo");
-        doc.SetAsync(notification_Player);
-
         yield return null;
     }
 }

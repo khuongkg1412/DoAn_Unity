@@ -17,10 +17,10 @@ public class Player_Loading : MonoBehaviour
     {
         isDonePlayer = false;
         FirebaseFirestore db = FirebaseFirestore.DefaultInstance;
-        string IDPlayer = "7xv28G3fCIf2UoO0rV2SFV5tTr62";//AuthController.ID;
+        string IDPlayer = AuthController.ID;
         if (IDPlayer == null) IDPlayer = FacebookManager.ID;
 
-        DocumentReference docRef = db.Collection("Player").Document("7xv28G3fCIf2UoO0rV2SFV5tTr62");
+        DocumentReference docRef = db.Collection("Player").Document(IDPlayer);
         docRef.GetSnapshotAsync().ContinueWithOnMainThread(task =>
         {
 
@@ -99,19 +99,22 @@ public class Player_Loading : MonoBehaviour
 
     private void loadDataFriend()
     {
+        string IDPlayer = AuthController.ID;
+        if (IDPlayer == null) IDPlayer = FacebookManager.ID;
         isDoneFriend = false;
         //FireBase Object
         FirebaseFirestore db;
 
         //db connection
         db = FirebaseFirestore.DefaultInstance;
-        Query allCitiesQuery = db.Collection("Player").Document("7xv28G3fCIf2UoO0rV2SFV5tTr62").Collection("Friend_Player");
+        Query allCitiesQuery = db.Collection("Player").Document(IDPlayer).Collection("Friend_Player");
         allCitiesQuery.GetSnapshotAsync().ContinueWithOnMainThread(task =>
         {
             QuerySnapshot allCitiesQuerySnapshot = task.Result;
             foreach (DocumentSnapshot documentSnapshot in allCitiesQuerySnapshot.Documents)
             {
                 Friend_Player objectData = documentSnapshot.ConvertTo<Friend_Player>();
+                objectData.friendID = documentSnapshot.Id;
                 Player_DataManager.Instance.friend_Player.Add(objectData);
             }
             if (task.IsCanceled)

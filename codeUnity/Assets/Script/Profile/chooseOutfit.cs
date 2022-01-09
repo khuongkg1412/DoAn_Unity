@@ -12,95 +12,370 @@ public class chooseOutfit : MonoBehaviour
     FirebaseFirestore db;
     public GameObject prefab;
     public GameObject content;
-    List<ItemStruct> listShirt = new List<ItemStruct>();
-    List<ItemStruct> listPants = new List<ItemStruct>();
-    List<ItemStruct> listAccessory = new List<ItemStruct>();
-    List<ItemStruct> listShoes = new List<ItemStruct>();
-    bool isRun = false;
-    private ItemStruct objectData;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(generateItem(ModifyPlayerInfor.typeOfOutfit));
+        GetOutfitData(ModifyPlayerInfor.typeOfOutfit);
+        //AddData();
     }
 
-
-    void Populate(Sprite sprite)
+    void GetOutfitData(string typeOfItem)
     {
-        Debug.Log("Dang o day");
-
-        GameObject scrollItemObj = (GameObject)Instantiate(prefab, transform);
-
-        scrollItemObj.transform.Find("Image").gameObject.GetComponent<Image>().sprite = sprite;
-        scrollItemObj.transform.Find("Outfit Item").gameObject.GetComponentInParent<Button>().enabled = false;
-    }
-
-    IEnumerator generateItem(string typeOfItem)
-    {
-        StartCoroutine(GetOutfitData(typeOfItem));
-        yield return new WaitUntil(() => isRun == true);
-        Debug.Log("Database Reading  " + listShirt[0].image_Item);
-
-        foreach (ItemStruct shirt in listShirt)
-        {
-            StartCoroutine(GetImage(shirt.image_Item));
-        }
-        yield return null;
-    }
-
-
-    IEnumerator GetOutfitData(string typeOfItem)
-    {
+        bool notHavethisItem;
         switch (typeOfItem)
         {
             case "Shirt":
-                foreach (ItemStruct item in listShirt) { }
-
+                foreach (ItemStruct item in Item_DataManager.Instance.Item)
+                {
+                    notHavethisItem = true;
+                    if (item.type_Item.Equals("Shirt"))
+                    {
+                        foreach (Inventory_Player outfit in Player_DataManager.Instance.inventory_Player)
+                        {
+                            if (item.ID.Equals(outfit.ID))
+                            {
+                                notHavethisItem = false;
+                                break;
+                            }
+                        }
+                        Populate(item, notHavethisItem);
+                    }
+                }
                 break;
             case "Pants":
-
+                foreach (ItemStruct item in Item_DataManager.Instance.Item)
+                {
+                    notHavethisItem = true;
+                    if (item.type_Item.Equals("Pants"))
+                    {
+                        foreach (Inventory_Player outfit in Player_DataManager.Instance.inventory_Player)
+                        {
+                            if (item.ID.Equals(outfit.ID))
+                            {
+                                notHavethisItem = false;
+                                break;
+                            }
+                        }
+                        Populate(item, notHavethisItem);
+                    }
+                }
                 break;
             case "Accessory":
-
+                foreach (ItemStruct item in Item_DataManager.Instance.Item)
+                {
+                    notHavethisItem = true;
+                    if (item.type_Item.Equals("Accessory"))
+                    {
+                        foreach (Inventory_Player outfit in Player_DataManager.Instance.inventory_Player)
+                        {
+                            if (item.ID.Equals(outfit.ID))
+                            {
+                                notHavethisItem = false;
+                                break;
+                            }
+                        }
+                        Populate(item, notHavethisItem);
+                    }
+                }
                 break;
             case "Shoes":
-
+                foreach (ItemStruct item in Item_DataManager.Instance.Item)
+                {
+                    notHavethisItem = true;
+                    if (item.type_Item.Equals("Shoes"))
+                    {
+                        foreach (Inventory_Player outfit in Player_DataManager.Instance.inventory_Player)
+                        {
+                            if (item.ID.Equals(outfit.ID))
+                            {
+                                notHavethisItem = false;
+                                break;
+                            }
+                        }
+                        Populate(item, notHavethisItem);
+                    }
+                }
                 break;
         }
-        yield return null;
     }
-    IEnumerator GetImage(string dataImage)
+
+    void Populate(ItemStruct item, bool notHavethisItem)
     {
-        Debug.Log("Image Downloading");
+        Texture2D OutfitImage = loadingImageFromFilePath(item.image_Item);
+        Sprite sprite = Sprite.Create(OutfitImage, new Rect(0.0f, 0.0f, OutfitImage.width, OutfitImage.height), new Vector2(0.5f, 0.5f), 100.0f);
+        GameObject scrollItemObj = (GameObject)Instantiate(prefab, transform);
 
-        // Get a reference to the storage service, using the default Firebase App
-        FirebaseStorage storage = FirebaseStorage.DefaultInstance;
-
-        // Create a storage reference from our storage service
-        StorageReference storageRef = storage.GetReference(dataImage);
-
-        // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
-        const long maxAllowedSize = 1 * 1024 * 1024;
-        storageRef
-            .GetBytesAsync(maxAllowedSize)
-            .ContinueWithOnMainThread(task =>
-            {
-                if (task.IsFaulted || task.IsCanceled)
-                {
-                    // Uh-oh, an error occurred!
-                    Debug.LogException(task.Exception);
-                }
-                else
-                {
-                    byte[] fileContents = task.Result;
-                    Texture2D texture = new Texture2D(1, 1);
-                    texture.LoadImage(fileContents);
-                    Sprite sprite = Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100.0f);
-
-                    Populate(sprite);
-                }
-            });
-        yield return null;
+        if (notHavethisItem)
+        {
+            scrollItemObj.transform.Find("choosed frame").gameObject.GetComponent<Image>().color = Color.black;
+            scrollItemObj.transform.Find("Image").gameObject.GetComponent<Image>().sprite = sprite;
+            //scrollItemObj.transform.Find("Outfit Item").gameObject.GetComponentInParent<Button>().enabled = false;
+        }
+        else
+        {
+            scrollItemObj.transform.Find("choosed frame").gameObject.GetComponent<Image>().color = Color.cyan;
+            scrollItemObj.transform.Find("Image").gameObject.GetComponent<Image>().sprite = sprite;
+        }
     }
+
+    Texture2D loadingImageFromFilePath(string Filepath)
+    {
+        if (Resources.Load<Sprite>(Filepath) != null)
+        {
+            return Resources.Load<Texture2D>(Filepath);
+        }
+        return null;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public void AddData()
+    {
+        Debug.Log("Database Added");
+
+        //FireBase Object
+        FirebaseFirestore db;
+
+        //db connection
+        db = FirebaseFirestore.DefaultInstance;
+
+        //Get Collection And Document
+        DocumentReference doc = db.Collection("Item").Document();
+        doc.SetAsync(item1);
+        doc = db.Collection("Item").Document();
+        doc.SetAsync(item2);
+        doc = db.Collection("Item").Document();
+        doc.SetAsync(item3);
+        doc = db.Collection("Item").Document();
+        doc.SetAsync(item4);
+        doc = db.Collection("Item").Document();
+        doc.SetAsync(item5);
+        doc = db.Collection("Item").Document();
+        doc.SetAsync(item6);
+        doc = db.Collection("Item").Document();
+        doc.SetAsync(item7);
+        doc = db.Collection("Item").Document();
+        doc.SetAsync(item8);
+    }
+
+    ItemStruct
+        item1 =
+            new ItemStruct
+            {
+                concurrency = new Concurrency
+                {
+                    Coin = 100,
+                    Diamond = 0
+                },
+                description_Item = "Heal Shirt is name of Item",
+                image_Item = "Outfit_Image/Shirt/Shirt 1",
+                name_Item = "Heal Shirt",
+                rate_Item = 1,
+                type_Item = "Shirt",
+                numeral_Item =
+                    new NumeralStruct
+                    {
+                        ATK_Numeral = 0,
+                        DEF_Numeral = 0,
+                        HP_Numeral = 10,
+                        SPD_Numeral = 0
+                    }
+            };
+
+    ItemStruct
+        item2 = new ItemStruct
+        {
+            concurrency = new Concurrency
+            {
+                Coin = 200,
+                Diamond = 0
+            },
+            description_Item = "Energy Shirt is name of Item",
+            image_Item = "Outfit_Image/Shirt/Shirt 2",
+            name_Item = "Energy Shirt",
+            rate_Item = 2,
+            type_Item = "Shirt",
+            numeral_Item =
+                    new NumeralStruct
+                    {
+                        ATK_Numeral = 0,
+                        DEF_Numeral = 0,
+                        HP_Numeral = 20,
+                        SPD_Numeral = 0
+                    }
+        };
+
+    ItemStruct
+        item3 =
+            new ItemStruct
+            {
+                concurrency = new Concurrency
+                {
+                    Coin = 250,
+                    Diamond = 0
+                },
+                description_Item = "Shirt Killers is name of Item",
+                image_Item = "Outfit_Image/Shirt/Shirt 3",
+                name_Item = "Shirt Killers",
+                rate_Item = 2,
+                type_Item = "Shirt",
+                numeral_Item =
+                    new NumeralStruct
+                    {
+                        ATK_Numeral = 0,
+                        DEF_Numeral = 0,
+                        HP_Numeral = 30,
+                        SPD_Numeral = 0
+                    }
+            };
+
+    ItemStruct item4 = new ItemStruct
+    {
+        concurrency = new Concurrency
+        {
+            Coin = 250,
+            Diamond = 0
+        },
+        description_Item = "Yellow Shirt is name of Item",
+        image_Item = "Outfit_Image/Shirt/Shirt 4",
+        name_Item = "Yellow Shirt",
+        rate_Item = 2,
+        type_Item = "Shirt",
+        numeral_Item =
+                    new NumeralStruct
+                    {
+                        ATK_Numeral = 0,
+                        DEF_Numeral = 0,
+                        HP_Numeral = 30,
+                        SPD_Numeral = 0
+                    }
+    };
+
+    ItemStruct
+        item5 =
+            new ItemStruct
+            {
+                concurrency = new Concurrency
+                {
+                    Coin = 250,
+                    Diamond = 0
+                },
+                description_Item = "Shirt Kit is name of Item",
+                image_Item = "Outfit_Image/Shirt/Shirt 5",
+                name_Item = "Shirt Kit",
+                rate_Item = 2,
+                type_Item = "Shirt",
+                numeral_Item =
+                    new NumeralStruct
+                    {
+                        ATK_Numeral = 0,
+                        DEF_Numeral = 0,
+                        HP_Numeral = 30,
+                        SPD_Numeral = 0
+                    }
+            };
+
+    ItemStruct
+        item6 =
+            new ItemStruct
+            {
+                concurrency = new Concurrency
+                {
+                    Coin = 0,
+                    Diamond = 50
+                },
+                description_Item = "Shirt Sample is name of Item",
+                image_Item = "Outfit_Image/Shirt/Shirt 6",
+                name_Item = "Shirt Sample",
+                rate_Item = 2,
+                type_Item = "Shirt",
+                numeral_Item =
+                    new NumeralStruct
+                    {
+                        ATK_Numeral = 0,
+                        DEF_Numeral = 0,
+                        HP_Numeral = 30,
+                        SPD_Numeral = 0
+                    }
+            };
+
+    ItemStruct
+        item7 =
+            new ItemStruct
+            {
+                concurrency = new Concurrency
+                {
+                    Coin = 0,
+                    Diamond = 50
+                },
+                description_Item = "Common Shirt is name of Item",
+                image_Item = "Outfit_Image/Shirt/Shirt 7",
+                name_Item = "Common Shirt",
+                rate_Item = 2,
+                type_Item = "Shirt",
+                numeral_Item =
+                    new NumeralStruct
+                    {
+                        ATK_Numeral = 0,
+                        DEF_Numeral = 0,
+                        HP_Numeral = 0,
+                        SPD_Numeral = 0
+                    }
+            };
+
+    ItemStruct
+        item8 =
+            new ItemStruct
+            {
+                concurrency = new Concurrency
+                {
+                    Coin = 0,
+                    Diamond = 100
+                },
+                description_Item = "Rare Shirt is name of Item",
+                image_Item = "Outfit_Image/Shirt/Shirt 8",
+                name_Item = "Rare Shirt",
+                rate_Item = 2,
+                type_Item = "Shirt",
+                numeral_Item =
+                    new NumeralStruct
+                    {
+                        ATK_Numeral = 0,
+                        DEF_Numeral = 0,
+                        HP_Numeral = 0,
+                        SPD_Numeral = 0
+                    }
+            };
+
 }

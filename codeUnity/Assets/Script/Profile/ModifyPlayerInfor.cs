@@ -14,18 +14,25 @@ public class ModifyPlayerInfor : MonoBehaviour
     private PlayerStruct player;
     bool isModify = uploadAvatar.isModify;
     bool isUpDone = uploadAvatar.isUpDone;
-    bool isRun = false;
     public Image currentAvatar;
+    public Text Name, Level;
 
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        if (isModify == true)
-        {
-            StartCoroutine(lam());
-            //Debug.Log("isModify: " + isModify);
-            isModify = false;
-        }
+        player = Player_DataManager.Instance.Player;
+        StartCoroutine(GetImage(player.generalInformation.avatar_Player));
+        Name.text = player.generalInformation.username_Player;
+        Level.text = "LV " + player.level.level;
+    }
+    private void Start()
+    {
+        // if (isModify == true)
+        // {
+        //     StartCoroutine(lam());
+        //     //Debug.Log("isModify: " + isModify);
+        //     isModify = false;
+        // }
     }
 
     IEnumerator lam()
@@ -36,9 +43,9 @@ public class ModifyPlayerInfor : MonoBehaviour
         //yield return new WaitUntil(() => isUpDone == true);
         //yield return new WaitWhile(() => isUpDone == true)
         yield return new WaitForSeconds(7);
-        Debug.Log("isModify 2: " + player.avatar_Player);
+        Debug.Log("isModify 2: " + player.generalInformation.avatar_Player);
 
-        StartCoroutine(GetImage(player.avatar_Player));
+        StartCoroutine(GetImage(player.generalInformation.avatar_Player));
     }
     IEnumerator updatePlayerInfor()
     {
@@ -57,7 +64,7 @@ public class ModifyPlayerInfor : MonoBehaviour
 
                 }
                 player = snapshot.ConvertTo<PlayerStruct>();
-                Debug.Log("Player : " + player.avatar_Player);
+                Debug.Log("Player : " + player.generalInformation.avatar_Player);
             }
             else
             {
@@ -78,10 +85,8 @@ public class ModifyPlayerInfor : MonoBehaviour
         StorageReference storageRef = storage.GetReference(dataImage);
 
         // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
-        const long maxAllowedSize = 1 * 1024 * 1024;
-        storageRef
-            .GetBytesAsync(maxAllowedSize)
-            .ContinueWithOnMainThread(task =>
+        const long maxAllowedSize = 4 * 1024 * 1024;
+        storageRef.GetBytesAsync(maxAllowedSize).ContinueWithOnMainThread(task =>
             {
                 if (task.IsFaulted || task.IsCanceled)
                 {
@@ -94,7 +99,6 @@ public class ModifyPlayerInfor : MonoBehaviour
                     texture.LoadImage(fileContents);
                     Sprite sprite = Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100.0f);
                     currentAvatar.sprite = sprite;
-                    //Populate(sprite, Name, level);
                 }
             });
         yield return null;
