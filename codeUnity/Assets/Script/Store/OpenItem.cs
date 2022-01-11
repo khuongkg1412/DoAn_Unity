@@ -6,9 +6,6 @@ using UnityEngine.UI;
 
 public class OpenItem : MonoBehaviour
 {
-    [SerializeField]
-    GameObject dataHandeling;
-
     public ItemStruct dataItem;
 
     public GameObject blurBG;
@@ -17,45 +14,27 @@ public class OpenItem : MonoBehaviour
 
     public GameObject pannelChest;
 
-    // public void OpenPannelItem(int i){
-    //     if(pannel != null){
-    //         if(i>0){
-    //         blurBG.SetActive(true);
-    //         pannel.SetActive(false);
-    //         pannelChest.SetActive(true);
-    //         }else{
-    //         blurBG.SetActive(true);
-    //         pannel.SetActive(true);
-    //         pannelChest.SetActive(false);
-    //         }
-    //     }
-    // }
-    void SettingImage()
-    {
-    }
-
     public void OpenPannelItem()
     {
         switch (dataItem.type_Item)
         {
-            case "Medicine_DailyItem":
+            case (int)TypeItem.ItemDaily:
                 blurBG.SetActive(true);
                 pannel.SetActive(true);
                 pannel.GetComponent<LoadingItem>().dataItem = dataItem;
                 pannel.GetComponent<LoadingItem>().loadingData();
                 pannelChest.SetActive(false);
                 break;
-            case "Medicine_WeeklyItem":
+            case (int)TypeItem.ItemWeekly:
                 blurBG.SetActive(true);
                 pannel.SetActive(true);
                 pannel.GetComponent<LoadingItem>().dataItem = dataItem;
                 pannel.GetComponent<LoadingItem>().loadingData();
                 pannelChest.SetActive(false);
                 break;
-            case "Chest":
+            case (int)TypeItem.Chest:
                 blurBG.SetActive(true);
                 pannel.SetActive(false);
-
                 pannelChest.SetActive(true);
                 pannelChest.GetComponent<LoadingItem>().dataItem = dataItem;
                 pannelChest.GetComponent<LoadingItem>().loadingData();

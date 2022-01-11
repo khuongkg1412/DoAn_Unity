@@ -54,6 +54,7 @@ public class Player_Loading : MonoBehaviour
             foreach (DocumentSnapshot documentSnapshot in allCitiesQuerySnapshot.Documents)
             {
                 Inventory_Player objectData = documentSnapshot.ConvertTo<Inventory_Player>();
+                objectData.ID = documentSnapshot.Id;
                 Player_DataManager.Instance.inventory_Player.Add(objectData);
             }
             if (task.IsCanceled)
@@ -134,7 +135,6 @@ public class Player_Loading : MonoBehaviour
 
         //db connection
         db = FirebaseFirestore.DefaultInstance;
-        Debug.Log("ID Player" + Player_DataManager.Instance.Player.ID);
         Query allCitiesQuery = db.Collection("Notifcation")
          .WhereEqualTo("sentID_Notification", Player_DataManager.Instance.Player.ID)
         // .WhereEqualTo("receivedID_Notification", Player_DataManager.Instance.Player.ID)
@@ -156,13 +156,6 @@ public class Player_Loading : MonoBehaviour
             else if (task.IsFaulted)
             {
                 Debug.LogError("Notification_Player Faulted");
-            }
-            else if (task.IsCompleted)
-            {
-                foreach (var item in Player_DataManager.Instance.notification_Player)
-                {
-                    Debug.Log(item.type_Notification);
-                }
             }
             isDoneNotification = true;
         });

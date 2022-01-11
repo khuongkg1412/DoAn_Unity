@@ -39,7 +39,23 @@ public class ItemStruct
     public float rate_Item { get; set; }
 
     [FirestoreProperty]
-    public string type_Item { get; set; }
+    public int type_Item { get; set; }
     [FirestoreProperty]
     public NumeralStruct numeral_Item { get; set; }
+}
+
+public enum TypeItem
+{
+    ItemDaily = 0,
+    ItemWeekly = 1,
+    Chest = 2,
+    Shirt = 3
+}
+
+public enum RateItem
+{
+    Common = 0,
+    Rare = 1,
+    Epic = 2,
+    Legendary = 3
 }
