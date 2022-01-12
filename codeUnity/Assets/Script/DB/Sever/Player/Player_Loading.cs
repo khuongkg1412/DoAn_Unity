@@ -12,7 +12,6 @@ public class Player_Loading : MonoBehaviour
     {
         StartCoroutine(LoadingDataFromSever());
     }
-
     void loadingPlayer()
     {
         isDonePlayer = false;
