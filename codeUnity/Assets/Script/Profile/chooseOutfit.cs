@@ -24,13 +24,13 @@ public class chooseOutfit : MonoBehaviour
     void GetOutfitData(string typeOfItem)
     {
         bool notHavethisItem;
-        switch (typeOfItem)
+        switch (int.Parse(typeOfItem))
         {
-            case "Shirt":
+            case (int)TypeItem.Shirt:
                 foreach (ItemStruct item in Item_DataManager.Instance.Item)
                 {
                     notHavethisItem = true;
-                    if (item.type_Item.Equals("Shirt"))
+                    if (item.type_Item.Equals((int)TypeItem.Shirt))
                     {
                         foreach (Inventory_Player outfit in Player_DataManager.Instance.inventory_Player)
                         {
@@ -44,7 +44,7 @@ public class chooseOutfit : MonoBehaviour
                     }
                 }
                 break;
-            case "Pants":
+            case (int)TypeItem.ItemDaily:
                 foreach (ItemStruct item in Item_DataManager.Instance.Item)
                 {
                     notHavethisItem = true;
@@ -62,7 +62,7 @@ public class chooseOutfit : MonoBehaviour
                     }
                 }
                 break;
-            case "Accessory":
+            case (int)TypeItem.ItemWeekly:
                 foreach (ItemStruct item in Item_DataManager.Instance.Item)
                 {
                     notHavethisItem = true;
@@ -80,7 +80,7 @@ public class chooseOutfit : MonoBehaviour
                     }
                 }
                 break;
-            case "Shoes":
+            case (int)TypeItem.Chest:
                 foreach (ItemStruct item in Item_DataManager.Instance.Item)
                 {
                     notHavethisItem = true;
@@ -202,7 +202,7 @@ public class chooseOutfit : MonoBehaviour
                 image_Item = "Outfit_Image/Shirt/Shirt 1",
                 name_Item = "Heal Shirt",
                 rate_Item = 1,
-                type_Item = "Shirt",
+                type_Item = (int)TypeItem.Shirt,
                 numeral_Item =
                     new NumeralStruct
                     {
@@ -225,7 +225,7 @@ public class chooseOutfit : MonoBehaviour
             image_Item = "Outfit_Image/Shirt/Shirt 2",
             name_Item = "Energy Shirt",
             rate_Item = 2,
-            type_Item = "Shirt",
+            type_Item = (int)TypeItem.Shirt,
             numeral_Item =
                     new NumeralStruct
                     {
@@ -249,7 +249,7 @@ public class chooseOutfit : MonoBehaviour
                 image_Item = "Outfit_Image/Shirt/Shirt 3",
                 name_Item = "Shirt Killers",
                 rate_Item = 2,
-                type_Item = "Shirt",
+                type_Item = (int)TypeItem.Shirt,
                 numeral_Item =
                     new NumeralStruct
                     {
@@ -271,7 +271,7 @@ public class chooseOutfit : MonoBehaviour
         image_Item = "Outfit_Image/Shirt/Shirt 4",
         name_Item = "Yellow Shirt",
         rate_Item = 2,
-        type_Item = "Shirt",
+        type_Item = (int)TypeItem.Shirt,
         numeral_Item =
                     new NumeralStruct
                     {
@@ -295,7 +295,7 @@ public class chooseOutfit : MonoBehaviour
                 image_Item = "Outfit_Image/Shirt/Shirt 5",
                 name_Item = "Shirt Kit",
                 rate_Item = 2,
-                type_Item = "Shirt",
+                type_Item = (int)TypeItem.Shirt,
                 numeral_Item =
                     new NumeralStruct
                     {
@@ -319,7 +319,7 @@ public class chooseOutfit : MonoBehaviour
                 image_Item = "Outfit_Image/Shirt/Shirt 6",
                 name_Item = "Shirt Sample",
                 rate_Item = 2,
-                type_Item = "Shirt",
+                type_Item = (int)TypeItem.Shirt,
                 numeral_Item =
                     new NumeralStruct
                     {
@@ -343,7 +343,7 @@ public class chooseOutfit : MonoBehaviour
                 image_Item = "Outfit_Image/Shirt/Shirt 7",
                 name_Item = "Common Shirt",
                 rate_Item = 2,
-                type_Item = "Shirt",
+                type_Item = (int)TypeItem.Shirt,
                 numeral_Item =
                     new NumeralStruct
                     {
@@ -367,7 +367,7 @@ public class chooseOutfit : MonoBehaviour
                 image_Item = "Outfit_Image/Shirt/Shirt 8",
                 name_Item = "Rare Shirt",
                 rate_Item = 2,
-                type_Item = "Shirt",
+                type_Item = (int)TypeItem.Shirt,
                 numeral_Item =
                     new NumeralStruct
                     {
