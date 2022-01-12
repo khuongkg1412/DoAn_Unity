@@ -11,9 +11,9 @@ public class FriendNotificationData : MonoBehaviour
 {
     FirebaseFirestore db;
 
-    private FriendNotificationStruct objectData;
+    private Notification_Struct objectData;
 
-    List<FriendNotificationStruct> listData = new List<FriendNotificationStruct>();
+    List<Notification_Struct> listData = new List<Notification_Struct>();
 
     bool isRun = false;
 
@@ -30,8 +30,8 @@ public class FriendNotificationData : MonoBehaviour
     public GameObject prefab;
 
 
-    // FriendNotificationStruct noti1 =
-    //         new FriendNotificationStruct
+    // Notification_Struct noti1 =
+    //         new Notification_Struct
     //         {
     //             notificationImage = "Notification/FriendNotification/noti6/2.png",
     //             notificationIcon = "Notification/FriendNotification/noti6/heart-icon.png",
@@ -89,7 +89,7 @@ public class FriendNotificationData : MonoBehaviour
                 )
                 {
                     objectData =
-                        documentSnapshot.ConvertTo<FriendNotificationStruct>();
+                        documentSnapshot.ConvertTo<Notification_Struct>();
 
                     listData.Add(objectData);
                 }
@@ -148,13 +148,9 @@ public class FriendNotificationData : MonoBehaviour
 
         foreach (var objectItem in listData)
         {
-            StartCoroutine(GetImage(objectItem.notificationImage, 1));
-            StartCoroutine(GetImage(objectItem.notificationIcon, 2));
+
             yield return new WaitUntil(() => count == 2);
-            Populate(
-        objectItem.notificationContent,
-        objectItem.notificationSenderId,
-        objectItem.notificationStatus);
+
             count = 0;
         }
         yield return null;

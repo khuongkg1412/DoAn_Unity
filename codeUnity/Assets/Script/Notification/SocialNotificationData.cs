@@ -12,9 +12,9 @@ public class SocialNotificationData : MonoBehaviour
 {
     FirebaseFirestore db;
 
-    private SocialNotificationStruct objectData;
+    private Notification_Struct objectData;
 
-    List<SocialNotificationStruct> listData = new List<SocialNotificationStruct>();
+    List<Notification_Struct> listData = new List<Notification_Struct>();
 
     bool isRun = false;
 
@@ -31,14 +31,10 @@ public class SocialNotificationData : MonoBehaviour
     public GameObject prefab;
 
 
-    SocialNotificationStruct noti1 =
-            new SocialNotificationStruct
+    Notification_Struct noti1 =
+            new Notification_Struct
             {
-                notificationImage = "Notification/SocialNotification/noti6/VN.png",
-                notificationIcon = "SocialNotification/noti6/mail-icon.png",
-                notificationContent = "ToiyeuVn has sent you a mail!",
-                notificationSenderId = "a123",
-                notificationStatus = false
+
             };
 
     private void Start()
@@ -93,7 +89,7 @@ public class SocialNotificationData : MonoBehaviour
                 {
 
                     objectData =
-                        documentSnapshot.ConvertTo<SocialNotificationStruct>();
+                        documentSnapshot.ConvertTo<Notification_Struct>();
 
                     listData.Add(objectData);
                 }
@@ -150,15 +146,10 @@ public class SocialNotificationData : MonoBehaviour
 
         foreach (var objectItem in listData)
         {
-            StartCoroutine(GetImage(objectItem.notificationImage, 1));
-            StartCoroutine(GetImage(objectItem.notificationIcon, 2));
+
             yield return new WaitUntil(() => count == 2);
-            Populate(
-        objectItem.notificationContent,
-        objectItem.notificationSenderId,
-        objectItem.notificationStatus);
-            count = 0;
+
+            yield return null;
         }
-        yield return null;
     }
 }
