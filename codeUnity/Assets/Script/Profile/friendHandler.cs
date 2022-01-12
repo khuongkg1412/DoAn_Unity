@@ -13,16 +13,13 @@ public class friendHandler : MonoBehaviour
     public GameObject prefab;
     public ScrollRect friendList;
     public GameObject content;
-    List<playerStruct> listData = new List<playerStruct>();
-    bool isRun = false;
 
-    private playerStruct objectData;
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(generateItem());
         //friendList.verticalNormalizedPosition = 1;
+        StartCoroutine(GetFriendData());
     }
 
     // Update is called once per frame
@@ -31,58 +28,43 @@ public class friendHandler : MonoBehaviour
 
     }
 
-    void Populate(Sprite sprite, string name, int Level)
+    void Populate(Sprite sprite, string name, float Level)
     {
-        Debug.Log("Dang o day");
+        GameObject scrollItemObj = (GameObject)Instantiate(prefab, friendList.transform);
 
-        GameObject scrollItemObj = (GameObject) Instantiate(prefab, transform);
-       
         scrollItemObj.transform.Find("Name & level/Name").gameObject.GetComponent<Text>().text = name;
         scrollItemObj.transform.Find("Name & level/level").gameObject.GetComponent<Text>().text = "Level " + Level;
         scrollItemObj.transform.Find("Avatar").gameObject.GetComponent<Image>().sprite = sprite;
     }
 
-    IEnumerator generateItem()
+    private PlayerStruct player;
+    IEnumerator GetFriendData()
     {
-        StartCoroutine(GetFriendData());
-        yield return new WaitUntil(() => isRun == true);
-        Debug.Log("Database Reading  "+ listData[0].avatar_Player);
-
-        foreach (playerStruct player in listData)
+        foreach (Friend_Player friend in Player_DataManager.Instance.friend_Player)
         {
-            StartCoroutine(GetImage(player.avatar_Player, player.name_Player, player.level_Player));
+            //db connection
+            db = FirebaseFirestore.DefaultInstance;
+            Debug.Log("Database Reading " + friend.friendID);
+
+            DocumentReference docRef = db.Collection("Player").Document(friend.friendID);
+            docRef.GetSnapshotAsync().ContinueWithOnMainThread(task =>
+            {
+                DocumentSnapshot snapshot = task.Result;
+                if (snapshot.Exists)
+                {
+                    player = snapshot.ConvertTo<PlayerStruct>();
+                    StartCoroutine(GetImage(player.generalInformation.avatar_Player, player.generalInformation.username_Player, player.level.level));
+                }
+                else
+                {
+                    Debug.Log(string.Format("Document {0} does not exist!", snapshot.Id));
+                }
+            });
         }
         yield return null;
     }
 
-
-    IEnumerator GetFriendData()
-    {
-        //db connection
-        db = FirebaseFirestore.DefaultInstance;
-        Debug.Log("Database Reading");
-
-        Query allItemQuery = db.Collection("player");
-        allItemQuery
-            .GetSnapshotAsync()
-            .ContinueWithOnMainThread(task =>
-            {
-                QuerySnapshot allItemQuerySnapshot = task.Result;
-                foreach (DocumentSnapshot
-                    documentSnapshot
-                    in
-                    allItemQuerySnapshot.Documents
-                )
-                {
-                    objectData = documentSnapshot.ConvertTo<playerStruct>();
-                    Debug.Log("Database Reading 1 " + objectData.avatar_Player);
-                    listData.Add(objectData);
-                }
-                isRun = true;
-            });
-        yield return null;
-    }
-    IEnumerator GetImage(string dataImage, string Name, int level)
+    IEnumerator GetImage(string dataImage, string Name, float level)
     {
         Debug.Log("Image Downloading");
 
@@ -93,7 +75,7 @@ public class friendHandler : MonoBehaviour
         StorageReference storageRef = storage.GetReference(dataImage);
 
         // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
-        const long maxAllowedSize = 1 * 1024 * 1024;
+        const long maxAllowedSize = 4 * 1024 * 1024;
         storageRef
             .GetBytesAsync(maxAllowedSize)
             .ContinueWithOnMainThread(task =>

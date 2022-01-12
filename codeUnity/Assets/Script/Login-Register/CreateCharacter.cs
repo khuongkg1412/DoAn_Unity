@@ -8,11 +8,32 @@ using UnityEngine.UI;
 
 public class CreateCharacter : MonoBehaviour
 {
-    FirebaseFirestore db = FirebaseFirestore.DefaultInstance;
+    FirebaseFirestore db;
     public InputField characterName;
 
     int male = 1;
 
+    Inventory_Player inventory_Player = new Inventory_Player()
+    {
+        item = new Dictionary<string, float>
+        {
+            {"item", 0 }
+        }
+    };
+    SystemNotification systemNotification = new SystemNotification()
+    {
+        status_Notification = false
+    };
+    Friend_Player friend_Player = new Friend_Player()
+    {
+        accept_Friend = false,
+        friendID = "MINSaf0TpgEPzy5JtEUM"
+    };
+
+    private void Start()
+    {
+        db = FirebaseFirestore.DefaultInstance;
+    }
     public void Create()
     {
         if (characterName.text.Length == 0)
@@ -42,7 +63,7 @@ public class CreateCharacter : MonoBehaviour
         {
             generalInformation = new GeneralInformation_Player()
             {
-                username_Player = "Khuong Meo",
+                username_Player = characterName.text,
                 avatar_Player = "PlayerAvatar/Avatar item.png",
                 gender_Player = 0
             },
@@ -79,9 +100,36 @@ public class CreateCharacter : MonoBehaviour
         docRef.SetAsync(newPlayer).ContinueWithOnMainThread(task =>
         {
             Debug.Log("Added data to the LA document in the cities collection.");
+            StartCoroutine(addOtherCollection(IDPlayer));
             SceneManager.LoadScene("MainPage");
         });
 
+        yield return null;
+    }
+
+
+    IEnumerator addOtherCollection(string ID)
+    {
+        Inventory_Player inventory_Player = new Inventory_Player()
+        {
+            item = new Dictionary<string, float>
+        {
+            {"item", 0 }
+        }
+        };
+        Friend_Player friend_Player = new Friend_Player()
+        {
+            accept_Friend = true,
+            friendID = "7xv28G3fCIf2UoO0rV2SFV5tTr62"
+        };
+
+        FirebaseFirestore db = FirebaseFirestore.DefaultInstance;
+
+        DocumentReference doc = db.Collection("Player").Document(ID).Collection("Inventory_Player").Document("Outfit");
+        doc.SetAsync(inventory_Player);
+
+        doc = db.Collection("Player").Document(ID).Collection("Friend_Player").Document(friend_Player.friendID);
+        doc.SetAsync(friend_Player);
         yield return null;
     }
 }

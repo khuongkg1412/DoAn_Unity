@@ -12,9 +12,9 @@ public class SystemNotificationData : MonoBehaviour
 {
     FirebaseFirestore db;
 
-    private SystemNotificationStruct objectData;
+    private Notification_Struct objectData;
 
-    List<SystemNotificationStruct> listData = new List<SystemNotificationStruct>();
+    List<Notification_Struct> listData = new List<Notification_Struct>();
 
     bool isRun = false;
 
@@ -27,12 +27,10 @@ public class SystemNotificationData : MonoBehaviour
     public GameObject prefab;
 
 
-    SystemNotificationStruct noti1 =
-            new SystemNotificationStruct
+    Notification_Struct noti1 =
+            new Notification_Struct
             {
-                notificationIcon = "Notification/SystemNotification/noti6/achievement_icon.png",
-                notificationContent = "You got a new achievement: Sniper",
-                notificationStatus = false
+
             };
 
     private void Start()
@@ -77,7 +75,7 @@ public class SystemNotificationData : MonoBehaviour
             .GetSnapshotAsync()
             .ContinueWithOnMainThread(task =>
             {
-     
+
 
                 QuerySnapshot leaderQuerySnapshot = task.Result;
 
@@ -89,7 +87,7 @@ public class SystemNotificationData : MonoBehaviour
                 {
 
                     objectData =
-                        documentSnapshot.ConvertTo<SystemNotificationStruct>();
+                        documentSnapshot.ConvertTo<Notification_Struct>();
 
                     listData.Add(objectData);
 
@@ -141,8 +139,7 @@ public class SystemNotificationData : MonoBehaviour
 
         foreach (var objectItem in listData)
         {
-            StartCoroutine(GetImage(objectItem.notificationIcon, 
-            objectItem.notificationContent, objectItem.notificationStatus));
+
 
             count = 0;
         }

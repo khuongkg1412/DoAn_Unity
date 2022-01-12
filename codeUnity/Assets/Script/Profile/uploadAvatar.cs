@@ -8,8 +8,8 @@ using Firebase.Extensions;
 using Firebase.Storage;
 //For Picking files
 using System.Threading.Tasks;
-//using UnityEngine.Windows;
 using UnityEngine.SceneManagement;
+
 public class uploadAvatar : MonoBehaviour
 {
     FirebaseStorage storage;
@@ -17,7 +17,7 @@ public class uploadAvatar : MonoBehaviour
     StorageReference storageReference;
     public Image localImg;
     static string paths;
-    static bool reviewImgActived = false;
+    //static bool reviewImgActived = false;
     public static bool isModify = false;
     public static bool isUpDone = false;
 
@@ -43,20 +43,23 @@ public class uploadAvatar : MonoBehaviour
                    return;
                }
 
-               StartCoroutine(ReviewImageFromLocal(path));
-               // Assign texture to a temporary quad and destroy it after 5 seconds
-               GameObject quad = GameObject.CreatePrimitive(PrimitiveType.Quad);
-               quad.transform.position = Camera.main.transform.position + Camera.main.transform.forward * 2.5f;
-               quad.transform.forward = Camera.main.transform.forward;
-               quad.transform.localScale = new Vector3(1f, texture.height / (float)texture.width, 1f);
-               Material material = quad.GetComponent<Renderer>().material;
-               if (!material.shader.isSupported) // happens when Standard shader is not included in the build
-                   material.shader = Shader.Find("Legacy Shaders/Diffuse");
-               material.mainTexture = texture;
-               Destroy(quad, 5f);
-               // If a procedural texture is not destroyed manually, 
-               // it will only be freed after a scene change
-               Destroy(texture, 5f);
+               StartCoroutine(ReviewImageFromLocal(texture, path));
+
+               //    // Assign texture to a temporary quad and destroy it after 5 seconds
+               //    GameObject quad = GameObject.CreatePrimitive(PrimitiveType.Quad);
+               //    quad.transform.position = Camera.main.transform.position + Camera.main.transform.forward * 2.5f;
+               //    quad.transform.forward = Camera.main.transform.forward;
+               //    quad.transform.localScale = new Vector3(1f, texture.height / (float)texture.width, 1f);
+
+               //    Material material = quad.GetComponent<Renderer>().material;
+               //    if (!material.shader.isSupported) // happens when Standard shader is not included in the build
+               //        material.shader = Shader.Find("Legacy Shaders/Diffuse");
+               //    material.mainTexture = texture;
+
+               //    Destroy(quad, 5f);
+               //    // If a procedural texture is not destroyed manually, 
+               //    // it will only be freed after a scene change
+               //    Destroy(texture, 5f);
            }
        }, "Select a PNG image", "image/png");
         Debug.Log("Permission result: " + permission);
@@ -64,8 +67,6 @@ public class uploadAvatar : MonoBehaviour
 
     public void OnPickImageButtonClick()
     {
-        //paths = EditorUtility.OpenFilePanel("Show all image (.png", "", "png,jpg");
-        //StartCoroutine(ReviewImageFromLocal(paths));
         PickImage(512);
     }
 
@@ -85,18 +86,15 @@ public class uploadAvatar : MonoBehaviour
         // }
     }
 
-    IEnumerator ReviewImageFromLocal(string localFilePath){
-         //Review image before upload
+    IEnumerator ReviewImageFromLocal(Texture2D texture, string localFilePath)
+    {
+        //Review image before upload
 
-        //byte[] fileContents = File.ReadAllBytes(localFilePath);
-        Texture2D texture = new Texture2D(1, 1);
-        //texture.LoadImage(fileContents);
         Sprite sprite = Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100.0f);
         localImg.GetComponent<Image>().sprite = sprite;
-        reviewImgActived = true;
+        //reviewImgActived = true;
         paths = localFilePath;
         yield return null;
-        //StartCoroutine(UpImageFromLocal(localFilePath));
     }
 
     IEnumerator UpImageFromLocal(string localFilePath)
@@ -141,22 +139,13 @@ public class uploadAvatar : MonoBehaviour
     void changeCurrentAvatar(string newPath)
     {
         db = FirebaseFirestore.DefaultInstance;
-        DocumentReference docRef = db.Collection("player").Document("ID");
-        Dictionary<string, object> update = new Dictionary<string, object>{{"avatarUrl",newPath }};
-        
-        docRef.SetAsync(update, SetOptions.MergeAll).ContinueWithOnMainThread(task =>
-        {
-            if (true)
-            {
-                Debug.Log("Modify successfully");
-                isModify = true;
-                Scene scene = SceneManager.GetActiveScene();
-                SceneManager.LoadScene(scene.name);
-            }
-            else
-            {
-                Debug.Log("Modify crashing");
-            }
-        });
+        DocumentReference docRef = db.Collection("Player").Document(Player_DataManager.Instance.Player.ID);
+        PlayerStruct player = Player_DataManager.Instance.Player;
+        player.generalInformation.avatar_Player = newPath;
+
+        docRef.SetAsync(player);
+
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
     }
 }
