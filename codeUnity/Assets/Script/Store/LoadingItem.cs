@@ -24,7 +24,7 @@ public class LoadingItem : MonoBehaviour
         int currentQuantity = int.Parse(quantityText.text);
         if (input == (int)QuantityButton.Plus)
         {
-            if (currentQuantity >= 0 && currentQuantity < 99)
+            if (currentQuantity > 0 && currentQuantity < 99)
             {
                 currentQuantity += 1;
                 quantityText.text = currentQuantity.ToString();
@@ -34,9 +34,9 @@ public class LoadingItem : MonoBehaviour
                 Debug.LogError("Cannot Increase More");
             }
         }
-        else
+        else if (input == (int)QuantityButton.Minus)
         {
-            if (currentQuantity > 0 && currentQuantity <= 99)
+            if (currentQuantity > 1 && currentQuantity <= 99)
             {
                 currentQuantity -= 1;
                 quantityText.text = currentQuantity.ToString();
