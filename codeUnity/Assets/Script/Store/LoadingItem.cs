@@ -19,11 +19,93 @@ public class LoadingItem : MonoBehaviour
         Minus = 1
     }
     [SerializeField] TMPro.TMP_Text quantityText;
+    GameObject coinToggle, diamondToggle;
+    float waitingTime = 0f;
+    private void Start()
+    {
+        coinToggle = GameObject.Find("ToggleCoin");
+        diamondToggle = GameObject.Find("ToggleDiamond");
+    }
+    private void Update()
+    {
+        updateCoinandDiamond();
+        checkValidCurrency();
+    }
+    void checkValidCurrency()
+    {
+        float diamond = float.Parse(diamondItem.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text);
+        float coin = float.Parse(coinItem.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text);
+        /*
+        Coin Part
+        */
+        if (Player_DataManager.Instance.Player.concurrency.Coin < coin)
+        {
+            Color red = new Color(1, 0, 0);
+            coinItem.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().color = red;
+        }
+        else if (Player_DataManager.Instance.Player.concurrency.Coin >= coin)
+        {
+            Color white = new Color(1, 1, 1);
+            coinItem.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().color = white;
+        }
+        /*
+        Diamond Part
+        */
+        if (Player_DataManager.Instance.Player.concurrency.Diamond < diamond)
+        {
+            Color red = new Color(1, 0, 0);
+            diamondItem.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().color = red;
+        }
+        else if (Player_DataManager.Instance.Player.concurrency.Diamond >= diamond)
+        {
+            Color white = new Color(1, 1, 1);
+            diamondItem.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().color = white;
+        }
+        /*
+        Interacable button if value is 0 Part
+        */
+        if (diamond == 0)
+        {
+            diamondToggle.GetComponent<Toggle>().interactable = false;
+        }
+        else
+        {
+            diamondToggle.GetComponent<Toggle>().interactable = true;
+        }
+
+        if (coin == 0)
+        {
+            coinToggle.GetComponent<Toggle>().interactable = false;
+        }
+        else
+        {
+            coinToggle.GetComponent<Toggle>().interactable = true;
+        }
+    }
+    void updateCoinandDiamond()
+    {
+        //Get the current quantity by parse the string in the text field
+        int currentQuantity = int.Parse(quantityText.text);
+        if (dataItem.type_Item == (int)TypeItem.ItemDaily || dataItem.type_Item == (int)TypeItem.ItemWeekly)
+        {
+            diamondItem.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text = (dataItem.concurrency.Diamond * currentQuantity).ToString();
+            coinItem.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text = (dataItem.concurrency.Coin * currentQuantity).ToString();
+        }
+        else if (dataItem.type_Item == (int)TypeItem.Chest)
+        {
+            diamondChest.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text = (dataItem.concurrency.Diamond * currentQuantity).ToString();
+            coinChest.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text = (dataItem.concurrency.Coin * currentQuantity).ToString();
+        }
+    }
+    //Controll the quantity of item that user wanna buy
     public void quantityControll(int input)
     {
+        //Get the current quantity by parse the string in the text field
         int currentQuantity = int.Parse(quantityText.text);
+        //Press Plus button would input 0 is equal to (int)QuantityButton.Plus
         if (input == (int)QuantityButton.Plus)
         {
+            //Check whether currentQuantity is in valid range
             if (currentQuantity > 0 && currentQuantity < 99)
             {
                 currentQuantity += 1;
@@ -34,8 +116,10 @@ public class LoadingItem : MonoBehaviour
                 Debug.LogError("Cannot Increase More");
             }
         }
+        //Press Plus button would input 0 is equal to (int)QuantityButton.Minus
         else if (input == (int)QuantityButton.Minus)
         {
+            //Check whether currentQuantity is in valid range
             if (currentQuantity > 1 && currentQuantity <= 99)
             {
                 currentQuantity -= 1;
@@ -46,6 +130,24 @@ public class LoadingItem : MonoBehaviour
                 Debug.LogError("Cannot Increase More");
             }
         }
+
+    }
+    public void HoldingButtonQuantity(int input)
+    {
+        waitingTime += Time.deltaTime;
+        if (waitingTime > 0.25f)
+        {
+            waitingTime = 0f;
+            quantityControll(input);
+
+        }
+    }
+    //Pointer Up to stop increase or decrease quantity
+    public void PointerUP()
+    {
+        GameObject myEventSystem = GameObject.Find("EventSystem");
+
+        myEventSystem.GetComponent<UnityEngine.EventSystems.EventSystem>().SetSelectedGameObject(null);
     }
     //Instantiate for all objects in the pannel
     void settingObject()
@@ -70,6 +172,7 @@ public class LoadingItem : MonoBehaviour
     //Set data for each objects
     void dataforItem()
     {
+        quantityText.text = "1";
         nameItem.text = dataItem.name_Item;
         if (dataItem.type_Item == (int)TypeItem.ItemDaily)
         {
