@@ -29,24 +29,30 @@ public class Player_DataManager : MonoBehaviour
     {
         //quantity of item
         float quanity = 0;
-        for (int i = 0; i < Instance.inventory_Player.Count - 1; i++)
+        bool isFound = false;
+        for (int i = 0; i < Instance.inventory_Player.Count; i++)
         {
             if (Instance.inventory_Player[i].item.ContainsKey(item.name_Item))
             {
                 quanity = Instance.inventory_Player[i].item[item.name_Item];
-                Instance.inventory_Player.RemoveAt(i);
+                quanity += quantityBuy;
+                Debug.Log("Find");
+                Instance.inventory_Player[i].item = new Dictionary<string, float>() { { item.name_Item, quanity } };
+                isFound = true;
             }
         }
-        quanity += quantityBuy;
-        //adding item to inventory
-        Inventory_Player invent = new Inventory_Player()
+        if (isFound == false)
         {
-            ID = item.ID,
-            item = new Dictionary<string, float>(){
-                {item.name_Item ,quanity }
-            }
-        };
-        Instance.inventory_Player.Add(invent);
+            Debug.Log("Cannot Find");
+            //adding item to inventory
+            Inventory_Player invent = new Inventory_Player()
+            {
+                ID = item.ID,
+                item = new Dictionary<string, float>() { { item.name_Item, quanity + quantityBuy } }
+            };
+            Instance.inventory_Player.Add(invent);
+        }
+
         //Call to update the information off Player
         Player_Update.UpdatePlayer();
     }

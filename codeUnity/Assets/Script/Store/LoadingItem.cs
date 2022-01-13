@@ -151,7 +151,6 @@ public class LoadingItem : MonoBehaviour
         {
             waitingTime = 0f;
             quantityControll(input);
-
         }
     }
     //Pointer Up to stop increase or decrease quantity
