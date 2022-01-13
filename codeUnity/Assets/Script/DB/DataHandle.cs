@@ -168,12 +168,12 @@ public class DataHandle : MonoBehaviour
     float timeGetUpdate = 0f;
     private void Start()
     {
-        TestFireBase();
+        //TestFireBase();
     }
 
     private void Update()
     {
-        //update_Information();
+        update_Information();
     }
     void update_Information()
     {
