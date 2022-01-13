@@ -12,6 +12,7 @@ public class LoadingItem : MonoBehaviour
     //Get Diamond, coin
     [SerializeField] GameObject diamondItem, coinItem;
     [SerializeField] GameObject diamondChest, coinChest;
+    [SerializeField] GameObject BuyButton;
     RawImage dataImage;
     enum QuantityButton
     {
@@ -42,11 +43,13 @@ public class LoadingItem : MonoBehaviour
         {
             Color red = new Color(1, 0, 0);
             coinItem.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().color = red;
+            BuyButton.GetComponent<Button>().interactable = false;
         }
         else if (Player_DataManager.Instance.Player.concurrency.Coin >= coin)
         {
             Color white = new Color(1, 1, 1);
             coinItem.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().color = white;
+            BuyButton.GetComponent<Button>().interactable = true;
         }
         /*
         Diamond Part
@@ -55,31 +58,35 @@ public class LoadingItem : MonoBehaviour
         {
             Color red = new Color(1, 0, 0);
             diamondItem.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().color = red;
+            BuyButton.GetComponent<Button>().interactable = false;
         }
         else if (Player_DataManager.Instance.Player.concurrency.Diamond >= diamond)
         {
+            BuyButton.GetComponent<Button>().interactable = true;
             Color white = new Color(1, 1, 1);
             diamondItem.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().color = white;
         }
         /*
         Interacable button if value is 0 Part
         */
-        if (diamond == 0)
-        {
-            diamondToggle.GetComponent<Toggle>().interactable = false;
-        }
-        else
+        if (diamond != 0 && coin != 0)
         {
             diamondToggle.GetComponent<Toggle>().interactable = true;
-        }
-
-        if (coin == 0)
-        {
-            coinToggle.GetComponent<Toggle>().interactable = false;
-        }
-        else
-        {
             coinToggle.GetComponent<Toggle>().interactable = true;
+        }
+        else if (diamond == 0 && coin != 0)
+        {
+            diamondToggle.GetComponent<Toggle>().interactable = false;
+            diamondToggle.GetComponent<Toggle>().isOn = false;
+            coinToggle.GetComponent<Toggle>().interactable = true;
+            coinToggle.GetComponent<Toggle>().isOn = true;
+        }
+        else if (coin == 0 && diamond != 0)
+        {
+            diamondToggle.GetComponent<Toggle>().interactable = true;
+            diamondToggle.GetComponent<Toggle>().isOn = true;
+            coinToggle.GetComponent<Toggle>().interactable = false;
+            coinToggle.GetComponent<Toggle>().isOn = false;
         }
     }
     void updateCoinandDiamond()
@@ -96,6 +103,11 @@ public class LoadingItem : MonoBehaviour
             diamondChest.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text = (dataItem.concurrency.Diamond * currentQuantity).ToString();
             coinChest.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text = (dataItem.concurrency.Coin * currentQuantity).ToString();
         }
+    }
+
+    public void PressBuyButton()
+    {
+        Player_DataManager.Instance.adding_Item(dataItem, int.Parse(quantityText.text));
     }
     //Controll the quantity of item that user wanna buy
     public void quantityControll(int input)

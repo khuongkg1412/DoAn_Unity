@@ -25,28 +25,28 @@ public class Player_DataManager : MonoBehaviour
         }
     }
 
-    public void adding_Item(ItemStruct item)
+    public void adding_Item(ItemStruct item, int quantityBuy)
     {
         //quantity of item
         float quanity = 0;
-        //Get quantity of item if it is exist
-        foreach (var i in inventory_Player)
+        for (int i = 0; i < Instance.inventory_Player.Count - 1; i++)
         {
-            //if not exist quantity is 0
-            if (i.item.ContainsKey(item.name_Item))
+            if (Instance.inventory_Player[i].item.ContainsKey(item.name_Item))
             {
-                quanity = i.item[item.name_Item];
+                quanity = Instance.inventory_Player[i].item[item.name_Item];
+                Instance.inventory_Player.RemoveAt(i);
             }
         }
+        quanity += quantityBuy;
         //adding item to inventory
         Inventory_Player invent = new Inventory_Player()
         {
             ID = item.ID,
             item = new Dictionary<string, float>(){
-                {item.name_Item , ++quanity}
+                {item.name_Item ,quanity }
             }
         };
-        inventory_Player.Add(invent);
+        Instance.inventory_Player.Add(invent);
         //Call to update the information off Player
         Player_Update.UpdatePlayer();
     }

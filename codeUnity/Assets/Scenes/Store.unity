@@ -5752,7 +5752,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &733973489
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7460,6 +7460,7 @@ MonoBehaviour:
   coinItem: {fileID: 1515070741}
   diamondChest: {fileID: 1643699722}
   coinChest: {fileID: 1515070741}
+  BuyButton: {fileID: 0}
   quantityText: {fileID: 0}
 --- !u!114 &1032432049
 MonoBehaviour:
@@ -12198,7 +12199,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_IsOn: 1
+  m_IsOn: 0
 --- !u!1 &1497767972
 GameObject:
   m_ObjectHideFlags: 0
@@ -16219,7 +16220,7 @@ GameObject:
   - component: {fileID: 2039286265}
   - component: {fileID: 2039286264}
   m_Layer: 0
-  m_Name: Resume
+  m_Name: Buy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16740,6 +16741,7 @@ MonoBehaviour:
   coinItem: {fileID: 1343204846}
   diamondChest: {fileID: 0}
   coinChest: {fileID: 0}
+  BuyButton: {fileID: 2039286262}
   quantityText: {fileID: 1166730230}
 --- !u!1 &2091678316
 GameObject:
