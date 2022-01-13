@@ -35,7 +35,7 @@ public class DataHandle : MonoBehaviour
     {
         generalInformation = new GeneralInformation_Player
         {
-            username_Player = "Diep Thien",
+            username_Player = "Hai Long",
             avatar_Player = "PlayerAvatar/Avatar item.png",
             gender_Player = 0
         },
@@ -168,12 +168,12 @@ public class DataHandle : MonoBehaviour
     float timeGetUpdate = 0f;
     private void Start()
     {
-        // TestFireBase();
+        TestFireBase();
     }
 
     private void Update()
     {
-        update_Information();
+        //update_Information();
     }
     void update_Information()
     {
@@ -231,13 +231,14 @@ public class DataHandle : MonoBehaviour
         //FireBase Object
         FirebaseFirestore db;
         db = FirebaseFirestore.DefaultInstance;
-        Debug.Log("Data has been updated ");
-        notificationSystem.dateCreate = dataTime;
-        notificationSocial.dateCreate = dataTime;
-        notificationFriend.dateCreate = dataTime;
-        db.Collection("Notifcation").AddAsync(notificationSystem);
-        db.Collection("Notifcation").AddAsync(notificationSocial);
-        db.Collection("Notifcation").AddAsync(notificationFriend);
+        // Debug.Log("Data has been updated ");
+        // notificationSystem.dateCreate = dataTime;
+        // notificationSocial.dateCreate = dataTime;
+        // notificationFriend.dateCreate = dataTime;
+        // db.Collection("Notifcation").AddAsync(notificationSystem);
+        // db.Collection("Notifcation").AddAsync(notificationSocial);
+        // db.Collection("Notifcation").AddAsync(notificationFriend);
+        db.Collection("Player").Document("7xv28G3fCIf2UoO0rV2SFV5tTr62").SetAsync(newPlayer);
 
     }
 
