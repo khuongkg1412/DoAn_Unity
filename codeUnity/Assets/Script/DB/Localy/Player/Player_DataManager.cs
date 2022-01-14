@@ -24,7 +24,20 @@ public class Player_DataManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
+    public void updateCoinConcurrency(float amountUpdate)
+    {
+        Player.concurrency.Coin += amountUpdate;
+        //if(Player.concurrency.Coin);
+        //Call to update the information off Player
+        Player_Update.UpdatePlayer();
+    }
+    public void updateDiamondConcurrency(float amountUpdate)
+    {
+        Player.concurrency.Diamond += amountUpdate;
+        //if(Player.concurrency.Coin);
+        //Call to update the information off Player
+        Player_Update.UpdatePlayer();
+    }
     public void adding_Item(ItemStruct item, int quantityBuy)
     {
         //quantity of item

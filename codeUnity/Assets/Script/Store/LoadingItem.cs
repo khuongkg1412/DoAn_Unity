@@ -43,13 +43,11 @@ public class LoadingItem : MonoBehaviour
         {
             Color red = new Color(1, 0, 0);
             coinItem.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().color = red;
-            BuyButton.GetComponent<Button>().interactable = false;
         }
         else if (Player_DataManager.Instance.Player.concurrency.Coin >= coin)
         {
             Color white = new Color(1, 1, 1);
             coinItem.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().color = white;
-            BuyButton.GetComponent<Button>().interactable = true;
         }
         /*
         Diamond Part
@@ -58,11 +56,9 @@ public class LoadingItem : MonoBehaviour
         {
             Color red = new Color(1, 0, 0);
             diamondItem.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().color = red;
-            BuyButton.GetComponent<Button>().interactable = false;
         }
         else if (Player_DataManager.Instance.Player.concurrency.Diamond >= diamond)
         {
-            BuyButton.GetComponent<Button>().interactable = true;
             Color white = new Color(1, 1, 1);
             diamondItem.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().color = white;
         }
@@ -88,6 +84,30 @@ public class LoadingItem : MonoBehaviour
             coinToggle.GetComponent<Toggle>().interactable = false;
             coinToggle.GetComponent<Toggle>().isOn = false;
         }
+        /*
+        Check whether is any toggles's on 
+        */
+
+        if ((Player_DataManager.Instance.Player.concurrency.Diamond < diamond) && (Player_DataManager.Instance.Player.concurrency.Coin < coin))
+        {
+            BuyButton.GetComponent<Button>().interactable = false;
+        }
+        else if ((Player_DataManager.Instance.Player.concurrency.Diamond < diamond) && (coin == 0))
+        {
+            BuyButton.GetComponent<Button>().interactable = false;
+        }
+        else if ((Player_DataManager.Instance.Player.concurrency.Coin < coin) && (diamond == 0))
+        {
+            BuyButton.GetComponent<Button>().interactable = false;
+        }
+        else if (coinToggle.GetComponent<Toggle>().isOn || diamondToggle.GetComponent<Toggle>().isOn)
+        {
+            BuyButton.GetComponent<Button>().interactable = true;
+        }
+        else
+        {
+            BuyButton.GetComponent<Button>().interactable = false;
+        }
     }
     void updateCoinandDiamond()
     {
@@ -108,6 +128,19 @@ public class LoadingItem : MonoBehaviour
     public void PressBuyButton()
     {
         Player_DataManager.Instance.adding_Item(dataItem, int.Parse(quantityText.text));
+        if (coinToggle.GetComponent<Toggle>().isOn)
+        {
+            Debug.Log("Buy by Coin");
+            float buyAmount = -float.Parse(coinItem.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text);
+            Player_DataManager.Instance.updateCoinConcurrency(buyAmount);
+        }
+        else
+        {
+            Debug.Log("Buy by Diamond");
+            float buyAmount = -float.Parse(diamondItem.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text);
+            Player_DataManager.Instance.updateDiamondConcurrency(buyAmount);
+        }
+
     }
     //Controll the quantity of item that user wanna buy
     public void quantityControll(int input)
