@@ -19,7 +19,7 @@ public class LoadingItem : MonoBehaviour
         Plus = 0,
         Minus = 1
     }
-    [SerializeField] TMPro.TMP_Text quantityText;
+    [SerializeField] TMPro.TMP_Text quantityText, notificationTransaction;
     GameObject coinToggle, diamondToggle;
     float waitingTime = 0f;
     private void Start()
@@ -29,8 +29,64 @@ public class LoadingItem : MonoBehaviour
     }
     private void Update()
     {
-        updateCoinandDiamond();
-        checkValidCurrency();
+        if (dataItem.type_Item == (int)TypeItem.ItemDaily || dataItem.type_Item == (int)TypeItem.ItemWeekly)
+        {
+            updateCoinandDiamond();
+            checkValidCurrency();
+        }
+        else if (dataItem.type_Item == (int)TypeItem.Chest)
+        {
+            updateCoinandDiamondForChest();
+            CheckValidforChest();
+        }
+
+    }
+    void updateCoinandDiamondForChest()
+    {
+        if (coinToggle.active)
+        {
+            float coin = float.Parse(coinItem.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text);
+            if (Player_DataManager.Instance.Player.concurrency.Coin < coin)
+            {
+                BuyButton.GetComponent<Button>().interactable = false;
+                coinChest.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().color = new Color(1, 0, 0);
+            }
+            else
+            {
+                BuyButton.GetComponent<Button>().interactable = true;
+                coinChest.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().color = new Color(1, 1, 1);
+            }
+        }
+        else if (diamondToggle.active)
+        {
+            float diamond = float.Parse(diamondItem.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text);
+
+            if (Player_DataManager.Instance.Player.concurrency.Diamond < diamond)
+            {
+                diamondChest.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().color = new Color(1, 0, 0);
+                BuyButton.GetComponent<Button>().interactable = false;
+            }
+            else
+            {
+                BuyButton.GetComponent<Button>().interactable = true;
+                diamondChest.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().color = new Color(1, 1, 1);
+            }
+        }
+    }
+    void CheckValidforChest()
+    {
+        if (dataItem.name_Item.Equals("Common Chest"))
+        {
+            coinToggle.SetActive(true);
+            diamondToggle.SetActive(false);
+            coinChest.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text = dataItem.concurrency.Coin.ToString();
+        }
+        else
+        {
+            coinToggle.SetActive(false);
+            diamondToggle.SetActive(true);
+            diamondChest.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text = dataItem.concurrency.Diamond.ToString();
+        }
     }
     void checkValidCurrency()
     {
@@ -111,36 +167,74 @@ public class LoadingItem : MonoBehaviour
     }
     void updateCoinandDiamond()
     {
-        //Get the current quantity by parse the string in the text field
-        int currentQuantity = int.Parse(quantityText.text);
         if (dataItem.type_Item == (int)TypeItem.ItemDaily || dataItem.type_Item == (int)TypeItem.ItemWeekly)
-        {
+        {        //Get the current quantity by parse the string in the text field
+            int currentQuantity = int.Parse(quantityText.text);
             diamondItem.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text = (dataItem.concurrency.Diamond * currentQuantity).ToString();
             coinItem.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text = (dataItem.concurrency.Coin * currentQuantity).ToString();
         }
-        else if (dataItem.type_Item == (int)TypeItem.Chest)
-        {
-            diamondChest.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text = (dataItem.concurrency.Diamond * currentQuantity).ToString();
-            coinChest.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text = (dataItem.concurrency.Coin * currentQuantity).ToString();
-        }
+        // else if (dataItem.type_Item == (int)TypeItem.Chest)
+        // {
+        //     diamondChest.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text = (dataItem.concurrency.Diamond * currentQuantity).ToString();
+        //     coinChest.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text = (dataItem.concurrency.Coin * currentQuantity).ToString();
+        // }
     }
-
+    /*
+    Function for pressing button Buy: Adding to Inventory of Player and Minus the Concurrency of Player
+    */
     public void PressBuyButton()
     {
-        Player_DataManager.Instance.adding_Item(dataItem, int.Parse(quantityText.text));
+        //Player choose coin as the payment method
         if (coinToggle.GetComponent<Toggle>().isOn)
         {
-            Debug.Log("Buy by Coin");
-            float buyAmount = -float.Parse(coinItem.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text);
-            Player_DataManager.Instance.updateCoinConcurrency(buyAmount);
+            float buyAmount = float.Parse(coinItem.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text);
+            if (Player_DataManager.Instance.Player.concurrency.Coin >= buyAmount)
+            {
+                Player_DataManager.Instance.updateCoinConcurrency(-buyAmount);
+                //Add items to Inventory
+                Player_DataManager.Instance.adding_Item(dataItem, int.Parse(quantityText.text));
+                notificationTransaction.color = new Color(0, 1, 0);
+                notificationTransaction.text = "Successful Transaction";
+            }
+            else
+            {
+                notificationTransaction.color = new Color(1, 0, 0);
+                notificationTransaction.text = "Failed Transaction";
+                Debug.Log("Cannot Buy");
+            }
         }
+        //Player choose diamond as the payment method 
         else
         {
-            Debug.Log("Buy by Diamond");
-            float buyAmount = -float.Parse(diamondItem.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text);
-            Player_DataManager.Instance.updateDiamondConcurrency(buyAmount);
+            float buyAmount = float.Parse(diamondItem.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text);
+            if (Player_DataManager.Instance.Player.concurrency.Diamond >= buyAmount)
+            {
+                Player_DataManager.Instance.updateDiamondConcurrency(-buyAmount);
+                //Add items to Inventory
+                Player_DataManager.Instance.adding_Item(dataItem, int.Parse(quantityText.text));
+                notificationTransaction.color = new Color(0, 1, 0);
+                notificationTransaction.text = "Successful Transaction";
+            }
+            else
+            {
+                notificationTransaction.color = new Color(1, 0, 0);
+                notificationTransaction.text = "Failed Transaction";
+                Debug.Log("Cannot Buy");
+            }
         }
+        Invoke("notificationOn", 0f);
+        Invoke("notificationOff", 1.5f);
 
+    }
+
+    void notificationOn()
+    {
+        notificationTransaction.gameObject.SetActive(true);
+    }
+
+    void notificationOff()
+    {
+        notificationTransaction.gameObject.SetActive(false);
     }
     //Controll the quantity of item that user wanna buy
     public void quantityControll(int input)
@@ -242,8 +336,6 @@ public class LoadingItem : MonoBehaviour
         //Load data from Resource folders
         dataImage.texture = loadingImageFromFilePath(dataItem.image_Item);
         dataImage.SetNativeSize();//Set native size for image
-        diamondChest.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text = dataItem.concurrency.Diamond.ToString();
-        coinChest.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text = dataItem.concurrency.Coin.ToString();
     }
     /*
     This method is use to determine what type of item is, and what function would be call to process that type
