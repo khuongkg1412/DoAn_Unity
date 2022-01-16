@@ -29,10 +29,13 @@ public class AuthController : MonoBehaviour
                 return;
             }
 
-            Firebase.Auth.FirebaseUser newUser = task.Result;
-            Debug.LogFormat("User signed in successfully: {0} ({1})", newUser.DisplayName, newUser.UserId);
-            isDone = true;
-            ID = auth.CurrentUser.UserId;
+            if (task.IsCompleted)
+            {
+                Firebase.Auth.FirebaseUser newUser = task.Result;
+                Debug.LogFormat("User signed in successfully: {0} ({1})", newUser.DisplayName, newUser.UserId);
+                isDone = true;
+                ID = auth.CurrentUser.UserId;
+            }
         });
         yield return new WaitUntil(() => isDone == true);
         SceneManager.LoadScene("MainPage");

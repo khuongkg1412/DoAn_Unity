@@ -30,7 +30,7 @@ public class friendHandler : MonoBehaviour
 
     void Populate(Sprite sprite, string name, float Level)
     {
-        GameObject scrollItemObj = (GameObject)Instantiate(prefab, friendList.transform);
+        GameObject scrollItemObj = (GameObject)Instantiate(prefab, content.transform);
 
         scrollItemObj.transform.Find("Name & level/Name").gameObject.GetComponent<Text>().text = name;
         scrollItemObj.transform.Find("Name & level/level").gameObject.GetComponent<Text>().text = "Level " + Level;

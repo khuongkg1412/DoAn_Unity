@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Firebase.Extensions;
 using Firebase.Firestore;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player_Loading : MonoBehaviour
 {
@@ -32,6 +33,7 @@ public class Player_Loading : MonoBehaviour
             else
             {
                 Debug.LogError("loadingPlayer Error");
+                SceneManager.LoadScene("Register by Email");
             }
             isDonePlayer = true;
         });
@@ -138,10 +140,11 @@ public class Player_Loading : MonoBehaviour
         //db connection
         db = FirebaseFirestore.DefaultInstance;
         Query allCitiesQuery = db.Collection("Notifcation")
-         .WhereEqualTo("sentID_Notification", Player_DataManager.Instance.Player.ID)
-        // .WhereEqualTo("receivedID_Notification", Player_DataManager.Instance.Player.ID)
+        // .WhereEqualTo("sentID_Notification", Player_DataManager.Instance.Player.ID)
+         .WhereEqualTo("receivedID_Notification", Player_DataManager.Instance.Player.ID)
         // .OrderBy("dateCreate")
         ;
+        Debug.Log("Dàn o day ne: " + Player_DataManager.Instance.Player.ID);
         allCitiesQuery.GetSnapshotAsync().ContinueWithOnMainThread(task =>
         {
             QuerySnapshot allCitiesQuerySnapshot = task.Result;
