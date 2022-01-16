@@ -96,7 +96,7 @@ public class Store_DataHadle : MonoBehaviour
         description_Item = "Heal Pills is name of Item",
         image_Item = "Item_Image/HealPills",
         name_Item = "Heal Pills",
-        rate_Item = 1,
+        rate_Item = RateItem.Common,
         type_Item = (int)TypeItem.ItemDaily,
         numeral_Item =
                     new NumeralStruct
@@ -118,7 +118,7 @@ public class Store_DataHadle : MonoBehaviour
         description_Item = "Energy Pills is name of Item",
         image_Item = "Item_Image/EnergyPills",
         name_Item = "Energy Pills",
-        rate_Item = 2,
+        rate_Item = RateItem.Rare,
         type_Item = (int)TypeItem.ItemDaily,
         numeral_Item =
                     new NumeralStruct
@@ -140,7 +140,7 @@ public class Store_DataHadle : MonoBehaviour
         description_Item = "Pain Killers is name of Item",
         image_Item = "Item_Image/PainKiller",
         name_Item = "Pain Killers",
-        rate_Item = 2,
+        rate_Item = RateItem.Epic,
         type_Item = (int)TypeItem.ItemDaily,
         numeral_Item =
                     new NumeralStruct
@@ -162,7 +162,7 @@ public class Store_DataHadle : MonoBehaviour
         description_Item = "Yellow Tube is name of Item",
         image_Item = "Item_Image/blood-test (1)",
         name_Item = "Yellow Tube",
-        rate_Item = 2,
+        rate_Item = RateItem.Common,
         type_Item = (int)TypeItem.ItemWeekly,
         numeral_Item =
                     new NumeralStruct
@@ -184,7 +184,7 @@ public class Store_DataHadle : MonoBehaviour
         description_Item = "Test Kit is name of Item",
         image_Item = "Item_Image/image 58",
         name_Item = "Test Kit",
-        rate_Item = 2,
+        rate_Item = RateItem.Epic,
         type_Item = (int)TypeItem.ItemWeekly,
         numeral_Item =
                     new NumeralStruct
@@ -206,7 +206,7 @@ public class Store_DataHadle : MonoBehaviour
         description_Item = "Test Sample is name of Item",
         image_Item = "Item_Image/blood-test",
         name_Item = "Test Sample",
-        rate_Item = 2,
+        rate_Item = RateItem.Legendary,
         type_Item = (int)TypeItem.ItemWeekly,
         numeral_Item =
                     new NumeralStruct

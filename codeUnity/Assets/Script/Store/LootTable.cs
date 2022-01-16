@@ -1,13 +1,11 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "LootTable", menuName = "Loot Table")]
-public class RandomItem : ScriptableObject
+public class LootTable : ScriptableObject
 {
-    /*
     // This list is populated from the editor
     [SerializeField] private List<ItemStruct> _items;
 
@@ -22,7 +20,14 @@ public class RandomItem : ScriptableObject
     {
         if (!isInitialized)
         {
-            _totalWeight = _items.Sum(item => item.weight);
+            foreach (var i in Item_DataManager.Instance.Item)
+            {
+                if (i.type_Item != (int)TypeItem.Chest)
+                {
+                    _items.Add(i);
+                }
+            };
+            _totalWeight = (float)_items.Sum(item => item.rate_Item);
             isInitialized = true;
         }
     }
@@ -36,7 +41,7 @@ public class RandomItem : ScriptableObject
             _totalWeight = 0;
             foreach (var item in _items)
             {
-                _totalWeight += item.weight;
+                _totalWeight += (float)item.rate_Item;
                 //_totalWeight = _totalWeight + item.weight;
             }
 
@@ -45,7 +50,7 @@ public class RandomItem : ScriptableObject
     }
     #endregion
 
-    public RewardItem GetRandomItem()
+    public ItemStruct GetRandomItem()
     {
         // Make sure it is initalized
         Initialize();
@@ -57,18 +62,26 @@ public class RandomItem : ScriptableObject
         foreach (var item in _items)
         {
             // If item.weight is greater (or equal) than our diceRoll, we take that item and return
-            if (item.weight >= diceRoll)
+            if (item.rate_Item >= diceRoll)
             {
                 // Return here, so that the cycle doesn't keep running
                 return item;
             }
 
             // If we didn't return, we substract the weight to our diceRoll and cycle to the next item
-            diceRoll -= item.weight;
+            diceRoll -= (float)item.rate_Item;
         }
 
         // As long as everything works we'll never reach this point, but better be notified if this happens!
         throw new System.Exception("Reward generation failed!");
     }
-    */
+}
+
+[System.Serializable]
+public class RewardItem
+{
+    public string itemName;
+    public float weight;
+    public Sprite sprite;
+    // your item stats go here
 }
