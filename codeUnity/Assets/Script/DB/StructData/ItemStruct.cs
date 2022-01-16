@@ -24,6 +24,7 @@ public class NumeralStruct
 public class ItemStruct
 {
     public string ID { get; set; }
+    public Texture2D texture2D { get; set; }
     [FirestoreProperty]
     public Concurrency concurrency { get; set; }
     [FirestoreProperty]

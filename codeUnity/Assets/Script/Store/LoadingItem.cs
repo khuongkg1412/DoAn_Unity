@@ -41,9 +41,10 @@ public class LoadingItem : MonoBehaviour
         }
 
     }
+
     void updateCoinandDiamondForChest()
     {
-        if (coinToggle.active)
+        if (coinToggle.activeInHierarchy)
         {
             float coin = float.Parse(coinItem.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text);
             if (Player_DataManager.Instance.Player.concurrency.Coin < coin)
@@ -51,13 +52,17 @@ public class LoadingItem : MonoBehaviour
                 BuyButton.GetComponent<Button>().interactable = false;
                 coinChest.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().color = new Color(1, 0, 0);
             }
-            else
+            else if (coinToggle.GetComponent<Toggle>().isOn)
             {
                 BuyButton.GetComponent<Button>().interactable = true;
                 coinChest.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().color = new Color(1, 1, 1);
             }
+            else
+            {
+                BuyButton.GetComponent<Button>().interactable = false;
+            }
         }
-        else if (diamondToggle.active)
+        else if (diamondToggle.activeInHierarchy)
         {
             float diamond = float.Parse(diamondItem.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text);
 
@@ -66,10 +71,14 @@ public class LoadingItem : MonoBehaviour
                 diamondChest.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().color = new Color(1, 0, 0);
                 BuyButton.GetComponent<Button>().interactable = false;
             }
-            else
+            else if (diamondToggle.GetComponent<Toggle>().isOn)
             {
                 BuyButton.GetComponent<Button>().interactable = true;
                 diamondChest.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().color = new Color(1, 1, 1);
+            }
+            else
+            {
+                BuyButton.GetComponent<Button>().interactable = false;
             }
         }
     }
@@ -185,46 +194,49 @@ public class LoadingItem : MonoBehaviour
     public void PressBuyButton()
     {
         //Player choose coin as the payment method
-        if (coinToggle.GetComponent<Toggle>().isOn)
+        if (GameObject.Find("ToggleCoin"))
         {
-            float buyAmount = float.Parse(coinItem.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text);
-            if (Player_DataManager.Instance.Player.concurrency.Coin >= buyAmount)
+            if (coinToggle.GetComponent<Toggle>().isOn)
             {
-                Player_DataManager.Instance.updateCoinConcurrency(-buyAmount);
-                //Add items to Inventory
-                Player_DataManager.Instance.adding_Item(dataItem, int.Parse(quantityText.text));
-                notificationTransaction.color = new Color(0, 1, 0);
-                notificationTransaction.text = "Successful Transaction";
-            }
-            else
-            {
-                notificationTransaction.color = new Color(1, 0, 0);
-                notificationTransaction.text = "Failed Transaction";
-                Debug.Log("Cannot Buy");
+                float buyAmount = float.Parse(coinItem.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text);
+                if (Player_DataManager.Instance.Player.concurrency.Coin >= buyAmount)
+                {
+                    Player_DataManager.Instance.updateCoinConcurrency(-buyAmount);
+                    //Add items to Inventory
+                    Player_DataManager.Instance.adding_Item(dataItem, int.Parse(quantityText.text));
+                    notificationTransaction.color = new Color(0, 1, 0);
+                    notificationTransaction.text = "Successful Transaction";
+                }
+                else
+                {
+                    notificationTransaction.color = new Color(1, 0, 0);
+                    notificationTransaction.text = "Failed Transaction";
+                }
             }
         }
         //Player choose diamond as the payment method 
-        else
+        if (GameObject.Find("ToggleDiamond"))
         {
-            float buyAmount = float.Parse(diamondItem.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text);
-            if (Player_DataManager.Instance.Player.concurrency.Diamond >= buyAmount)
+            if (diamondToggle.GetComponent<Toggle>().isOn)
             {
-                Player_DataManager.Instance.updateDiamondConcurrency(-buyAmount);
-                //Add items to Inventory
-                Player_DataManager.Instance.adding_Item(dataItem, int.Parse(quantityText.text));
-                notificationTransaction.color = new Color(0, 1, 0);
-                notificationTransaction.text = "Successful Transaction";
-            }
-            else
-            {
-                notificationTransaction.color = new Color(1, 0, 0);
-                notificationTransaction.text = "Failed Transaction";
-                Debug.Log("Cannot Buy");
+                float buyAmount = float.Parse(diamondItem.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text);
+                if (Player_DataManager.Instance.Player.concurrency.Diamond >= buyAmount)
+                {
+                    Player_DataManager.Instance.updateDiamondConcurrency(-buyAmount);
+                    //Add items to Inventory
+                    Player_DataManager.Instance.adding_Item(dataItem, int.Parse(quantityText.text));
+                    notificationTransaction.color = new Color(0, 1, 0);
+                    notificationTransaction.text = "Successful Transaction";
+                }
+                else
+                {
+                    notificationTransaction.color = new Color(1, 0, 0);
+                    notificationTransaction.text = "Failed Transaction";
+                }
             }
         }
         Invoke("notificationOn", 0f);
         Invoke("notificationOff", 1.5f);
-
     }
 
     void notificationOn()
@@ -322,7 +334,7 @@ public class LoadingItem : MonoBehaviour
         }
         description.text = dataItem.description_Item;
         //Load data from Resource folders
-        dataImage.texture = loadingImageFromFilePath(dataItem.image_Item);
+        dataImage.texture = dataItem.texture2D;
         dataImage.SetNativeSize(); //Set native size for image
         diamondItem.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text = dataItem.concurrency.Diamond.ToString();
         coinItem.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text = dataItem.concurrency.Coin.ToString();
@@ -334,7 +346,7 @@ public class LoadingItem : MonoBehaviour
         description.text = dataItem.description_Item;
         type.text = "Chest";
         //Load data from Resource folders
-        dataImage.texture = loadingImageFromFilePath(dataItem.image_Item);
+        dataImage.texture = dataItem.texture2D;
         dataImage.SetNativeSize();//Set native size for image
     }
     /*
@@ -360,16 +372,5 @@ public class LoadingItem : MonoBehaviour
             default:
                 break;
         }
-    }
-    //Insert filepath then load image from Resouce folder
-    Texture2D loadingImageFromFilePath(string Filepath)
-    {
-        //Check filepath is valid
-        if (Resources.Load<Sprite>(Filepath) != null)
-        {
-            //Return image in Texture2D type
-            return Resources.Load<Texture2D>(Filepath);
-        }
-        return null;
     }
 }

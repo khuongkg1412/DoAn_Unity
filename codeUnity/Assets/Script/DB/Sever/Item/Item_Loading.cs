@@ -20,6 +20,8 @@ public class Item_Loading : MonoBehaviour
 
         yield return new WaitUntil(() => isDoneItem);
 
+        Item_DataManager.Instance.setTextureForItem();
+
     }
 
     private void loadDataItem()
