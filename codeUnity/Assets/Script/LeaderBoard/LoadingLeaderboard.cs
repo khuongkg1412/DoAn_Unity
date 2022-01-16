@@ -14,16 +14,14 @@ public class LoadingLeaderboard : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(loadLeaderboard());
+        loadLeaderboard();
     }
-    IEnumerator loadLeaderboard()
+    void loadLeaderboard()
     {
         int countTop = 0;
         foreach (var item in ListPlayer_DataManager.Instance.listPlayer)
         {
-
-            StartCoroutine(GetImage(item.generalInformation.avatar_Player));
-            yield return new WaitUntil(() => isRun == true);
+            avtImg.GetComponent<RawImage>().texture = item.texture2D;
             namePlayer.GetComponent<Text>().text = item.generalInformation.username_Player;
             mapPlayer.GetComponent<Text>().text = item.level.stage.ToString();
             levelPlayer.GetComponent<Text>().text = item.level.level.ToString();
@@ -52,36 +50,6 @@ public class LoadingLeaderboard : MonoBehaviour
             Instantiate(itemRow, transform);
             countTop++;
         }
-        yield return null;
-    }
-
-    IEnumerator GetImage(string dataImage)
-    {
-        isRun = false;
-        // Get a reference to the storage service, using the default Firebase App
-        FirebaseStorage storage = FirebaseStorage.DefaultInstance;
-        // Create a storage reference from our storage service
-        StorageReference storageRef = storage.GetReference(dataImage);
-
-        // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
-        const long maxAllowedSize = 1 * 1024 * 1024;
-        storageRef.GetBytesAsync(maxAllowedSize).ContinueWithOnMainThread(task =>
-           {
-               if (task.IsFaulted || task.IsCanceled)
-               {
-                   Debug.LogException(task.Exception);
-               }
-               else
-               {
-                   byte[] fileContents = task.Result;
-                   Texture2D texture = new Texture2D(1, 1);
-                   texture.LoadImage(fileContents);
-                   avtImg.GetComponent<RawImage>().texture = texture;
-                   isRun = true;
-               }
-
-           });
-        yield return null;
     }
     Texture2D loadingImageFromFilePath(string Filepath)
     {
