@@ -11,6 +11,8 @@ public class Player_DataManager : MonoBehaviour
     public List<SystemNotification> systemNotification = new List<SystemNotification>();
     public List<Friend_Player> friend_Player = new List<Friend_Player>();
     public List<Notification_Struct> notification_Player = new List<Notification_Struct>();
+    public List<AchievementStruct> achivementReceived_Player = new List<AchievementStruct>();
+
 
     private void Awake()
     {
@@ -27,14 +29,12 @@ public class Player_DataManager : MonoBehaviour
     public void updateCoinConcurrency(float amountUpdate)
     {
         Player.concurrency.Coin += amountUpdate;
-        //if(Player.concurrency.Coin);
         //Call to update the information off Player
         Player_Update.UpdatePlayer();
     }
     public void updateDiamondConcurrency(float amountUpdate)
     {
         Player.concurrency.Diamond += amountUpdate;
-        //if(Player.concurrency.Coin);
         //Call to update the information off Player
         Player_Update.UpdatePlayer();
     }
@@ -49,14 +49,12 @@ public class Player_DataManager : MonoBehaviour
             {
                 quanity = Instance.inventory_Player[i].item[item.name_Item];
                 quanity += quantityBuy;
-                Debug.Log("Find");
                 Instance.inventory_Player[i].item = new Dictionary<string, float>() { { item.name_Item, quanity } };
                 isFound = true;
             }
         }
         if (isFound == false)
         {
-            Debug.Log("Cannot Find");
             //adding item to inventory
             Inventory_Player invent = new Inventory_Player()
             {
@@ -83,6 +81,23 @@ public class Player_DataManager : MonoBehaviour
         Player_Update.UpdatePlayer();
     }
 
+    public void player_GetRewardAchievement(AchievementStruct achieve)
+    {
+        //Add concurrency by checking which concurrency is more than 0 to add into concurrency
+        Concurrency rewardReceived = achieve.concurrency;
+        if (rewardReceived.Coin > 0 && rewardReceived.Diamond <= 0)
+        {
+            updateCoinConcurrency(rewardReceived.Coin);
+        }
+        else
+        {
+            updateDiamondConcurrency(rewardReceived.Diamond);
+        }
+        // Add to received achievement of player
+        achivementReceived_Player.Add(achieve);
+        Player_Update.UpdatePlayer();
+
+    }
     public void sent_Notification()
     {
         // string sentID = "asd";

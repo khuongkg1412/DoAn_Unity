@@ -19,6 +19,7 @@ public class Achievement_Loading : MonoBehaviour
         loadDataAchievement();
 
         yield return new WaitUntil(() => isDoneAchieve);
+        Achievement_DataManager.Instance.Achievement_TrueOrFalse();
 
     }
 
@@ -39,7 +40,7 @@ public class Achievement_Loading : MonoBehaviour
             {
                 AchievementStruct objectData = documentSnapshot.ConvertTo<AchievementStruct>();
                 objectData.ID = documentSnapshot.Id;
-                Achievement_DataManager.Instance.Achievement.Add(objectData, false);
+                Achievement_DataManager.Instance.Achievement.Add(objectData);
             }
             if (task.IsCanceled)
             {

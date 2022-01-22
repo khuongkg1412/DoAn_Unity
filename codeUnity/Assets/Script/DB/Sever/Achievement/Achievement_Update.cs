@@ -15,8 +15,8 @@ public class Achievement_Update
         foreach (var item in Achievement_DataManager.Instance.Achievement)
         {
             //Get Collection And Document
-            DocumentReference doc = db.Collection("Achievement").Document(item.Key.ID);
-            doc.SetAsync(item.Key);
+            DocumentReference doc = db.Collection("Achievement").Document(item.ID);
+            doc.SetAsync(item);
         }
 
     }

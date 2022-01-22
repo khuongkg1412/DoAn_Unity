@@ -11,6 +11,7 @@ public class AchieveHandler : MonoBehaviour
     FirebaseFirestore db;
     public GameObject prefab;
     public GameObject content;
+    Slider assd;
     List<achieveItemStruct> listData = new List<achieveItemStruct>();
     bool isRun = false;
     private achieveItemStruct objectData;
@@ -18,37 +19,54 @@ public class AchieveHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(generateItem());
+        generateItem();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    IEnumerator Populate(string title, int prize)
+    void Populate(AchievementStruct achievement, double percentage)
     {
-        Debug.Log("Dang o day " + title);
+        GameObject itemObj = (GameObject)Instantiate(prefab, transform);
 
-        GameObject itemObj = (GameObject) Instantiate(prefab, transform);
-       
-        itemObj.transform.Find("ContentAchive").gameObject.GetComponent<Text>().text = title;
-        itemObj.transform.Find("RewardButton/ContentReward").gameObject.GetComponent<Text>().text = "" + prize;
-        yield return true;
-    }
-
-    IEnumerator generateItem()
-    {
-        StartCoroutine(GetFriendData());
-        yield return new WaitUntil(() => isRun == true);
-        Debug.Log("Database Counting "+ listData.Count);
-
-        foreach(achieveItemStruct item in listData)
+        itemObj.transform.Find("ContentAchive").gameObject.GetComponent<Text>().text = achievement.title_Achievement;
+        //Set text concurrency by checking which concurrency is more than 0 
+        Concurrency rewardReceived = achievement.concurrency;
+        if (rewardReceived.Coin > 0 && rewardReceived.Diamond <= 0)
         {
-            StartCoroutine(Populate(item.achieveTitle,item.achievePrize));
+            itemObj.transform.Find("RewardButton/ContentReward").gameObject.GetComponent<Text>().text = "" + achievement.concurrency.Coin;
         }
-        yield return null;
+        else
+        {
+            itemObj.transform.Find("RewardButton/ContentReward").gameObject.GetComponent<Text>().text = "" + achievement.concurrency.Diamond;
+        }
+        if (percentage < 1)
+        {
+            itemObj.transform.Find("ProgressAchive").gameObject.GetComponent<Slider>().value = (float)percentage;
+            itemObj.transform.Find("ProgressAchive/ContentSlider").gameObject.GetComponent<TMPro.TMP_Text>().text = (float)percentage * 100 + "%";
+        }
+        else if (percentage >= 1)
+        {
+            percentage = 100;
+            itemObj.transform.Find("ProgressAchive").gameObject.GetComponent<Slider>().value = (float)percentage;
+            itemObj.transform.Find("ProgressAchive/ContentSlider").gameObject.GetComponent<TMPro.TMP_Text>().text = (float)percentage + "%";
+            itemObj.transform.Find("ProgressAchive/Fill Area/Fill").gameObject.GetComponent<Image>().color = new Color(0, 1, 0);
+            itemObj.transform.Find("RewardButton").GetComponent<Image>().color = new Color(0, 1, 0);
+        }
+
+
+    }
+
+    void generateItem()
+    {
+        Debug.Log("Go");
+        foreach (var item in Achievement_DataManager.Instance.Achievement)
+        {
+            Populate(item, item.percentage);
+        }
     }
 
 
