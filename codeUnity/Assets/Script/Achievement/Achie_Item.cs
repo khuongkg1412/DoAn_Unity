@@ -61,12 +61,10 @@ public class Achie_Item : MonoBehaviour
 
     void checkReceivedAchievement()
     {
-        Debug.Log("Checked");
         foreach (var receivedItem in Player_DataManager.Instance.achivementReceived_Player)
         {
             if (receivedItem.ID == item.ID)
             {
-                Debug.Log("Received");
                 //Change color to gray for achievement that has been received from Player
                 Color gray = new Color((float)0.5, (float)0.5, (float)0.5);
                 Fill.GetComponent<Image>().color = gray;
