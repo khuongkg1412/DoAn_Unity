@@ -8,6 +8,7 @@ using System;
 [FirestoreData]
 public class Notification_Struct
 {
+    public string ID { get; set; }
     [FirestoreProperty]
     public string content_Notification { get; set; }
     [FirestoreProperty]
@@ -26,8 +27,10 @@ public class Notification_Struct
 }
 public enum Notification
 {
-    System_Notification = 0,
-    Friend_Notification = 1,
-    Social_Notifacation = 2
+    SystemUpdate_Notification = 0,
+    ReachAchive_Notification = 1,
+    SystemGift_Notification = 2,
+    Friend_Notification = 3,
+    Social_Notifacation = 4
 
 }

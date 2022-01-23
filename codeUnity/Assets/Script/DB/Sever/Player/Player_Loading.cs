@@ -144,13 +144,14 @@ public class Player_Loading : MonoBehaviour
          .WhereEqualTo("receivedID_Notification", Player_DataManager.Instance.Player.ID)
         // .OrderBy("dateCreate")
         ;
-        Debug.Log("Dàn o day ne: " + Player_DataManager.Instance.Player.ID);
+
         allCitiesQuery.GetSnapshotAsync().ContinueWithOnMainThread(task =>
         {
             QuerySnapshot allCitiesQuerySnapshot = task.Result;
             foreach (DocumentSnapshot documentSnapshot in allCitiesQuerySnapshot.Documents)
             {
                 Notification_Struct objectData = documentSnapshot.ConvertTo<Notification_Struct>();
+                objectData.ID = documentSnapshot.Id;
                 Player_DataManager.Instance.notification_Player.Add(objectData);
 
             }

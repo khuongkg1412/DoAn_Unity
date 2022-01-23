@@ -7,13 +7,11 @@ using UnityEngine.UI;
 
 public class DisplayNoti : MonoBehaviour
 {
-    public GameObject lifeRequest_prefab, addFriendRequest_prefab, systemRequest_prefab;
+    public GameObject lifeRequest_prefab, addFriendRequest_prefab, systemUpdate_prefab, reachAchieve_prefab, systemGift_prefab;
 
     public GameObject FriendNoti, SystemNoti, SocialNoti;
 
-    public ScrollRect FriendNotiList, SystemNotiList, SocialNotiList;
-
-    //public Text numberUnseenFriendNoti, numberUnseenSocialNoti, numberUnseenSystemNoti;
+    public GameObject FriendNotiPanel, SystemNotiPanel, SocialNotiPanel;
 
     private void Start()
     {
@@ -26,100 +24,185 @@ public class DisplayNoti : MonoBehaviour
 
         foreach (Notification_Struct noti in Player_DataManager.Instance.notification_Player)
         {
-            if (noti.type_Notification == 0)
+            if (noti.type_Notification < 3)
             {
-                if (noti.isRead_Notification == false) UnseenSystemNoti += 1;
+                if (!noti.isRead_Notification) UnseenSystemNoti += 1;
 
-                StartCoroutine(GetPlayerAvatar(noti.sentID_Notification));
-                yield return new WaitForSeconds(3);
-                StartCoroutine(Populate(noti, 0));
+                StartCoroutine(Populate(noti, noti.type_Notification));
             }
-            else if (noti.type_Notification == 1)
+            else if (noti.type_Notification == 3)
             {
 
-                if (noti.isRead_Notification == false) UnseenFriendNoti += 1;
+                if (!noti.isRead_Notification) UnseenFriendNoti += 1;
 
                 StartCoroutine(GetPlayerAvatar(noti.sentID_Notification));
                 yield return new WaitForSeconds(3);
-                StartCoroutine(Populate(noti, 1));
+                StartCoroutine(Populate(noti, noti.type_Notification));
             }
             else
             {
 
-                if (noti.isRead_Notification == false) UnseenSocialNoti += 1;
+                if (!noti.isRead_Notification) UnseenSocialNoti += 1;
 
                 StartCoroutine(GetPlayerAvatar(noti.sentID_Notification));
                 yield return new WaitForSeconds(3);
-                StartCoroutine(Populate(noti, 2));
+                StartCoroutine(Populate(noti, noti.type_Notification));
             }
         }
-        //setUnseenNotiNumber(UnseenFriendNoti, UnseenSocialNoti, UnseenSystemNoti);
+        setUnseenNotiNumber(UnseenFriendNoti, UnseenSocialNoti, UnseenSystemNoti);
         yield return null;
     }
 
     private void setUnseenNotiNumber(int NotiFriend, int NotiSocial, int NotiSystem)
     {
+        GameObject[] objs;
         if (NotiFriend > 0)
         {
-            GameObject obj = GameObject.Find("notify_count1");
-            obj.SetActive(true);
-            obj.GetComponentInChildren<Text>().text = NotiFriend.ToString();
+            objs = GameObject.FindGameObjectsWithTag("notify_count1");
+            foreach (GameObject obj in objs) obj.GetComponentInChildren<Text>().text = NotiFriend.ToString();
         }
-        //else GameObject.Find("notify_count").SetActive(false);
+        else
+        {
+            objs = GameObject.FindGameObjectsWithTag("notify_count1");
+            foreach (GameObject obj in objs) obj.SetActive(false);
+        }
 
         if (NotiSocial > 0)
         {
-            GameObject obj = GameObject.Find("notify_count2");
-            obj.SetActive(true);
-            obj.transform.Find("Text").gameObject.GetComponent<Text>().text = NotiSocial.ToString();
+            objs = GameObject.FindGameObjectsWithTag("notify_count2");
+            foreach (GameObject obj in objs) obj.GetComponentInChildren<Text>().text = NotiSocial.ToString();
         }
-        //else GameObject.Find("notify_count").SetActive(false);
+        else
+        {
+            objs = GameObject.FindGameObjectsWithTag("notify_count2");
+            foreach (GameObject obj in objs) obj.SetActive(false);
+        }
 
         if (NotiSystem > 0)
         {
-            GameObject obj = GameObject.Find("notify_count");
-            obj.SetActive(true);
-            obj.transform.Find("Text").gameObject.GetComponent<Text>().text = NotiSystem.ToString();
+            objs = GameObject.FindGameObjectsWithTag("notify_count");
+            foreach (GameObject obj in objs) obj.GetComponentInChildren<Text>().text = NotiSystem.ToString();
         }
-        //else GameObject.Find("notify_count").SetActive(false);
+        else
+        {
+            objs = GameObject.FindGameObjectsWithTag("notify_count");
+            foreach (GameObject obj in objs) obj.SetActive(false);
+        }
     }
 
     IEnumerator Populate(Notification_Struct noti, int typeNoti)
     {
+        GameObject Noti;
         switch (typeNoti)
         {
             case 1:
-                Debug.Log(avatarSender);
-                //lifeRequest_prefab.GetComponent<Button>().onClick.AddListener(() => OnFriendNotiClick());
-                GameObject Noti1 = (GameObject)Instantiate(lifeRequest_prefab, FriendNoti.transform);
-                Noti1.transform.Find("Title_noti").gameObject.GetComponentInParent<Button>().onClick.AddListener(() => OnFriendNotiClick());
-                Noti1.transform.Find("Title_noti").gameObject.GetComponent<Text>().text = noti.title_Notification;
-                Noti1.transform.Find("Mask Circle/SenderAvatar").gameObject.GetComponent<Image>().sprite = avatarSender;
+                Noti = (GameObject)Instantiate(reachAchieve_prefab, SystemNoti.transform);
+                Noti.transform.Find("Title_noti").gameObject.GetComponentInParent<Button>().onClick.AddListener(() => OnReachAchiveNotiClick());
+                Noti.transform.Find("Title_noti").gameObject.GetComponent<Text>().text = noti.title_Notification;
+                if (noti.isRead_Notification)
+                {
+                    Color color = Hetx2RGB("D9D9E3");
+                    Noti.transform.Find("Title_noti").gameObject.GetComponentInParent<Image>().color = color;
+                }
 
                 break;
             case 2:
-                Debug.Log(avatarSender);
-                GameObject Noti2 = (GameObject)Instantiate(addFriendRequest_prefab, SocialNoti.transform);
-                Noti2.transform.Find("Title_noti").gameObject.GetComponentInParent<Button>().onClick.AddListener(() => OnSocialNotiClick());
-                Noti2.transform.Find("Title_noti").gameObject.GetComponent<Text>().text = noti.title_Notification;
-                Noti2.transform.Find("SenderAvatar").gameObject.GetComponent<Image>().sprite = avatarSender;
+                Noti = (GameObject)Instantiate(systemGift_prefab, SystemNoti.transform);
+                Noti.transform.Find("Title_noti").gameObject.GetComponentInParent<Button>().onClick.AddListener(() => OnSystemGiftNotiClick());
+                Noti.transform.Find("Title_noti").gameObject.GetComponent<Text>().text = noti.title_Notification;
+                if (noti.isRead_Notification)
+                {
+                    Color color = Hetx2RGB("D9D9E3");
+                    Noti.transform.Find("Title_noti").gameObject.GetComponentInParent<Image>().color = color;
+                }
+
+                break;
+            case 3:
+                Noti = (GameObject)Instantiate(lifeRequest_prefab, FriendNoti.transform);
+                Noti.transform.Find("Title_noti").gameObject.GetComponentInParent<Button>().onClick.AddListener(() => OnFriendNotiClick(Noti, noti));
+                Noti.transform.Find("Title_noti").gameObject.GetComponent<Text>().text = noti.title_Notification;
+                Noti.transform.Find("Mask Circle/SenderAvatar").gameObject.GetComponent<Image>().sprite = avatarSender;
+                if (noti.isRead_Notification)
+                {
+                    Color color = Hetx2RGB("D9D9E3");
+                    Noti.transform.Find("Title_noti").gameObject.GetComponentInParent<Image>().color = color;
+                }
+
+                break;
+            case 4:
+
+                Noti = (GameObject)Instantiate(addFriendRequest_prefab, SocialNoti.transform);
+
+                Noti.transform.Find("Title_noti").gameObject.GetComponentInParent<Button>().onClick.AddListener(() => OnSocialNotiClick());
+                Noti.transform.Find("Title_noti").gameObject.GetComponent<Text>().text = noti.title_Notification;
+                Noti.transform.Find("Mask Circle/SenderAvatar").gameObject.GetComponent<Image>().sprite = avatarSender;
+                if (noti.isRead_Notification)
+                {
+                    Color color = Hetx2RGB("D9D9E3");
+                    Noti.transform.Find("Title_noti").gameObject.GetComponentInParent<Image>().color = color;
+                }
 
                 break;
             default:
-
-                GameObject Noti = (GameObject)Instantiate(systemRequest_prefab, SystemNoti.transform);
-                Noti.transform.Find("Title_noti").gameObject.GetComponentInParent<Button>().onClick.AddListener(() => OnSystemNotiClick());
+                Noti = (GameObject)Instantiate(systemUpdate_prefab, SystemNoti.transform);
+                Noti.transform.Find("Title_noti").gameObject.GetComponentInParent<Button>().onClick.AddListener(() => OnSystemUpdateNotiClick());
                 Noti.transform.Find("Title_noti").gameObject.GetComponent<Text>().text = noti.title_Notification;
-                //Noti.transform.Find("SenderAvatar").gameObject.GetComponent<Image>().sprite = avatarSender;
+                if (noti.isRead_Notification)
+                {
+                    Color color = Hetx2RGB("D9D9E3");
+                    Noti.transform.Find("Title_noti").gameObject.GetComponentInParent<Image>().color = color;
+                }
                 break;
         }
         yield return null;
     }
 
-    void OnFriendNotiClick() { Debug.Log("Thanh cong"); }
-    void OnSystemNotiClick() { }
-    void OnSocialNotiClick() { Debug.Log("Thanh cong"); }
+    private Color Hetx2RGB(string hex)
+    {
 
+        char[] values = hex.ToCharArray();
+        Color newColor = Color.white;
+
+        //Make sure we dont have any alpha values
+        if (hex.Length != 6)
+        {
+            return newColor;
+        }
+
+        var hexRed = int.Parse(hex[0].ToString() + hex[1].ToString(),
+        System.Globalization.NumberStyles.HexNumber);
+
+        var hexGreen = int.Parse(hex[2].ToString() + hex[3].ToString(),
+        System.Globalization.NumberStyles.HexNumber);
+
+        var hexBlue = int.Parse(hex[4].ToString() + hex[5].ToString(),
+        System.Globalization.NumberStyles.HexNumber);
+
+        newColor = new Color(hexRed / 255f, hexGreen / 255f, hexBlue / 255f);
+
+        return newColor;
+
+    }
+
+    public void OnSystemUpdateNotiClick() { }
+    public void OnSystemGiftNotiClick() { }
+    public void OnReachAchiveNotiClick() { }
+    public void OnFriendNotiClick(GameObject CurentNoti_prefab, Notification_Struct noti)
+    {
+        GameObject obj = (GameObject)Resources.Load("Prefabs/Notification/Popup window/LifeRequestWindow", typeof(GameObject));
+
+        GameObject popupWindow = (GameObject)Instantiate(obj, FriendNotiPanel.transform);
+
+        IsreadNoti(CurentNoti_prefab, noti);
+    }
+    public void OnSocialNotiClick() { Debug.Log("Thanh cong"); }
+
+    private void IsreadNoti(GameObject CurentNoti_prefab, Notification_Struct noti)
+    {
+        Color color = Hetx2RGB("D9D9E3");
+        CurentNoti_prefab.transform.Find("Title_noti").gameObject.GetComponentInParent<Image>().color = color;
+        Player_DataManager.Instance.read_Notification(noti);
+    }
 
     FirebaseFirestore db;
     public static Sprite avatarSender;

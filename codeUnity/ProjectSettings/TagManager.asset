@@ -10,6 +10,9 @@ TagManager:
   - Building
   - Enemy
   - Citizen
+  - notify_count2
+  - notify_count1
+  - notify_count
   layers:
   - Default
   - TransparentFX
