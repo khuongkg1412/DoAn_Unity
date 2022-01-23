@@ -17,13 +17,6 @@ public class AchieveHandler : MonoBehaviour
         generateItem();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-
 
     void TaskOnClick()
     {

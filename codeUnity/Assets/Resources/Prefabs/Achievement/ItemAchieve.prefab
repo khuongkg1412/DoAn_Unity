@@ -278,7 +278,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4f4fca4f79c3def4faa0ae9eee1c1ea5, type: 3}
+  m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -799,8 +799,6 @@ MonoBehaviour:
   ContentSlider: {fileID: 1891495516517527323}
   Fill: {fileID: 2678110490123092903}
   RewardButton: {fileID: 3493613993848900286}
-  backgroundObject: {fileID: 6798477240991478697}
-  fillImage: {fileID: 21300000, guid: 4f4fca4f79c3def4faa0ae9eee1c1ea5, type: 3}
 --- !u!1 &6798477240991478697
 GameObject:
   m_ObjectHideFlags: 0
@@ -866,7 +864,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4f4fca4f79c3def4faa0ae9eee1c1ea5, type: 3}
+  m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

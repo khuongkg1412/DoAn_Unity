@@ -7,6 +7,8 @@ public class Player_Update
 {
     public static void UpdatePlayer()
     {
+        string IDPlayer = AuthController.ID;
+        if (IDPlayer == null) IDPlayer = FacebookManager.ID;
         //FireBase Object
         FirebaseFirestore db;
 
@@ -14,32 +16,32 @@ public class Player_Update
         db = FirebaseFirestore.DefaultInstance;
 
         //Get Collection And Document
-        DocumentReference doc = db.Collection("Player").Document("7xv28G3fCIf2UoO0rV2SFV5tTr62");
+        DocumentReference doc = db.Collection("Player").Document(IDPlayer);
         doc.SetAsync(Player_DataManager.Instance.Player);
 
         foreach (var i in Player_DataManager.Instance.inventory_Player)
         {
-            doc = db.Collection("Player").Document("7xv28G3fCIf2UoO0rV2SFV5tTr62").Collection("Inventory_Player").Document(i.ID);
+            doc = db.Collection("Player").Document(IDPlayer).Collection("Inventory_Player").Document(i.ID);
             doc.SetAsync(i);
         }
         foreach (var i in Player_DataManager.Instance.systemNotification)
         {
-            doc = db.Collection("Player").Document("7xv28G3fCIf2UoO0rV2SFV5tTr62").Collection("SystemNotification").Document();
+            doc = db.Collection("Player").Document(IDPlayer).Collection("SystemNotification").Document();
             doc.SetAsync(i);
         }
         foreach (var i in Player_DataManager.Instance.friend_Player)
         {
-            doc = db.Collection("Player").Document("7xv28G3fCIf2UoO0rV2SFV5tTr62").Collection("Friend_Player").Document();
+            doc = db.Collection("Player").Document(IDPlayer).Collection("Friend_Player").Document();
             doc.SetAsync(i);
         }
         foreach (var i in Player_DataManager.Instance.friend_Player)
         {
-            doc = db.Collection("Player").Document("7xv28G3fCIf2UoO0rV2SFV5tTr62").Collection("Friend_Player").Document();
+            doc = db.Collection("Player").Document(IDPlayer).Collection("Friend_Player").Document();
             doc.SetAsync(i);
         }
         foreach (var i in Player_DataManager.Instance.achivementReceived_Player)
         {
-            doc = db.Collection("Player").Document("7xv28G3fCIf2UoO0rV2SFV5tTr62").Collection("Achivement_Player").Document(i.ID);
+            doc = db.Collection("Player").Document(IDPlayer).Collection("Achivement_Player").Document(i.ID);
             doc.SetAsync(i);
         }
 

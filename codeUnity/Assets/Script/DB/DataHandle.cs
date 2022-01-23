@@ -225,22 +225,6 @@ public class DataHandle : MonoBehaviour
            });
         yield return null;
     }
-    private void TestFireBase()
-    {
-        DateTime dataTime = System.DateTime.Now;
-        //FireBase Object
-        FirebaseFirestore db;
-        db = FirebaseFirestore.DefaultInstance;
-        // Debug.Log("Data has been updated ");
-        // notificationSystem.dateCreate = dataTime;
-        // notificationSocial.dateCreate = dataTime;
-        // notificationFriend.dateCreate = dataTime;
-        // db.Collection("Notifcation").AddAsync(notificationSystem);
-        // db.Collection("Notifcation").AddAsync(notificationSocial);
-        // db.Collection("Notifcation").AddAsync(notificationFriend);
-        db.Collection("Player").Document("7xv28G3fCIf2UoO0rV2SFV5tTr62").SetAsync(newPlayer);
-
-    }
 
     public void AdddingItem()
     {
