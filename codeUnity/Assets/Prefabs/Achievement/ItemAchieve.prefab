@@ -271,14 +271,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.98039216, g: 0.6784314, b: 0.22352941, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0e584d3de80397c4da7233ebe86751c9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4f4fca4f79c3def4faa0ae9eee1c1ea5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -524,7 +524,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7204446718156555739}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5337555957347517153
 GameObject:
   m_ObjectHideFlags: 0
@@ -701,6 +713,7 @@ GameObject:
   - component: {fileID: 193145426955433248}
   - component: {fileID: 1852193076534909688}
   - component: {fileID: 6707535840536398008}
+  - component: {fileID: 6834616942284767526}
   m_Layer: 5
   m_Name: ItemAchieve
   m_TagString: Untagged
@@ -758,7 +771,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b7c3e8abe0e54ff48a8bbbb08a0b513a, type: 3}
+  m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -768,6 +781,26 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 100
+--- !u!114 &6834616942284767526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5762564297100785820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b773327443b56044885f5417f411e54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ContentAchive: {fileID: 3327702482589714977}
+  ContentReward: {fileID: 747767234963295068}
+  ProgressAchive: {fileID: 5574295205043402750}
+  ContentSlider: {fileID: 1891495516517527323}
+  Fill: {fileID: 2678110490123092903}
+  RewardButton: {fileID: 3493613993848900286}
+  backgroundObject: {fileID: 6798477240991478697}
+  fillImage: {fileID: 21300000, guid: 4f4fca4f79c3def4faa0ae9eee1c1ea5, type: 3}
 --- !u!1 &6798477240991478697
 GameObject:
   m_ObjectHideFlags: 0
@@ -826,14 +859,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.6886792, g: 0.65879315, b: 0.65879315, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 278796bc0f7b14746b9450231469d33a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4f4fca4f79c3def4faa0ae9eee1c1ea5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

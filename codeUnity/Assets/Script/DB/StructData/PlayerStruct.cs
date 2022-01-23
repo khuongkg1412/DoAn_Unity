@@ -28,13 +28,6 @@ public class Friend_Player
     public string friendID { get; set; }
 }
 
-[FirestoreData]
-public class Achievement_Player
-{
-    [FirestoreProperty]
-    public AchievementStruct achievementReceived { get; set; }
-}
-
 
 [FirestoreData]
 [System.Serializable]

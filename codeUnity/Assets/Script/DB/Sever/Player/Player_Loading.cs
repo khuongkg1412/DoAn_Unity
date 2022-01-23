@@ -38,6 +38,36 @@ public class Player_Loading : MonoBehaviour
         });
 
     }
+    private void loadDataAchievement()
+    {
+        isDoneInvent = false;
+        //FireBase Object
+        FirebaseFirestore db;
+
+        //db connection
+        db = FirebaseFirestore.DefaultInstance;
+
+        Query allCitiesQuery = db.Collection("Player").Document("7xv28G3fCIf2UoO0rV2SFV5tTr62").Collection("Achivement_Player");
+        allCitiesQuery.GetSnapshotAsync().ContinueWithOnMainThread(task =>
+        {
+            QuerySnapshot allCitiesQuerySnapshot = task.Result;
+            foreach (DocumentSnapshot documentSnapshot in allCitiesQuerySnapshot.Documents)
+            {
+                AchievementStruct objectData = documentSnapshot.ConvertTo<AchievementStruct>();
+                objectData.ID = documentSnapshot.Id;
+                Player_DataManager.Instance.achivementReceived_Player.Add(objectData);
+            }
+            if (task.IsCanceled)
+            {
+                Debug.LogError("loadDataInvetory Error");
+            }
+            else if (task.IsFaulted)
+            {
+                Debug.LogError("loadDataInvetory Faulted");
+            }
+            isDoneInvent = true;
+        });
+    }
     private void loadDataInvetory()
     {
         isDoneInvent = false;
@@ -169,6 +199,7 @@ public class Player_Loading : MonoBehaviour
         yield return new WaitUntil(() => Player_DataManager.Instance != null);
         loadingPlayer();
         yield return new WaitUntil(() => isDonePlayer);
+        loadDataAchievement();
         loadDataFriend();
         loadDataInvetory();
         loadDataNotification();
