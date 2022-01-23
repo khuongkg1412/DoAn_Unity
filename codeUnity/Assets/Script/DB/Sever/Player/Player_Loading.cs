@@ -8,20 +8,20 @@ using UnityEngine.SceneManagement;
 public class Player_Loading : MonoBehaviour
 {
     private bool isDonePlayer = false, isDoneInvent = false, isDoneAchive = false, isDoneSystemNoti = false, isDoneFriend = false, isDoneNotification = false;
-
+    string IDPlayer;
     private void Start()
     {
         StartCoroutine(LoadingDataFromSever());
+        IDPlayer = AuthController.ID;
+        if (IDPlayer == null) IDPlayer = FacebookManager.ID;
     }
     void loadingPlayer()
     {
         isDonePlayer = false;
         FirebaseFirestore db = FirebaseFirestore.DefaultInstance;
-        string IDPlayer = AuthController.ID;
-        if (IDPlayer == null) IDPlayer = FacebookManager.ID;
 
-        //DocumentReference docRef = db.Collection("Player").Document(IDPlayer);
-        DocumentReference docRef = db.Collection("Player").Document("7xv28G3fCIf2UoO0rV2SFV5tTr62");
+
+        DocumentReference docRef = db.Collection("Player").Document(IDPlayer);
         docRef.GetSnapshotAsync().ContinueWithOnMainThread(task =>
         {
 
@@ -49,7 +49,7 @@ public class Player_Loading : MonoBehaviour
         //db connection
         db = FirebaseFirestore.DefaultInstance;
 
-        Query allCitiesQuery = db.Collection("Player").Document("7xv28G3fCIf2UoO0rV2SFV5tTr62").Collection("Achivement_Player");
+        Query allCitiesQuery = db.Collection("Player").Document(IDPlayer).Collection("Achivement_Player");
         allCitiesQuery.GetSnapshotAsync().ContinueWithOnMainThread(task =>
         {
             QuerySnapshot allCitiesQuerySnapshot = task.Result;
@@ -79,7 +79,7 @@ public class Player_Loading : MonoBehaviour
         //db connection
         db = FirebaseFirestore.DefaultInstance;
 
-        Query allCitiesQuery = db.Collection("Player").Document("7xv28G3fCIf2UoO0rV2SFV5tTr62").Collection("Inventory_Player");
+        Query allCitiesQuery = db.Collection("Player").Document(IDPlayer).Collection("Inventory_Player");
         allCitiesQuery.GetSnapshotAsync().ContinueWithOnMainThread(task =>
         {
             QuerySnapshot allCitiesQuerySnapshot = task.Result;
@@ -109,7 +109,7 @@ public class Player_Loading : MonoBehaviour
         //db connection
         db = FirebaseFirestore.DefaultInstance;
 
-        Query allCitiesQuery = db.Collection("Player").Document("7xv28G3fCIf2UoO0rV2SFV5tTr62").Collection("SystemNotification");
+        Query allCitiesQuery = db.Collection("Player").Document(IDPlayer).Collection("SystemNotification");
         allCitiesQuery.GetSnapshotAsync().ContinueWithOnMainThread(task =>
         {
             QuerySnapshot allCitiesQuerySnapshot = task.Result;
@@ -140,7 +140,7 @@ public class Player_Loading : MonoBehaviour
 
         //db connection
         db = FirebaseFirestore.DefaultInstance;
-        Query allCitiesQuery = db.Collection("Player").Document("7xv28G3fCIf2UoO0rV2SFV5tTr62").Collection("Friend_Player");
+        Query allCitiesQuery = db.Collection("Player").Document(IDPlayer).Collection("Friend_Player");
         allCitiesQuery.GetSnapshotAsync().ContinueWithOnMainThread(task =>
         {
             QuerySnapshot allCitiesQuerySnapshot = task.Result;
