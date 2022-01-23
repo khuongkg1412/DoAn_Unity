@@ -81,6 +81,7 @@ public class Player_DataManager : MonoBehaviour
         Player_Update.UpdatePlayer();
     }
 
+
     public void player_GetRewardAchievement(AchievementStruct achieve)
     {
         //Add concurrency by checking which concurrency is more than 0 to add into concurrency
@@ -98,18 +99,18 @@ public class Player_DataManager : MonoBehaviour
         Player_Update.UpdatePlayer();
 
     }
-    public void sent_Notification()
+    public void read_Notification(Notification_Struct currentNoti)
     {
-        // string sentID = "asd";
-        // Notification_Player notification_Player = new Notification_Player()
-        // {
-        //     content_Notification = "This is the content of the first notification",
-        //     sentID_Notification = "ID sent",
-        //     status_Notification = false,
-        //     title_Notification = "This is title of the first notification",
-        //     type_Notification = 0
-        // };
-
+        foreach (Notification_Struct noti in notification_Player)
+        {
+            if (noti.ID.Equals(currentNoti.ID))
+            {
+                noti.isRead_Notification = true;
+                break;
+            }
+        }
+        //Call to update the information off Player
+        Player_Update.UpdatePlayer();
     }
 
 

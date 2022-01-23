@@ -28,13 +28,30 @@ public class friendHandler : MonoBehaviour
 
     }
 
-    void Populate(Sprite sprite, string name, float Level)
+    void OnLifeRequestClick(string friendId)
     {
-        GameObject scrollItemObj = (GameObject)Instantiate(prefab, friendList.transform);
+        Debug.Log(friendId);
+        // Notification_Struct notificationFriend = new Notification_Struct()
+        // {
+        //     content_Notification = "Welcome to our new game. Wish you could enjoy happily this.",
+        //     title_Notification = "Welcome to Covid Refuse",
+        //     isRead_Notification = false,
+        //     receivedID_Notification = friendId,
+        //     sentID_Notification = Player_DataManager.Instance.Player.ID,
+        //     type_Notification = (int)Notification.Friend_Notification
+        // };
+
+
+    }
+
+    void Populate(Sprite sprite, string name, float Level, string FriendID)
+    {
+        GameObject scrollItemObj = (GameObject)Instantiate(prefab, content.transform);
 
         scrollItemObj.transform.Find("Name & level/Name").gameObject.GetComponent<Text>().text = name;
         scrollItemObj.transform.Find("Name & level/level").gameObject.GetComponent<Text>().text = "Level " + Level;
         scrollItemObj.transform.Find("Avatar").gameObject.GetComponent<Image>().sprite = sprite;
+        scrollItemObj.transform.Find("LifeRequest").gameObject.GetComponent<Button>().onClick.AddListener(() => OnLifeRequestClick(FriendID));
     }
 
     private PlayerStruct player;
@@ -53,7 +70,7 @@ public class friendHandler : MonoBehaviour
                 if (snapshot.Exists)
                 {
                     player = snapshot.ConvertTo<PlayerStruct>();
-                    StartCoroutine(GetImage(player.generalInformation.avatar_Player, player.generalInformation.username_Player, player.level.level));
+                    StartCoroutine(GetImage(player.ID, player.generalInformation.avatar_Player, player.generalInformation.username_Player, player.level.level));
                 }
                 else
                 {
@@ -64,7 +81,7 @@ public class friendHandler : MonoBehaviour
         yield return null;
     }
 
-    IEnumerator GetImage(string dataImage, string Name, float level)
+    IEnumerator GetImage(string ID, string dataImage, string Name, float level)
     {
         Debug.Log("Image Downloading");
 
@@ -91,7 +108,7 @@ public class friendHandler : MonoBehaviour
                     texture.LoadImage(fileContents);
                     Sprite sprite = Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100.0f);
 
-                    Populate(sprite, Name, level);
+                    Populate(sprite, Name, level, ID);
                 }
             });
         yield return null;

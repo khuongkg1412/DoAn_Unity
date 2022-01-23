@@ -139,7 +139,7 @@ public class DataHandle : MonoBehaviour
         isRead_Notification = false,
         receivedID_Notification = "7xv28G3fCIf2UoO0rV2SFV5tTr62",
         sentID_Notification = "System_Notification",
-        type_Notification = (int)Notification.System_Notification
+        type_Notification = (int)Notification.SystemUpdate_Notification
     };
     Notification_Struct notificationSocial = new Notification_Struct()
     {
