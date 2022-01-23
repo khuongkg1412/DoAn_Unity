@@ -381,6 +381,8 @@ GameObject:
   - component: {fileID: 123476457}
   - component: {fileID: 123476460}
   - component: {fileID: 123476459}
+  - component: {fileID: 123476462}
+  - component: {fileID: 123476461}
   m_Layer: 5
   m_Name: DBConnect
   m_TagString: Untagged
@@ -496,6 +498,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffebbeaf226ec9a4aa893771c636ea2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &123476461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 123476452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7f72a401d2d10544a277c23f9ca2c36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &123476462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 123476452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d3f40bb0c3a0b24bac7a8096319aaf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  listPlayer: []
 --- !u!1 &134091993
 GameObject:
   m_ObjectHideFlags: 0

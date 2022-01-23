@@ -28,21 +28,6 @@ public class Friend_Player
     public string friendID { get; set; }
 }
 
-// [FirestoreData]
-// public class Notification_Player
-// {
-//     [FirestoreProperty]
-//     public string content_Notification { get; set; }
-//     [FirestoreProperty]
-//     public string sentID_Notification { get; set; }
-//     [FirestoreProperty]
-//     public bool status_Notification { get; set; }
-//     [FirestoreProperty]
-//     public string title_Notification { get; set; }
-//     [FirestoreProperty]
-//     public float type_Notification { get; set; }
-// }
-
 
 [FirestoreData]
 [System.Serializable]
@@ -60,6 +45,8 @@ public class PlayerStruct
     public Dictionary<string, float> statistic { get; set; }
 
     public string ID { get; set; }
+
+    public Texture2D texture2D { get; set; }
 
 }
 

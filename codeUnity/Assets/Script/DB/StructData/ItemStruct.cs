@@ -21,9 +21,11 @@ public class NumeralStruct
 }
 
 [FirestoreData]
+[System.Serializable]
 public class ItemStruct
 {
     public string ID { get; set; }
+    public Texture2D texture2D { get; set; }
     [FirestoreProperty]
     public Concurrency concurrency { get; set; }
     [FirestoreProperty]
@@ -36,7 +38,7 @@ public class ItemStruct
     public string name_Item { get; set; }
 
     [FirestoreProperty]
-    public float rate_Item { get; set; }
+    public double rate_Item { get; set; }
 
     [FirestoreProperty]
     public int type_Item { get; set; }
@@ -55,10 +57,10 @@ public enum TypeItem
     Accessory = 6
 }
 
-public enum RateItem
+public struct RateItem
 {
-    Common = 0,
-    Rare = 1,
-    Epic = 2,
-    Legendary = 3
+    public const double Common = 75.5;
+    public const double Rare = 31.5;
+    public const double Epic = 15.5;
+    public const double Legendary = 4.5;
 }

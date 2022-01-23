@@ -20,6 +20,19 @@ public class Item_DataManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    public void setTextureForItem()
+    {
+        Item.ForEach(item => item.texture2D = loadingImageFromFilePath(item.image_Item));
+    }
+    Texture2D loadingImageFromFilePath(string Filepath)
+    {
+        if (Resources.Load<Sprite>(Filepath) != null)
+        {
+            return Resources.Load<Texture2D>(Filepath);
+        }
+        return null;
+    }
+
 
     public List<ItemStruct> itemDaily()
     {

@@ -8,6 +8,7 @@ using Firebase.Firestore;
 public class AchievementStruct
 {
     public string ID { get; set; }
+    public double percentage { get; set; }
     [FirestoreProperty]
     public string title_Achievement { get; set; }
 

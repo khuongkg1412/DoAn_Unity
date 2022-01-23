@@ -11,6 +11,8 @@ public class Player_DataManager : MonoBehaviour
     public List<SystemNotification> systemNotification = new List<SystemNotification>();
     public List<Friend_Player> friend_Player = new List<Friend_Player>();
     public List<Notification_Struct> notification_Player = new List<Notification_Struct>();
+    public List<AchievementStruct> achivementReceived_Player = new List<AchievementStruct>();
+
 
     private void Awake()
     {
@@ -24,29 +26,44 @@ public class Player_DataManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    public void adding_Item(ItemStruct item)
+    public void updateCoinConcurrency(float amountUpdate)
+    {
+        Player.concurrency.Coin += amountUpdate;
+        //Call to update the information off Player
+        Player_Update.UpdatePlayer();
+    }
+    public void updateDiamondConcurrency(float amountUpdate)
+    {
+        Player.concurrency.Diamond += amountUpdate;
+        //Call to update the information off Player
+        Player_Update.UpdatePlayer();
+    }
+    public void adding_Item(ItemStruct item, int quantityBuy)
     {
         //quantity of item
         float quanity = 0;
-        //Get quantity of item if it is exist
-        foreach (var i in inventory_Player)
+        bool isFound = false;
+        for (int i = 0; i < Instance.inventory_Player.Count; i++)
         {
-            //if not exist quantity is 0
-            if (i.item.ContainsKey(item.name_Item))
+            if (Instance.inventory_Player[i].item.ContainsKey(item.name_Item))
             {
-                quanity = i.item[item.name_Item];
+                quanity = Instance.inventory_Player[i].item[item.name_Item];
+                quanity += quantityBuy;
+                Instance.inventory_Player[i].item = new Dictionary<string, float>() { { item.name_Item, quanity } };
+                isFound = true;
             }
         }
-        //adding item to inventory
-        Inventory_Player invent = new Inventory_Player()
+        if (isFound == false)
         {
-            ID = item.ID,
-            item = new Dictionary<string, float>(){
-                {item.name_Item , ++quanity}
-            }
-        };
-        inventory_Player.Add(invent);
+            //adding item to inventory
+            Inventory_Player invent = new Inventory_Player()
+            {
+                ID = item.ID,
+                item = new Dictionary<string, float>() { { item.name_Item, quanity + quantityBuy } }
+            };
+            Instance.inventory_Player.Add(invent);
+        }
+
         //Call to update the information off Player
         Player_Update.UpdatePlayer();
     }
@@ -64,6 +81,24 @@ public class Player_DataManager : MonoBehaviour
         Player_Update.UpdatePlayer();
     }
 
+
+    public void player_GetRewardAchievement(AchievementStruct achieve)
+    {
+        //Add concurrency by checking which concurrency is more than 0 to add into concurrency
+        Concurrency rewardReceived = achieve.concurrency;
+        if (rewardReceived.Coin > 0 && rewardReceived.Diamond <= 0)
+        {
+            updateCoinConcurrency(rewardReceived.Coin);
+        }
+        else
+        {
+            updateDiamondConcurrency(rewardReceived.Diamond);
+        }
+        // Add to received achievement of player
+        achivementReceived_Player.Add(achieve);
+        Player_Update.UpdatePlayer();
+
+    }
     public void read_Notification(Notification_Struct currentNoti)
     {
         foreach (Notification_Struct noti in notification_Player)

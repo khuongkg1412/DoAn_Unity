@@ -54,52 +54,33 @@ public class Store_DataHadle : MonoBehaviour
         */
         foreach (var objectItem in listDataItemDaily)
         {
-            Populate(objectItem.name_Item,
-            objectItem.image_Item,
-            verticalDaily,
-            objectItem);
+            Populate(verticalDaily, objectItem);
         }
 
         foreach (var objectItem in listDataItemWeekly)
         {
-            Populate(objectItem.name_Item,
-            objectItem.image_Item,
-            verticalWeekly,
-            objectItem);
+            Populate(verticalWeekly, objectItem);
         }
 
         foreach (var objectItem in listDataItemChest)
         {
-            Populate(objectItem.name_Item,
-            objectItem.image_Item,
-            verticalChest,
-            objectItem);
+            Populate(verticalChest, objectItem);
         }
     }
-    //Insert filepath then load image from Resouce folder
-    Texture2D loadingImageFromFilePath(string Filepath)
-    {
-        //Check filepath is valid
-        if (Resources.Load<Sprite>(Filepath) != null)
-        {
-            //Return image in Texture2D type
-            return Resources.Load<Texture2D>(Filepath);
-        }
-        return null;
-    }
+
     //Instaniate the object item for each one
-    void Populate(string name, string filePath, GameObject verticalObject, ItemStruct typeItem)
+    void Populate(GameObject verticalObject, ItemStruct Item)
     {
         //The prototype of each item in store
         GameObject prefab = GameObject.Find("BoxItem"); // Create GameObject instance
         //Set data in that prototype 
-        dataImage.texture = loadingImageFromFilePath(filePath);
+        dataImage.texture = Item.texture2D;
         dataImage.SetNativeSize();
-        itemName.text = name;
+        itemName.text = Item.name_Item;
         //Instaniate the object item
         GameObject item = Instantiate(prefab, verticalObject.transform);
         //Set data type for each prototype
-        item.GetComponent<OpenItem>().dataItem = typeItem;
+        item.GetComponent<OpenItem>().dataItem = Item;
     }
 
 
@@ -115,7 +96,7 @@ public class Store_DataHadle : MonoBehaviour
         description_Item = "Heal Pills is name of Item",
         image_Item = "Item_Image/HealPills",
         name_Item = "Heal Pills",
-        rate_Item = 1,
+        rate_Item = RateItem.Common,
         type_Item = (int)TypeItem.ItemDaily,
         numeral_Item =
                     new NumeralStruct
@@ -137,7 +118,7 @@ public class Store_DataHadle : MonoBehaviour
         description_Item = "Energy Pills is name of Item",
         image_Item = "Item_Image/EnergyPills",
         name_Item = "Energy Pills",
-        rate_Item = 2,
+        rate_Item = RateItem.Rare,
         type_Item = (int)TypeItem.ItemDaily,
         numeral_Item =
                     new NumeralStruct
@@ -159,7 +140,7 @@ public class Store_DataHadle : MonoBehaviour
         description_Item = "Pain Killers is name of Item",
         image_Item = "Item_Image/PainKiller",
         name_Item = "Pain Killers",
-        rate_Item = 2,
+        rate_Item = RateItem.Epic,
         type_Item = (int)TypeItem.ItemDaily,
         numeral_Item =
                     new NumeralStruct
@@ -181,7 +162,7 @@ public class Store_DataHadle : MonoBehaviour
         description_Item = "Yellow Tube is name of Item",
         image_Item = "Item_Image/blood-test (1)",
         name_Item = "Yellow Tube",
-        rate_Item = 2,
+        rate_Item = RateItem.Common,
         type_Item = (int)TypeItem.ItemWeekly,
         numeral_Item =
                     new NumeralStruct
@@ -203,7 +184,7 @@ public class Store_DataHadle : MonoBehaviour
         description_Item = "Test Kit is name of Item",
         image_Item = "Item_Image/image 58",
         name_Item = "Test Kit",
-        rate_Item = 2,
+        rate_Item = RateItem.Epic,
         type_Item = (int)TypeItem.ItemWeekly,
         numeral_Item =
                     new NumeralStruct
@@ -225,7 +206,7 @@ public class Store_DataHadle : MonoBehaviour
         description_Item = "Test Sample is name of Item",
         image_Item = "Item_Image/blood-test",
         name_Item = "Test Sample",
-        rate_Item = 2,
+        rate_Item = RateItem.Legendary,
         type_Item = (int)TypeItem.ItemWeekly,
         numeral_Item =
                     new NumeralStruct

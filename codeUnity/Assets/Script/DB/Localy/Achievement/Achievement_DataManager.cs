@@ -5,8 +5,7 @@ using UnityEngine;
 public class Achievement_DataManager : MonoBehaviour
 {
     public static Achievement_DataManager Instance { get; private set; }
-
-    public Dictionary<AchievementStruct, bool> Achievement = new Dictionary<AchievementStruct, bool>();
+    public List<AchievementStruct> Achievement = new List<AchievementStruct>();
 
     private void Awake()
     {
@@ -28,17 +27,16 @@ public class Achievement_DataManager : MonoBehaviour
         //If not null then do action
         if (Achievement_DataManager.Instance.Achievement != null)
         {
-            foreach (var item in Achievement_DataManager.Instance.Achievement)
+            for (int i = 0; i < Achievement.Count; i++)
             {
-                Debug.Log("Running");
                 // Call Method base on APICaLL.Mehtod 
-                switch (item.Key.APICall.APIMethod)
+                switch (Achievement[i].APICall.APIMethod)
                 {
                     case "Save_CitizenMethod":
-                        Save_CitizenMethod(item.Key);
+                        Save_CitizenMethod(Achievement[i], i);
                         break;
                     case "Kill_VirusMethod":
-                        Kill_VirusMethod(item.Key);
+                        Kill_VirusMethod(Achievement[i], i);
                         break;
                     default:
                         Debug.Log("Default case Achievement data");
@@ -52,35 +50,29 @@ public class Achievement_DataManager : MonoBehaviour
         }
     }
 
-    void Save_CitizenMethod(AchievementStruct item)
+    void Save_CitizenMethod(AchievementStruct item, int index)
     {
-        Debug.Log("Save_CitizenMethod");
         //get goal that need to unlock achievement
         float goal = item.APICall.goal;
         //Total citizen that player save
         float saveCitizen = Player_DataManager.Instance.Player.statistic["Citizen_Saved"];
+        //Percentage of complete achievement
+        float percentage = saveCitizen / goal;
         //If player is reach the goal then unlock the achievement
-        if (saveCitizen >= goal)
-        {
-            Achievement.Remove(item);
-            Achievement.Add(item, true);
-        }
+        Achievement[index].percentage = percentage;
     }
-    void Kill_VirusMethod(AchievementStruct item)
+    void Kill_VirusMethod(AchievementStruct item, int index)
     {
-        Debug.Log("Kill_VirusMethod");
         //get goal that need to unlock achievement
         float goal = item.APICall.goal;
         //Get player object
         PlayerStruct player = Player_DataManager.Instance.Player;
         //Total virus that player killed
         float killedVirus = player.statistic["VirusA_Killed"] + player.statistic["VirusB_Killed"] + player.statistic["VirusC_Killed"] + player.statistic["VirusD_Killed"];
+        //Percentage of complete achievement
+        float percentage = killedVirus / goal;
         //If player is reach the goal then unlock the achievement
-        if (killedVirus >= goal)
-        {
-            Achievement.Remove(item);
-            Achievement.Add(item, true);
-        }
+        Achievement[index].percentage = percentage;
     }
 }
 

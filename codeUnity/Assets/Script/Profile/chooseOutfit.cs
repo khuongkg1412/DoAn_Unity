@@ -103,7 +103,7 @@ public class chooseOutfit : MonoBehaviour
 
     void Populate(ItemStruct item, bool notHavethisItem)
     {
-        Texture2D OutfitImage = loadingImageFromFilePath(item.image_Item);
+        Texture2D OutfitImage = item.texture2D;
         Sprite sprite = Sprite.Create(OutfitImage, new Rect(0.0f, 0.0f, OutfitImage.width, OutfitImage.height), new Vector2(0.5f, 0.5f), 100.0f);
         GameObject scrollItemObj = (GameObject)Instantiate(prefab, transform);
 
@@ -120,14 +120,6 @@ public class chooseOutfit : MonoBehaviour
         }
     }
 
-    Texture2D loadingImageFromFilePath(string Filepath)
-    {
-        if (Resources.Load<Sprite>(Filepath) != null)
-        {
-            return Resources.Load<Texture2D>(Filepath);
-        }
-        return null;
-    }
 
 
 

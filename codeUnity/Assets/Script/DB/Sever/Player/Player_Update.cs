@@ -32,11 +32,16 @@ public class Player_Update
             doc = db.Collection("Player").Document("7xv28G3fCIf2UoO0rV2SFV5tTr62").Collection("Friend_Player").Document();
             doc.SetAsync(i);
         }
-        // foreach (var i in Player_DataManager.Instance.notification_Player)
-        // {
-        //     doc = db.Collection("Player").Document("7xv28G3fCIf2UoO0rV2SFV5tTr62").Collection("Notification_Player").Document();
-        //     doc.SetAsync(i);
-        // }
+        foreach (var i in Player_DataManager.Instance.friend_Player)
+        {
+            doc = db.Collection("Player").Document("7xv28G3fCIf2UoO0rV2SFV5tTr62").Collection("Friend_Player").Document();
+            doc.SetAsync(i);
+        }
+        foreach (var i in Player_DataManager.Instance.achivementReceived_Player)
+        {
+            doc = db.Collection("Player").Document("7xv28G3fCIf2UoO0rV2SFV5tTr62").Collection("Achivement_Player").Document(i.ID);
+            doc.SetAsync(i);
+        }
 
     }
 
