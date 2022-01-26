@@ -28,30 +28,22 @@ public class friendHandler : MonoBehaviour
 
     }
 
-    void OnLifeRequestClick(string friendId)
+    void OnLifeRequestClick(string FriendId)
     {
-        Debug.Log(friendId);
-        // Notification_Struct notificationFriend = new Notification_Struct()
-        // {
-        //     content_Notification = "Welcome to our new game. Wish you could enjoy happily this.",
-        //     title_Notification = "Welcome to Covid Refuse",
-        //     isRead_Notification = false,
-        //     receivedID_Notification = friendId,
-        //     sentID_Notification = Player_DataManager.Instance.Player.ID,
-        //     type_Notification = (int)Notification.Friend_Notification
-        // };
-
-
+        Debug.Log(FriendId);
+        Player_DataManager.Instance.SendLiferequest(FriendId);
     }
 
-    void Populate(Sprite sprite, string name, float Level, string FriendID)
+    void Populate(Sprite sprite, PlayerStruct friend)
     {
         GameObject scrollItemObj = (GameObject)Instantiate(prefab, content.transform);
 
-        scrollItemObj.transform.Find("Name & level/Name").gameObject.GetComponent<Text>().text = name;
-        scrollItemObj.transform.Find("Name & level/level").gameObject.GetComponent<Text>().text = "Level " + Level;
-        scrollItemObj.transform.Find("Avatar").gameObject.GetComponent<Image>().sprite = sprite;
-        scrollItemObj.transform.Find("LifeRequest").gameObject.GetComponent<Button>().onClick.AddListener(() => OnLifeRequestClick(FriendID));
+
+        scrollItemObj.transform.Find("Name & level/Name").gameObject.GetComponent<Text>().text = friend.generalInformation.username_Player;
+        scrollItemObj.transform.Find("Name & level/Level").gameObject.GetComponent<Text>().text = "Level " + (int)friend.level.level;
+        scrollItemObj.transform.Find("Mask/Avatar").gameObject.GetComponent<Image>().sprite = sprite;
+        scrollItemObj.transform.Find("FriendID").gameObject.GetComponent<Text>().text = friend.ID;
+        scrollItemObj.transform.Find("Name & level/LifeRequest").gameObject.GetComponent<Button>().onClick.AddListener(() => OnLifeRequestClick(GameObject.Find("FriendID").gameObject.GetComponent<Text>().text));
     }
 
     private PlayerStruct player;
@@ -70,18 +62,19 @@ public class friendHandler : MonoBehaviour
                 if (snapshot.Exists)
                 {
                     player = snapshot.ConvertTo<PlayerStruct>();
-                    StartCoroutine(GetImage(player.ID, player.generalInformation.avatar_Player, player.generalInformation.username_Player, player.level.level));
+                    player.ID = snapshot.Id;
+                    StartCoroutine(GetImage(player));
                 }
                 else
                 {
                     Debug.Log(string.Format("Document {0} does not exist!", snapshot.Id));
                 }
             });
+            yield return new WaitForSeconds(1);
         }
-        yield return null;
     }
 
-    IEnumerator GetImage(string ID, string dataImage, string Name, float level)
+    IEnumerator GetImage(PlayerStruct friend)
     {
         Debug.Log("Image Downloading");
 
@@ -89,7 +82,7 @@ public class friendHandler : MonoBehaviour
         FirebaseStorage storage = FirebaseStorage.DefaultInstance;
 
         // Create a storage reference from our storage service
-        StorageReference storageRef = storage.GetReference(dataImage);
+        StorageReference storageRef = storage.GetReference(friend.generalInformation.avatar_Player);
 
         // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
         const long maxAllowedSize = 4 * 1024 * 1024;
@@ -108,7 +101,7 @@ public class friendHandler : MonoBehaviour
                     texture.LoadImage(fileContents);
                     Sprite sprite = Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100.0f);
 
-                    Populate(sprite, Name, level, ID);
+                    Populate(sprite, friend);
                 }
             });
         yield return null;

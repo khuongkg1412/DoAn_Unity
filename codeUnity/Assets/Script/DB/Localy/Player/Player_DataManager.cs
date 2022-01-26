@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Firebase.Firestore;
 using UnityEngine;
 
 public class Player_DataManager : MonoBehaviour
@@ -111,6 +112,32 @@ public class Player_DataManager : MonoBehaviour
         }
         //Call to update the information off Player
         Player_Update.UpdatePlayer();
+    }
+
+    public void changeAvatar(string path)
+    {
+        Player.generalInformation.avatar_Player = path;
+        //Call to update the information off Player
+        Player_Update.UpdatePlayer();
+    }
+
+    public void SendLiferequest(string FriendId)
+    {
+        Notification_Struct lifeRequest = new Notification_Struct()
+        {
+            content_Notification = "Help, I'm running out of energy.",
+            title_Notification = "Help me",
+            isRead_Notification = false,
+            receivedID_Notification = FriendId,
+            sentID_Notification = Player.ID,
+            type_Notification = (int)Notification.Friend_Notification
+        };
+
+        FirebaseFirestore db = FirebaseFirestore.DefaultInstance;
+
+        //Get Collection And Document
+        DocumentReference doc = db.Collection("Notifcation").Document();
+        doc.SetAsync(lifeRequest);
     }
 
 

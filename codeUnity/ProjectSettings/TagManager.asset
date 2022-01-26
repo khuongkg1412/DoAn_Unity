@@ -13,6 +13,7 @@ TagManager:
   - notify_count2
   - notify_count1
   - notify_count
+  - FriendID
   layers:
   - Default
   - TransparentFX

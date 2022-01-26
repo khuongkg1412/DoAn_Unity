@@ -20,10 +20,7 @@ public class ModifyPlayerInfor : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        player = Player_DataManager.Instance.Player;
-        StartCoroutine(GetImage(player.generalInformation.avatar_Player));
-        Name.text = player.generalInformation.username_Player;
-        Level.text = "LV " + player.level.level;
+        loadplayerInfor();
     }
     private void Start()
     {
@@ -33,6 +30,18 @@ public class ModifyPlayerInfor : MonoBehaviour
         //     //Debug.Log("isModify: " + isModify);
         //     isModify = false;
         // }
+    }
+
+    void loadplayerInfor()
+    {
+        //load basic infor 
+        player = Player_DataManager.Instance.Player;
+        StartCoroutine(GetImage(player.generalInformation.avatar_Player));
+        Name.text = player.generalInformation.username_Player;
+        Level.text = "LV " + player.level.level;
+
+        //load outfit
+
     }
 
     IEnumerator lam()
@@ -104,21 +113,21 @@ public class ModifyPlayerInfor : MonoBehaviour
         yield return null;
     }
 
-    public static string typeOfOutfit;
+    public static int typeOfOutfit;
     public void openWindowForShirt()
     {
-        typeOfOutfit = "Shirt";
+        typeOfOutfit = 3;
     }
     public void openWindowForPants()
     {
-        typeOfOutfit = "Pants";
-    }
-    public void openWindowForAccessory()
-    {
-        typeOfOutfit = "Accessory";
+        typeOfOutfit = 4;
     }
     public void openWindowForShoes()
     {
-        typeOfOutfit = "Shoes";
+        typeOfOutfit = 5;
+    }
+    public void openWindowForAccessory()
+    {
+        typeOfOutfit = 6;
     }
 }

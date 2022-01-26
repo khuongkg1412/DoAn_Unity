@@ -1228,7 +1228,8 @@ MonoBehaviour:
   emailReg: {fileID: 148232857}
   passwordReg: {fileID: 1396749294}
   confirmPasswordReg: {fileID: 2142022473}
-  MessageDialogue: {fileID: 1070104861143463753, guid: ec90b15f30ed349469a19fcb10ff1f83, type: 3}
+  SuccessDialogue: {fileID: 1070104861143463753, guid: de7efc5b82370e34f9c57f5b6610a05b, type: 3}
+  ErrorDialogue: {fileID: 1070104861143463753, guid: ec90b15f30ed349469a19fcb10ff1f83, type: 3}
 --- !u!1 &383900809
 GameObject:
   m_ObjectHideFlags: 0
