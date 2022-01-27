@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GacchaSystem : MonoBehaviour
 {
     public LootTable gacchaObject;
+   // public RawImage chest;
     // Start is called before the first frame update
     void Start()
     {
