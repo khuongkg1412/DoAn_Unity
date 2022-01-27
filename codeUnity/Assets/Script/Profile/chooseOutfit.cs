@@ -21,16 +21,16 @@ public class chooseOutfit : MonoBehaviour
         //AddData();
     }
 
-    void GetOutfitData(string typeOfItem)
+    void GetOutfitData(int typeOfItem)
     {
         bool notHavethisItem;
-        switch (int.Parse(typeOfItem))
+        switch (typeOfItem)
         {
             case (int)TypeItem.Shirt:
                 foreach (ItemStruct item in Item_DataManager.Instance.Item)
                 {
                     notHavethisItem = true;
-                    if (item.type_Item.Equals((int)TypeItem.Shirt))
+                    if (item.type_Item == 3)
                     {
                         foreach (Inventory_Player outfit in Player_DataManager.Instance.inventory_Player)
                         {
@@ -44,11 +44,11 @@ public class chooseOutfit : MonoBehaviour
                     }
                 }
                 break;
-            case (int)TypeItem.ItemDaily:
+            case (int)TypeItem.Pants:
                 foreach (ItemStruct item in Item_DataManager.Instance.Item)
                 {
                     notHavethisItem = true;
-                    if (item.type_Item.Equals("Pants"))
+                    if (item.type_Item == 4)
                     {
                         foreach (Inventory_Player outfit in Player_DataManager.Instance.inventory_Player)
                         {
@@ -62,11 +62,11 @@ public class chooseOutfit : MonoBehaviour
                     }
                 }
                 break;
-            case (int)TypeItem.ItemWeekly:
+            case (int)TypeItem.Accessory:
                 foreach (ItemStruct item in Item_DataManager.Instance.Item)
                 {
                     notHavethisItem = true;
-                    if (item.type_Item.Equals("Accessory"))
+                    if (item.type_Item == 6)
                     {
                         foreach (Inventory_Player outfit in Player_DataManager.Instance.inventory_Player)
                         {
@@ -80,11 +80,11 @@ public class chooseOutfit : MonoBehaviour
                     }
                 }
                 break;
-            case (int)TypeItem.Chest:
+            case (int)TypeItem.Shoes:
                 foreach (ItemStruct item in Item_DataManager.Instance.Item)
                 {
                     notHavethisItem = true;
-                    if (item.type_Item.Equals("Shoes"))
+                    if (item.type_Item == 5)
                     {
                         foreach (Inventory_Player outfit in Player_DataManager.Instance.inventory_Player)
                         {
@@ -111,13 +111,19 @@ public class chooseOutfit : MonoBehaviour
         {
             scrollItemObj.transform.Find("choosed frame").gameObject.GetComponent<Image>().color = Color.black;
             scrollItemObj.transform.Find("Image").gameObject.GetComponent<Image>().sprite = sprite;
-            //scrollItemObj.transform.Find("Outfit Item").gameObject.GetComponentInParent<Button>().enabled = false;
+            scrollItemObj.transform.Find("choosed frame").gameObject.GetComponentInParent<Button>().enabled = false;
         }
         else
         {
             scrollItemObj.transform.Find("choosed frame").gameObject.GetComponent<Image>().color = Color.cyan;
             scrollItemObj.transform.Find("Image").gameObject.GetComponent<Image>().sprite = sprite;
+            scrollItemObj.transform.Find("choosed frame").gameObject.GetComponentInParent<Button>().onClick.AddListener(() => chooseThisItem());
         }
+    }
+
+    private void chooseThisItem()
+    {
+        Debug.Log("OK");
     }
 
 

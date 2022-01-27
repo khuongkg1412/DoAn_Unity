@@ -34,7 +34,7 @@ public class Player_Loading : MonoBehaviour
             else
             {
                 Debug.LogError("loadingPlayer Error");
-                SceneManager.LoadScene("Register by Email");
+                SceneManager.LoadScene("Create Character");
             }
             isDonePlayer = true;
         });

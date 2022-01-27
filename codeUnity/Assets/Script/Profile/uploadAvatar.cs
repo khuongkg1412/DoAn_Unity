@@ -100,12 +100,10 @@ public class uploadAvatar : MonoBehaviour
     IEnumerator UpImageFromLocal(string localFilePath)
     {
         storage = FirebaseStorage.DefaultInstance;
-        // Create a root reference
         storageReference = storage.GetReferenceFromUrl("gs://ltd2k-fptk14.appspot.com/PlayerAvatar");
-        // File located on disk
-        string[] fName = localFilePath.Split('/');
-        string fileName = fName[fName.Length - 1];
-        //byte[] fileContents = File.ReadAllBytes(localFilePath);
+
+        string fileName = Player_DataManager.Instance.Player.ID;
+
 
         // Create a reference to the file you want to upload
         StorageReference newAvatarsRef = storageReference.Child(fileName);
@@ -120,13 +118,10 @@ public class uploadAvatar : MonoBehaviour
             {
                 if (task.IsFaulted || task.IsCanceled)
                 {
-                    Debug.Log("Hủy rồi, Lỗi rồi");
+                    Debug.Log("Some thing wrong");
                 }
                 else
                 {
-                    // Metadata contains file metadata such as size, content-type, and download URL.
-                    StorageMetadata metadata = task.Result;
-                    string md5Hash = metadata.Md5Hash;
                     Debug.Log("Finished uploading...");
                     isUpDone = true;
                 }
@@ -138,12 +133,7 @@ public class uploadAvatar : MonoBehaviour
 
     void changeCurrentAvatar(string newPath)
     {
-        db = FirebaseFirestore.DefaultInstance;
-        DocumentReference docRef = db.Collection("Player").Document(Player_DataManager.Instance.Player.ID);
-        PlayerStruct player = Player_DataManager.Instance.Player;
-        player.generalInformation.avatar_Player = newPath;
-
-        docRef.SetAsync(player);
+        Player_DataManager.Instance.changeAvatar(newPath);
 
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);

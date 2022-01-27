@@ -7,8 +7,7 @@ using UnityEngine.UI;
 
 public class changeName : MonoBehaviour
 {
-    public Text newName, currentName;
-    FirebaseFirestore db;
+    public Text newName;
 
     public void acceptChange()
     {
@@ -18,15 +17,7 @@ public class changeName : MonoBehaviour
         }
         else
         {
-            string str = newName.text;
-            currentName.text = str;
-
-            db = FirebaseFirestore.DefaultInstance;
-            DocumentReference docRef = db.Collection("Player").Document(Player_DataManager.Instance.Player.ID);
-            PlayerStruct player = Player_DataManager.Instance.Player;
-            player.generalInformation.username_Player = str;
-
-            docRef.SetAsync(player);
+            Player_DataManager.Instance.changeName(newName.text);
 
             Scene scene = SceneManager.GetActiveScene();
             SceneManager.LoadScene(scene.name);

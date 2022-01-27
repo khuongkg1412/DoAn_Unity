@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class AuthController : MonoBehaviour
 {
     public InputField emailLogin, passwordLogin, emailReg, passwordReg, confirmPasswordReg;
-    public GameObject MessageDialogue;
+    public GameObject SuccessDialogue, ErrorDialogue;
     public static string ID;
     bool isDone;
 
@@ -74,27 +74,30 @@ public class AuthController : MonoBehaviour
         yield return null;
     }
 
+    GameObject ErrorToast;
     public void Login()
     {
         string email = emailLogin.text.Trim();
         string pass = passwordLogin.text.Trim();
-        GameObject scrollItemObj = (GameObject)Instantiate(MessageDialogue, transform);
+
 
         if (Validation.checkNullData(new string[] { email, pass }))
         {
+            ErrorToast = (GameObject)Instantiate(ErrorDialogue, transform); Debug.Log("Ko the qua day");
             if (email.Length == 0)
             {
                 string Erorr = "Email cannot be empty! Please input!";
-                scrollItemObj.transform.Find("Message").gameObject.GetComponent<Text>().text = Erorr;
-                Destroy(scrollItemObj, 2);
-
+                ErrorToast.transform.Find("Message").gameObject.GetComponent<Text>().text = Erorr;
+                Destroy(ErrorToast, 2);
+                Debug.Log("Ko the qua day 1");
                 return;
             }
             if (pass.Length == 0)
             {
                 string Erorr = "Password cannot be empty! Please input!";
-                scrollItemObj.transform.Find("Message").gameObject.GetComponent<Text>().text = Erorr;
-                Destroy(scrollItemObj, 2);
+                ErrorToast.transform.Find("Message").gameObject.GetComponent<Text>().text = Erorr;
+                Destroy(ErrorToast, 2);
+                Debug.Log("Ko the qua day 2");
                 return;
             }
         }
@@ -109,25 +112,23 @@ public class AuthController : MonoBehaviour
         string email = emailReg.text.Trim();
         string password = passwordReg.text.Trim();
         string confirmPassword = confirmPasswordReg.text.Trim();
-        GameObject scrollItemObj = (GameObject)Instantiate(MessageDialogue, transform);
+        ErrorToast = (GameObject)Instantiate(ErrorDialogue, transform);
 
         if (Validation.checkNullData(new string[] { email, password, confirmPassword }))
         {
-
             if (email.Length == 0)
             {
                 string Erorr = "Email cannot be empty! Please input!";
-                scrollItemObj.transform.Find("Message").gameObject.GetComponent<Text>().text = Erorr;
-                Destroy(scrollItemObj, 2);
+                ErrorToast.transform.Find("Message").gameObject.GetComponent<Text>().text = Erorr;
+                Destroy(ErrorToast, 2);
 
                 return;
             }
-
             if (password.Length == 0)
             {
                 string Erorr = "Password cannot be empty! Please input!";
-                scrollItemObj.transform.Find("Message").gameObject.GetComponent<Text>().text = Erorr;
-                Destroy(scrollItemObj, 2);
+                ErrorToast.transform.Find("Message").gameObject.GetComponent<Text>().text = Erorr;
+                Destroy(ErrorToast, 2);
 
                 return;
             }
@@ -135,8 +136,8 @@ public class AuthController : MonoBehaviour
             if (confirmPassword.Length == 0)
             {
                 string Erorr = "Confirm password cannot be empty! Please input!";
-                scrollItemObj.transform.Find("Message").gameObject.GetComponent<Text>().text = Erorr;
-                Destroy(scrollItemObj, 2);
+                ErrorToast.transform.Find("Message").gameObject.GetComponent<Text>().text = Erorr;
+                Destroy(ErrorToast, 2);
 
                 return;
             }
@@ -147,8 +148,8 @@ public class AuthController : MonoBehaviour
             if (!Validation.checkEmailFormat(email))
             {
                 string Erorr = "Email must be in correct format. (Ex: thanh@gmail.com)";
-                scrollItemObj.transform.Find("Message").gameObject.GetComponent<Text>().text = Erorr;
-                Destroy(scrollItemObj, 2);
+                ErrorToast.transform.Find("Message").gameObject.GetComponent<Text>().text = Erorr;
+                Destroy(ErrorToast, 2);
 
                 return;
             }
@@ -156,8 +157,8 @@ public class AuthController : MonoBehaviour
             if (!Validation.checkStrongPassword(password))
             {
                 string Erorr = "Your password is not strong enough. It must contain at least 1 uppercase, 1 lowercase letter, 1 digit, and 1 special character.";
-                scrollItemObj.transform.Find("Message").gameObject.GetComponent<Text>().text = Erorr;
-                Destroy(scrollItemObj, 2);
+                ErrorToast.transform.Find("Message").gameObject.GetComponent<Text>().text = Erorr;
+                Destroy(ErrorToast, 2);
 
                 return;
             }
@@ -166,8 +167,8 @@ public class AuthController : MonoBehaviour
             {
 
                 string Erorr = "The confirm password did not match.";
-                scrollItemObj.transform.Find("Message").gameObject.GetComponent<Text>().text = Erorr;
-                Destroy(scrollItemObj, 2);
+                ErrorToast.transform.Find("Message").gameObject.GetComponent<Text>().text = Erorr;
+                Destroy(ErrorToast, 2);
 
                 return;
             }

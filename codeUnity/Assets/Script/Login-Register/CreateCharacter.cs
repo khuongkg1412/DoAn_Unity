@@ -13,23 +13,6 @@ public class CreateCharacter : MonoBehaviour
 
     int male = 1;
 
-    Inventory_Player inventory_Player = new Inventory_Player()
-    {
-        item = new Dictionary<string, float>
-        {
-            {"item", 0 }
-        }
-    };
-    SystemNotification systemNotification = new SystemNotification()
-    {
-        status_Notification = false
-    };
-    Friend_Player friend_Player = new Friend_Player()
-    {
-        accept_Friend = false,
-        friendID = "MINSaf0TpgEPzy5JtEUM"
-    };
-
     private void Start()
     {
         db = FirebaseFirestore.DefaultInstance;
@@ -65,12 +48,12 @@ public class CreateCharacter : MonoBehaviour
             {
                 username_Player = characterName.text,
                 avatar_Player = "PlayerAvatar/Avatar item.png",
-                gender_Player = 0
+                gender_Player = male
             },
             concurrency = new Concurrency()
             {
-                Coin = 0,
-                Diamond = 0
+                Coin = 50,
+                Diamond = 50
             },
             numeral = new NumeralStruct()
             {
@@ -88,13 +71,20 @@ public class CreateCharacter : MonoBehaviour
                 life = 6
             },
             statistic = new Dictionary<string, float>
-        {
-            {"VirusA_Killed",0},
-            {"VirusB_Killed",0},
-            {"VirusC_Killed",0},
-            {"VirusD_Killed",0},
-            {"Citizen_Saved",0}
-        }
+            {
+                {"VirusA_Killed",0},
+                {"VirusB_Killed",0},
+                {"VirusC_Killed",0},
+                {"VirusD_Killed",0},
+                {"Citizen_Saved",0}
+            },
+            currentOutfit = new Outfit()
+            {
+                currentShirt = "SEWnEHmTZSTMWKvAPF8l",
+                currentPant = "",
+                currentAccesory = "",
+                currentShoes = ""
+            }
         };
 
         docRef.SetAsync(newPlayer).ContinueWithOnMainThread(task =>
@@ -113,10 +103,11 @@ public class CreateCharacter : MonoBehaviour
         Inventory_Player inventory_Player = new Inventory_Player()
         {
             item = new Dictionary<string, float>
-        {
-            {"item", 0 }
-        }
+            {
+                {"Shirt 2", 1 }
+            }
         };
+
         Friend_Player friend_Player = new Friend_Player()
         {
             accept_Friend = true,
@@ -125,7 +116,7 @@ public class CreateCharacter : MonoBehaviour
 
         FirebaseFirestore db = FirebaseFirestore.DefaultInstance;
 
-        DocumentReference doc = db.Collection("Player").Document(ID).Collection("Inventory_Player").Document("Outfit");
+        DocumentReference doc = db.Collection("Player").Document(ID).Collection("Inventory_Player").Document("SEWnEHmTZSTMWKvAPF8l");
         doc.SetAsync(inventory_Player);
 
         doc = db.Collection("Player").Document(ID).Collection("Friend_Player").Document(friend_Player.friendID);
