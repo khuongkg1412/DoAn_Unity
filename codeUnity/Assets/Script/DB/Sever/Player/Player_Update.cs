@@ -31,12 +31,7 @@ public class Player_Update
         }
         foreach (var i in Player_DataManager.Instance.friend_Player)
         {
-            doc = db.Collection("Player").Document(IDPlayer).Collection("Friend_Player").Document();
-            doc.SetAsync(i);
-        }
-        foreach (var i in Player_DataManager.Instance.friend_Player)
-        {
-            doc = db.Collection("Player").Document(IDPlayer).Collection("Friend_Player").Document();
+            doc = db.Collection("Player").Document(IDPlayer).Collection("Friend_Player").Document(i.friendID);
             doc.SetAsync(i);
         }
         foreach (var i in Player_DataManager.Instance.achivementReceived_Player)
