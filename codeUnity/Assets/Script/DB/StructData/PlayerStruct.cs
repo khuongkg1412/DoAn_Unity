@@ -43,6 +43,8 @@ public class PlayerStruct
     public Level level { get; set; }
     [FirestoreProperty]
     public Dictionary<string, float> statistic { get; set; }
+    [FirestoreProperty]
+    public Outfit currentOutfit { get; set; }
 
     public string ID { get; set; }
 
@@ -77,4 +79,13 @@ public class Level
     [FirestoreProperty] public int level { get; set; }
     [FirestoreProperty] public int stage { get; set; }
     [FirestoreProperty] public int life { get; set; }
+}
+
+[FirestoreData]
+public class Outfit
+{
+    [FirestoreProperty] public string currentShirt { get; set; }
+    [FirestoreProperty] public string currentPant { get; set; }
+    [FirestoreProperty] public string currentAccesory { get; set; }
+    [FirestoreProperty] public string currentShoes { get; set; }
 }

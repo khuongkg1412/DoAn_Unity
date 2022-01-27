@@ -111,13 +111,19 @@ public class chooseOutfit : MonoBehaviour
         {
             scrollItemObj.transform.Find("choosed frame").gameObject.GetComponent<Image>().color = Color.black;
             scrollItemObj.transform.Find("Image").gameObject.GetComponent<Image>().sprite = sprite;
-            //scrollItemObj.transform.Find("Outfit Item").gameObject.GetComponentInParent<Button>().enabled = false;
+            scrollItemObj.transform.Find("choosed frame").gameObject.GetComponentInParent<Button>().enabled = false;
         }
         else
         {
             scrollItemObj.transform.Find("choosed frame").gameObject.GetComponent<Image>().color = Color.cyan;
             scrollItemObj.transform.Find("Image").gameObject.GetComponent<Image>().sprite = sprite;
+            scrollItemObj.transform.Find("choosed frame").gameObject.GetComponentInParent<Button>().onClick.AddListener(() => chooseThisItem());
         }
+    }
+
+    private void chooseThisItem()
+    {
+        Debug.Log("OK");
     }
 
 

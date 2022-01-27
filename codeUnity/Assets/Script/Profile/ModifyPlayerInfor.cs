@@ -22,15 +22,6 @@ public class ModifyPlayerInfor : MonoBehaviour
     {
         loadplayerInfor();
     }
-    private void Start()
-    {
-        // if (isModify == true)
-        // {
-        //     StartCoroutine(lam());
-        //     //Debug.Log("isModify: " + isModify);
-        //     isModify = false;
-        // }
-    }
 
     void loadplayerInfor()
     {
@@ -40,49 +31,13 @@ public class ModifyPlayerInfor : MonoBehaviour
         Name.text = player.generalInformation.username_Player;
         Level.text = "LV " + player.level.level;
 
+
         //load outfit
-
+        GameObject.Find("shirt/body").GetComponent<Image>().sprite = getOutfitImage("SEWnEHmTZSTMWKvAPF8l");
+        //GameObject.Find("accesory/head").GetComponent<Image>().sprite = 
+        //GameObject.Find("accesory/head").GetComponent<Image>().sprite = 
+        //GameObject.Find("accesory/head").GetComponent<Image>().sprite = 
     }
-
-    IEnumerator lam()
-    {
-        StartCoroutine(updatePlayerInfor());
-
-        Debug.Log("isModify 1: " + isUpDone);
-        //yield return new WaitUntil(() => isUpDone == true);
-        //yield return new WaitWhile(() => isUpDone == true)
-        yield return new WaitForSeconds(7);
-        Debug.Log("isModify 2: " + player.generalInformation.avatar_Player);
-
-        StartCoroutine(GetImage(player.generalInformation.avatar_Player));
-    }
-    IEnumerator updatePlayerInfor()
-    {
-        db = FirebaseFirestore.DefaultInstance;
-        DocumentReference docRef = db.Collection("player").Document("ID");
-        docRef.GetSnapshotAsync().ContinueWith(task =>
-        {
-            DocumentSnapshot snapshot = task.Result;
-            if (snapshot.Exists)
-            {
-                Debug.Log(String.Format("Document data for {0} document:", snapshot.Id));
-                Dictionary<string, object> city = snapshot.ToDictionary();
-                foreach (KeyValuePair<string, object> pair in city)
-                {
-                    Debug.Log(String.Format("{0}: {1}", pair.Key, pair.Value));
-
-                }
-                player = snapshot.ConvertTo<PlayerStruct>();
-                Debug.Log("Player : " + player.generalInformation.avatar_Player);
-            }
-            else
-            {
-                Debug.Log(String.Format("Document {0} does not exist!", snapshot.Id));
-            }
-        });
-        yield return null;
-    }
-
     IEnumerator GetImage(string dataImage)
     {
         Debug.Log("Image Downloading");
@@ -129,5 +84,20 @@ public class ModifyPlayerInfor : MonoBehaviour
     public void openWindowForAccessory()
     {
         typeOfOutfit = 6;
+    }
+
+    private Sprite getOutfitImage(string ID)
+    {
+        Texture2D OutfitImage;
+        foreach (ItemStruct item in Item_DataManager.Instance.Item)
+        {
+            if (item.ID.Equals(ID))
+            {
+                OutfitImage = item.texture2D;
+                Sprite sprite = Sprite.Create(OutfitImage, new Rect(0.0f, 0.0f, OutfitImage.width, OutfitImage.height), new Vector2(0.5f, 0.5f), 100.0f);
+                return sprite;
+            }
+        }
+        return null;
     }
 }

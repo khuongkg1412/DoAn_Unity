@@ -120,6 +120,12 @@ public class Player_DataManager : MonoBehaviour
         //Call to update the information off Player
         Player_Update.UpdatePlayer();
     }
+    public void changeName(string newName)
+    {
+        Player.generalInformation.username_Player = newName;
+        //Call to update the information off Player
+        Player_Update.UpdatePlayer();
+    }
 
     public void SendLiferequest(string FriendId)
     {
