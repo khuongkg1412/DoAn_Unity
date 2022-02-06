@@ -54,7 +54,8 @@ public enum TypeItem
     Shirt = 3,
     Pants = 4,
     Shoes = 5,
-    Accessory = 6
+    Accessory = 6,
+    Buff = 7
 }
 
 public struct RateItem

@@ -86,6 +86,113 @@ public class Store_DataHadle : MonoBehaviour
 
     // Data of Object
     //Item Daily Data
+    ItemStruct itemReal1 = new ItemStruct
+    {
+        concurrency = new Concurrency
+        {
+            Coin = 0,
+            Diamond = 0
+        },
+        description_Item = "Revive is one of the rarest buff in the game. Using Revive, you have one chance to revive from your dead. Can't buy this item in shop. You only get it from Chest.",
+        image_Item = "Item_Image/Revive",
+        name_Item = "Revive",
+        rate_Item = RateItem.Legendary,
+        type_Item = (int)TypeItem.Buff,
+        numeral_Item =
+                   new NumeralStruct
+                   {
+                       ATK_Numeral = 0,
+                       DEF_Numeral = 0,
+                       HP_Numeral = 0,
+                       SPD_Numeral = 0
+                   }
+    };
+    ItemStruct itemReal2 = new ItemStruct
+    {
+        concurrency = new Concurrency
+        {
+            Coin = 100,
+            Diamond = 0
+        },
+        description_Item = "This buff helps player to recover the small amount of HP.",
+        image_Item = "Item_Image/Heal",
+        name_Item = "Heal",
+        rate_Item = RateItem.Common,
+        type_Item = (int)TypeItem.Buff,
+        numeral_Item =
+                   new NumeralStruct
+                   {
+                       ATK_Numeral = 0,
+                       DEF_Numeral = 0,
+                       HP_Numeral = 10,
+                       SPD_Numeral = 0
+                   }
+    };
+    ItemStruct itemReal3 = new ItemStruct
+    {
+        concurrency = new Concurrency
+        {
+            Coin = 150,
+            Diamond = 0
+        },
+        description_Item = "Shield helps players to increase the DEF points.",
+        image_Item = "Item_Image/Shield",
+        name_Item = "Shield",
+        rate_Item = RateItem.Common,
+        type_Item = (int)TypeItem.Buff,
+        numeral_Item =
+                   new NumeralStruct
+                   {
+                       ATK_Numeral = 0,
+                       DEF_Numeral = 10,
+                       HP_Numeral = 0,
+                       SPD_Numeral = 0
+                   }
+    };
+    ItemStruct itemReal4 = new ItemStruct
+    {
+        concurrency = new Concurrency
+        {
+            Coin = 200,
+            Diamond = 0
+        },
+        description_Item = "Speed helps players to speed up the movement in 5 seconds.",
+        image_Item = "Item_Image/Speed",
+        name_Item = "Speed",
+        rate_Item = RateItem.Common,
+        type_Item = (int)TypeItem.Buff,
+        numeral_Item =
+               new NumeralStruct
+               {
+                   ATK_Numeral = 0,
+                   DEF_Numeral = 10,
+                   HP_Numeral = 0,
+                   SPD_Numeral = 100
+               }
+    };
+    ItemStruct itemReal5 = new ItemStruct
+    {
+        concurrency = new Concurrency
+        {
+            Coin = 200,
+            Diamond = 0
+        },
+        description_Item = "This buff helps players to speed up the Attack Speed in 10 seconds.",
+        image_Item = "Item_Image/AttackSpeed",
+        name_Item = "Speed",
+        rate_Item = RateItem.Common,
+        type_Item = (int)TypeItem.Buff,
+        numeral_Item =
+           new NumeralStruct
+           {
+               ATK_Numeral = 0,
+               DEF_Numeral = 0,
+               HP_Numeral = 0,
+               SPD_Numeral = 0
+           }
+    };
+
+    // Data Sample
     ItemStruct item1 = new ItemStruct
     {
         concurrency = new Concurrency
