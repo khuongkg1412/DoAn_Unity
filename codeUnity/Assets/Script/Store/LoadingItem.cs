@@ -253,6 +253,7 @@ public class LoadingItem : MonoBehaviour
     {
         //Get the current quantity by parse the string in the text field
         int currentQuantity = int.Parse(quantityText.text);
+        Debug.Log("Test: " + quantityText.text);
         //Press Plus button would input 0 is equal to (int)QuantityButton.Plus
         if (input == (int)QuantityButton.Plus)
         {
@@ -264,7 +265,7 @@ public class LoadingItem : MonoBehaviour
             }
             else
             {
-                Debug.LogError("Cannot Increase More");
+                Debug.LogError("Cannot Decrease More");
             }
         }
         //Press Plus button would input 0 is equal to (int)QuantityButton.Minus
