@@ -7,25 +7,54 @@ public class GacchaSystem : MonoBehaviour
 {
     public LootTable gacchaObject;
     public GameObject Layout;
-    public RawImage dataImage;
+    public RawImage dataImage, ImageChest;
 
     public TMPro.TMP_Text itemName, itemQuantity;
     private List<ItemStruct> _itemsList = new List<ItemStruct>();
     string IDForItemRemove;
+    int randomTime;
+    string typeChest;
+    [SerializeField] GameObject ChestOpening, itemDisplay, BGChest;
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 0; i < 50; i++)
+
+    }
+    public void setRandomTime(int randomTimeSent, ItemStruct itemSent)
+    {
+        randomTime = randomTimeSent;
+        ImageChest.texture = itemSent.texture2D;
+    }
+    public void backtoStore()
+    {
+        itemDisplay.SetActive(false);
+        BGChest.SetActive(true);
+        gacchaItem();
+    }
+    public void clickToOpen()
+    {
+        ChestOpening.SetActive(false);
+        itemDisplay.SetActive(true);
+        gacchaItem();
+    }
+    public void gacchaItem()
+    {
+        for (int i = 0; i < randomTime; i++)
         {
             ItemStruct item = gacchaObject.GetRandomItem();
             _itemsList.Add(item);
         }
+
     }
     private void Update()
     {
         if (_itemsList.Count > 0)
         {
-            Populate(_itemsList[0], CountItem(_itemsList[0]));
+            int quanity = CountItem(_itemsList[0]);
+            //Add items to Inventory
+            Player_DataManager.Instance.adding_Item(_itemsList[0], quanity);
+            Populate(_itemsList[0], quanity);
+            RemoveItem(_itemsList[0]);
         }
     }
     int CountItem(ItemStruct item)
@@ -38,7 +67,6 @@ public class GacchaSystem : MonoBehaviour
                 count += 1;
             }
         }
-        RemoveItem(item);
         return count;
     }
     void RemoveItem(ItemStruct item)
