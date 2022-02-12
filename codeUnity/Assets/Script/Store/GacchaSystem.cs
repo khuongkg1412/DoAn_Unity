@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class GacchaSystem : MonoBehaviour
 {
@@ -12,13 +13,23 @@ public class GacchaSystem : MonoBehaviour
     public TMPro.TMP_Text itemName, itemQuantity;
     private List<ItemStruct> _itemsList = new List<ItemStruct>();
     string IDForItemRemove;
-    int randomTime;
+    int randomTime = 0;
     string typeChest;
+
+    bool doneGaccha = false;
     [SerializeField] GameObject ChestOpening, itemDisplay, BGChest;
+    List<GameObject> _itemPopulated = new List<GameObject>();
     // Start is called before the first frame update
     void Start()
     {
 
+    }
+    void clearitemPopulated()
+    {
+        foreach (var i in _itemPopulated)
+        {
+            Destroy(i);
+        }
     }
     public void setRandomTime(int randomTimeSent, ItemStruct itemSent)
     {
@@ -27,28 +38,50 @@ public class GacchaSystem : MonoBehaviour
     }
     public void backtoStore()
     {
+        clearitemPopulated();
         itemDisplay.SetActive(false);
         BGChest.SetActive(true);
-        gacchaItem();
     }
     public void clickToOpen()
     {
         ChestOpening.SetActive(false);
-        itemDisplay.SetActive(true);
+
+        if (!GameObject.Find("ItemDisplay"))
+        {
+            //Instantiate(itemDisplay);
+            itemDisplay.SetActive(true);
+        }
+        else
+        {
+            itemDisplay.SetActive(true);
+        }
         gacchaItem();
     }
     public void gacchaItem()
     {
+        doneGaccha = false;
         for (int i = 0; i < randomTime; i++)
         {
             ItemStruct item = gacchaObject.GetRandomItem();
             _itemsList.Add(item);
         }
 
+        _itemsList.OrderBy(x => x.rate_Item);
+
+        foreach (var i in _itemsList)
+        {
+
+            Debug.Log("Name Item: " + i.name_Item);
+        }
+
+        PopulateItem();
+
+        doneGaccha = true;
+
     }
-    private void Update()
+    void PopulateItem()
     {
-        if (_itemsList.Count > 0)
+        while (_itemsList.Count > 0)
         {
             int quanity = CountItem(_itemsList[0]);
             //Add items to Inventory
@@ -90,6 +123,7 @@ public class GacchaSystem : MonoBehaviour
         itemQuantity.text = "x" + count.ToString();
         //Instaniate the object item
         GameObject item = Instantiate(prefab, Layout.transform);
+        _itemPopulated.Add(item);
         //Set data type for each prototype
         //item.GetComponent<OpenItem>().dataItem = Item;
     }
