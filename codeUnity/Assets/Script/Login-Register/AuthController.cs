@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Firebase.Auth;
+using Proyecto26;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -10,32 +11,24 @@ public class AuthController : MonoBehaviour
     public InputField emailLogin, passwordLogin, emailReg, passwordReg, confirmPasswordReg;
     public GameObject SuccessDialogue, ErrorDialogue;
     public static string ID;
+    const string AuthKey = "AIzaSyAGYUKR0KqH1JnVG0xkiyxTNhVfLHWZw5o";
     bool isDone;
+    GameObject ErrorToast;
 
     IEnumerator LoginbyEmailandPass(string email, string pass)
     {
         isDone = false;
-        Firebase.Auth.FirebaseAuth auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
-        auth.SignInWithEmailAndPasswordAsync(email, pass).ContinueWith(task =>
-        {
-            if (task.IsCanceled)
-            {
-                Debug.LogError("SignInWithEmailAndPasswordAsync was canceled.");
-                return;
-            }
-            if (task.IsFaulted)
-            {
-                Debug.LogError("SignInWithEmailAndPasswordAsync encountered an error: " + task.Exception);
-                return;
-            }
 
-            if (task.IsCompleted)
+        string userData = "{\"email\":\"" + email + "\",\"password\":\"" + pass + "\",\"returnSecureToken\":true}";
+        RestClient.Post<SignResponse>("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=" + AuthKey, userData).Then(
+            response =>
             {
-                Firebase.Auth.FirebaseUser newUser = task.Result;
-                Debug.LogFormat("User signed in successfully: {0} ({1})", newUser.DisplayName, newUser.UserId);
+                ID = response.localId;
                 isDone = true;
-                ID = auth.CurrentUser.UserId;
-            }
+            }).Catch(error =>
+        {
+            Debug.Log(error.Message);
+            loadErrorToast("This account is not Registered or Wrong email and password!");
         });
         yield return new WaitUntil(() => isDone == true);
         SceneManager.LoadScene("MainPage");
@@ -44,60 +37,39 @@ public class AuthController : MonoBehaviour
     IEnumerator RegisterbyEmailandPass(string email, string pass)
     {
         isDone = false;
-        Firebase.Auth.FirebaseAuth auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
-        auth.CreateUserWithEmailAndPasswordAsync(email, pass).ContinueWith(task =>
-        {
-            if (task.IsCanceled)
+        string userData = "{\"email\":\"" + email + "\",\"password\":\"" + pass + "\",\"returnSecureToken\":true}";
+        RestClient.Post<SignResponse>("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=" + AuthKey, userData).Then(
+            response =>
             {
-                Firebase.FirebaseException e = task.Exception.Flatten().InnerExceptions[0] as Firebase.FirebaseException;
 
-                GetErrorMessage((AuthError)e.ErrorCode);
-                return;
-            }
+                string emailVerification = "{\"requestType\":\"VERIFY_EMAIL\",\"idToken\":\"" + response.idToken + "\"}";
+                RestClient.Post("https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=" + AuthKey, emailVerification);
 
-            if (task.IsFaulted)
-            {
-                Firebase.FirebaseException e = task.Exception.Flatten().InnerExceptions[0] as Firebase.FirebaseException;
-
-                GetErrorMessage((AuthError)e.ErrorCode);
-                return;
-            }
-
-            if (task.IsCompleted)
-            {
-                print("Registration Completed!");
-                ID = auth.CurrentUser.UserId;
+                ID = response.localId;
                 isDone = true;
-            }
+            }).Catch(error =>
+        {
+            Debug.Log(error);
         });
-
         yield return null;
     }
 
-    GameObject ErrorToast;
+
     public void Login()
     {
         string email = emailLogin.text.Trim();
         string pass = passwordLogin.text.Trim();
 
-
         if (Validation.checkNullData(new string[] { email, pass }))
         {
-            ErrorToast = (GameObject)Instantiate(ErrorDialogue, transform); Debug.Log("Ko the qua day");
             if (email.Length == 0)
             {
-                string Erorr = "Email cannot be empty! Please input!";
-                ErrorToast.transform.Find("Message").gameObject.GetComponent<Text>().text = Erorr;
-                Destroy(ErrorToast, 2);
-                Debug.Log("Ko the qua day 1");
+                loadErrorToast("Email cannot be empty! Please input!");
                 return;
             }
             if (pass.Length == 0)
             {
-                string Erorr = "Password cannot be empty! Please input!";
-                ErrorToast.transform.Find("Message").gameObject.GetComponent<Text>().text = Erorr;
-                Destroy(ErrorToast, 2);
-                Debug.Log("Ko the qua day 2");
+                loadErrorToast("Password cannot be empty! Please input!");
                 return;
             }
         }
@@ -112,33 +84,29 @@ public class AuthController : MonoBehaviour
         string email = emailReg.text.Trim();
         string password = passwordReg.text.Trim();
         string confirmPassword = confirmPasswordReg.text.Trim();
-        ErrorToast = (GameObject)Instantiate(ErrorDialogue, transform);
+
 
         if (Validation.checkNullData(new string[] { email, password, confirmPassword }))
         {
             if (email.Length == 0)
             {
-                string Erorr = "Email cannot be empty! Please input!";
-                ErrorToast.transform.Find("Message").gameObject.GetComponent<Text>().text = Erorr;
-                Destroy(ErrorToast, 2);
-
+                loadErrorToast("Email cannot be empty! Please input!");
                 return;
             }
             if (password.Length == 0)
             {
-                string Erorr = "Password cannot be empty! Please input!";
-                ErrorToast.transform.Find("Message").gameObject.GetComponent<Text>().text = Erorr;
-                Destroy(ErrorToast, 2);
-
+                loadErrorToast("Password cannot be empty! Please input!");
+                return;
+            }
+            else if (password.Length < 8)
+            {
+                loadErrorToast("Password must have 8 characters! Please input more!");
                 return;
             }
 
             if (confirmPassword.Length == 0)
             {
-                string Erorr = "Confirm password cannot be empty! Please input!";
-                ErrorToast.transform.Find("Message").gameObject.GetComponent<Text>().text = Erorr;
-                Destroy(ErrorToast, 2);
-
+                loadErrorToast("Confirm password cannot be empty! Please input!");
                 return;
             }
         }
@@ -147,29 +115,19 @@ public class AuthController : MonoBehaviour
 
             if (!Validation.checkEmailFormat(email))
             {
-                string Erorr = "Email must be in correct format. (Ex: thanh@gmail.com)";
-                ErrorToast.transform.Find("Message").gameObject.GetComponent<Text>().text = Erorr;
-                Destroy(ErrorToast, 2);
-
+                loadErrorToast("Email must be in correct format. (Ex: thanh@gmail.com)");
                 return;
             }
 
             if (!Validation.checkStrongPassword(password))
             {
-                string Erorr = "Your password is not strong enough. It must contain at least 1 uppercase, 1 lowercase letter, 1 digit, and 1 special character.";
-                ErrorToast.transform.Find("Message").gameObject.GetComponent<Text>().text = Erorr;
-                Destroy(ErrorToast, 2);
-
+                loadErrorToast("Your password must contain at least 1 uppercase, 1 lowercase letter, 1 digit, 1 special character.");
                 return;
             }
 
             if (!Validation.checkConfirmPassword(password, confirmPassword))
             {
-
-                string Erorr = "The confirm password did not match.";
-                ErrorToast.transform.Find("Message").gameObject.GetComponent<Text>().text = Erorr;
-                Destroy(ErrorToast, 2);
-
+                loadErrorToast("The confirm password did not match.");
                 return;
             }
 
@@ -180,11 +138,18 @@ public class AuthController : MonoBehaviour
     IEnumerator changeSnece(string email, string password)
     {
         StartCoroutine(RegisterbyEmailandPass(email, password));
+
         yield return new WaitUntil(() => isDone == true);
-        SceneManager.LoadScene("Register by Email");
+        SceneManager.LoadScene("Create Character");
         yield return null;
     }
 
+    private void loadErrorToast(string message)
+    {
+        ErrorToast = (GameObject)Instantiate(ErrorDialogue, transform);
+        ErrorToast.transform.Find("Message").gameObject.GetComponent<Text>().text = message;
+        Destroy(ErrorToast, 2);
+    }
 
     void GetErrorMessage(AuthError errCode)
     {

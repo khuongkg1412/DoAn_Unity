@@ -193,7 +193,7 @@ public class DisplayNoti : MonoBehaviour
 
         GameObject popupWindow = (GameObject)Instantiate(obj, FriendNotiPanel.transform);
 
-        //IsreadNoti(CurentNoti_prefab, noti);
+        IsreadNoti(CurentNoti_prefab, noti);
     }
     public void OnSocialNotiClick() { Debug.Log("Thanh cong"); }
 
