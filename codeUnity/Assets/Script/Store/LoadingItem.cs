@@ -11,8 +11,9 @@ public class LoadingItem : MonoBehaviour
     private TMPro.TMP_Text nameItem, type, description;
     //Get Diamond, coin
     [SerializeField] GameObject diamondItem, coinItem;
-    [SerializeField] GameObject diamondChest, coinChest;
+    //[SerializeField] GameObject diamondItem, coinChest;
     [SerializeField] GameObject BuyButton;
+    [SerializeField] GameObject ChestOpening, gachaSystem;
     RawImage dataImage;
     enum QuantityButton
     {
@@ -20,82 +21,12 @@ public class LoadingItem : MonoBehaviour
         Minus = 1
     }
     [SerializeField] TMPro.TMP_Text quantityText, notificationTransaction;
-    GameObject coinToggle, diamondToggle;
+    [SerializeField] GameObject coinToggle, diamondToggle;
     float waitingTime = 0f;
-    private void Start()
-    {
-        coinToggle = GameObject.Find("ToggleCoin");
-        diamondToggle = GameObject.Find("ToggleDiamond");
-    }
     private void Update()
     {
-        if (dataItem.type_Item == (int)TypeItem.ItemDaily || dataItem.type_Item == (int)TypeItem.ItemWeekly)
-        {
-            updateCoinandDiamond();
-            checkValidCurrency();
-        }
-        else if (dataItem.type_Item == (int)TypeItem.Chest)
-        {
-            updateCoinandDiamondForChest();
-            CheckValidforChest();
-        }
-
-    }
-
-    void updateCoinandDiamondForChest()
-    {
-        if (coinToggle.activeInHierarchy)
-        {
-            float coin = float.Parse(coinItem.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text);
-            if (Player_DataManager.Instance.Player.concurrency.Coin < coin)
-            {
-                BuyButton.GetComponent<Button>().interactable = false;
-                coinChest.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().color = new Color(1, 0, 0);
-            }
-            else if (coinToggle.GetComponent<Toggle>().isOn)
-            {
-                BuyButton.GetComponent<Button>().interactable = true;
-                coinChest.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().color = new Color(1, 1, 1);
-            }
-            else
-            {
-                BuyButton.GetComponent<Button>().interactable = false;
-            }
-        }
-        else if (diamondToggle.activeInHierarchy)
-        {
-            float diamond = float.Parse(diamondItem.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text);
-
-            if (Player_DataManager.Instance.Player.concurrency.Diamond < diamond)
-            {
-                diamondChest.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().color = new Color(1, 0, 0);
-                BuyButton.GetComponent<Button>().interactable = false;
-            }
-            else if (diamondToggle.GetComponent<Toggle>().isOn)
-            {
-                BuyButton.GetComponent<Button>().interactable = true;
-                diamondChest.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().color = new Color(1, 1, 1);
-            }
-            else
-            {
-                BuyButton.GetComponent<Button>().interactable = false;
-            }
-        }
-    }
-    void CheckValidforChest()
-    {
-        if (dataItem.name_Item.Equals("Common Chest"))
-        {
-            coinToggle.SetActive(true);
-            diamondToggle.SetActive(false);
-            coinChest.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text = dataItem.concurrency.Coin.ToString();
-        }
-        else
-        {
-            coinToggle.SetActive(false);
-            diamondToggle.SetActive(true);
-            diamondChest.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text = dataItem.concurrency.Diamond.ToString();
-        }
+        updateCoinandDiamond();
+        checkValidCurrency();
     }
     void checkValidCurrency()
     {
@@ -176,17 +107,34 @@ public class LoadingItem : MonoBehaviour
     }
     void updateCoinandDiamond()
     {
-        if (dataItem.type_Item == (int)TypeItem.ItemDaily || dataItem.type_Item == (int)TypeItem.ItemWeekly)
-        {        //Get the current quantity by parse the string in the text field
-            int currentQuantity = int.Parse(quantityText.text);
+        //Get the current quantity by parse the string in the text field
+        int currentQuantity = int.Parse(quantityText.text);
+        if (dataItem.type_Item == (int)TypeItem.Chest)
+        {
+            if (dataItem.name_Item.Equals("Common Chest"))
+            {
+                coinToggle.SetActive(true);
+                diamondToggle.SetActive(false);
+                coinItem.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text = (dataItem.concurrency.Coin * currentQuantity).ToString();
+            }
+            else
+            {
+                coinToggle.SetActive(false);
+                diamondToggle.SetActive(true);
+                diamondItem.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text = (dataItem.concurrency.Diamond * currentQuantity).ToString();
+            }
+        }
+        else
+        {
             diamondItem.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text = (dataItem.concurrency.Diamond * currentQuantity).ToString();
             coinItem.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text = (dataItem.concurrency.Coin * currentQuantity).ToString();
         }
-        // else if (dataItem.type_Item == (int)TypeItem.Chest)
-        // {
-        //     diamondChest.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text = (dataItem.concurrency.Diamond * currentQuantity).ToString();
-        //     coinChest.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text = (dataItem.concurrency.Coin * currentQuantity).ToString();
-        // }
+    }
+    public void OpenChest()
+    {
+        ChestOpening.SetActive(true);
+        gachaSystem.GetComponent<GacchaSystem>().setRandomTime(int.Parse(quantityText.text), dataItem);
+        GameObject.Find("BG Chest").SetActive(false);
     }
     /*
     Function for pressing button Buy: Adding to Inventory of Player and Minus the Concurrency of Player
@@ -206,6 +154,10 @@ public class LoadingItem : MonoBehaviour
                     Player_DataManager.Instance.adding_Item(dataItem, int.Parse(quantityText.text));
                     notificationTransaction.color = new Color(0, 1, 0);
                     notificationTransaction.text = "Successful Transaction";
+                    if (dataItem.type_Item == (int)TypeItem.Chest)
+                    {
+                        OpenChest();
+                    }
                 }
                 else
                 {
@@ -227,6 +179,10 @@ public class LoadingItem : MonoBehaviour
                     Player_DataManager.Instance.adding_Item(dataItem, int.Parse(quantityText.text));
                     notificationTransaction.color = new Color(0, 1, 0);
                     notificationTransaction.text = "Successful Transaction";
+                    if (dataItem.type_Item == (int)TypeItem.Chest)
+                    {
+                        OpenChest();
+                    }
                 }
                 else
                 {
@@ -264,7 +220,7 @@ public class LoadingItem : MonoBehaviour
             }
             else
             {
-                Debug.LogError("Cannot Increase More");
+                Debug.LogError("Cannot Decrease More");
             }
         }
         //Press Plus button would input 0 is equal to (int)QuantityButton.Minus

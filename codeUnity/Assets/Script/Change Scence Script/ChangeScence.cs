@@ -58,6 +58,10 @@ public class ChangeScence : MonoBehaviour
     {
         SceneManager.LoadScene("Main screen");
     }
+    public void openLogin()
+    {
+        SceneManager.LoadScene("Login - Main theme");
+    }
 
     public void gameplayOpening()
     {
