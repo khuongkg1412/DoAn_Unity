@@ -50,12 +50,12 @@ public enum TypeItem
 {
     ItemDaily = 0,
     ItemWeekly = 1,
-    Chest = 2,
+    Buff = 2,
     Shirt = 3,
     Pants = 4,
     Shoes = 5,
     Accessory = 6,
-    Buff = 7
+    Chest = 7
 }
 
 public struct RateItem
