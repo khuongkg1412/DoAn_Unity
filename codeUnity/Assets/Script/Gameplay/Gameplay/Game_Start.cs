@@ -6,11 +6,13 @@ using UnityEngine.UI;
 
 public class Game_Start : MonoBehaviour
 {
+    //Create a new object for player
+    public Player Player = new Player();
     private float score;
 
     public bool isVictory = false, isGameOver;
 
-    public GameObject Player;
+    // public GameObject Player;
 
     public GameObject pannelGameover;
 
@@ -23,13 +25,11 @@ public class Game_Start : MonoBehaviour
             enemyCount,
             citizenCount;
 
-    public float timeRemaining = 180;
+    public float timeRemaining = 600;
 
     private bool timerIsRunning = false;
 
     public Text timeText;
-
-    private Camera cameraMain;
 
     private float enemyNumber,
             enemyNumberStart,
@@ -38,6 +38,9 @@ public class Game_Start : MonoBehaviour
 
     private void Start()
     {
+        //Loading Numeral of player 
+        loadingPlayer();
+        //Scale Time is normal
         Time.timeScale = 1f;
         //Convert to landscape mode in gameplay
         Screen.orientation = ScreenOrientation.Landscape;
@@ -85,22 +88,33 @@ public class Game_Start : MonoBehaviour
             GameOVer();
         }
     }
+    //Loading Numeral of player 
+    void loadingPlayer()
+    {
+        //Get static data 
+        PlayerStruct playerData = Player_DataManager.Instance.Player;
+        //Set the numeral from static data
+        Player.settingNumeral(playerData.numeral);
+    }
     //Method Game over
     public void GameOVer()
     {
         //Player dead and set active for pannel result
         Time.timeScale = 0f;
         pannelGameover.SetActive(true);
-        Player.GetComponent<Player_HP>().isDead = true;
+        //Set Player is dead when the game is over
+        //Player.GetComponent<Player_HP>().isDead = true;
         DisplayResultPannel();
     }
     //Update score
     public void UpdateScore(float scorePlus)
     {
-        //Set score
+        //Set score to the UI on the scence
         score += scorePlus;
         scoreRunning.text = score.ToString();
         scoreResult.text = score.ToString();
+        //Set score to the object
+        Player.setScore(score);
     }
     //Update enemy
     public void UpdateEnemyNumber(float number)
@@ -164,9 +178,5 @@ public class Game_Start : MonoBehaviour
         //Set to text
         timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
-    //Return score public method
-    public float returnScore()
-    {
-        return score;
-    }
+
 }

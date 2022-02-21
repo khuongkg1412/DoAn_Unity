@@ -1,37 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
+    //Setting up Enemy
+    public EnemyObject virus = new EnemyObject();
     //Player targetPlayer to enemy move forward
     public GameObject[] targetCitizen;
     public Transform targetPlayer;
-    //Distance from player to enemy
-    //public Vector3 distancePlayer = new Vector3(10,10,0);
     //The orginal position of enemy, after out of range with player, enemy would comeback here
     [SerializeField]
     Transform originalPos;
-
-    //Speed to Move
-    private float speed = 200f;
-
-    //Range to Move
-    private float range = 300f;
 
     //Decide whether enemy is following player
     public bool isFollow = true;
 
     //Time before enemy continute follow player after a collision
     float waiToFolllow = 0f;
-
-    //Dame enemy give to player
-    public float dameGiven = 10f;
-
+    public Texture2D image;
     private void Update()
     {
+        if (virus != null)
+        {
+
+        }
         //Stop virus follow player for a secend
-        if (!isFollow)
+        else if (!isFollow)
         {
             //Count to follow
             waiToFolllow += Time.deltaTime;
@@ -64,11 +60,16 @@ public class Enemy : MonoBehaviour
         }
 
     }
-
+    public void setVirusImage()
+    {
+        Debug.Log("Run Image");
+        Texture2D texture = virus.setImageForVirus();
+        gameObject.GetComponent<SpriteRenderer>().sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+    }
     bool distanceToPlayer()
     {
 
-        if (Vector3.Distance(targetPlayer.position, transform.position) <= range)
+        if (Vector3.Distance(targetPlayer.position, transform.position) <= virus.returnDectectRange())
         {
             return true;
         }
@@ -101,7 +102,7 @@ public class Enemy : MonoBehaviour
                     }
                 }
                 //If mimum range is in range following then return that target
-                if (minimumRange <= range)
+                if (minimumRange <= virus.returnDectectRange())
                 {
                     return target;
                 }
@@ -115,18 +116,18 @@ public class Enemy : MonoBehaviour
     //Comeback home position
     public void comeBackPos()
     {
-        transform.position = Vector3.MoveTowards(transform.position, originalPos.position, speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, originalPos.position, virus.returnSPD() * Time.deltaTime);
     }
 
     //Following p;ayer
     public void followPlayer()
     {
-        transform.position = Vector3.MoveTowards(transform.position, targetPlayer.position, speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, targetPlayer.position, virus.returnSPD() * Time.deltaTime);
     }
 
     public void followCitizen(GameObject citizen)
     {
-        transform.position = Vector3.MoveTowards(transform.position, citizen.transform.position, speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, citizen.transform.position, virus.returnSPD() * Time.deltaTime);
     }
 
     private void OnCollisionEnter2D(Collision2D other)

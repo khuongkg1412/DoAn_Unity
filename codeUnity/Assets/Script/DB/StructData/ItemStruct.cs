@@ -18,6 +18,8 @@ public class NumeralStruct
 
     [FirestoreProperty]
     public float SPD_Numeral { get; set; }
+    [FirestoreProperty]
+    public float ATKSPD_Numeral { get; set; }
 }
 
 [FirestoreData]

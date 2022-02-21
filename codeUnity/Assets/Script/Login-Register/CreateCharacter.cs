@@ -59,8 +59,9 @@ public class CreateCharacter : MonoBehaviour
             {
                 ATK_Numeral = 10,
                 DEF_Numeral = 0,
-                HP_Numeral = 10,
-                SPD_Numeral = 300
+                HP_Numeral = 50,
+                SPD_Numeral = 300,
+                ATKSPD_Numeral = 1
             },
             level = new Level()
             {

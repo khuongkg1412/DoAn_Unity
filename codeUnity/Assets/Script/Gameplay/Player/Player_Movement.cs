@@ -56,7 +56,7 @@ public class Player_Movement : MonoBehaviour
     /*
      Help People
     */
-    //public GameObject citizen;
+    public GameObject canvas;
     private void Awake()
     {
         //Getting RigidBody
@@ -64,9 +64,15 @@ public class Player_Movement : MonoBehaviour
         canShoot = true;
         isMoving = true;
     }
-
+    private void Start()
+    {
+        canvas = GameObject.Find("Canvas");
+    }
     private void Update()
     {
+        //Set value for 2 numeral ATKSPD and SPD
+        speed = canvas.GetComponent<Game_Start>().Player.returnSPD();
+        coolDownTime = canvas.GetComponent<Game_Start>().Player.returnATKSPD();
         if (canShoot)
         {
             //Shooting after time
