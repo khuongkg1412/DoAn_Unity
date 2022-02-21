@@ -66,7 +66,6 @@ public class ChangeScence : MonoBehaviour
     public void gameplayOpening()
     {
 
-
         //PlayerStruct player = SaveSystem.LoadDataPlayer();
         if (Player_DataManager.Instance.Player.level.stage == 0)
         {

@@ -35,5 +35,9 @@ public class Spawn_Citizen : MonoBehaviour
                 numberOfCitizen -= 1;
             }
         }
+        else if (numberOfCitizen == 0)
+        {
+            Destroy(Citizen);
+        }
     }
 }

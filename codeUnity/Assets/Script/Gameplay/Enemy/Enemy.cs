@@ -22,12 +22,8 @@ public class Enemy : MonoBehaviour
     public Texture2D image;
     private void Update()
     {
-        if (virus != null)
-        {
-
-        }
         //Stop virus follow player for a secend
-        else if (!isFollow)
+        if (!isFollow)
         {
             //Count to follow
             waiToFolllow += Time.deltaTime;
@@ -41,7 +37,7 @@ public class Enemy : MonoBehaviour
                 isFollow = true;
             }
         }
-        else
+        else if (virus != null)
         {
             //Follow if in range
             if (distanceToPlayer())
@@ -60,11 +56,10 @@ public class Enemy : MonoBehaviour
         }
 
     }
+
     public void setVirusImage()
     {
-        Debug.Log("Run Image");
-        Texture2D texture = virus.setImageForVirus();
-        gameObject.GetComponent<SpriteRenderer>().sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+        gameObject.GetComponent<SpriteRenderer>().sprite = virus.setImageForVirus();
     }
     bool distanceToPlayer()
     {

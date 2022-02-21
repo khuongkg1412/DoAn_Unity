@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class Game_Start : MonoBehaviour
 {
     //Create a new object for player
-    public Player Player = new Player();
+    public Player Character;
     private float score;
 
-    public bool isVictory = false, isGameOver;
+    public bool isVictory = false, isGameOver, isStoped = false;
 
     // public GameObject Player;
 
@@ -38,8 +38,10 @@ public class Game_Start : MonoBehaviour
 
     private void Start()
     {
+        Character = new Player(Player_DataManager.Instance.Player.numeral);
+        //Character.settingNumeral();
         //Loading Numeral of player 
-        loadingPlayer();
+        //loadingPlayer();
         //Scale Time is normal
         Time.timeScale = 1f;
         //Convert to landscape mode in gameplay
@@ -51,8 +53,8 @@ public class Game_Start : MonoBehaviour
         Set and get number citizen follow by spawning
         */
         citizenSaveNumber = 0;
-        citizenNumberStart = GameObject.Find("Spawning Citizen").GetComponent<Spawn_Enemy>().numberOfEnemies + 1;
-        enemyNumberStart = GameObject.Find("Spawning Enemy").GetComponent<Spawn_Enemy>().numberOfEnemies + 1;
+        citizenNumberStart = GameObject.Find("Spawning Citizen").GetComponent<Spawn_Citizen>().numberOfCitizen;
+        enemyNumberStart = GameObject.Find("Spawning Enemy").GetComponent<Spawn_Enemy>().numberOfEnemies;
         enemyNumber = 0;
         //Update citizen in Quest pannel
         UpdateCitizen(0);
@@ -87,24 +89,39 @@ public class Game_Start : MonoBehaviour
             //Game end. Display result and end the gameplay
             GameOVer();
         }
+
     }
     //Loading Numeral of player 
-    void loadingPlayer()
+    public void loadingPlayer()
     {
-        //Get static data 
-        PlayerStruct playerData = Player_DataManager.Instance.Player;
         //Set the numeral from static data
-        Player.settingNumeral(playerData.numeral);
+        // Player.settingNumeral(Player_DataManager.Instance.settingNumeral());
+
     }
     //Method Game over
     public void GameOVer()
     {
         //Player dead and set active for pannel result
-        Time.timeScale = 0f;
         pannelGameover.SetActive(true);
         //Set Player is dead when the game is over
         //Player.GetComponent<Player_HP>().isDead = true;
         DisplayResultPannel();
+        if (!isStoped)
+        {
+            totalScore();
+            isStoped = true;
+        }
+
+    }
+    void totalScore()
+    {
+        //Get name of scence to calculate the stage
+        string scenceName = SceneManager.GetActiveScene().name;
+        //Calculate the stage
+        float stage = float.Parse(scenceName.Substring(5));
+        //Plus the time has left to total score
+        score += timeRemaining;
+        Player_DataManager.Instance.finishTheStage(score, stage, isVictory);
     }
     //Update score
     public void UpdateScore(float scorePlus)
@@ -113,8 +130,6 @@ public class Game_Start : MonoBehaviour
         score += scorePlus;
         scoreRunning.text = score.ToString();
         scoreResult.text = score.ToString();
-        //Set score to the object
-        Player.setScore(score);
     }
     //Update enemy
     public void UpdateEnemyNumber(float number)
@@ -161,9 +176,11 @@ public class Game_Start : MonoBehaviour
     //Condition to victory
     void ConditionToVictory()
     {
+        Debug.Log("Check Win");
         //Check condition victory
         if (citizenSaveNumber == citizenNumberStart)
         {
+            Debug.Log("Win");
             isGameOver = true;
             isVictory = true;
         }

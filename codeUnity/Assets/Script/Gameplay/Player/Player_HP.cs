@@ -29,10 +29,10 @@ public class Player_HP : MonoBehaviour
     private void Update()
     {
         //Update Text and health bar by the current Health from the object Player
-        HealthBar.value = canvas.GetComponent<Game_Start>().Player.returnHP();
+        HealthBar.value = canvas.GetComponent<Game_Start>().Character.returnHP();
         HPText.text = (HealthBar.value + " / " + HealthBar.maxValue);
         //Cheeck the player is dead
-        if (canvas.GetComponent<Game_Start>().Player.isPlayerDead())
+        if (canvas.GetComponent<Game_Start>().Character.isPlayerDead())
         {
             canvas.GetComponent<Game_Start>().GameOVer();
             //If dead, set false for player game object
@@ -66,8 +66,8 @@ public class Player_HP : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy")
         {
-            canvas.GetComponent<Game_Start>().Player.getDamage(other.gameObject.GetComponent<Enemy>().virus.returnATK());
-            getDamage();
+            canvas.GetComponent<Game_Start>().Character.getDamage(other.gameObject.GetComponent<Enemy>().virus.returnATK());
+            // getDamage();
         }
     }
 }

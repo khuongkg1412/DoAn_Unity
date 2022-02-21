@@ -71,8 +71,8 @@ public class Player_Movement : MonoBehaviour
     private void Update()
     {
         //Set value for 2 numeral ATKSPD and SPD
-        speed = canvas.GetComponent<Game_Start>().Player.returnSPD();
-        coolDownTime = canvas.GetComponent<Game_Start>().Player.returnATKSPD();
+        speed = canvas.GetComponent<Game_Start>().Character.returnSPD();
+        coolDownTime = canvas.GetComponent<Game_Start>().Character.returnATKSPD();
         if (canShoot)
         {
             //Shooting after time

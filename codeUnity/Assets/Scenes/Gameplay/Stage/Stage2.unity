@@ -1116,7 +1116,7 @@ Transform:
   m_Children:
   - {fileID: 1245679349}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &326240724
 GameObject:
@@ -1147,7 +1147,7 @@ Transform:
   m_Children:
   - {fileID: 571074374}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!1 &335396039
 GameObject:
@@ -86849,6 +86849,7 @@ MonoBehaviour:
   shootJoystick: {fileID: 354764381}
   canShoot: 1
   cameraMain: {fileID: 1299645170}
+  canvas: {fileID: 0}
 --- !u!50 &571074376
 Rigidbody2D:
   serializedVersion: 4
@@ -86983,7 +86984,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 881436829}
-  Reloading: 0
   isDead: 0
   HealthBar: {fileID: 1905076049}
   HPText: {fileID: 2100226997}
@@ -88105,7 +88105,7 @@ RectTransform:
   - {fileID: 389464376}
   - {fileID: 1590092559}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -88199,7 +88199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isVictory: 0
   isGameOver: 0
-  Player: {fileID: 571074373}
+  isStoped: 0
   pannelGameover: {fileID: 1590092558}
   scoreResult: {fileID: 2020350584}
   enemyKillResult: {fileID: 36786544}
@@ -88326,7 +88326,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 903638242}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 028771a84840f164197c3ad66e1dfbe8, type: 3}
+  m_Script: {fileID: 11500000, guid: bf14b81e64b1541429626c1124dea719, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   positionSpawn:
@@ -88338,9 +88338,8 @@ MonoBehaviour:
   - {fileID: 1828163136}
   - {fileID: 1622318811}
   - {fileID: 129832665}
-  Enemy: {fileID: 1172515324}
-  numberOfEnemies: 2
-  spawnedPos: 
+  Citizen: {fileID: 1172515324}
+  numberOfCitizen: 5
 --- !u!4 &903638244
 Transform:
   m_ObjectHideFlags: 0
@@ -89569,7 +89568,7 @@ Transform:
   m_Children:
   - {fileID: 452618599}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1299645174
 MonoBehaviour:
@@ -89652,7 +89651,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1327838807
 GameObject:
@@ -99121,8 +99120,7 @@ MonoBehaviour:
   - {fileID: 1640926819}
   - {fileID: 1585386527}
   Enemy: {fileID: 946611837}
-  numberOfEnemies: 2
-  spawnedPos: 
+  numberOfEnemies: 3
 --- !u!4 &1576777873
 Transform:
   m_ObjectHideFlags: 0

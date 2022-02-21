@@ -8,17 +8,17 @@ public class EnemyObject
 {
     private VirusType typeVirus;
     private NumeralStruct numeral;
-    private Texture2D image;
+    private Sprite image;
     private float detectRange;
     public void settingNumeral(NumeralStruct numeral)
     {
         this.numeral = numeral;
     }
-    Texture2D loadingImageFromFilePath(string Filepath)
+    Sprite loadingImageFromFilePath(string Filepath)
     {
         if (Resources.Load<Sprite>(Filepath) != null)
         {
-            return Resources.Load<Texture2D>(Filepath);
+            return Resources.Load<Sprite>(Filepath);
         }
         return null;
     }
@@ -27,7 +27,7 @@ public class EnemyObject
     {
         this.numeral.HP_Numeral -= damageTaken;
     }
-    public Texture2D setImageForVirus()
+    public Sprite setImageForVirus()
     {
         return this.image;
     }

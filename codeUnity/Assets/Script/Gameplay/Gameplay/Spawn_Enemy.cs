@@ -49,17 +49,13 @@ public class Spawn_Enemy : MonoBehaviour
         switch (randomType)
         {
             case (int)VirusType.VirusA:
-                Debug.Log("RunA");
                 return virusExample.VirusA();
             case (int)VirusType.VirusB:
-                Debug.Log("RunB");
-                return virusExample.VirusA();
+                return virusExample.VirusB();
             case (int)VirusType.VirusC:
-                Debug.Log("RunC");
-                return virusExample.VirusA();
+                return virusExample.VirusC();
             case (int)VirusType.VirusD:
-                Debug.Log("RunD");
-                return virusExample.VirusA();
+                return virusExample.VirusD();
         }
         return null;
     }
