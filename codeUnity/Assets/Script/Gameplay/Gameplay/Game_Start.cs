@@ -89,7 +89,6 @@ public class Game_Start : MonoBehaviour
         }
         else
         {
-
             //Game end. Display result and end the gameplay
             GameOVer();
         }
