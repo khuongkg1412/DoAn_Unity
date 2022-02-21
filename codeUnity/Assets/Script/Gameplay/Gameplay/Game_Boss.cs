@@ -4,9 +4,10 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-public class Game_Start : MonoBehaviour
+
+public class Game_Boss : MonoBehaviour
 {
-    NumeralStruct originNumeral = new NumeralStruct();
+    public GameObject VirusBoos;
     //Create a new object for player
     public Character Character;
     private float score;
@@ -39,12 +40,10 @@ public class Game_Start : MonoBehaviour
 
     private void Start()
     {
-        //Reset data
-        loadingPlayer();
-        //Loading Numeral of player 
-        //originNumeral = Player_DataManager.Instance.Player.numeral;
+        EnemyObject virusObject = new EnemyObject();
+        VirusBoos.GetComponent<Enemy>().virus = virusObject.VirusBoss();
+        //Set Character data
         Character = new Character(Player_DataManager.Instance.Player.numeral);
-
         //Scale Time is normal
         Time.timeScale = 1f;
         //Convert to landscape mode in gameplay
@@ -56,7 +55,7 @@ public class Game_Start : MonoBehaviour
         Set and get number citizen follow by spawning
         */
         citizenSaveNumber = 0;
-        citizenNumberStart = GameObject.Find("Spawning Citizen").GetComponent<Spawn_Citizen>().numberOfCitizen;
+        //        citizenNumberStart = GameObject.Find("Spawning Citizen").GetComponent<Spawn_Citizen>().numberOfCitizen;
         enemyNumberStart = GameObject.Find("Spawning Enemy").GetComponent<Spawn_Enemy>().numberOfEnemies;
         enemyNumber = 0;
         //Update citizen in Quest pannel
@@ -89,7 +88,6 @@ public class Game_Start : MonoBehaviour
         }
         else
         {
-
             //Game end. Display result and end the gameplay
             GameOVer();
         }
@@ -99,30 +97,22 @@ public class Game_Start : MonoBehaviour
     public void loadingPlayer()
     {
         //Set the numeral from static data
-        Player_DataManager.Instance.Player.numeral = new NumeralStruct()
-        {
-            ATK_Numeral = 10,
-            DEF_Numeral = 0,
-            HP_Numeral = 50,
-            SPD_Numeral = 300,
-            ATKSPD_Numeral = 1
-        };
-        Debug.Log("Reset data");
-        //Player_DataManager.Instance.Player.numeral = originNumeral;
+        // Player.settingNumeral(Player_DataManager.Instance.settingNumeral());
 
     }
     //Method Game over
     public void GameOVer()
     {
+        //Player dead and set active for pannel result
+        pannelGameover.SetActive(true);
+        //Plus the time left to the score
+        UpdateScore(timeRemaining);
+        //Show Result Pannel
+        DisplayResultPannel();
+        //Update score to database
         if (!isStoped)
         {
-            //Player dead and set active for pannel result
-            pannelGameover.SetActive(true);
-            //Plus the time left to the score
-            UpdateScore(timeRemaining);
-            //Show Result Pannel
-            DisplayResultPannel();
-            //Update score to database
+
             totalScore();
             isStoped = true;
         }
@@ -191,20 +181,16 @@ public class Game_Start : MonoBehaviour
     //Condition to victory
     void ConditionToVictory()
     {
-        Debug.Log("Check Win");
-        if (GameObject.Find("Spawning Enemy").GetComponent<Spawn_Enemy>().isBossStage)
-        {
-            if (enemyNumber == enemyNumberStart)
-            {
-                Debug.Log("Win By Boss");
-                isGameOver = true;
-                isVictory = true;
-            }
-        }
         //Check condition victory
-        else if (citizenSaveNumber == citizenNumberStart)
+        // if (citizenSaveNumber == citizenNumberStart)
+        // {
+        //     isGameOver = true;
+        //     isVictory = true;
+        // }
+        Debug.Log("Check Win");
+        if (VirusBoos.active == false)
         {
-            Debug.Log("Win By Stage");
+            Debug.Log("Win");
             isGameOver = true;
             isVictory = true;
         }

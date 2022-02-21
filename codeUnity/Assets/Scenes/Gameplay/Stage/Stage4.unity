@@ -88339,7 +88339,8 @@ MonoBehaviour:
   - {fileID: 1622318811}
   - {fileID: 129832665}
   Citizen: {fileID: 1172515324}
-  numberOfCitizen: 0
+  numberOfCitizen: 5
+  spawnedPos: 
 --- !u!4 &903638244
 Transform:
   m_ObjectHideFlags: 0
@@ -98780,6 +98781,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 028771a84840f164197c3ad66e1dfbe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBossStage: 0
   positionSpawn:
   - {fileID: 874697255}
   - {fileID: 2024385075}
@@ -98790,7 +98792,8 @@ MonoBehaviour:
   - {fileID: 1640926819}
   - {fileID: 1585386527}
   Enemy: {fileID: 946611837}
-  numberOfEnemies: 2
+  numberOfEnemies: 5
+  spawnedPos: 
 --- !u!4 &1576777873
 Transform:
   m_ObjectHideFlags: 0

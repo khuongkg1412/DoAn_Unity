@@ -22,12 +22,11 @@ public class Player_HP : MonoBehaviour
     {
         //Set Max HP for player characters
         maxHP = Player_DataManager.Instance.Player.numeral.HP_Numeral;
-        //Set max HP to slider
-        HealthBar.maxValue = maxHP;
     }
-
     private void Update()
     {
+        //Set max HP to slider
+        HealthBar.maxValue = maxHP;
         //Update Text and health bar by the current Health from the object Player
         HealthBar.value = canvas.GetComponent<Game_Start>().Character.returnHP();
         HPText.text = (HealthBar.value + " / " + HealthBar.maxValue);

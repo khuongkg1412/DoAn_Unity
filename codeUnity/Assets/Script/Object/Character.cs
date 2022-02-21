@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 
-public class Player
+public class Character
 {
-    public Player(NumeralStruct numeralStruct)
+    public Character(NumeralStruct numeralStruct)
     {
         this.numeral = numeralStruct;
         this.maxNumeral = numeral;

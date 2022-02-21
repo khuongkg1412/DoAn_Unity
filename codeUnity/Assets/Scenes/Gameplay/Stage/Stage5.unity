@@ -1116,7 +1116,7 @@ Transform:
   m_Children:
   - {fileID: 1245679349}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &326240724
 GameObject:
@@ -1141,14 +1141,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 326240724}
-  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: -1826, y: 2825, z: 10}
+  m_LocalRotation: {x: -0, y: -0, z: 0.7057737, w: -0.7084374}
+  m_LocalPosition: {x: -213, y: -837, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 571074374}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 270.216}
 --- !u!1 &335396039
 GameObject:
   m_ObjectHideFlags: 0
@@ -86491,6 +86491,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &536862991 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7538197236379058746, guid: 28a54c95b9baaa44ebf266e3b76d76e6, type: 3}
+  m_PrefabInstance: {fileID: 6532921673374073568}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &538904317
 GameObject:
   m_ObjectHideFlags: 0
@@ -86819,7 +86824,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 571074373}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 82, y: 404, z: 0}
+  m_LocalPosition: {x: 61, y: 69, z: 0}
   m_LocalScale: {x: 60, y: 60, z: 1}
   m_Children:
   - {fileID: 263468293}
@@ -86849,6 +86854,7 @@ MonoBehaviour:
   shootJoystick: {fileID: 354764381}
   canShoot: 1
   cameraMain: {fileID: 1299645170}
+  canvas: {fileID: 0}
 --- !u!50 &571074376
 Rigidbody2D:
   serializedVersion: 4
@@ -86983,7 +86989,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 881436829}
-  Reloading: 0
   isDead: 0
   HealthBar: {fileID: 1905076049}
   HPText: {fileID: 2100226997}
@@ -88005,7 +88010,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 874697254}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1734, y: -427, z: 10}
+  m_LocalPosition: {x: -1561, y: -920, z: 10}
   m_LocalScale: {x: 80, y: 80, z: 1}
   m_Children: []
   m_Father: {fileID: 1576777873}
@@ -88078,6 +88083,7 @@ GameObject:
   - component: {fileID: 881436830}
   - component: {fileID: 881436831}
   - component: {fileID: 881436832}
+  - component: {fileID: 881436833}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -88105,7 +88111,7 @@ RectTransform:
   - {fileID: 389464376}
   - {fileID: 1590092559}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -88199,7 +88205,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isVictory: 0
   isGameOver: 0
-  Player: {fileID: 571074373}
+  isStoped: 0
   pannelGameover: {fileID: 1590092558}
   scoreResult: {fileID: 2020350584}
   enemyKillResult: {fileID: 36786544}
@@ -88225,6 +88231,32 @@ MonoBehaviour:
   resumeButton: {fileID: 5739898}
   pauseButton: {fileID: 112314186}
   pausePannel: {fileID: 389464375}
+--- !u!114 &881436833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881436825}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8fe5451fd0755e4ab737977bfe051b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VirusBoos: {fileID: 536862991}
+  isVictory: 0
+  isGameOver: 0
+  isStoped: 0
+  pannelGameover: {fileID: 1590092558}
+  scoreResult: {fileID: 2020350584}
+  enemyKillResult: {fileID: 36786544}
+  citizenSaveResult: {fileID: 2088248600}
+  gameplayResult: {fileID: 335396041}
+  scoreRunning: {fileID: 542576247}
+  enemyCount: {fileID: 1540450786}
+  citizenCount: {fileID: 579710479}
+  timeRemaining: 600
+  timeText: {fileID: 620428237}
 --- !u!1 &899745436
 GameObject:
   m_ObjectHideFlags: 0
@@ -88326,20 +88358,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 903638242}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 028771a84840f164197c3ad66e1dfbe8, type: 3}
+  m_Script: {fileID: 11500000, guid: bf14b81e64b1541429626c1124dea719, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   positionSpawn:
   - {fileID: 1053951585}
-  - {fileID: 237033429}
-  - {fileID: 1776211525}
-  - {fileID: 493762670}
-  - {fileID: 1411913999}
-  - {fileID: 1828163136}
-  - {fileID: 1622318811}
-  - {fileID: 129832665}
-  Enemy: {fileID: 1172515324}
-  numberOfEnemies: 2
+  Citizen: {fileID: 1172515324}
+  numberOfCitizen: 1
   spawnedPos: 
 --- !u!4 &903638244
 Transform:
@@ -89569,7 +89594,7 @@ Transform:
   m_Children:
   - {fileID: 452618599}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1299645174
 MonoBehaviour:
@@ -89652,7 +89677,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1327838807
 GameObject:
@@ -92911,17 +92936,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 028771a84840f164197c3ad66e1dfbe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBossStage: 1
   positionSpawn:
   - {fileID: 874697255}
-  - {fileID: 2024385075}
-  - {fileID: 1948698662}
-  - {fileID: 538904318}
-  - {fileID: 1337999307}
-  - {fileID: 807107983}
-  - {fileID: 1640926819}
-  - {fileID: 1585386527}
   Enemy: {fileID: 946611837}
-  numberOfEnemies: 2
+  numberOfEnemies: 1
   spawnedPos: 
 --- !u!4 &1576777873
 Transform:
@@ -95158,7 +95177,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5399668668997908419, guid: 6080bb2a2cf7c3a44b5aefcf5701690d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5399668669916413910, guid: 6080bb2a2cf7c3a44b5aefcf5701690d, type: 3}
       propertyPath: m_LocalPosition.y

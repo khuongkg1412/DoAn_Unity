@@ -17,11 +17,16 @@ public class Enemy_HP : MonoBehaviour
     // public GameObject HPText;
     private void Start()
     {
-        maxHP = 30f;
+        // maxHP = 30;
+        // currentHP = maxHP;
+        // maxHPsize = HealthBar.transform.localScale.x;
+    }
+    public void setNumeral(float hp)
+    {
+        maxHP = hp;
         currentHP = maxHP;
         maxHPsize = HealthBar.transform.localScale.x;
     }
-
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.tag == "Bullet")

@@ -119,13 +119,13 @@ public class EnemyObject
             {
                 ATK_Numeral = 10,
                 DEF_Numeral = 0,
-                HP_Numeral = 30,
-                SPD_Numeral = 200,
+                HP_Numeral = 100,
+                SPD_Numeral = 100,
                 ATKSPD_Numeral = 1
             },
             typeVirus = VirusType.Bosss1,
             image = loadingImageFromFilePath("Virus/Boss1"),
-            detectRange = 300f
+            detectRange = 10000f
         };
 
         return VirusBoss;
