@@ -30,6 +30,7 @@ public class Player_Loading : MonoBehaviour
             {
                 Player_DataManager.Instance.Player = snapshot.ConvertTo<PlayerStruct>();
                 Player_DataManager.Instance.Player.ID = snapshot.Id;
+                Player_DataManager.Instance.settingCharacter(snapshot.ConvertTo<PlayerStruct>().numeral);
             }
             else
             {

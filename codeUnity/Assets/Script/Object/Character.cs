@@ -2,20 +2,25 @@ using System.Collections.Generic;
 
 public class Character
 {
+    public Character()
+    {
+
+    }
     public Character(NumeralStruct numeralStruct)
     {
         this.numeral = numeralStruct;
-        this.maxNumeral = numeral;
     }
     private NumeralStruct numeral;
 
-    private NumeralStruct maxNumeral;
     private List<ItemStruct> buffInGame = new List<ItemStruct>();
 
     private bool isDead = false;
 
     private float score = 0;
-
+    public NumeralStruct returnNumeral()
+    {
+        return this.numeral;
+    }
     public void setScore(float score)
     {
         this.score = score;
@@ -38,48 +43,20 @@ public class Character
         }
     }
 
-    public void getHeal(float healTaken)
+    public void getHeal(float healTaken, float maxHP)
     {
         //Inscrease the HP by taken healing 
         this.numeral.HP_Numeral += healTaken;
         //If Hp point is over maximum numeral, set it is equal to max numeral
-        if (this.numeral.HP_Numeral > maxNumeral.HP_Numeral)
+        if (this.numeral.HP_Numeral > maxHP)
         {
-            this.numeral.HP_Numeral = maxNumeral.HP_Numeral;
+            this.numeral.HP_Numeral = maxHP;
         }
     }
-    public float retrnMaxHP()
-    {
-        return maxNumeral.HP_Numeral;
-    }
+
     public void addBuff(ItemStruct item)
     {
         buffInGame.Add(item);
-    }
-    public void settingNumeral()
-    {
-        //this.maxNumeral = Player_DataManager.Instance.settingNumeral();
-        // numeral = new NumeralStruct()
-        // {
-        // ATK_Numeral = 10,
-        // DEF_Numeral = 0,
-        // HP_Numeral = 50,
-        // SPD_Numeral = 300,
-        // ATKSPD_Numeral = 1
-        // };
-
-        float ATK = Player_DataManager.Instance.Player.numeral.ATK_Numeral;
-        this.setATK(ATK);
-        float DEF = Player_DataManager.Instance.Player.numeral.DEF_Numeral;
-        this.setDEF(DEF);
-        float HP = Player_DataManager.Instance.Player.numeral.HP_Numeral;
-        this.setHP(HP);
-        float SPD = Player_DataManager.Instance.Player.numeral.SPD_Numeral;
-        this.setSPD(SPD);
-        float ATKSPD = Player_DataManager.Instance.Player.numeral.ATKSPD_Numeral;
-        this.setATKSPD(ATKSPD);
-
-        this.maxNumeral = numeral;
     }
     public float returnATK()
     {

@@ -66,7 +66,7 @@ public class Player_HP : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
             canvas.GetComponent<Game_Start>().Character.getDamage(other.gameObject.GetComponent<Enemy>().virus.returnATK());
-            // getDamage();
+            getDamage();
         }
     }
 }

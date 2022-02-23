@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private float boundX;
+    private float boundX = 2085f;
 
-    private float boundY;
+    private float boundY = 2185f;
 
     public float dameGiven;
 
@@ -19,8 +19,6 @@ public class Bullet : MonoBehaviour
     {
         rangeShooting = 200f;
         dameGiven = 10f;
-        boundX = GameObject.Find("Player").GetComponent<Boundary>().getBoundX();
-        boundY = GameObject.Find("Player").GetComponent<Boundary>().getBoundY();
     }
 
     private void Update()

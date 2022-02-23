@@ -7,13 +7,14 @@ public class Player_DataManager : MonoBehaviour
 {
     public static Player_DataManager Instance { get; private set; }
 
-    public PlayerStruct Player;
+    public PlayerStruct Player = new PlayerStruct();
+
+    public Character playerCharacter = new Character();
     public List<Inventory_Player> inventory_Player = new List<Inventory_Player>();
     public List<SystemNotification> systemNotification = new List<SystemNotification>();
     public List<Friend_Player> friend_Player = new List<Friend_Player>();
     public List<Notification_Struct> notification_Player = new List<Notification_Struct>();
     public List<AchievementStruct> achivementReceived_Player = new List<AchievementStruct>();
-
 
     private void Awake()
     {
@@ -27,9 +28,10 @@ public class Player_DataManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    public NumeralStruct settingNumeral()
+
+    public void settingCharacter(NumeralStruct numeralStruct)
     {
-        return Player.numeral;
+        this.playerCharacter = new Character(numeralStruct);
     }
 
     public void updateCoinConcurrency(float amountUpdate)

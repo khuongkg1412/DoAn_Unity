@@ -86800,10 +86800,10 @@ GameObject:
   - component: {fileID: 571074376}
   - component: {fileID: 571074375}
   - component: {fileID: 571074382}
-  - component: {fileID: 571074377}
   - component: {fileID: 571074378}
   - component: {fileID: 571074379}
   - component: {fileID: 571074381}
+  - component: {fileID: 571074377}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -86878,12 +86878,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 571074373}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba919a200e8127f4db1839e492768720, type: 3}
+  m_Script: {fileID: 11500000, guid: f19573afa99faef4cbcc1015ba7930d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenBounds: {x: 0, y: 0}
 --- !u!212 &571074378
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -86978,7 +86977,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 571074373}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6cdfb4714998a124eb7aea40a82f536d, type: 3}
   m_Name: 
@@ -88362,6 +88361,7 @@ MonoBehaviour:
   - {fileID: 129832665}
   Citizen: {fileID: 1172515324}
   numberOfCitizen: 2
+  spawnedPos: 
 --- !u!1 &904344177
 GameObject:
   m_ObjectHideFlags: 0
@@ -103540,6 +103540,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 028771a84840f164197c3ad66e1dfbe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBossStage: 0
   positionSpawn:
   - {fileID: 874697255}
   - {fileID: 2024385075}
@@ -103550,7 +103551,9 @@ MonoBehaviour:
   - {fileID: 1640926819}
   - {fileID: 1585386527}
   Enemy: {fileID: 946611837}
+  Boss: {fileID: 0}
   numberOfEnemies: 3
+  spawnedPos: 
 --- !u!4 &1576777873
 Transform:
   m_ObjectHideFlags: 0
@@ -105563,7 +105566,7 @@ GameObject:
   - component: {fileID: 2100226998}
   - component: {fileID: 2100226997}
   m_Layer: 0
-  m_Name: Text
+  m_Name: HPText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

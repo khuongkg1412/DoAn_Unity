@@ -39,10 +39,10 @@ public class Game_Start : MonoBehaviour
 
     private void Start()
     {
+        originNumeral = Player_DataManager.Instance.Player.numeral;
         //Reset data
-        loadingPlayer();
+        // loadingPlayer();
         //Loading Numeral of player 
-        //originNumeral = Player_DataManager.Instance.Player.numeral;
         Character = new Character(Player_DataManager.Instance.Player.numeral);
 
         //Scale Time is normal
@@ -91,6 +91,8 @@ public class Game_Start : MonoBehaviour
         {
             //Game end. Display result and end the gameplay
             GameOVer();
+            //Reset data
+            loadingPlayer();
         }
 
     }
@@ -98,17 +100,17 @@ public class Game_Start : MonoBehaviour
     public void loadingPlayer()
     {
         //Set the numeral from static data
-        Player_DataManager.Instance.Player.numeral = new NumeralStruct()
-        {
-            ATK_Numeral = 10,
-            DEF_Numeral = 0,
-            HP_Numeral = 50,
-            SPD_Numeral = 300,
-            ATKSPD_Numeral = 1
-        };
-        Debug.Log("Reset data");
+        Player_DataManager.Instance.Player.numeral = originNumeral;
+        //= new NumeralStruct()
+        //{
+        //    ATK_Numeral = 10,
+        //    DEF_Numeral = 0,
+        //    HP_Numeral = 50,
+        //    SPD_Numeral = 300,
+        //    ATKSPD_Numeral = 1
+        //};
         //Player_DataManager.Instance.Player.numeral = originNumeral;
-
+        Debug.Log("Data: " + Player_DataManager.Instance.Player.numeral.HP_Numeral);
     }
     //Method Game over
     public void GameOVer()
@@ -190,12 +192,10 @@ public class Game_Start : MonoBehaviour
     //Condition to victory
     void ConditionToVictory()
     {
-        Debug.Log("Check Win");
         if (GameObject.Find("Spawning Enemy").GetComponent<Spawn_Enemy>().isBossStage)
         {
             if (enemyNumber == enemyNumberStart)
             {
-                Debug.Log("Win By Boss");
                 isGameOver = true;
                 isVictory = true;
             }
@@ -203,7 +203,6 @@ public class Game_Start : MonoBehaviour
         //Check condition victory
         else if (citizenSaveNumber == citizenNumberStart)
         {
-            Debug.Log("Win By Stage");
             isGameOver = true;
             isVictory = true;
         }
