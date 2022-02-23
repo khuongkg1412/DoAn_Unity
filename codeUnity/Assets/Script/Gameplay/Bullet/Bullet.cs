@@ -9,7 +9,7 @@ public class Bullet : MonoBehaviour
     private float boundY;
 
     public float dameGiven;
-    
+
     private Transform positionStartShooting;
 
     private float rangeShooting;
@@ -29,25 +29,31 @@ public class Bullet : MonoBehaviour
         checkDistanceShooting();
     }
 
-    private void checkBoundary(){
-        if(transform.position.x < - boundX || transform.position.y < - boundY ||
-           transform.position.x >   boundX || transform.position.y >   boundY ){
-            Destroy (gameObject);
+    private void checkBoundary()
+    {
+        if (transform.position.x < -boundX || transform.position.y < -boundY ||
+           transform.position.x > boundX || transform.position.y > boundY)
+        {
+            Destroy(gameObject);
         }
     }
 
-    private void bulletDistroy(){
+    private void bulletDistroy()
+    {
         GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
-        effect.transform.position = new Vector3(effect.transform.position.x,effect.transform.position.y, 1);
-        Destroy(effect,0.5f);
-        Destroy (gameObject);
+        effect.transform.position = new Vector3(effect.transform.position.x, effect.transform.position.y, 1);
+        Destroy(effect, 0.5f);
+        Destroy(gameObject);
     }
-    public void setPositionStartShooting(Transform position){
+    public void setPositionStartShooting(Transform position)
+    {
         positionStartShooting = position;
     }
 
-    public void checkDistanceShooting(){
-        if( Vector2.Distance(positionStartShooting.position   ,transform.position) > rangeShooting){
+    public void checkDistanceShooting()
+    {
+        if (Vector2.Distance(positionStartShooting.position, transform.position) > rangeShooting)
+        {
             bulletDistroy();
         }
     }

@@ -429,11 +429,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e9e792357b58d54ea1c8554d0692caa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  target2: {fileID: 0}
+  targetCitizen: []
+  targetPlayer: {fileID: 0}
   originalPos: {fileID: 0}
   isFollow: 1
-  dameGiven: 10
+  image: {fileID: 0}
 --- !u!114 &3617683340215423016
 MonoBehaviour:
   m_ObjectHideFlags: 0

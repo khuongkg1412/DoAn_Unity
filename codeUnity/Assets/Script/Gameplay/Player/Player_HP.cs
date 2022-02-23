@@ -8,17 +8,8 @@ public class Player_HP : MonoBehaviour
 {
     public Canvas canvas;
 
-    //Reload the scence cause you lost the game
-    public bool Reloading = false;
-
-    //Wait for reoading excutes
-    private float waitToLoad;
-
     //Player dead
     public bool isDead = false;
-
-    //Cureent Health Point
-    private float currentHP;
 
     //Max Health Point
     private float maxHP;
@@ -29,33 +20,36 @@ public class Player_HP : MonoBehaviour
 
     private void Start()
     {
-        maxHP = 50f;
-        currentHP = maxHP;
+        //Set Max HP for player characters
+        maxHP = Player_DataManager.Instance.Player.numeral.HP_Numeral;
     }
-
     private void Update()
     {
-        if (isDead)
+        //Set max HP to slider
+        HealthBar.maxValue = maxHP;
+        //Update Text and health bar by the current Health from the object Player
+        HealthBar.value = canvas.GetComponent<Game_Start>().Character.returnHP();
+        HPText.text = (HealthBar.value + " / " + HealthBar.maxValue);
+        //Cheeck the player is dead
+        if (canvas.GetComponent<Game_Start>().Character.isPlayerDead())
         {
+            canvas.GetComponent<Game_Start>().GameOVer();
+            //If dead, set false for player game object
             gameObject.SetActive(false);
+            //Split up by 2 modes : Story Mode and Tutorial
             if (canvas.GetComponent<Game_Start>() != null)
             {
                 canvas.GetComponent<Game_Start>().GameOVer();
-
             }
             else
             {
                 canvas.GetComponent<Game_Tutorial>().GameOVer();
             }
-
         }
     }
 
     private void getDamage()
     {
-        HealthBar.maxValue = maxHP;
-        HealthBar.value = currentHP;
-        HPText.text = currentHP + " / " + maxHP;
         /*
             Player Get Hurt then stop the player movement
         */
@@ -71,14 +65,8 @@ public class Player_HP : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy")
         {
-            currentHP -= other.gameObject.GetComponent<Enemy>().dameGiven;
-            getDamage();
-
-            if (currentHP == 0)
-            {
-                Reloading = true;
-                isDead = true;
-            }
+            canvas.GetComponent<Game_Start>().Character.getDamage(other.gameObject.GetComponent<Enemy>().virus.returnATK());
+            // getDamage();
         }
     }
 }

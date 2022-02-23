@@ -27,6 +27,11 @@ public class Player_DataManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    public NumeralStruct settingNumeral()
+    {
+        return Player.numeral;
+    }
+
     public void updateCoinConcurrency(float amountUpdate)
     {
         Player.concurrency.Coin += amountUpdate;
@@ -68,16 +73,39 @@ public class Player_DataManager : MonoBehaviour
         //Call to update the information off Player
         Player_Update.UpdatePlayer();
     }
+    public void finishTheStage(float score, float stage, bool isCompleted)
+    {
+        //Up the stage if the stage has been complete is greather
+        if (stage == Player.level.stage & isCompleted)
+        {
+            Player.level.stage += 1;
+        }
+        //Calculate the exp point by the score the player get
+        player_LevelUP(score);
+        //Plus the coin by the score the player get
+        updateCoinConcurrency(score);
+        //Call to update the information off Player
+        Player_Update.UpdatePlayer();
+    }
     public void player_LevelUP(float xpGet)
     {
-        Player.level.currentXP += xpGet;
-
-        if (Player.level.currentXP >= Player.level.reachXP)
+        float totalExp = xpGet + Player.level.currentXP;
+        while (totalExp - Player.level.reachXP > 0)
         {
-            Player.level.currentXP = 0;
+            float expNeeded = Player.level.reachXP - Player.level.currentXP;
+            totalExp -= expNeeded;
+
+            //Increase level
+            Player.level.level += 1;
+            //Calculate the new reach Xp
             Player.level.reachXP = 100 * Player.level.level * (float)1.3;
-            Debug.Log("Level Need to Reach " + Player.level.reachXP);
+            //Set currento 0 after level up
+            Player.level.currentXP = 0;
         }
+        Player.level.currentXP += totalExp;
+
+
+
         //Call to update the information off Player
         Player_Update.UpdatePlayer();
     }
