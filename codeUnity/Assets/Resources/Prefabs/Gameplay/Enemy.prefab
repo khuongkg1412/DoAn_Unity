@@ -100208,10 +100208,26 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 791896357, guid: 03c20b675f5302f448e46cb6532905f2, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 30.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 791896357, guid: 03c20b675f5302f448e46cb6532905f2, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 27.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3304147659484608967, guid: 03c20b675f5302f448e46cb6532905f2, type: 3}
+      propertyPath: HealthBar
+      value: 
+      objectReference: {fileID: 6532921674142499709}
     - target: {fileID: 3304147659484608967, guid: 03c20b675f5302f448e46cb6532905f2, type: 3}
       propertyPath: originalPos
       value: 
       objectReference: {fileID: 6532921674655772910}
+    - target: {fileID: 3617683341387958442, guid: 03c20b675f5302f448e46cb6532905f2, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 56b238589e6334449a78c896a2e5b9f0, type: 3}
     - target: {fileID: 3617683341387958442, guid: 03c20b675f5302f448e46cb6532905f2, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -100290,5 +100306,10 @@ GameObject:
 --- !u!4 &7538197236379058749 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3617683341387958443, guid: 03c20b675f5302f448e46cb6532905f2, type: 3}
+  m_PrefabInstance: {fileID: 6532921674339420822}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6532921674142499709 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 885344747, guid: 03c20b675f5302f448e46cb6532905f2, type: 3}
   m_PrefabInstance: {fileID: 6532921674339420822}
   m_PrefabAsset: {fileID: 0}

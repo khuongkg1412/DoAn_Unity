@@ -23,16 +23,13 @@ public class Player_Controller : MonoBehaviour
   */
     //Joystick controller (core of joystick)
     //Joystick object
-    public Joystick moveJoystick;
+    Joystick moveJoystick;
 
     //Velocity movement for player
-    public Vector2 moveVelocity;
+    Vector2 moveVelocity;
 
     //Rigid body of Player
     private Rigidbody2D myBody;
-
-    //Moving State
-    public bool isMoving;
 
     /* 
        Shooting Part
@@ -44,7 +41,7 @@ public class Player_Controller : MonoBehaviour
     [SerializeField] public GameObject bulletPrefab;
 
     //Bullet speed
-    public float bulletSpeed = 1000;
+    float bulletSpeed = 1000;
 
     //Time CD for every shot
     [SerializeField] private float coolDownTime;
@@ -53,7 +50,7 @@ public class Player_Controller : MonoBehaviour
     private float shootTimer;
 
     //Shoot Joystick object
-    public Joystick shootJoystick;
+    Joystick shootJoystick;
 
     //Detemin people can shoot or not
     public bool canShoot = true;
@@ -61,7 +58,7 @@ public class Player_Controller : MonoBehaviour
     /*
     Camera Main
     */
-    public Camera cameraMain;
+    Camera cameraMain;
 
     // Start is called before the first frame update
     void Start()
@@ -74,6 +71,9 @@ public class Player_Controller : MonoBehaviour
         canvas = GameObject.Find("Canvas");
         HealthBar = GameObject.Find("HealthBar").GetComponent<Slider>();
         HPText = GameObject.Find("HPText").GetComponent<Text>();
+        moveJoystick = GameObject.Find("MoveJoystick").GetComponent<Joystick>();
+        shootJoystick = GameObject.Find("ShootJoystick").GetComponent<Joystick>();
+        cameraMain = GameObject.Find("Camera").GetComponent<Camera>();
         //Getting RigidBody
         myBody = GetComponent<Rigidbody2D>();
         //Set max HP to slider
@@ -105,13 +105,13 @@ public class Player_Controller : MonoBehaviour
     }
     void settingCharacter()
     {
-        Debug.Log("Before Setting Player " + Player_DataManager.Instance.Player.numeral.HP_Numeral);
-        Debug.Log("Before Setting Charac " + Player_DataManager.Instance.playerCharacter.returnHP());
+        // Debug.Log("Before Setting Player " + Player_DataManager.Instance.Player.numeral.HP_Numeral);
+        // Debug.Log("Before Setting Charac " + Player_DataManager.Instance.playerCharacter.returnHP());
         //Create Character for gameplay
         // originNumeral = Player_DataManager.Instance.playerCharacter.returnNumeral();
         Character = new Character(Player_DataManager.Instance.playerCharacter.returnNumeral());
-        Debug.Log("After Setting Player " + Player_DataManager.Instance.Player.numeral.HP_Numeral);
-        Debug.Log("After Setting Charac " + Player_DataManager.Instance.playerCharacter.returnHP());
+        // Debug.Log("After Setting Player " + Player_DataManager.Instance.Player.numeral.HP_Numeral);
+        // Debug.Log("After Setting Charac " + Player_DataManager.Instance.playerCharacter.returnHP());
     }
     void updateMovement()
     {
@@ -182,7 +182,7 @@ public class Player_Controller : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
 
-            Character.getDamage(other.gameObject.GetComponent<Enemy>().virus.returnATK());
+            Character.getDamage(other.gameObject.GetComponent<Enemy_Controller>().virus.numeral.ATK_Numeral);
             getDamage();
         }
         //Help Citizen
@@ -215,7 +215,6 @@ public class Player_Controller : MonoBehaviour
 
             //Velocity for dragging
             moveVelocity = moveInput.normalized * Character.returnSPD();
-            Debug.Log("Speed " + Character.returnSPD());
             //Move the Player by the Velocity* Time
             myBody.MovePosition(myBody.position + moveVelocity * Time.deltaTime);
         }

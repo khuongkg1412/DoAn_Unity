@@ -86803,12 +86803,10 @@ GameObject:
   m_Component:
   - component: {fileID: 571074374}
   - component: {fileID: 571074376}
-  - component: {fileID: 571074375}
-  - component: {fileID: 571074382}
-  - component: {fileID: 571074377}
   - component: {fileID: 571074378}
   - component: {fileID: 571074379}
   - component: {fileID: 571074381}
+  - component: {fileID: 571074375}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -86841,20 +86839,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 571074373}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d0dc781d0e224e4e9047197af310f18, type: 3}
+  m_Script: {fileID: 11500000, guid: f19573afa99faef4cbcc1015ba7930d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveJoystick: {fileID: 714834913}
-  moveVelocity: {x: 0, y: 0}
-  isMoving: 0
   firePoint: {fileID: 263468293}
   bulletPrefab: {fileID: 7104374684683533559, guid: b33ae7b6cba70d746b8f145a02237b8d, type: 3}
-  bulletSpeed: 1000
   coolDownTime: 0.5
-  shootJoystick: {fileID: 354764381}
   canShoot: 1
-  cameraMain: {fileID: 1299645170}
-  canvas: {fileID: 0}
 --- !u!50 &571074376
 Rigidbody2D:
   serializedVersion: 4
@@ -86876,19 +86867,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &571074377
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 571074373}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba919a200e8127f4db1839e492768720, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  screenBounds: {x: 0, y: 0}
 --- !u!212 &571074378
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -86976,22 +86954,6 @@ CircleCollider2D:
   m_Offset: {x: -0.04704421, y: -0.12354933}
   serializedVersion: 2
   m_Radius: 0.600568
---- !u!114 &571074382
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 571074373}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cdfb4714998a124eb7aea40a82f536d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canvas: {fileID: 881436829}
-  isDead: 0
-  HealthBar: {fileID: 1905076049}
-  HPText: {fileID: 2100226997}
 --- !u!1 &579710477
 GameObject:
   m_ObjectHideFlags: 0
@@ -92940,6 +92902,7 @@ MonoBehaviour:
   positionSpawn:
   - {fileID: 874697255}
   Enemy: {fileID: 946611837}
+  Boss: {fileID: 0}
   numberOfEnemies: 1
   spawnedPos: 
 --- !u!4 &1576777873
@@ -94954,7 +94917,7 @@ GameObject:
   - component: {fileID: 2100226998}
   - component: {fileID: 2100226997}
   m_Layer: 0
-  m_Name: Text
+  m_Name: HPText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

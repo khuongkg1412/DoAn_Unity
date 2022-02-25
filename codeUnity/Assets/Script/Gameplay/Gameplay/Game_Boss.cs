@@ -40,10 +40,6 @@ public class Game_Boss : MonoBehaviour
 
     private void Start()
     {
-        EnemyObject virusObject = new EnemyObject();
-        VirusBoos.GetComponent<Enemy>().virus = virusObject.VirusBoss();
-        //Set Character data
-        Character = new Character(Player_DataManager.Instance.Player.numeral);
         //Scale Time is normal
         Time.timeScale = 1f;
         //Convert to landscape mode in gameplay
@@ -55,9 +51,15 @@ public class Game_Boss : MonoBehaviour
         Set and get number citizen follow by spawning
         */
         citizenSaveNumber = 0;
-        //        citizenNumberStart = GameObject.Find("Spawning Citizen").GetComponent<Spawn_Citizen>().numberOfCitizen;
-        enemyNumberStart = GameObject.Find("Spawning Enemy").GetComponent<Spawn_Enemy>().numberOfEnemies;
         enemyNumber = 0;
+        if (GameObject.Find("Spawning Citizen"))
+        {
+            citizenNumberStart = GameObject.Find("Spawning Citizen").GetComponent<Spawn_Citizen>().numberOfCitizen;
+        }
+        if (GameObject.Find("Spawning Enemy"))
+        {
+            enemyNumberStart = GameObject.Find("Spawning Enemy").GetComponent<Spawn_Enemy>().numberOfEnemies;
+        }
         //Update citizen in Quest pannel
         UpdateCitizen(0);
         UpdateEnemyNumber(0);

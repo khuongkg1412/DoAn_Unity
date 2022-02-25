@@ -294,7 +294,6 @@ GameObject:
   - component: {fileID: 8139301693914824007}
   - component: {fileID: 791896357}
   - component: {fileID: 3304147659484608967}
-  - component: {fileID: 3617683340215423016}
   m_Layer: 0
   m_Name: Enemies
   m_TagString: Enemy
@@ -434,19 +433,7 @@ MonoBehaviour:
   originalPos: {fileID: 0}
   isFollow: 1
   image: {fileID: 0}
---- !u!114 &3617683340215423016
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3617683341387958444}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a42603054441d04c9f80386b650a3c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   gamePlay: {fileID: 0}
   currentHP: 0
   maxHP: 0
-  HealthBar: {fileID: 885344747}
+  HealthBar: {fileID: 0}

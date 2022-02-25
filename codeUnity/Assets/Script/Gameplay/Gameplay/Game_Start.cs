@@ -47,9 +47,15 @@ public class Game_Start : MonoBehaviour
         Set and get number citizen follow by spawning
         */
         citizenSaveNumber = 0;
-        citizenNumberStart = GameObject.Find("Spawning Citizen").GetComponent<Spawn_Citizen>().numberOfCitizen;
-        enemyNumberStart = GameObject.Find("Spawning Enemy").GetComponent<Spawn_Enemy>().numberOfEnemies;
         enemyNumber = 0;
+        if (GameObject.Find("Spawning Citizen"))
+        {
+            citizenNumberStart = GameObject.Find("Spawning Citizen").GetComponent<Spawn_Citizen>().numberOfCitizen;
+        }
+        if (GameObject.Find("Spawning Enemy"))
+        {
+            enemyNumberStart = GameObject.Find("Spawning Enemy").GetComponent<Spawn_Enemy>().numberOfEnemies;
+        }
         //Update citizen in Quest pannel
         UpdateCitizen(0);
         UpdateEnemyNumber(0);
@@ -83,7 +89,6 @@ public class Game_Start : MonoBehaviour
             //Game end. Display result and end the gameplay
             GameOVer();
         }
-
     }
     //Method Game over
     public void GameOVer()

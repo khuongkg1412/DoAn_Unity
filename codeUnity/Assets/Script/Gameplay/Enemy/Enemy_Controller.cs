@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
-public class Enemy : MonoBehaviour
+public class Enemy_Controller : MonoBehaviour
 {
     //Setting up Enemy
-    public EnemyObject virus = new EnemyObject();
+    public Enemy virus = new Enemy();
     //Player targetPlayer to enemy move forward
     public GameObject[] targetCitizen;
     public Transform targetPlayer;
@@ -19,7 +20,24 @@ public class Enemy : MonoBehaviour
 
     //Time before enemy continute follow player after a collision
     float waiToFolllow = 0f;
-    public Texture2D image;
+
+    /*
+    HP Enemy
+    */
+    GameObject gamePlay;
+    //Cureent Health Point
+    float currentHP;
+
+    //Max Health Point
+    float maxHP;
+
+    public GameObject HealthBar;
+
+    float maxHPsize;
+    private void Start()
+    {
+        gamePlay = GameObject.Find("Canvas");
+    }
     private void Update()
     {
         //Stop virus follow player for a secend
@@ -57,14 +75,17 @@ public class Enemy : MonoBehaviour
 
     }
 
-    public void setVirusImage()
+    public void setNumeral()
     {
-        gameObject.GetComponent<SpriteRenderer>().sprite = virus.setImageForVirus();
+        maxHP = virus.numeral.HP_Numeral;
+        currentHP = maxHP;
+        maxHPsize = HealthBar.transform.localScale.x;
+        gameObject.GetComponent<SpriteRenderer>().sprite = virus.image;
     }
     bool distanceToPlayer()
     {
 
-        if (Vector3.Distance(targetPlayer.position, transform.position) <= virus.returnDectectRange())
+        if (Vector3.Distance(targetPlayer.position, transform.position) <= virus.detectRange)
         {
             return true;
         }
@@ -97,7 +118,7 @@ public class Enemy : MonoBehaviour
                     }
                 }
                 //If mimum range is in range following then return that target
-                if (minimumRange <= virus.returnDectectRange())
+                if (minimumRange <= virus.detectRange)
                 {
                     return target;
                 }
@@ -111,18 +132,18 @@ public class Enemy : MonoBehaviour
     //Comeback home position
     public void comeBackPos()
     {
-        transform.position = Vector3.MoveTowards(transform.position, originalPos.position, virus.returnSPD() * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, originalPos.position, virus.numeral.SPD_Numeral * Time.deltaTime);
     }
 
     //Following p;ayer
     public void followPlayer()
     {
-        transform.position = Vector3.MoveTowards(transform.position, targetPlayer.position, virus.returnSPD() * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, targetPlayer.position, virus.numeral.SPD_Numeral * Time.deltaTime);
     }
 
     public void followCitizen(GameObject citizen)
     {
-        transform.position = Vector3.MoveTowards(transform.position, citizen.transform.position, virus.returnSPD() * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, citizen.transform.position, virus.numeral.SPD_Numeral * Time.deltaTime);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -146,6 +167,39 @@ public class Enemy : MonoBehaviour
             if (other.gameObject.tag == "Citizen")
             {
                 other.gameObject.GetComponent<Citizen_HP>().isSicked = true;
+            }
+        }
+
+        /*
+        Enemy HP
+        */
+        if (other.gameObject.tag == "Bullet")
+        {
+            currentHP -= other.gameObject.GetComponent<Bullet>().dameGiven;
+            if (currentHP > 0)
+            {
+
+                HealthBar.transform.localScale = new Vector3((currentHP / maxHP) * maxHPsize, HealthBar.transform.transform.localScale.y, HealthBar.transform.transform.localScale.z);
+            }
+            else
+            {
+                currentHP = 0;
+                HealthBar.transform.localScale =
+                    new Vector3(0,
+                        HealthBar.transform.transform.localScale.y,
+                        HealthBar.transform.transform.localScale.z);
+                Destroy(gameObject);
+                if (gamePlay.GetComponent<Game_Start>() != null)
+                {
+                    gamePlay.GetComponent<Game_Start>().UpdateScore(10f);
+                    gamePlay.GetComponent<Game_Start>().UpdateEnemyNumber(1);
+                }
+                else
+                {
+                    gamePlay.GetComponent<Game_Tutorial>().UpdateScore(10f);
+                    gamePlay.GetComponent<Game_Tutorial>().UpdateEnemyNumber(1);
+                }
+
             }
         }
     }

@@ -95,11 +95,11 @@ public class Tutorial : MonoBehaviour
             case 7:
                 textContent.text = "They are under attack of virus. They would lose by 2 HP for a second, and they'll die if HP is 0. Keep them alive or you would lose.";
                 enemy2.SetActive(true);
-                enemy2.transform.GetChild(0).gameObject.GetComponent<Enemy>().isFollow = false;
+                enemy2.transform.GetChild(0).gameObject.GetComponent<Enemy_Controller>().isFollow = false;
                 break;
             case 8:
                 textContent.text = "You must help them by touching them and holding the help button for 7 seconds. Releasing the button would count from 0.";
-                enemy2.transform.GetChild(0).gameObject.GetComponent<Enemy>().isFollow = false;
+                enemy2.transform.GetChild(0).gameObject.GetComponent<Enemy_Controller>().isFollow = false;
                 break;
             case 9:
                 player.GetComponent<Player_Controller>().Character.setMove(true);

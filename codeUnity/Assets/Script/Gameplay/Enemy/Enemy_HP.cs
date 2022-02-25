@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy_HP : MonoBehaviour
 {
-    public Canvas gamePlay;
+    public GameObject gamePlay;
     //Cureent Health Point
     public float currentHP;
 
@@ -20,6 +20,7 @@ public class Enemy_HP : MonoBehaviour
         // maxHP = 30;
         // currentHP = maxHP;
         // maxHPsize = HealthBar.transform.localScale.x;
+        gamePlay = GameObject.Find("Canvas");
     }
     public void setNumeral(float hp)
     {
