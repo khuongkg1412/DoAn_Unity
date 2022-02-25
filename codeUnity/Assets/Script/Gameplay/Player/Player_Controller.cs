@@ -15,44 +15,125 @@ public class Player_Controller : MonoBehaviour
     Text HPText;
 
     //Create a new object for player
-    Character Character;
-    float test;
+    public Character Character;
+
     NumeralStruct originNumeral;
+    /* 
+      Moving Part
+  */
+    //Joystick controller (core of joystick)
+    //Joystick object
+    public Joystick moveJoystick;
+
+    //Velocity movement for player
+    public Vector2 moveVelocity;
+
+    //Rigid body of Player
+    private Rigidbody2D myBody;
+
+    //Moving State
+    public bool isMoving;
+
+    /* 
+       Shooting Part
+    */
+    //The fire point, when bullet come out
+    public Transform firePoint;
+
+    //Bullet Prefab
+    [SerializeField] public GameObject bulletPrefab;
+
+    //Bullet speed
+    public float bulletSpeed = 1000;
+
+    //Time CD for every shot
+    [SerializeField] private float coolDownTime;
+
+    //Time Player need to wait for next shot
+    private float shootTimer;
+
+    //Shoot Joystick object
+    public Joystick shootJoystick;
+
+    //Detemin people can shoot or not
+    public bool canShoot = true;
+
+    /*
+    Camera Main
+    */
+    public Camera cameraMain;
+
     // Start is called before the first frame update
     void Start()
     {
         settingCharacter();
+        //Let Player shoot and move fistly
+        Character.setShoot(true);
+        Character.setMove(true);
         //Setting object for Game object
         canvas = GameObject.Find("Canvas");
         HealthBar = GameObject.Find("HealthBar").GetComponent<Slider>();
         HPText = GameObject.Find("HPText").GetComponent<Text>();
+        //Getting RigidBody
+        myBody = GetComponent<Rigidbody2D>();
         //Set max HP to slider
         HealthBar.maxValue = Character.returnHP();
+        //Set Atack speed
+        coolDownTime = Character.returnATKSPD();
     }
 
     // Update is called once per frame
     void Update()
     {
+        //Update the HP of Player
         updateProcessHP();
+        //U[date the Movement of Player including Moving, shooting and helping citizen
+        updateMovement();
     }
-
+    private void OnDestroy()
+    { //Reset data when the game play is over
+        resetNumeral();
+    }
     void resetNumeral()
     {
-        Player_DataManager.Instance.Player.numeral = originNumeral;
-        Player_DataManager.Instance.playerCharacter = new Character(originNumeral);
+        //Debug.Log("Before Reset Player " + Player_DataManager.Instance.Player.numeral.HP_Numeral);
+        //Debug.Log("Before Reset Charac " + Player_DataManager.Instance.playerCharacter.returnHP());
+        // Player_DataManager.Instance.Player.numeral = originNumeral;
+        // Player_DataManager.Instance.playerCharacter = new Character(originNumeral);
+        // Debug.Log("After Reset Player " + Player_DataManager.Instance.Player.numeral.HP_Numeral);
+        // Debug.Log("After Reset Charac " + Player_DataManager.Instance.playerCharacter.returnHP());
     }
     void settingCharacter()
     {
-        //
-        //Character.setATK(Player_DataManager.Instance.returnATK());
-        //Character.setDEF(Player_DataManager.Instance.returnDEF());
-        //Character.setHP(Player_DataManager.Instance.returnHP());
-        //Character.setSPD(Player_DataManager.Instance.returnSPD());
-        //Character.setATKSPD(Player_DataManager.Instance.returnATKSPD());
-        //
+        Debug.Log("Before Setting Player " + Player_DataManager.Instance.Player.numeral.HP_Numeral);
+        Debug.Log("Before Setting Charac " + Player_DataManager.Instance.playerCharacter.returnHP());
         //Create Character for gameplay
-        originNumeral = Player_DataManager.Instance.playerCharacter.returnNumeral();
-        Character = new Character(Player_DataManager.Instance.Player.numeral);
+        // originNumeral = Player_DataManager.Instance.playerCharacter.returnNumeral();
+        Character = new Character(Player_DataManager.Instance.playerCharacter.returnNumeral());
+        Debug.Log("After Setting Player " + Player_DataManager.Instance.Player.numeral.HP_Numeral);
+        Debug.Log("After Setting Charac " + Player_DataManager.Instance.playerCharacter.returnHP());
+    }
+    void updateMovement()
+    {
+        if (canShoot)
+        {
+            //Shooting after time
+            TimeShooting();
+        }
+
+        //Detect citizen
+        DetectCitizen();
+
+        //Rotation by the touch in joystick shooting
+        if (!Character.isPlayerDead())
+        {
+            Rotation();
+        }
+        //Movement by the touch in joystick movement
+        if (!Character.isPlayerDead() && Character.isMove())
+        {
+            Movement();
+        }
     }
     void updateProcessHP()
     {
@@ -62,7 +143,6 @@ public class Player_Controller : MonoBehaviour
         //Cheeck the player is dead
         if (Character.isPlayerDead())
         {
-            Debug.Log("Dead");
             resetNumeral();
             canvas.GetComponent<Game_Start>().GameOVer();
             //If dead, set false for player game object
@@ -83,21 +163,136 @@ public class Player_Controller : MonoBehaviour
         /*
             Player Get Hurt then stop the player movement
         */
-        GetComponent<Player_Movement>().isMoving = false;
+        Character.setMove(false);
         Invoke("allowMoving", 0.5f);
     }
-
+    /*
+        Allow player to move after get damage
+    */
     void allowMoving()
     {
-        GetComponent<Player_Movement>().isMoving = true;
+        Character.setMove(true);
     }
+    /*
+        Collision Happend
+    */
     private void OnCollisionEnter2D(Collision2D other)
     {
+        //Get damage from enemy
         if (other.gameObject.tag == "Enemy")
         {
 
             Character.getDamage(other.gameObject.GetComponent<Enemy>().virus.returnATK());
             getDamage();
         }
+        //Help Citizen
+        Button button = GameObject.Find("HelpButton").GetComponent<Button>();
+        if (other.gameObject.tag == "Citizen")
+        {
+            button.interactable = true;
+            button.GetComponent<Citizen_Healing>().setCitizenObject(other.gameObject);
+        }
+        else
+        {
+            button.interactable = false;
+        }
     }
+    ////////////////////////////
+
+    /*
+        Method for movement of player
+    */
+    void Movement()
+    {
+        //Getting hortizontal and vertical axis means x,y and store in vector
+        Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+
+        //If joystick has been dragging, then move the player
+        if (moveJoystick.InputDir != Vector3.zero)
+        {
+            //Direction dragging
+            moveInput = moveJoystick.InputDir;
+
+            //Velocity for dragging
+            moveVelocity = moveInput.normalized * Character.returnSPD();
+            Debug.Log("Speed " + Character.returnSPD());
+            //Move the Player by the Velocity* Time
+            myBody.MovePosition(myBody.position + moveVelocity * Time.deltaTime);
+        }
+    }
+
+    /*
+        Rotation Player by the touch in Shooting Joystick
+    */
+    void Rotation()
+    {
+        //Get the touching position on screen
+        Vector2 dir = cameraMain.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+
+        //Calculate the angle of rotation
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 90;
+
+        //If joystick has been dragging, then rotate the player
+        if (shootJoystick.InputDir != Vector3.zero)
+        {
+            //Calculate the angle of rotation
+            angle = Mathf.Atan2(shootJoystick.InputDir.y, shootJoystick.InputDir.x) * Mathf.Rad2Deg + 90;
+
+            //Rotation
+            Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 10 * Time.deltaTime);
+        }
+    }
+
+    /*
+    Shooting timer countdown
+    */
+    void TimeShooting()
+    {
+        //Increase shooterTimer
+        shootTimer += Time.deltaTime;
+
+        //Shooting every time shootTimer reaches the coolDownTime
+        if (shootTimer > coolDownTime)
+        {
+            //Reset time shooter
+            shootTimer = 0f;
+            Shooting();
+        }
+    }
+
+    /*
+     Shooting action
+    */
+    void Shooting()
+    {
+        //Creating bullet
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+        bullet.GetComponent<Bullet>().setPositionStartShooting(firePoint);
+
+        //Pull bullet out at fire point
+        rb.AddForce(firePoint.up * bulletSpeed, ForceMode2D.Impulse);
+    }
+
+    public void DetectCitizen()
+    {
+        float range = 150f;
+        Button button = GameObject.Find("HelpButton").GetComponent<Button>();
+        bool check = false;
+        GameObject[] citizen = GameObject.FindGameObjectsWithTag("Citizen");
+        foreach (var i in citizen)
+        {
+            if (Vector2.Distance(i.transform.position, transform.position) <= range && citizen != null)
+            {
+                check = true;
+            }
+        }
+        if (!check)
+        {
+            button.GetComponent<Citizen_Healing>().disableCitizenObject();
+            button.interactable = false;
+        }
+    }
+
 }

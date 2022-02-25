@@ -53,7 +53,7 @@ public class Tutorial : MonoBehaviour
         {
             case 0: //Movement tutorial
                 textContent.text = "Dragging the joystick area would allow you to move around.";
-                GameObject.FindWithTag("Player").GetComponent<Player_Movement>().canShoot = false;
+                GameObject.FindWithTag("Player").GetComponent<Player_Controller>().canShoot = false;
                 break;
             case 1:  //Map tutorial
                 textContent.text = "Look at the map area that would tell you about the surrounding objects.";
@@ -70,7 +70,7 @@ public class Tutorial : MonoBehaviour
                 textContent.text = "They'll attack if someone is in the red circle. You should use your weapon to kill them before they hurt people.";
                 break;
             case 5:
-                player.GetComponent<Player_Movement>().canShoot = true;
+                player.GetComponent<Player_Controller>().Character.setShoot(true);
                 if (GameObject.Find("Canvas").GetComponent<Game_Tutorial>().returnScore() > 0)
                 {
                     conditionPos.SetActive(true);
@@ -80,8 +80,8 @@ public class Tutorial : MonoBehaviour
                         tutorialPopup.SetActive(true);
                         conditionPos.SetActive(false);
                         citizen.SetActive(true);
-                        player.GetComponent<Player_Movement>().canShoot = false;
-                        player.GetComponent<Player_Movement>().isMoving = false;
+                        player.GetComponent<Player_Controller>().Character.setShoot(false);
+                        player.GetComponent<Player_Controller>().Character.setShoot(false);
                     }
                 }
                 else
@@ -102,8 +102,8 @@ public class Tutorial : MonoBehaviour
                 enemy2.transform.GetChild(0).gameObject.GetComponent<Enemy>().isFollow = false;
                 break;
             case 9:
-                player.GetComponent<Player_Movement>().isMoving = true;
-                player.GetComponent<Player_Movement>().canShoot = true;
+                player.GetComponent<Player_Controller>().Character.setMove(true);
+                player.GetComponent<Player_Controller>().Character.setShoot(true);
                 tutorialPopup.SetActive(false);
                 increaseIndex();
                 break;

@@ -97,7 +97,7 @@ public class Game_Tutorial : MonoBehaviour
         Time.timeScale = 0f;
         Button nextBtn = GameObject.Find("Next_Button").GetComponent<Button>();
         nextBtn.interactable = true;
-        if (Player.GetComponent<Player_HP>().isDead == true || citizenSaveNumber == 0)
+        if (Player.GetComponent<Player_Controller>().Character.isPlayerDead() == true || citizenSaveNumber == 0)
         {
             gameplayResult.text = "TUTORIAL FAILED";
             nextBtn.interactable = false;

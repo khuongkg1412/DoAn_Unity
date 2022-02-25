@@ -1,22 +1,54 @@
 using System.Collections.Generic;
 
-public class Character
+public struct Character
 {
-    public Character()
-    {
-
-    }
     public Character(NumeralStruct numeralStruct)
     {
         this.numeral = numeralStruct;
+        this.isMoving = true;
+        this.isShooting = true;
+        this.isDead = false;
+        this.score = 0f;
+        this.buffInGame = new List<ItemStruct>();
     }
     private NumeralStruct numeral;
 
-    private List<ItemStruct> buffInGame = new List<ItemStruct>();
+    private List<ItemStruct> buffInGame;
 
-    private bool isDead = false;
+    private bool isDead;
+    private float score;
 
-    private float score = 0;
+    private bool isMoving
+    {
+        get; set;
+    }
+
+    public bool isMove()
+    {
+        return isMoving;
+    }
+
+    public void setMove(bool isMove)
+    {
+        isMoving = isMove;
+    }
+
+
+    private bool isShooting
+    {
+        get; set;
+    }
+
+    public bool isShoot()
+    {
+        return isShooting;
+    }
+
+    public void setShoot(bool isShoot)
+    {
+        isShooting = isShoot;
+    }
+
     public NumeralStruct returnNumeral()
     {
         return this.numeral;

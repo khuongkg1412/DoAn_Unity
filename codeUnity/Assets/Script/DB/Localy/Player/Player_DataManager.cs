@@ -9,7 +9,7 @@ public class Player_DataManager : MonoBehaviour
 
     public PlayerStruct Player = new PlayerStruct();
 
-    public Character playerCharacter = new Character();
+    public Character playerCharacter;
     public List<Inventory_Player> inventory_Player = new List<Inventory_Player>();
     public List<SystemNotification> systemNotification = new List<SystemNotification>();
     public List<Friend_Player> friend_Player = new List<Friend_Player>();

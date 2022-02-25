@@ -6,9 +6,6 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class Game_Start : MonoBehaviour
 {
-    NumeralStruct originNumeral = new NumeralStruct();
-    //Create a new object for player
-    public Character Character;
     private float score;
 
     public bool isVictory = false, isGameOver, isStoped = false;
@@ -39,12 +36,6 @@ public class Game_Start : MonoBehaviour
 
     private void Start()
     {
-        originNumeral = Player_DataManager.Instance.Player.numeral;
-        //Reset data
-        // loadingPlayer();
-        //Loading Numeral of player 
-        Character = new Character(Player_DataManager.Instance.Player.numeral);
-
         //Scale Time is normal
         Time.timeScale = 1f;
         //Convert to landscape mode in gameplay
@@ -91,26 +82,8 @@ public class Game_Start : MonoBehaviour
         {
             //Game end. Display result and end the gameplay
             GameOVer();
-            //Reset data
-            loadingPlayer();
         }
 
-    }
-    //Loading Numeral of player 
-    public void loadingPlayer()
-    {
-        //Set the numeral from static data
-        Player_DataManager.Instance.Player.numeral = originNumeral;
-        //= new NumeralStruct()
-        //{
-        //    ATK_Numeral = 10,
-        //    DEF_Numeral = 0,
-        //    HP_Numeral = 50,
-        //    SPD_Numeral = 300,
-        //    ATKSPD_Numeral = 1
-        //};
-        //Player_DataManager.Instance.Player.numeral = originNumeral;
-        Debug.Log("Data: " + Player_DataManager.Instance.Player.numeral.HP_Numeral);
     }
     //Method Game over
     public void GameOVer()
