@@ -164,7 +164,7 @@ public class Citizen_HP : MonoBehaviour
         if (GameObject.Find("Canvas").GetComponent<Game_Start>() != null)
 
         {
-            GameObject.Find("Canvas").GetComponent<Game_Start>().UpdateScore(100f);
+            GameObject.FindWithTag("Player").GetComponent<Player_Controller>().Character.score += 100;
             GameObject.Find("Canvas").GetComponent<Game_Start>().UpdateCitizen(1);
         }
         else

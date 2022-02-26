@@ -9,23 +9,19 @@ public class Game_Boss : MonoBehaviour
 {
     public GameObject VirusBoos;
     //Create a new object for player
-    public Character Character;
     private float score;
 
     public bool isVictory = false, isGameOver, isStoped = false;
 
     // public GameObject Player;
-
     public GameObject pannelGameover;
 
     [SerializeField]
     private TextMeshProUGUI scoreResult,
             enemyKillResult,
-            citizenSaveResult,
             gameplayResult,
             scoreRunning,
-            enemyCount,
-            citizenCount;
+            enemyCount;
 
     public float timeRemaining = 600;
 
@@ -34,12 +30,14 @@ public class Game_Boss : MonoBehaviour
     public Text timeText;
 
     private float enemyNumber,
-            enemyNumberStart,
-            citizenSaveNumber,
-            citizenNumberStart;
+            enemyNumberStart;
 
     private void Start()
     {
+        //Set virus type for boss virus
+        VirusBoos.GetComponent<Boss1>().virus = new VirusBoss();
+        VirusBoos.GetComponent<Boss1>().setNumeral();
+
         //Scale Time is normal
         Time.timeScale = 1f;
         //Convert to landscape mode in gameplay
@@ -50,18 +48,10 @@ public class Game_Boss : MonoBehaviour
         /*
         Set and get number citizen follow by spawning
         */
-        citizenSaveNumber = 0;
         enemyNumber = 0;
-        if (GameObject.Find("Spawning Citizen"))
-        {
-            citizenNumberStart = GameObject.Find("Spawning Citizen").GetComponent<Spawn_Citizen>().numberOfCitizen;
-        }
-        if (GameObject.Find("Spawning Enemy"))
-        {
-            enemyNumberStart = GameObject.Find("Spawning Enemy").GetComponent<Spawn_Enemy>().numberOfEnemies;
-        }
+        enemyNumberStart = 1;
+
         //Update citizen in Quest pannel
-        UpdateCitizen(0);
         UpdateEnemyNumber(0);
         //Set value for two variable which decide game end and victory
         isVictory = false;
@@ -150,18 +140,7 @@ public class Game_Boss : MonoBehaviour
             enemyCount.color = new Color(0, 1, 0);
         }
     }
-    //Update citizen
-    public void UpdateCitizen(float number)
-    {
-        //Set citizen number
-        citizenSaveNumber += number;
-        citizenCount.text = "Citizen: " + citizenSaveNumber.ToString() + "/" + citizenNumberStart;
-        //Turn green color when completed task
-        if (citizenSaveNumber == citizenNumberStart && isVictory)
-        {
-            citizenCount.color = new Color(0, 1, 0);
-        }
-    }
+
     //Display resukt
     void DisplayResultPannel()
     {
@@ -177,7 +156,6 @@ public class Game_Boss : MonoBehaviour
             gameplayResult.text = "GAMEOVER";
         }
         enemyKillResult.text = enemyNumber.ToString();
-        citizenSaveResult.text = citizenSaveNumber.ToString();
 
     }
     //Condition to victory
@@ -189,13 +167,12 @@ public class Game_Boss : MonoBehaviour
         //     isGameOver = true;
         //     isVictory = true;
         // }
-        Debug.Log("Check Win");
-        if (VirusBoos.active == false)
-        {
-            Debug.Log("Win");
-            isGameOver = true;
-            isVictory = true;
-        }
+        //  if (VirusBoos.active == false)
+        //  {
+        //      Debug.Log("Win");
+        //      isGameOver = true;
+        //      isVictory = true;
+        //  }
     }
     //Method display time
     void DisplayTime(float timeToDisplay)

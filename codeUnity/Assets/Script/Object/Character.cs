@@ -16,7 +16,10 @@ public struct Character
     private List<ItemStruct> buffInGame;
 
     private bool isDead;
-    private float score;
+    public float score
+    {
+        get; set;
+    }
 
     private bool isMoving
     {

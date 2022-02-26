@@ -12,12 +12,11 @@ public class Bullet : MonoBehaviour
 
     private Transform positionStartShooting;
 
-    private float rangeShooting;
+    public float rangeShooting = 200f;
 
     public GameObject hitEffect;
     private void Start()
     {
-        rangeShooting = 200f;
         dameGiven = 10f;
     }
 
@@ -52,7 +51,9 @@ public class Bullet : MonoBehaviour
     {
         if (Vector2.Distance(positionStartShooting.position, transform.position) > rangeShooting)
         {
+            Destroy(gameObject);
             bulletDistroy();
+
         }
     }
     private void OnCollisionEnter2D(Collision2D other)

@@ -9,9 +9,6 @@ public class Game_Start : MonoBehaviour
     private float score;
 
     public bool isVictory = false, isGameOver, isStoped = false;
-
-    // public GameObject Player;
-
     public GameObject pannelGameover;
 
     [SerializeField]
@@ -66,6 +63,8 @@ public class Game_Start : MonoBehaviour
 
     void Update()
     {
+        //Update the score from Character object
+        UpdateScore();
         //Check condition victory in every frame
         ConditionToVictory();
         //Continute runing time whilke game is not oer
@@ -98,7 +97,7 @@ public class Game_Start : MonoBehaviour
             //Player dead and set active for pannel result
             pannelGameover.SetActive(true);
             //Plus the time left to the score
-            UpdateScore(timeRemaining);
+            score += timeRemaining;
             //Show Result Pannel
             DisplayResultPannel();
             //Update score to database
@@ -117,11 +116,12 @@ public class Game_Start : MonoBehaviour
         //Update score to database
         Player_DataManager.Instance.finishTheStage(score, stage, isVictory);
     }
-    //Update score
-    public void UpdateScore(float scorePlus)
+    //Update score every frame by the score that is hold by object Character
+    public void UpdateScore()
     {
+        float currentPlayerScore = GameObject.FindWithTag("Player").GetComponent<Player_Controller>().Character.score;
         //Set score to the UI on the scence
-        score += scorePlus;
+        score += currentPlayerScore;
         scoreRunning.text = score.ToString();
         scoreResult.text = score.ToString();
     }

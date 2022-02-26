@@ -1,10 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 
-public class Enemy_Controller : MonoBehaviour
+public class Boss1 : MonoBehaviour
 {
     //Setting up Enemy
     public Enemy virus = new Enemy();
@@ -34,45 +32,40 @@ public class Enemy_Controller : MonoBehaviour
     public GameObject HealthBar;
 
     float maxHPsize;
+    Vector3 updWard;
+    Vector3 downWard;
     private void Start()
     {
         gamePlay = GameObject.Find("Canvas");
+        updWard = new Vector3(transform.position.x, transform.position.y + 300, transform.position.z);
+        downWard = new Vector3(transform.position.x, transform.position.y - 300, transform.position.z);
     }
+    private float shootTimer;
+    [SerializeField] private float coolDownTime;
     private void Update()
     {
-        //Stop virus follow player for a secend
-        if (!isFollow)
-        {
-            //Count to follow
-            waiToFolllow += Time.deltaTime;
-            if (waiToFolllow >= 0.5f)
-            {
-                waiToFolllow = 0;
-                //Stop Enemy Moving After Beeing Hit
-                Rigidbody2D rd = gameObject.GetComponent<Rigidbody2D>();
-                rd.velocity = Vector2.zero;
-                //Allow it follow player or Citizen
-                isFollow = true;
-            }
-        }
-        else if (virus != null)
-        {
-            //Follow if in range
-            if (distanceToPlayer())
-            {
-                followPlayer();
-            }
-            else if (distanceToCitizen() != null)
-            {
-                followCitizen(distanceToCitizen());
-            }
-            //Out range then comeback to home position
-            else
-            {
-                comeBackPos();
-            }
-        }
+        moveUpDown();
+        TimeShooting();
+    }
 
+    /*
+Shooting timer countdown
+*/
+    void TimeShooting()
+    {
+        //Increase shooterTimer
+        shootTimer += Time.deltaTime;
+
+        //Shooting every time shootTimer reaches the coolDownTime
+        if (shootTimer > coolDownTime)
+        {
+            //Reset time shooter
+            shootTimer = 0f;
+            for (int i = 0; i < 5; i++)
+            {
+                Shoot();
+            }
+        }
     }
 
     public void setNumeral()
@@ -80,7 +73,7 @@ public class Enemy_Controller : MonoBehaviour
         maxHP = virus.numeral.HP_Numeral;
         currentHP = maxHP;
         maxHPsize = HealthBar.transform.localScale.x;
-        gameObject.GetComponent<SpriteRenderer>().sprite = virus.image;
+        //gameObject.GetComponent<SpriteRenderer>().sprite = virus.image;
     }
     bool distanceToPlayer()
     {
@@ -203,6 +196,43 @@ public class Enemy_Controller : MonoBehaviour
                     gamePlay.GetComponent<Game_Tutorial>().UpdateEnemyNumber(1);
                 }
 
+            }
+        }
+    }
+    [SerializeField] GameObject bulletPrefab;
+    [SerializeField] Transform firePoint;
+    void Shoot()
+    {
+        Debug.Log("Shoot");
+        //Creating bullet
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+        bullet.GetComponent<Bullet>().setPositionStartShooting(firePoint);
+
+        //Pull bullet out at fire point
+        rb.AddForce(firePoint.up * 1000f, ForceMode2D.Impulse);
+    }
+    bool reachUpper = false, reachLowwe = true;
+    public void moveUpDown()
+    {
+        if (reachUpper)
+        {
+            //Downward Move
+            transform.position = Vector3.MoveTowards(transform.position, downWard, virus.numeral.SPD_Numeral * Time.deltaTime);
+            if (Vector2.Distance(new Vector2(transform.position.x, transform.position.y), downWard) == 0)
+            {
+                reachUpper = false;
+                reachLowwe = true;
+            }
+        }
+        else if (reachLowwe)
+        {
+            //Upward Move
+            transform.position = Vector3.MoveTowards(transform.position, updWard, virus.numeral.SPD_Numeral * Time.deltaTime);
+            if (Vector2.Distance(new Vector2(transform.position.x, transform.position.y), updWard) == 0)
+            {
+                reachUpper = true;
+                reachLowwe = false;
             }
         }
     }
