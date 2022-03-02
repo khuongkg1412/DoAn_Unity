@@ -52,7 +52,7 @@ public class Bullet : MonoBehaviour
         if (Vector2.Distance(positionStartShooting.position, transform.position) > rangeShooting)
         {
             Destroy(gameObject);
-            bulletDistroy();
+           // bulletDistroy();
 
         }
     }

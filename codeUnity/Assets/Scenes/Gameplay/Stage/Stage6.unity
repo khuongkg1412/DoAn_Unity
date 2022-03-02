@@ -802,7 +802,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dameGiven: 0
   rangeShooting: 1500
-  hitEffect: {fileID: 0}
+  hitEffect: {fileID: 969308048198267444, guid: 09dcda31c2ae0504e8db7a1e7ac51271, type: 3}
 --- !u!1001 &147358964
 PrefabInstance:
   m_ObjectHideFlags: 0

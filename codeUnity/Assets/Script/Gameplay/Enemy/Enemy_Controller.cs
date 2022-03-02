@@ -187,7 +187,6 @@ public class Enemy_Controller : MonoBehaviour
                     new Vector3(0,
                         HealthBar.transform.transform.localScale.y,
                         HealthBar.transform.transform.localScale.z);
-                Destroy(gameObject);
                 if (gamePlay.GetComponent<Game_Boss>() != null)
                 {
                     GameObject.FindWithTag("Player").GetComponent<Player_Controller>().Character.score += 1000;
@@ -202,6 +201,8 @@ public class Enemy_Controller : MonoBehaviour
                     gamePlay.GetComponent<Game_Tutorial>().UpdateScore(10f);
                     gamePlay.GetComponent<Game_Tutorial>().UpdateEnemyNumber(1);
                 }
+
+                Destroy(gameObject);
 
             }
         }
