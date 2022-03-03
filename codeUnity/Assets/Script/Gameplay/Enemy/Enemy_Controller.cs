@@ -7,7 +7,7 @@ using TMPro;
 public class Enemy_Controller : MonoBehaviour
 {
     //Setting up Enemy
-    public Enemy virus = new Enemy();
+    public Enemy virus;
     //Player targetPlayer to enemy move forward
     public GameObject[] targetCitizen;
     public Transform targetPlayer;
@@ -37,12 +37,14 @@ public class Enemy_Controller : MonoBehaviour
     private void Start()
     {
         gamePlay = GameObject.Find("Canvas");
+        virus = new Enemy();
     }
     private void Update()
     {
         //Stop virus follow player for a secend
         if (!isFollow)
         {
+            Debug.Log("Is nOt follow");
             //Count to follow
             waiToFolllow += Time.deltaTime;
             if (waiToFolllow >= 0.5f)

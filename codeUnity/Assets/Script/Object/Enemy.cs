@@ -4,11 +4,21 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class Enemy : MonoBehaviour
+public class Enemy
 {
     public Enemy()
     {
-
+        numeral = new NumeralStruct()
+        {
+            ATK_Numeral = 10,
+            DEF_Numeral = 0,
+            HP_Numeral = 30,
+            SPD_Numeral = 200,
+            ATKSPD_Numeral = 1
+        };
+        typeVirus = VirusType.VirusA;
+        image = loadingImageFromFilePath("Virus/A");
+        detectRange = 300f;
     }
     public VirusType typeVirus;
     public NumeralStruct numeral;

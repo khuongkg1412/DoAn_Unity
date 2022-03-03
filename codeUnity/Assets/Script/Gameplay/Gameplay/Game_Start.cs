@@ -121,7 +121,7 @@ public class Game_Start : MonoBehaviour
     {
         float currentPlayerScore = GameObject.FindWithTag("Player").GetComponent<Player_Controller>().Character.score;
         //Set score to the UI on the scence
-        score += currentPlayerScore;
+        score = currentPlayerScore;
         scoreRunning.text = score.ToString();
         scoreResult.text = score.ToString();
     }
