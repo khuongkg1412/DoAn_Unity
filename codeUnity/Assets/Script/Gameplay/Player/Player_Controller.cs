@@ -52,9 +52,6 @@ public class Player_Controller : MonoBehaviour
     //Shoot Joystick object
     Joystick shootJoystick;
 
-    //Detemin people can shoot or not
-    public bool canShoot = true;
-
     /*
     Camera Main
     */
@@ -115,7 +112,7 @@ public class Player_Controller : MonoBehaviour
     }
     void updateMovement()
     {
-        if (canShoot)
+        if (Character.isShoot())
         {
             //Shooting after time
             TimeShooting();
@@ -250,7 +247,6 @@ public class Player_Controller : MonoBehaviour
     {
         //Increase shooterTimer
         shootTimer += Time.deltaTime;
-
         //Shooting every time shootTimer reaches the coolDownTime
         if (shootTimer > coolDownTime)
         {

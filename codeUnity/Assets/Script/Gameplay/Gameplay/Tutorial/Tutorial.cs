@@ -5,7 +5,9 @@ public class Tutorial : MonoBehaviour
 {
     public GameObject[] pointerTutorial;
 
-    public GameObject enemy1, enemy2, citizen;
+    public GameObject enemy, citizen;
+
+    public Transform spwanPos1, SpawnPos2;
 
     public GameObject conditionPos, Player, tutorialPopup;
 
@@ -14,6 +16,8 @@ public class Tutorial : MonoBehaviour
     private bool isIncrease = true;
     int indexPannel = 0;
     private GameObject player;
+    GameObject gameObjectNew;
+    float numberOfEnemies = 2;
     private void Start()
     {
         player = GameObject.FindWithTag("Player");
@@ -53,7 +57,7 @@ public class Tutorial : MonoBehaviour
         {
             case 0: //Movement tutorial
                 textContent.text = "Dragging the joystick area would allow you to move around.";
-                GameObject.FindWithTag("Player").GetComponent<Player_Controller>().canShoot = false;
+                GameObject.FindWithTag("Player").GetComponent<Player_Controller>().Character.setShoot(false);
                 break;
             case 1:  //Map tutorial
                 textContent.text = "Look at the map area that would tell you about the surrounding objects.";
@@ -62,8 +66,19 @@ public class Tutorial : MonoBehaviour
                 textContent.text = "This is the button to adjust the direction of the shot, use it to destroy the enemy.";
                 break;
             case 3: //Ennemy tutorial
-                //Set active  for enemy
-                enemy1.SetActive(true);
+                    //Check number of virus has been spawned
+                if (numberOfEnemies == 2)
+                {
+                    //Create object
+                    //Random type and set for virus enemy
+                    enemy.transform.GetChild(0).gameObject.GetComponent<Enemy_Controller>().virus = new VirusA();
+                    enemy.transform.GetChild(0).gameObject.GetComponent<Enemy_Controller>().setNumeral();
+                    Instantiate(enemy, spwanPos1.position, spwanPos1.rotation);
+                    //Decrease number of virus
+                    numberOfEnemies -= 1;
+                    Debug.Log("Run here");
+                }
+
                 textContent.text = "The virus has appeared. The icon red on the map represents the virus.";
                 break;
             case 4:
@@ -94,12 +109,21 @@ public class Tutorial : MonoBehaviour
                 break;
             case 7:
                 textContent.text = "They are under attack of virus. They would lose by 2 HP for a second, and they'll die if HP is 0. Keep them alive or you would lose.";
-                enemy2.SetActive(true);
-                enemy2.transform.GetChild(0).gameObject.GetComponent<Enemy_Controller>().isFollow = false;
+                //Check number of virus has been spawned
+                if (numberOfEnemies == 1)
+                {//Create object
+                    gameObjectNew = Instantiate(enemy, SpawnPos2.position, SpawnPos2.rotation);
+                    //Random type and set for virus enemy
+                    gameObjectNew.transform.GetChild(0).gameObject.GetComponent<Enemy_Controller>().virus = new VirusA();
+                    gameObjectNew.transform.GetChild(0).gameObject.GetComponent<Enemy_Controller>().setNumeral();
+                    gameObjectNew.transform.GetChild(0).gameObject.GetComponent<Enemy_Controller>().isFollow = false;
+                    //Decrease number of virus
+                    numberOfEnemies -= 1;
+                }
                 break;
             case 8:
                 textContent.text = "You must help them by touching them and holding the help button for 7 seconds. Releasing the button would count from 0.";
-                enemy2.transform.GetChild(0).gameObject.GetComponent<Enemy_Controller>().isFollow = false;
+                gameObjectNew.transform.GetChild(0).gameObject.GetComponent<Enemy_Controller>().isFollow = false;
                 break;
             case 9:
                 player.GetComponent<Player_Controller>().Character.setMove(true);

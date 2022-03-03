@@ -44,7 +44,7 @@ public class Citizen_Healing : MonoBehaviour
 
                 if (player != null)
                 {
-                    player.GetComponent<Player_Controller>().canShoot = false;
+                    player.GetComponent<Player_Controller>().Character.setShoot(false);
                 }
             }
             else if (citizen.GetComponent<Citizen_HP>().isSicked == false)
@@ -58,7 +58,7 @@ public class Citizen_Healing : MonoBehaviour
     {
         if (player != null)
         {
-            player.GetComponent<Player_Controller>().canShoot = true;
+            player.GetComponent<Player_Controller>().Character.setShoot(true);
         }
 
         if (citizen != null)

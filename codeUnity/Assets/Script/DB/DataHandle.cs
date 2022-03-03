@@ -33,25 +33,26 @@ public class DataHandle : MonoBehaviour
 
     PlayerStruct newPlayer = new PlayerStruct()
     {
-        generalInformation = new GeneralInformation_Player
+        generalInformation = new GeneralInformation_Player()
         {
-            username_Player = "Hai Long",
+            username_Player = "Duy",
             avatar_Player = "PlayerAvatar/Avatar item.png",
-            gender_Player = 0
+            gender_Player = 1
         },
-        concurrency = new Concurrency
+        concurrency = new Concurrency()
         {
-            Coin = 0,
-            Diamond = 0
+            Coin = 50,
+            Diamond = 50
         },
-        numeral = new NumeralStruct
+        numeral = new NumeralStruct()
         {
             ATK_Numeral = 10,
             DEF_Numeral = 0,
-            HP_Numeral = 10,
-            SPD_Numeral = 300
+            HP_Numeral = 50,
+            SPD_Numeral = 300,
+            ATKSPD_Numeral = 1
         },
-        level = new Level
+        level = new Level()
         {
             currentXP = 0,
             reachXP = 130,
@@ -60,12 +61,19 @@ public class DataHandle : MonoBehaviour
             life = 6
         },
         statistic = new Dictionary<string, float>
+            {
+                {"VirusA_Killed",0},
+                {"VirusB_Killed",0},
+                {"VirusC_Killed",0},
+                {"VirusD_Killed",0},
+                {"Citizen_Saved",0}
+            },
+        currentOutfit = new Outfit()
         {
-            {"VirusA_Killed",0},
-            {"VirusB_Killed",0},
-            {"VirusC_Killed",0},
-            {"VirusD_Killed",0},
-            {"Citizen_Saved",0}
+            currentShirt = "SEWnEHmTZSTMWKvAPF8l",
+            currentPant = "",
+            currentAccesory = "",
+            currentShoes = ""
         }
     };
 
@@ -168,7 +176,7 @@ public class DataHandle : MonoBehaviour
     float timeGetUpdate = 0f;
     private void Start()
     {
-        //TestFireBase();
+        //AdddingItem();
     }
 
     private void Update()
@@ -228,7 +236,9 @@ public class DataHandle : MonoBehaviour
 
     public void AdddingItem()
     {
-        // Player_DataManager.Instance.adding_Item(Item_DataManager.Instance.Item[0]);
-        // Debug.Log("Adding Item");
+        Debug.Log("Fixed");
+        FirebaseFirestore db = FirebaseFirestore.DefaultInstance;
+        DocumentReference docRef = db.Collection("Player").Document("5O0aBwYaPUSgJEhDbRlB5AS1xX32");
+        docRef.SetAsync(newPlayer);
     }
 }
