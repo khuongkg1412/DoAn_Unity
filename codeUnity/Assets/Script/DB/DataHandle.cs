@@ -174,11 +174,6 @@ public class DataHandle : MonoBehaviour
     public Text Coin, Diamond, Life, Name;
     public Image avatar;
     float timeGetUpdate = 0f;
-    private void Start()
-    {
-        //AdddingItem();
-    }
-
     private void Update()
     {
         update_Information();
@@ -236,9 +231,8 @@ public class DataHandle : MonoBehaviour
 
     public void AdddingItem()
     {
-        Debug.Log("Fixed");
-        FirebaseFirestore db = FirebaseFirestore.DefaultInstance;
-        DocumentReference docRef = db.Collection("Player").Document("5O0aBwYaPUSgJEhDbRlB5AS1xX32");
-        docRef.SetAsync(newPlayer);
+        //FirebaseFirestore db = FirebaseFirestore.DefaultInstance;
+        //DocumentReference docRef = db.Collection("Player").Document("5O0aBwYaPUSgJEhDbRlB5AS1xX32");
+        //docRef.SetAsync(newPlayer);
     }
 }

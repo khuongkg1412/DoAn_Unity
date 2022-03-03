@@ -22,8 +22,6 @@ public class Game_Start : MonoBehaviour
 
     public float timeRemaining = 600;
 
-    private bool timerIsRunning = false;
-
     public Text timeText;
 
     private float enemyNumber,
@@ -37,9 +35,6 @@ public class Game_Start : MonoBehaviour
         Time.timeScale = 1f;
         //Convert to landscape mode in gameplay
         Screen.orientation = ScreenOrientation.Landscape;
-
-        // Starts the timer automatically
-        timerIsRunning = true;
         /*
         Set and get number citizen follow by spawning
         */
@@ -68,7 +63,7 @@ public class Game_Start : MonoBehaviour
         //Check condition victory in every frame
         ConditionToVictory();
         //Continute runing time whilke game is not oer
-        if (timerIsRunning && isGameOver != true)
+        if (isGameOver == false)
         {
             //Time is not end
             if (timeRemaining > 0)
@@ -80,7 +75,6 @@ public class Game_Start : MonoBehaviour
             {
                 //Time's up
                 timeRemaining = 0;
-                timerIsRunning = false;
             }
         }
         else

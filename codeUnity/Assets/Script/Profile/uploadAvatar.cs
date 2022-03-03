@@ -109,11 +109,11 @@ public class uploadAvatar : MonoBehaviour
         StorageReference newAvatarsRef = storageReference.Child(fileName);
 
         // Create file metadata including the content type
-        var newMetadata = new MetadataChange();
-        newMetadata.ContentType = "image/png";
+        // var newMetadata = new MetadataChange();
+        // newMetadata.ContentType = "image/png";
 
         // Upload the file to the path 
-        newAvatarsRef.PutFileAsync(localFilePath, newMetadata)
+        newAvatarsRef.PutFileAsync(localFilePath)
             .ContinueWith((Task<StorageMetadata> task) =>
             {
                 if (task.IsFaulted || task.IsCanceled)
