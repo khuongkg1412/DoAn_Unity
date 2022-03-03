@@ -51,13 +51,15 @@ public class Bullet : MonoBehaviour
     {
         if (Vector2.Distance(positionStartShooting.position, transform.position) > rangeShooting)
         {
-            Destroy(gameObject);
-           // bulletDistroy();
-
+            bulletDistroy();
         }
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
-        bulletDistroy();
+        if (other.gameObject.tag != "Bullet")
+        {
+            bulletDistroy();
+        }
+
     }
 }

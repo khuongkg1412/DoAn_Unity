@@ -5,7 +5,7 @@ using UnityEngine;
 public class Boss1 : MonoBehaviour
 {
     //Setting up Enemy
-    public Enemy virus = new Enemy();
+    public Enemy virus;
     //Player targetPlayer to enemy move forward
     public GameObject[] targetCitizen;
     public Transform targetPlayer;
@@ -36,6 +36,7 @@ public class Boss1 : MonoBehaviour
     Vector3 downWard;
     private void Start()
     {
+        virus = new Enemy();
         gamePlay = GameObject.Find("Canvas");
         updWard = new Vector3(transform.position.x, transform.position.y + 300, transform.position.z);
         downWard = new Vector3(transform.position.x, transform.position.y - 300, transform.position.z);
@@ -63,7 +64,24 @@ Shooting timer countdown
             shootTimer = 0f;
             for (int i = 0; i < 5; i++)
             {
-                Shoot();
+                switch (i)
+                {
+                    case 0:
+                        Shoot(firePoint1);
+                        break;
+                    case 1:
+                        Shoot(firePoint2);
+                        break;
+                    case 2:
+                        Shoot(firePoint3);
+                        break;
+                    case 3:
+                        Shoot(firePoint4);
+                        break;
+                    case 4:
+                        Shoot(firePoint5);
+                        break;
+                }
             }
         }
     }
@@ -73,7 +91,6 @@ Shooting timer countdown
         maxHP = virus.numeral.HP_Numeral;
         currentHP = maxHP;
         maxHPsize = HealthBar.transform.localScale.x;
-        //gameObject.GetComponent<SpriteRenderer>().sprite = virus.image;
     }
     bool distanceToPlayer()
     {
@@ -200,15 +217,15 @@ Shooting timer countdown
         }
     }
     [SerializeField] GameObject bulletPrefab;
-    [SerializeField] Transform firePoint;
-    void Shoot()
+    [SerializeField] Transform firePoint1, firePoint2, firePoint3, firePoint4, firePoint5;
+    void Shoot(Transform firePoint)
     {
         Debug.Log("Shoot");
         //Creating bullet
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         bullet.GetComponent<Bullet>().setPositionStartShooting(firePoint);
-
+        bullet.GetComponent<Bullet>().rangeShooting = 1000f;
         //Pull bullet out at fire point
         rb.AddForce(firePoint.up * 1000f, ForceMode2D.Impulse);
     }
