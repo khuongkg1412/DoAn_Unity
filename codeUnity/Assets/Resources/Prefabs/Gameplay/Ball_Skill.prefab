@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b185688f6628fc14e9976efde432a18a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dameGiven: 0
+  dameGiven: 10
   rangeShooting: 1500
   hitEffect: {fileID: 969308048198267444, guid: 09dcda31c2ae0504e8db7a1e7ac51271, type: 3}
 --- !u!61 &3127086232455625203

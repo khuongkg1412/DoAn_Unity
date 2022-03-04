@@ -85,7 +85,6 @@ Shooting timer countdown
                         break;
                 }
             }
-            GetComponent<Animator>().Play("New State");
         }
     }
 
@@ -223,14 +222,13 @@ Shooting timer countdown
     [SerializeField] Transform firePoint1, firePoint2, firePoint3, firePoint4, firePoint5;
     void Shoot(Transform firePoint)
     {
-        Debug.Log("Shoot");
         //Creating bullet
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         bullet.GetComponent<Bullet>().setPositionStartShooting(firePoint);
         bullet.GetComponent<Bullet>().rangeShooting = 1000f;
         //Pull bullet out at fire point
-        rb.AddForce(firePoint.up * 1000f, ForceMode2D.Impulse);
+        rb.AddForce(firePoint.up * 1500f, ForceMode2D.Impulse);
     }
     bool reachUpper = false, reachLowwe = true;
     public void moveUpDown()
