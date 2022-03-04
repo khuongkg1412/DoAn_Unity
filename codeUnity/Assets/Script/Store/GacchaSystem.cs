@@ -68,12 +68,6 @@ public class GacchaSystem : MonoBehaviour
 
         _itemsList.OrderBy(x => x.rate_Item);
 
-        foreach (var i in _itemsList)
-        {
-
-            Debug.Log("Name Item: " + i.name_Item);
-        }
-
         PopulateItem();
 
         doneGaccha = true;
