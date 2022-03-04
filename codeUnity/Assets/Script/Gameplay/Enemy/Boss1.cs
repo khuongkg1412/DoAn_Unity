@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Boss1 : MonoBehaviour
 {
+    public Animator anim;
     //Setting up Enemy
     public Enemy virus;
     //Player targetPlayer to enemy move forward
@@ -62,6 +63,7 @@ Shooting timer countdown
         {
             //Reset time shooter
             shootTimer = 0f;
+            GetComponent<Animator>().Play("New Animation");
             for (int i = 0; i < 5; i++)
             {
                 switch (i)
@@ -83,6 +85,7 @@ Shooting timer countdown
                         break;
                 }
             }
+            GetComponent<Animator>().Play("New State");
         }
     }
 
