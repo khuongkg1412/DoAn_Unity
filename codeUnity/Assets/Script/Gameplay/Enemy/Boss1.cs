@@ -254,4 +254,10 @@ Shooting timer countdown
             }
         }
     }
+
+    private void OnDestroy()
+    {
+        gamePlay.GetComponent<Game_Boss>().isGameOver = true;
+        gamePlay.GetComponent<Game_Boss>().isVictory = true;
+    }
 }

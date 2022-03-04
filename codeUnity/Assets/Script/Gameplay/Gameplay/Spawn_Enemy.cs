@@ -20,42 +20,6 @@ public class Spawn_Enemy : MonoBehaviour
     {
         spawningEnemy();
     }
-    private void Update()
-    {
-        // if (isBossStage & numberOfEnemies > 0)
-        // {
-        //     //Create object
-        //     Boss = Instantiate(Enemy, positionSpawn[0].position, transform.rotation);
-        //     EnemyObject enemyObject = new EnemyObject();
-        //     //Random type and set for virus enemy
-        //     Boss.transform.GetChild(0).gameObject.GetComponent<Enemy_Controller>().virus = enemyObject.VirusBoss();
-        //     Boss.transform.GetChild(0).gameObject.GetComponent<Enemy_Controller>().setNumeral(Boss.transform.GetChild(0).gameObject.GetComponent<Enemy_Controller>().virus.returnHP());
-        //     //Decrease number of enemies
-        //     numberOfEnemies -= 1;
-        // }
-        // if (numberOfEnemies > 0)
-        // {
-        //     int randSpawnLocation = Random.Range(0, positionSpawn.Length);
-
-        //     //Check for position has been spawned
-        //     if (!spawnedPos.Contains(randSpawnLocation))
-        //     {
-        //         //add to pos has spawned
-        //         spawnedPos.Add(randSpawnLocation);
-        //         //Create object
-        //         GameObject gameObjectNew = Instantiate(Enemy, positionSpawn[randSpawnLocation].position, transform.rotation);
-        //         //Random type and set for virus enemy
-        //         gameObjectNew.transform.GetChild(0).gameObject.GetComponent<Enemy_Controller>().virus = ranomVirusType();
-        //         gameObjectNew.transform.GetChild(0).gameObject.GetComponent<Enemy_Controller>().setNumeral(gameObjectNew.transform.GetChild(0).gameObject.GetComponent<Enemy_Controller>().virus.returnHP());
-        //         //Decrease number of enemies
-        //         numberOfEnemies -= 1;
-        //     }
-        // }
-        // else if (numberOfEnemies == 0)
-        // {
-        //     Destroy(Enemy);
-        // }
-    }
     public void spawningEnemy()
     {
         while (numberOfEnemies > 0)
@@ -75,6 +39,7 @@ public class Spawn_Enemy : MonoBehaviour
                         //Random type and set for virus enemy
                         gameObjectNew.transform.GetChild(0).gameObject.GetComponent<Enemy_Controller>().virus = new VirusA();
                         gameObjectNew.transform.GetChild(0).gameObject.GetComponent<Enemy_Controller>().setNumeral();
+                        gameObjectNew.transform.GetChild(0).gameObject.GetComponent<Virus_Numeral>().settingNumeral(new VirusA());
                         //Decrease number of enemies
                         numberOfEnemies -= 1;
                     }
@@ -91,6 +56,7 @@ public class Spawn_Enemy : MonoBehaviour
                         //Random type and set for virus enemy
                         gameObjectNew.transform.GetChild(0).gameObject.GetComponent<Enemy_Controller>().virus = new VirusB();
                         gameObjectNew.transform.GetChild(0).gameObject.GetComponent<Enemy_Controller>().setNumeral();
+                        gameObjectNew.transform.GetChild(0).gameObject.GetComponent<Virus_Numeral>().settingNumeral(new VirusB());
                         //Decrease number of enemies
                         numberOfEnemies -= 1;
                     }
@@ -107,6 +73,7 @@ public class Spawn_Enemy : MonoBehaviour
                         //Random type and set for virus enemy
                         gameObjectNew.transform.GetChild(0).gameObject.GetComponent<Enemy_Controller>().virus = new VirusC();
                         gameObjectNew.transform.GetChild(0).gameObject.GetComponent<Enemy_Controller>().setNumeral();
+                        gameObjectNew.transform.GetChild(0).gameObject.GetComponent<Virus_Numeral>().settingNumeral(new VirusC());
                         //Decrease number of enemies
                         numberOfEnemies -= 1;
                     }
@@ -123,6 +90,7 @@ public class Spawn_Enemy : MonoBehaviour
                         //Random type and set for virus enemy
                         gameObjectNew.transform.GetChild(0).gameObject.GetComponent<Enemy_Controller>().virus = new VirusD();
                         gameObjectNew.transform.GetChild(0).gameObject.GetComponent<Enemy_Controller>().setNumeral();
+                        gameObjectNew.transform.GetChild(0).gameObject.GetComponent<Virus_Numeral>().settingNumeral(new VirusD());
                         //Decrease number of enemies
                         numberOfEnemies -= 1;
                     }

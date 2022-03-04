@@ -58,13 +58,13 @@ public class Game_Start : MonoBehaviour
 
     void Update()
     {
-        //Update the score from Character object
-        UpdateScore();
-        //Check condition victory in every frame
-        ConditionToVictory();
         //Continute runing time whilke game is not oer
         if (isGameOver == false)
         {
+            //Update the score from Character object
+            UpdateScore();
+            //Check condition victory in every frame
+            ConditionToVictory();
             //Time is not end
             if (timeRemaining > 0)
             {
@@ -77,28 +77,24 @@ public class Game_Start : MonoBehaviour
                 timeRemaining = 0;
             }
         }
-        else
+        else if (!isStoped)
         {
             //Game end. Display result and end the gameplay
             GameOVer();
+            isStoped = true;
         }
     }
     //Method Game over
     public void GameOVer()
     {
-        if (!isStoped)
-        {
-            //Player dead and set active for pannel result
-            pannelGameover.SetActive(true);
-            //Plus the time left to the score
-            score += timeRemaining;
-            //Show Result Pannel
-            DisplayResultPannel();
-            //Update score to database
-            totalScore();
-            isStoped = true;
-        }
-
+        //Player dead and set active for pannel result
+        pannelGameover.SetActive(true);
+        //Plus the time left to the score
+        score += timeRemaining;
+        //Show Result Pannel
+        DisplayResultPannel();
+        //Update score to database
+        totalScore();
     }
     //Update score to database
     void totalScore()

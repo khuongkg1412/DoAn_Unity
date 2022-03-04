@@ -37,7 +37,7 @@ public class Game_Boss : MonoBehaviour
         //Set virus type for boss virus
         VirusBoos.GetComponent<Boss1>().virus = new VirusBoss();
         VirusBoos.GetComponent<Boss1>().setNumeral();
-
+        VirusBoos.GetComponent<Virus_Numeral>().settingNumeral(new VirusBoss());
         //Scale Time is normal
         Time.timeScale = 1f;
         //Convert to landscape mode in gameplay
@@ -60,8 +60,6 @@ public class Game_Boss : MonoBehaviour
 
     void Update()
     {
-        //Check condition victory in every frame
-        ConditionToVictory();
         //Continute runing time whilke game is not oer
         if (timerIsRunning && isGameOver != true)
         {
@@ -78,10 +76,11 @@ public class Game_Boss : MonoBehaviour
                 timerIsRunning = false;
             }
         }
-        else
+        else if (!isStoped)
         {
             //Game end. Display result and end the gameplay
             GameOVer();
+            isStoped = true;
         }
 
     }
@@ -102,13 +101,7 @@ public class Game_Boss : MonoBehaviour
         //Show Result Pannel
         DisplayResultPannel();
         //Update score to database
-        if (!isStoped)
-        {
-
-            totalScore();
-            isStoped = true;
-        }
-
+        totalScore();
     }
     //Update score to database
     void totalScore()
@@ -158,22 +151,7 @@ public class Game_Boss : MonoBehaviour
         enemyKillResult.text = enemyNumber.ToString();
 
     }
-    //Condition to victory
-    void ConditionToVictory()
-    {
-        //Check condition victory
-        // if (citizenSaveNumber == citizenNumberStart)
-        // {
-        //     isGameOver = true;
-        //     isVictory = true;
-        // }
-        //  if (VirusBoos.active == false)
-        //  {
-        //      Debug.Log("Win");
-        //      isGameOver = true;
-        //      isVictory = true;
-        //  }
-    }
+
     //Method display time
     void DisplayTime(float timeToDisplay)
     {   //Increase time by 1
