@@ -84,13 +84,7 @@ public class Game_Boss : MonoBehaviour
         }
 
     }
-    //Loading Numeral of player 
-    public void loadingPlayer()
-    {
-        //Set the numeral from static data
-        // Player.settingNumeral(Player_DataManager.Instance.settingNumeral());
 
-    }
     //Method Game over
     public void GameOVer()
     {
