@@ -60,29 +60,32 @@ public class Game_Boss : MonoBehaviour
 
     void Update()
     {
-        //Continute runing time whilke game is not oer
-        if (timerIsRunning && isGameOver != true)
+        if (!isStoped)
         {
-            //Time is not end
-            if (timeRemaining > 0)
+            //Continute runing time whilke game is not oer
+            if (timerIsRunning && isGameOver != true)
             {
-                timeRemaining -= Time.deltaTime;
-                DisplayTime(timeRemaining);
+                //Time is not end
+                if (timeRemaining > 0)
+                {
+                    timeRemaining -= Time.deltaTime;
+                    DisplayTime(timeRemaining);
+                }
+                else
+                {
+                    //Time's up
+                    timeRemaining = 0;
+                    timerIsRunning = false;
+                }
             }
             else
             {
-                //Time's up
-                timeRemaining = 0;
-                timerIsRunning = false;
+                //Game end. Display result and end the gameplay
+                GameOVer();
+                isStoped = true;
             }
-        }
-        else if (!isStoped)
-        {
-            //Game end. Display result and end the gameplay
-            GameOVer();
-            isStoped = true;
-        }
 
+        }
     }
 
     //Method Game over
