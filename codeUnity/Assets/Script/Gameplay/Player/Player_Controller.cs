@@ -60,6 +60,7 @@ public class Player_Controller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("cahnge");
         settingCharacter();
         //Let Player shoot and move fistly
         Character.setShoot(true);
