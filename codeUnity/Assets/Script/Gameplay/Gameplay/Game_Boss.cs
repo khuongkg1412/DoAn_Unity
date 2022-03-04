@@ -140,6 +140,7 @@ public class Game_Boss : MonoBehaviour
         //Check victory
         if (isVictory)
         {
+            enemyNumber += 1;
             gameplayResult.text = "VICTORY";
             Button nextBtn = GameObject.Find("Next_Button").GetComponent<Button>();
             nextBtn.interactable = true;

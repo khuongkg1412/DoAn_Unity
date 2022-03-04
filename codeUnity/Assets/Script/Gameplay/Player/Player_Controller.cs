@@ -182,6 +182,12 @@ public class Player_Controller : MonoBehaviour
             Character.getDamage(other.gameObject.GetComponent<Virus_Numeral>().virusNumeral.ATK_Numeral);
             getDamage();
         }
+        //Hit by Bullet from Enemy
+        if (other.gameObject.tag == "Bullet")
+        {
+            Character.getDamage(other.gameObject.GetComponent<Bullet>().dameGiven);
+            getDamage();
+        }
         //Help Citizen
         Button button = GameObject.Find("HelpButton").GetComponent<Button>();
         if (other.gameObject.tag == "Citizen")
