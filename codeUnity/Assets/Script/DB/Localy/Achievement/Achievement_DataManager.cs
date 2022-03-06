@@ -68,7 +68,8 @@ public class Achievement_DataManager : MonoBehaviour
         //Get player object
         PlayerStruct player = Player_DataManager.Instance.Player;
         //Total virus that player killed
-        float killedVirus = player.statistic["VirusA_Killed"] + player.statistic["VirusB_Killed"] + player.statistic["VirusC_Killed"] + player.statistic["VirusD_Killed"];
+        //        float killedVirus = player.statistic["VirusA_Killed"] + player.statistic["VirusB_Killed"] + player.statistic["VirusC_Killed"] + player.statistic["VirusD_Killed"];
+        float killedVirus = player.statistic["Virus_Kill"];
         //Percentage of complete achievement
         float percentage = killedVirus / goal;
         //If player is reach the goal then unlock the achievement
