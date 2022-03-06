@@ -127,10 +127,12 @@ public class Player_Controller : MonoBehaviour
         //Cheeck the player is dead
         if (Character.isPlayerDead())
         {
-            canvas.GetComponent<Game_Start>().GameOVer();
-
+            if (canvas.GetComponent<Game_Boss>() != null)
+            {
+                canvas.GetComponent<Game_Boss>().GameOVer();
+            }
             //Split up by 2 modes : Story Mode and Tutorial
-            if (canvas.GetComponent<Game_Start>() != null)
+            else if (canvas.GetComponent<Game_Start>() != null)
             {
                 canvas.GetComponent<Game_Start>().GameOVer();
             }
