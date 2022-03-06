@@ -60,7 +60,6 @@ public class Player_Controller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("cahnge");
         settingCharacter();
         //Let Player shoot and move fistly
         Character.setShoot(true);
@@ -87,19 +86,6 @@ public class Player_Controller : MonoBehaviour
         updateProcessHP();
         //U[date the Movement of Player including Moving, shooting and helping citizen
         updateMovement();
-    }
-    private void OnDestroy()
-    { //Reset data when the game play is over
-        resetNumeral();
-    }
-    void resetNumeral()
-    {
-        //Debug.Log("Before Reset Player " + Player_DataManager.Instance.Player.numeral.HP_Numeral);
-        //Debug.Log("Before Reset Charac " + Player_DataManager.Instance.playerCharacter.returnHP());
-        // Player_DataManager.Instance.Player.numeral = originNumeral;
-        // Player_DataManager.Instance.playerCharacter = new Character(originNumeral);
-        // Debug.Log("After Reset Player " + Player_DataManager.Instance.Player.numeral.HP_Numeral);
-        // Debug.Log("After Reset Charac " + Player_DataManager.Instance.playerCharacter.returnHP());
     }
     void settingCharacter()
     {
@@ -141,12 +127,12 @@ public class Player_Controller : MonoBehaviour
         //Cheeck the player is dead
         if (Character.isPlayerDead())
         {
-            resetNumeral();
-            canvas.GetComponent<Game_Start>().GameOVer();
-            //If dead, set false for player game object
-            gameObject.SetActive(false);
+            if (canvas.GetComponent<Game_Boss>() != null)
+            {
+                canvas.GetComponent<Game_Boss>().GameOVer();
+            }
             //Split up by 2 modes : Story Mode and Tutorial
-            if (canvas.GetComponent<Game_Start>() != null)
+            else if (canvas.GetComponent<Game_Start>() != null)
             {
                 canvas.GetComponent<Game_Start>().GameOVer();
             }
@@ -154,7 +140,15 @@ public class Player_Controller : MonoBehaviour
             {
                 canvas.GetComponent<Game_Tutorial>().GameOVer();
             }
+            //Player dead function
+            Invoke("playerDead", 1f);
         }
+    }
+    //Player are dead
+    void playerDead()
+    {
+        //Destroy the game object
+        gameObject.SetActive(false);
     }
     private void getDamage()
     {

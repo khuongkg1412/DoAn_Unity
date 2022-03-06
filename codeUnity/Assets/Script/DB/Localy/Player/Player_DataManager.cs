@@ -157,6 +157,20 @@ public class Player_DataManager : MonoBehaviour
         Player_Update.UpdatePlayer();
     }
 
+    public void updateStatistic(float citizenSaved, float virusKilled)
+    {
+        //Citizen Saved and virus killed
+        citizenSaved += Player.statistic["Citizen_Saved"];
+        virusKilled += Player.statistic["Virus_Kill"];
+
+        Player.statistic = new Dictionary<string, float>()
+        {
+            {"Citizen_Saved" ,citizenSaved},
+             {"Virus_Kill" ,virusKilled}
+        };
+        //Call to update the information off Player
+        Player_Update.UpdatePlayer();
+    }
     public void SendLiferequest(string FriendId)
     {
         Notification_Struct lifeRequest = new Notification_Struct()

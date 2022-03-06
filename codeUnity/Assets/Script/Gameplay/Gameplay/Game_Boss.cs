@@ -82,15 +82,16 @@ public class Game_Boss : MonoBehaviour
             {
                 //Game end. Display result and end the gameplay
                 GameOVer();
-                isStoped = true;
             }
-
         }
+
+
     }
 
     //Method Game over
     public void GameOVer()
     {
+        isStoped = true;
         //Player dead and set active for pannel result
         pannelGameover.SetActive(true);
         //Plus the time left to the score

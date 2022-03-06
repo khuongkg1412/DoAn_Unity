@@ -87,7 +87,6 @@ public class Enemy_Controller : MonoBehaviour
     }
     bool distanceToPlayer()
     {
-
         if (Vector3.Distance(targetPlayer.position, transform.position) <= virus.detectRange)
         {
             return true;
