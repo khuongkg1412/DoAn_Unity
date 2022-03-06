@@ -60,7 +60,6 @@ public class Game_Start : MonoBehaviour
     {
         if (!isStoped)
         {
-            Debug.Log("Game Still Running");
             //Continute runing time whilke game is not oer
             if (isGameOver == false)
             {

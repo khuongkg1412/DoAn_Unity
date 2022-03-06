@@ -72,4 +72,17 @@ public class Item_DataManager : MonoBehaviour
         }
         return itemChest;
     }
+
+    public List<ItemStruct> itemBuff()
+    {
+        List<ItemStruct> itemDaily = new List<ItemStruct>();
+        foreach (var i in Item)
+        {
+            if (i.type_Item == (int)TypeItem.Buff)
+            {
+                itemDaily.Add(i);
+            }
+        }
+        return itemDaily;
+    }
 }
