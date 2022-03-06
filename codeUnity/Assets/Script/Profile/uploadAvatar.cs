@@ -44,22 +44,6 @@ public class uploadAvatar : MonoBehaviour
                }
 
                StartCoroutine(ReviewImageFromLocal(texture, path));
-
-               //    // Assign texture to a temporary quad and destroy it after 5 seconds
-               //    GameObject quad = GameObject.CreatePrimitive(PrimitiveType.Quad);
-               //    quad.transform.position = Camera.main.transform.position + Camera.main.transform.forward * 2.5f;
-               //    quad.transform.forward = Camera.main.transform.forward;
-               //    quad.transform.localScale = new Vector3(1f, texture.height / (float)texture.width, 1f);
-
-               //    Material material = quad.GetComponent<Renderer>().material;
-               //    if (!material.shader.isSupported) // happens when Standard shader is not included in the build
-               //        material.shader = Shader.Find("Legacy Shaders/Diffuse");
-               //    material.mainTexture = texture;
-
-               //    Destroy(quad, 5f);
-               //    // If a procedural texture is not destroyed manually, 
-               //    // it will only be freed after a scene change
-               //    Destroy(texture, 5f);
            }
        }, "Select a PNG image", "image/png");
         Debug.Log("Permission result: " + permission);
@@ -67,7 +51,7 @@ public class uploadAvatar : MonoBehaviour
 
     public void OnPickImageButtonClick()
     {
-        PickImage(512);
+        PickImage(1024);
     }
 
     public void onOkButtonClick()
@@ -109,16 +93,16 @@ public class uploadAvatar : MonoBehaviour
         StorageReference newAvatarsRef = storageReference.Child(fileName);
 
         // Create file metadata including the content type
-        // var newMetadata = new MetadataChange();
-        // newMetadata.ContentType = "image/png";
+        var newMetadata = new MetadataChange();
+        newMetadata.ContentType = "image/png";
 
         // Upload the file to the path 
-        newAvatarsRef.PutFileAsync(localFilePath)
+        newAvatarsRef.PutFileAsync("file://" + localFilePath, newMetadata)
             .ContinueWith((Task<StorageMetadata> task) =>
             {
                 if (task.IsFaulted || task.IsCanceled)
                 {
-                    Debug.Log("Some thing wrong");
+                    Debug.Log(task.Exception.ToString());
                 }
                 else
                 {
