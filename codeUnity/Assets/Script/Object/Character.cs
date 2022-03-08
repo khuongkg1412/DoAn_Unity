@@ -13,7 +13,7 @@ public struct Character
     }
     private NumeralStruct numeral;
 
-    private List<ItemStruct> buffInGame;
+    public List<ItemStruct> buffInGame;
 
     private bool isDead;
     public float score

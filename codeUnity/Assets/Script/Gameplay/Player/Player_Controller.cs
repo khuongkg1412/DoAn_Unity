@@ -57,9 +57,13 @@ public class Player_Controller : MonoBehaviour
     */
     Camera cameraMain;
 
+    //Buff Item
+    [SerializeField] GameObject buffItem;
     // Start is called before the first frame update
     void Start()
     {
+        buffItem.GetComponent<ItemBuff>().itemBuff = Player_DataManager.Instance.playerCharacter.buffInGame[0];
+        buffItem.GetComponent<ItemBuff>().setImage();
         settingCharacter();
         //Let Player shoot and move fistly
         Character.setShoot(true);

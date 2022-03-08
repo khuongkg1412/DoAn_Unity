@@ -7,15 +7,16 @@ using UnityEngine.SceneManagement;
 
 public class Selecting_Stage : MonoBehaviour
 {
-    [SerializeField] GameObject increaseBtn, decreaseBtn, buffItem, chooseBuffPannel, verticalLayout;
+    [SerializeField] GameObject increaseBtn, decreaseBtn, buffItem, chooseBuffPannel, verticalLayout, btnPlay;
     [SerializeField]
     TMP_Text stageSelected;
     [SerializeField]
     GameObject[] stageArray;
 
     private int stageNumber = 0;
-
+    private int levelStage = 0;
     List<ItemStruct> listItemBuff = new List<ItemStruct>();
+    bool isInstaniate = false;
     public void increaseNumberForStage()
     {
         foreach (var i in stageArray)
@@ -55,6 +56,22 @@ public class Selecting_Stage : MonoBehaviour
             increaseBtn.GetComponent<Button>().interactable = false;
             decreaseBtn.GetComponent<Button>().interactable = true;
         }
+
+        if (chooseBuffPannel.activeInHierarchy)
+        {
+            //   bool check = false;
+            for (int i = 0; i < listBuff.Count; i++)
+            {
+                if (i == indexofBuff)
+                {
+                    listBuff[i].transform.GetChild(1).GetComponent<RawImage>().enabled = true;
+                }
+                else
+                {
+                    listBuff[i].transform.GetChild(1).GetComponent<RawImage>().enabled = false;
+                }
+            }
+        }
     }
 
     void checkStageWithPlayerData()
@@ -78,9 +95,7 @@ public class Selecting_Stage : MonoBehaviour
         //PlayerStruct player = SaveSystem.LoadDataPlayer();
         if (int.Parse(level.text) <= Player_DataManager.Instance.Player.level.stage)
         {
-            // Screen.orientation = ScreenOrientation.Landscape;
-            // SceneManager.LoadScene("Stage" + int.Parse(level.text));
-
+            levelStage = int.Parse(level.text);
             openSelectBuff(int.Parse(level.text));
         }
         else
@@ -88,6 +103,11 @@ public class Selecting_Stage : MonoBehaviour
             Debug.Log("Cannot Open this stage cuz you didnot reach that level!!!");
         }
 
+    }
+    public void CancelButton()
+    {
+        //Invisible pannel choose buff
+        chooseBuffPannel.SetActive(false);
     }
     public void openSelectBuff(int stageNumber)
     {
@@ -97,21 +117,51 @@ public class Selecting_Stage : MonoBehaviour
         chooseBuffPannel.SetActive(true);
         //Load item type buff
         listItemBuff = Item_DataManager.Instance.itemBuff();
+        //Index to set to the index of buff list
+
         /*
         Initiate the object in the scence
         */
-        foreach (var objectItem in listItemBuff)
+        if (!isInstaniate)
         {
-            Populate(verticalLayout, objectItem);
+            isInstaniate = true;
+            foreach (var objectItem in listItemBuff)
+            {
+                foreach (var inventItem in Player_DataManager.Instance.inventory_Player)
+                {
+                    if (inventItem.ID.Equals(objectItem.ID))
+                    {
+                        Populate(verticalLayout, objectItem, (int)inventItem.item[objectItem.name_Item]);
+                    }
+                }
+            }
         }
 
     }
+    List<GameObject> listBuff = new List<GameObject>();
+    public int indexofBuff = 0;
     // //Instaniate the object item for each one
-    void Populate(GameObject verticalObject, ItemStruct Item)
+    void Populate(GameObject verticalObject, ItemStruct Item, int quantity)
     {
         //Set data in that prototype 
         buffItem.GetComponent<RawImage>().texture = Item.texture2D;
+        buffItem.transform.GetChild(0).GetComponent<TMP_Text>().text = "x" + quantity;
+
         //Instaniate the object item
         GameObject item = Instantiate(buffItem, verticalObject.transform);
+        listBuff.Add(item);
+        item.GetComponent<ItemBuff>().itemBuff = Item;
+        item.GetComponent<ItemBuff>().index = indexofBuff;
+        indexofBuff += 1;
+    }
+
+    public void pressPlayButton()
+    {
+        //Add buff to Character in instace Player_DataManager
+        ItemStruct item = listBuff[indexofBuff].GetComponent<ItemBuff>().itemBuff;
+        Player_DataManager.Instance.playerCharacter.addBuff(item);
+        //Load Stage 
+        Screen.orientation = ScreenOrientation.Landscape;
+        SceneManager.LoadScene("Stage" + levelStage);
     }
 }
