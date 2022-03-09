@@ -9,7 +9,7 @@ public class Selecting_Stage : MonoBehaviour
 {
     [SerializeField] GameObject increaseBtn, decreaseBtn, buffItem, chooseBuffPannel, verticalLayout, btnPlay;
     [SerializeField]
-    TMP_Text stageSelected;
+    TMP_Text stageSelected, buffSelect;
     [SerializeField]
     GameObject[] stageArray;
 
@@ -65,6 +65,7 @@ public class Selecting_Stage : MonoBehaviour
                 if (i == indexofBuff)
                 {
                     listBuff[i].transform.GetChild(1).GetComponent<RawImage>().enabled = true;
+                    buffSelect.text = "Choosing Buff: " + listBuff[i].GetComponent<ItemBuff>().itemBuff.name_Item;
                 }
                 else
                 {

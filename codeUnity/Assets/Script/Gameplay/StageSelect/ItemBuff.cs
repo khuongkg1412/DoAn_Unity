@@ -11,32 +11,9 @@ public class ItemBuff : MonoBehaviour
     public bool isGameplay = false;
     [SerializeField] Image imageCoolDown;
     [SerializeField] TMP_Text coolDownText;
-    private float coolDownBuff, coolDownTimer = 0f, buffEffect = 0f, buffEffectTimer = 0f, originNumeral;
+    private float coolDownBuff, coolDownTimer = 0f, buffEffect = 0f, buffEffectTimer = 0f, originNumeral, numberOfBuff = 0f;
     private bool isCoolDown = false, isEffect = false;
-
-    public void pressItem()
-    {
-        //Set index position in list of buff
-        canvas.GetComponent<Selecting_Stage>().indexofBuff = index;
-    }
-    public void setImage()
-    {
-        //Set image for buff that has been choosed in Selecting Stage
-        gameObject.GetComponent<RawImage>().texture = itemBuff.texture2D;
-    }
-    public void pressItemInGamePlay()
-    {
-        //Ativate the buff, process base on their name
-        switch (itemBuff.name_Item)
-        {
-            case "Heal":
-                HealingBuff();
-                break;
-            case "Speed":
-                SpeedBuff();
-                break;
-        }
-    }
+    [SerializeField] GameObject Canvas;
     private void Update()
     {
         //Check cool down time of buff
@@ -50,6 +27,50 @@ public class ItemBuff : MonoBehaviour
             BuffEffect();
         }
     }
+    public void pressItem()
+    {
+        //Set index position in list of buff
+        canvas.GetComponent<Selecting_Stage>().indexofBuff = index;
+    }
+    public void setDataForBuff()
+    {
+        //Set image for buff that has been choosed in Selecting Stage
+        gameObject.GetComponent<RawImage>().texture = itemBuff.texture2D;
+
+        numberOfBuff = Player_DataManager.Instance.inventory_Player.Find(x => x.ID == itemBuff.ID).item[itemBuff.name_Item];
+        gameObject.transform.GetChild(2).GetComponent<TMP_Text>().text = "x" + numberOfBuff;
+    }
+    public void pressItemInGamePlay()
+    {
+        if (numberOfBuff > 0)
+        {
+            //Ativate the buff, process base on their name
+            switch (itemBuff.name_Item)
+            {
+                case "Heal":
+                    HealingBuff();
+                    break;
+                case "Speed":
+                    SpeedBuff();
+                    break;
+                case "AttackSpeed":
+                    AttackSpeedBuff();
+                    break;
+                case "Shield":
+                    ShieldBuff();
+                    break;
+                case "Revive":
+                    break;
+            }
+        }
+        else
+        {
+            Debug.Log("There no buffs");
+        }
+        //Update After Pressing The buff
+        Player_DataManager.Instance.updateBuffInInventory(itemBuff, numberOfBuff);
+    }
+
     /*
     Process for Buff effect timer
     */
@@ -60,6 +81,8 @@ public class ItemBuff : MonoBehaviour
         //Reach the time of buff effect
         if (buffEffectTimer >= buffEffect)
         {
+            //reset Timer
+            buffEffectTimer = 0f;
             //No longer Effect
             isEffect = false;
             //Find gameobject Player with tag
@@ -71,6 +94,16 @@ public class ItemBuff : MonoBehaviour
                     //Set the speed Numeral to the origin
                     player.GetComponent<Player_Controller>().Character.setSPD(originNumeral);
                     Debug.Log("return SPD_ " + player.GetComponent<Player_Controller>().Character.returnSPD());
+                    break;
+                case "AttackSpeed":
+                    //Set the speed Numeral to the origin
+                    player.GetComponent<Player_Controller>().Character.setATKSPD(originNumeral);
+                    Debug.Log("return ATKSPD_ " + player.GetComponent<Player_Controller>().Character.returnATKSPD());
+                    break;
+                case "Shield":
+                    //Set the speed Numeral to the origin
+                    player.GetComponent<Player_Controller>().Character.setDEF(originNumeral);
+                    Debug.Log("return DEF " + player.GetComponent<Player_Controller>().Character.returnDEF());
                     break;
             }
         }
@@ -100,6 +133,7 @@ public class ItemBuff : MonoBehaviour
             imageCoolDown.fillAmount = coolDownTimer / coolDownBuff;
         }
     }
+
     /*
         Process for Healing Buff
     */
@@ -114,8 +148,12 @@ public class ItemBuff : MonoBehaviour
         }
         else
         {
+            //Decrease buff number
+            numberOfBuff -= 1;
+            gameObject.transform.GetChild(2).GetComponent<TMP_Text>().text = "x" + numberOfBuff;
             //Plus 10 HP to the current 
-            player.GetComponent<Player_Controller>().Character.getHeal(10f, Player_DataManager.Instance.playerCharacter.returnHP());
+            Debug.Log("Healing Up_" + itemBuff.numeral_Item.HP_Numeral);
+            player.GetComponent<Player_Controller>().Character.getHeal(itemBuff.numeral_Item.HP_Numeral, Player_DataManager.Instance.playerCharacter.returnHP());
             //Set timer cool down
             coolDownBuff = 10f;
             coolDownTimer = coolDownBuff;
@@ -128,18 +166,85 @@ public class ItemBuff : MonoBehaviour
         }
     }
     /*
-        Process for Healing Buff
+        Process for  Speed Buff
     */
     public void SpeedBuff()
     {
+        //Decrease buff number
+        numberOfBuff -= 1;
+        gameObject.transform.GetChild(2).GetComponent<TMP_Text>().text = "x" + numberOfBuff;
         //Get Object Player base on tag
         GameObject player = GameObject.FindWithTag("Player");
         //Store the origin numeral before get buff effect
         originNumeral = player.GetComponent<Player_Controller>().Character.returnSPD();
         //The Speed after geting buff
-        double speedUP = player.GetComponent<Player_Controller>().Character.returnSPD() * 1.5;
+        double speedUP = player.GetComponent<Player_Controller>().Character.returnSPD() + itemBuff.numeral_Item.SPD_Numeral;
+        Debug.Log("speedUP _" + itemBuff.numeral_Item.SPD_Numeral);
         //Set it to Character
         player.GetComponent<Player_Controller>().Character.setSPD((float)speedUP);
+        //Cool Down Time
+        coolDownBuff = 30f;
+        coolDownTimer = coolDownBuff;
+        //Set time for effect of buff
+        buffEffect = 10f;
+        //Text is active true
+        coolDownText.gameObject.SetActive(true);
+        //Start Count down for cooldown and effect time
+        isCoolDown = true;
+        isEffect = true;
+        //Cannot click the buff in the cool down time
+        gameObject.GetComponent<Button>().interactable = false;
+
+    }
+    /*
+        Process for ATK Speed Buff
+    */
+    public void AttackSpeedBuff()
+    {
+        //Decrease buff number
+        numberOfBuff -= 1;
+        gameObject.transform.GetChild(2).GetComponent<TMP_Text>().text = "x" + numberOfBuff;
+        //Get Object Player base on tag
+        GameObject player = GameObject.FindWithTag("Player");
+        //Store the origin numeral before get buff effect
+        originNumeral = player.GetComponent<Player_Controller>().Character.returnATKSPD();
+        //The Speed after geting buff
+        double speedUP = player.GetComponent<Player_Controller>().Character.returnATKSPD() + itemBuff.numeral_Item.ATKSPD_Numeral;
+        Debug.Log("ATKspeedUP _" + speedUP);
+        //Set it to Character
+        player.GetComponent<Player_Controller>().Character.setATKSPD((float)speedUP);
+        //Cool Down Time
+        coolDownBuff = 30f;
+        coolDownTimer = coolDownBuff;
+        //Set time for effect of buff
+        buffEffect = 10f;
+        //Text is active true
+        coolDownText.gameObject.SetActive(true);
+        //Start Count down for cooldown and effect time
+        isCoolDown = true;
+        isEffect = true;
+        //Cannot click the buff in the cool down time
+        gameObject.GetComponent<Button>().interactable = false;
+
+    }
+
+    /*
+       Process for Shield Buff
+   */
+    public void ShieldBuff()
+    {
+        //Decrease buff number
+        numberOfBuff -= 1;
+        gameObject.transform.GetChild(2).GetComponent<TMP_Text>().text = "x" + numberOfBuff;
+        //Get Object Player base on tag
+        GameObject player = GameObject.FindWithTag("Player");
+        //Store the origin numeral before get buff effect
+        originNumeral = player.GetComponent<Player_Controller>().Character.returnDEF();
+        //The Speed after geting buff
+        double speedUP = player.GetComponent<Player_Controller>().Character.returnDEF() + itemBuff.numeral_Item.DEF_Numeral;
+        Debug.Log("DEF UP _" + speedUP);
+        //Set it to Character
+        player.GetComponent<Player_Controller>().Character.setDEF((float)speedUP);
         //Cool Down Time
         coolDownBuff = 30f;
         coolDownTimer = coolDownBuff;

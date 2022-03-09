@@ -63,7 +63,7 @@ public class Player_Controller : MonoBehaviour
     void Start()
     {
         buffItem.GetComponent<ItemBuff>().itemBuff = Player_DataManager.Instance.playerCharacter.buffInGame[0];
-        buffItem.GetComponent<ItemBuff>().setImage();
+        buffItem.GetComponent<ItemBuff>().setDataForBuff();
         settingCharacter();
         //Let Player shoot and move fistly
         Character.setShoot(true);

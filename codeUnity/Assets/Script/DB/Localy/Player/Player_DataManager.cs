@@ -28,7 +28,23 @@ public class Player_DataManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
+    public void updateBuffInInventory(ItemStruct itemBuff, float quanity)
+    {
+        //update number of buff after playing game
+        foreach (var i in inventory_Player)
+        {
+            if (i.ID == itemBuff.ID)
+            {
+                Debug.Log("Item Edit is " + itemBuff.name_Item + " with quantiy " + quanity);
+                i.item = new Dictionary<string, float>{
+                    {itemBuff.name_Item,quanity}
+                };
+            }
+        }
+        //inventory_Player.Find(x => x.ID == itemBuff.ID).item[itemBuff.name_Item] = quanity;
+        //Call to update the information off Player
+        Player_Update.UpdatePlayer();
+    }
     public void settingCharacter(NumeralStruct numeralStruct)
     {
         this.playerCharacter = new Character(numeralStruct);
