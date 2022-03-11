@@ -60,6 +60,7 @@ public class ItemBuff : MonoBehaviour
                     ShieldBuff();
                     break;
                 case "Revive":
+                    ReviveBuff();
                     break;
             }
         }
@@ -105,6 +106,7 @@ public class ItemBuff : MonoBehaviour
                     player.GetComponent<Player_Controller>().Character.setDEF(originNumeral);
                     Debug.Log("return DEF " + player.GetComponent<Player_Controller>().Character.returnDEF());
                     break;
+
             }
         }
     }
@@ -257,6 +259,25 @@ public class ItemBuff : MonoBehaviour
         isEffect = true;
         //Cannot click the buff in the cool down time
         gameObject.GetComponent<Button>().interactable = false;
+
+    }
+
+    /*
+   Process for Revive Buff
+    */
+    public void ReviveBuff()
+    {
+        //Decrease buff number
+        numberOfBuff -= 1;
+        gameObject.transform.GetChild(2).GetComponent<TMP_Text>().text = "x" + numberOfBuff;
+        //Get Object Player base on tag
+        GameObject player = GameObject.FindWithTag("Player");
+        //Store the origin numeral before get buff effect
+        player.GetComponent<Player_Controller>().Character.isRevive = true;
+        //Cannot click the buff in the cool down time
+        gameObject.GetComponent<Button>().interactable = false;
+        //Cannot click the buff in the cool down time
+        gameObject.transform.GetChild(3).gameObject.SetActive(true);
 
     }
 }

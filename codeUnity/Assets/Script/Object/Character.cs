@@ -5,17 +5,25 @@ public struct Character
     public Character(NumeralStruct numeralStruct)
     {
         this.numeral = numeralStruct;
+        this.originalNumeral = numeralStruct;
         this.isMoving = true;
         this.isShooting = true;
         this.isDead = false;
         this.score = 0f;
+        this.isRevive = false;
         this.buffInGame = new List<ItemStruct>();
     }
     private NumeralStruct numeral;
 
+    private NumeralStruct originalNumeral;
+
     public List<ItemStruct> buffInGame;
 
     private bool isDead;
+    public bool isRevive
+    {
+        get; set;
+    }
     public float score
     {
         get; set;
@@ -73,8 +81,17 @@ public struct Character
         //If Hp point is under 0, set it is equal to 0
         if (numeral.HP_Numeral <= 0)
         {
-            numeral.HP_Numeral = 0;
-            isDead = true;
+            if (isRevive)
+            {
+                this.numeral = originalNumeral;
+                this.isRevive = false;
+            }
+            else
+            {
+                numeral.HP_Numeral = 0;
+                isDead = true;
+            }
+
         }
     }
 
