@@ -13,7 +13,6 @@ public class ItemBuff : MonoBehaviour
     [SerializeField] TMP_Text coolDownText;
     private float coolDownBuff, coolDownTimer = 0f, buffEffect = 0f, buffEffectTimer = 0f, originNumeral, numberOfBuff = 0f;
     private bool isCoolDown = false, isEffect = false;
-    [SerializeField] GameObject Canvas;
     private void Update()
     {
         //Check cool down time of buff
