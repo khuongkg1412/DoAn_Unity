@@ -44,21 +44,31 @@ public class ItemStruct
 
     [FirestoreProperty]
     public int type_Item { get; set; }
+
+    [FirestoreProperty]
+    public int type_Store { get; set; }
     [FirestoreProperty]
     public NumeralStruct numeral_Item { get; set; }
+
+    [FirestoreProperty]
+    public int piece { get; set; }
 }
 
 public enum TypeItem
 {
-    Shirt = 0,
-    Pants = 1,
-    Shoes = 2,
-    Accessory = 3,
-    ItemDaily = 4,
-    ItemWeekly = 5,
-    Chest = 6,
-    Buff = 7,
-    Gun = 8
+    Suit = 0,
+    Piece = 1,
+    Accessory = 2,
+    Buff = 3,
+    Gun = 4
+}
+
+public enum Type_Store
+{
+    ItemDaily = 0,
+    ItemWeekly = 1,
+    Chest = 2,
+
 }
 
 public struct RateItem
