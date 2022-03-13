@@ -38,7 +38,7 @@ public class ModifyPlayerInfor : MonoBehaviour
         GameObject.Find("shoes/foot").GetComponent<Image>().sprite = getOutfitImage(player.currentOutfit.currentShoes);
         GameObject.Find("pant/leg").GetComponent<Image>().sprite = getOutfitImage(player.currentOutfit.currentPant);
 
-
+        //GameObject.Find("character/leg").GetComponent<Image>().sprite =
     }
     IEnumerator GetImage(string dataImage)
     {

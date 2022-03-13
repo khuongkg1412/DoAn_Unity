@@ -105,7 +105,7 @@ public class chooseOutfit : MonoBehaviour
     {
         Texture2D OutfitImage = item.texture2D;
         Sprite sprite = Sprite.Create(OutfitImage, new Rect(0.0f, 0.0f, OutfitImage.width, OutfitImage.height), new Vector2(0.5f, 0.5f), 100.0f);
-        GameObject scrollItemObj = (GameObject)Instantiate(prefab, transform);
+        GameObject scrollItemObj = (GameObject)Instantiate(prefab, content.transform);
 
         if (notHavethisItem)
         {
