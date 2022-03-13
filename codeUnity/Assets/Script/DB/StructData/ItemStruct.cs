@@ -5,7 +5,7 @@ using Firebase.Firestore;
 using UnityEngine;
 [System.Serializable]
 [FirestoreData]
-public class NumeralStruct
+public struct NumeralStruct
 {
     [FirestoreProperty]
     public float ATK_Numeral { get; set; }
