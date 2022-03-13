@@ -30,7 +30,7 @@ public class chooseOutfit : MonoBehaviour
                 foreach (ItemStruct item in Item_DataManager.Instance.Item)
                 {
                     notHavethisItem = true;
-                    if (item.type_Item == 3)
+                    if (item.type_Item == 0)
                     {
                         foreach (Inventory_Player outfit in Player_DataManager.Instance.inventory_Player)
                         {
@@ -48,7 +48,7 @@ public class chooseOutfit : MonoBehaviour
                 foreach (ItemStruct item in Item_DataManager.Instance.Item)
                 {
                     notHavethisItem = true;
-                    if (item.type_Item == 4)
+                    if (item.type_Item == 1)
                     {
                         foreach (Inventory_Player outfit in Player_DataManager.Instance.inventory_Player)
                         {
@@ -66,7 +66,7 @@ public class chooseOutfit : MonoBehaviour
                 foreach (ItemStruct item in Item_DataManager.Instance.Item)
                 {
                     notHavethisItem = true;
-                    if (item.type_Item == 6)
+                    if (item.type_Item == 3)
                     {
                         foreach (Inventory_Player outfit in Player_DataManager.Instance.inventory_Player)
                         {
@@ -84,7 +84,7 @@ public class chooseOutfit : MonoBehaviour
                 foreach (ItemStruct item in Item_DataManager.Instance.Item)
                 {
                     notHavethisItem = true;
-                    if (item.type_Item == 5)
+                    if (item.type_Item == 2)
                     {
                         foreach (Inventory_Player outfit in Player_DataManager.Instance.inventory_Player)
                         {
@@ -115,7 +115,7 @@ public class chooseOutfit : MonoBehaviour
         }
         else
         {
-            scrollItemObj.transform.Find("choosed frame").gameObject.GetComponent<Image>().color = Color.cyan;
+            scrollItemObj.transform.Find("choosed frame").gameObject.GetComponent<Image>().color = Color.yellow;
             scrollItemObj.transform.Find("Image").gameObject.GetComponent<Image>().sprite = sprite;
             scrollItemObj.transform.Find("choosed frame").gameObject.GetComponentInParent<Button>().onClick.AddListener(() => chooseThisItem());
         }
@@ -124,6 +124,7 @@ public class chooseOutfit : MonoBehaviour
     private void chooseThisItem()
     {
         Debug.Log("OK");
+
     }
 
 
@@ -185,6 +186,14 @@ public class chooseOutfit : MonoBehaviour
         doc.SetAsync(item7);
         doc = db.Collection("Item").Document();
         doc.SetAsync(item8);
+        doc = db.Collection("Item").Document();
+        doc.SetAsync(item9);
+        doc = db.Collection("Item").Document();
+        doc.SetAsync(item10);
+        doc = db.Collection("Item").Document();
+        doc.SetAsync(item11);
+        doc = db.Collection("Item").Document();
+        doc.SetAsync(item12);
     }
 
     ItemStruct
@@ -193,20 +202,20 @@ public class chooseOutfit : MonoBehaviour
             {
                 concurrency = new Concurrency
                 {
-                    Coin = 100,
+                    Coin = 0,
                     Diamond = 0
                 },
-                description_Item = "Heal Shirt is name of Item",
-                image_Item = "Outfit_Image/Shirt/Shirt 1",
-                name_Item = "Heal Shirt",
-                rate_Item = 1,
+                description_Item = "Basic shirt for new player",
+                image_Item = "Outfit_Image/Shirt/basic_shirt",
+                name_Item = "Basic Shirt",
+                rate_Item = 0,
                 type_Item = (int)TypeItem.Shirt,
                 numeral_Item =
                     new NumeralStruct
                     {
                         ATK_Numeral = 0,
                         DEF_Numeral = 0,
-                        HP_Numeral = 10,
+                        HP_Numeral = 0,
                         SPD_Numeral = 0
                     }
             };
@@ -220,8 +229,8 @@ public class chooseOutfit : MonoBehaviour
                 Diamond = 0
             },
             description_Item = "Energy Shirt is name of Item",
-            image_Item = "Outfit_Image/Shirt/Shirt 2",
-            name_Item = "Energy Shirt",
+            image_Item = "Outfit_Image/Shirt/red_shirt",
+            name_Item = "Red Shirt",
             rate_Item = 2,
             type_Item = (int)TypeItem.Shirt,
             numeral_Item =
@@ -244,8 +253,8 @@ public class chooseOutfit : MonoBehaviour
                     Diamond = 0
                 },
                 description_Item = "Shirt Killers is name of Item",
-                image_Item = "Outfit_Image/Shirt/Shirt 3",
-                name_Item = "Shirt Killers",
+                image_Item = "Outfit_Image/Shirt/gray_shirt",
+                name_Item = "Gray Shirt",
                 rate_Item = 2,
                 type_Item = (int)TypeItem.Shirt,
                 numeral_Item =
@@ -258,24 +267,25 @@ public class chooseOutfit : MonoBehaviour
                     }
             };
 
+    //Pant
     ItemStruct item4 = new ItemStruct
     {
         concurrency = new Concurrency
         {
-            Coin = 250,
+            Coin = 0,
             Diamond = 0
         },
-        description_Item = "Yellow Shirt is name of Item",
-        image_Item = "Outfit_Image/Shirt/Shirt 4",
-        name_Item = "Yellow Shirt",
-        rate_Item = 2,
-        type_Item = (int)TypeItem.Shirt,
+        description_Item = "Basic pant for new player",
+        image_Item = "Outfit_Image/Pants/basic_pant",
+        name_Item = "Basic pant",
+        rate_Item = 0,
+        type_Item = (int)TypeItem.Pants,
         numeral_Item =
                     new NumeralStruct
                     {
                         ATK_Numeral = 0,
                         DEF_Numeral = 0,
-                        HP_Numeral = 30,
+                        HP_Numeral = 0,
                         SPD_Numeral = 0
                     }
     };
@@ -290,10 +300,10 @@ public class chooseOutfit : MonoBehaviour
                     Diamond = 0
                 },
                 description_Item = "Shirt Kit is name of Item",
-                image_Item = "Outfit_Image/Shirt/Shirt 5",
-                name_Item = "Shirt Kit",
+                image_Item = "Outfit_Image/Pants/red_pant",
+                name_Item = "Red pant",
                 rate_Item = 2,
-                type_Item = (int)TypeItem.Shirt,
+                type_Item = (int)TypeItem.Pants,
                 numeral_Item =
                     new NumeralStruct
                     {
@@ -313,11 +323,11 @@ public class chooseOutfit : MonoBehaviour
                     Coin = 0,
                     Diamond = 50
                 },
-                description_Item = "Shirt Sample is name of Item",
-                image_Item = "Outfit_Image/Shirt/Shirt 6",
-                name_Item = "Shirt Sample",
+                description_Item = "Gray pant is name of Item",
+                image_Item = "Outfit_Image/Pants/gray_pant",
+                name_Item = "Gray pant",
                 rate_Item = 2,
-                type_Item = (int)TypeItem.Shirt,
+                type_Item = (int)TypeItem.Pants,
                 numeral_Item =
                     new NumeralStruct
                     {
@@ -328,6 +338,7 @@ public class chooseOutfit : MonoBehaviour
                     }
             };
 
+    // Accessory
     ItemStruct
         item7 =
             new ItemStruct
@@ -337,11 +348,11 @@ public class chooseOutfit : MonoBehaviour
                     Coin = 0,
                     Diamond = 50
                 },
-                description_Item = "Common Shirt is name of Item",
-                image_Item = "Outfit_Image/Shirt/Shirt 7",
-                name_Item = "Common Shirt",
-                rate_Item = 2,
-                type_Item = (int)TypeItem.Shirt,
+                description_Item = "Basic accessory for new player",
+                image_Item = "Outfit_Image/Accessory/basic_accessory",
+                name_Item = "Common accessory",
+                rate_Item = 0,
+                type_Item = (int)TypeItem.Accessory,
                 numeral_Item =
                     new NumeralStruct
                     {
@@ -362,10 +373,58 @@ public class chooseOutfit : MonoBehaviour
                     Diamond = 100
                 },
                 description_Item = "Rare Shirt is name of Item",
-                image_Item = "Outfit_Image/Shirt/Shirt 8",
-                name_Item = "Rare Shirt",
+                image_Item = "Outfit_Image/Accessory/red_accessory",
+                name_Item = "Red accessory",
                 rate_Item = 2,
-                type_Item = (int)TypeItem.Shirt,
+                type_Item = (int)TypeItem.Accessory,
+                numeral_Item =
+                    new NumeralStruct
+                    {
+                        ATK_Numeral = 25,
+                        DEF_Numeral = 0,
+                        HP_Numeral = 0,
+                        SPD_Numeral = 0
+                    }
+            };
+    ItemStruct
+            item9 =
+                new ItemStruct
+                {
+                    concurrency = new Concurrency
+                    {
+                        Coin = 0,
+                        Diamond = 100
+                    },
+                    description_Item = "Rare Shirt is name of Item",
+                    image_Item = "Outfit_Image/Accessory/gray_accessory",
+                    name_Item = "Gray accessory",
+                    rate_Item = 2,
+                    type_Item = (int)TypeItem.Accessory,
+                    numeral_Item =
+                        new NumeralStruct
+                        {
+                            ATK_Numeral = 40,
+                            DEF_Numeral = 0,
+                            HP_Numeral = 0,
+                            SPD_Numeral = 0
+                        }
+                };
+
+    // Shoes
+    ItemStruct
+        item10 =
+            new ItemStruct
+            {
+                concurrency = new Concurrency
+                {
+                    Coin = 0,
+                    Diamond = 0
+                },
+                description_Item = "Basic shoes for new player",
+                image_Item = "Outfit_Image/Shoes/basic_shoes",
+                name_Item = "Basic Shoes",
+                rate_Item = 0,
+                type_Item = (int)TypeItem.Shoes,
                 numeral_Item =
                     new NumeralStruct
                     {
@@ -376,4 +435,50 @@ public class chooseOutfit : MonoBehaviour
                     }
             };
 
+    ItemStruct
+        item11 =
+            new ItemStruct
+            {
+                concurrency = new Concurrency
+                {
+                    Coin = 0,
+                    Diamond = 100
+                },
+                description_Item = "Rare Shirt is name of Item",
+                image_Item = "Outfit_Image/Shoes/red_shoes",
+                name_Item = "Red Shoes",
+                rate_Item = 2,
+                type_Item = (int)TypeItem.Shoes,
+                numeral_Item =
+                    new NumeralStruct
+                    {
+                        ATK_Numeral = 0,
+                        DEF_Numeral = 0,
+                        HP_Numeral = 0,
+                        SPD_Numeral = 30
+                    }
+            };
+    ItemStruct
+            item12 =
+                new ItemStruct
+                {
+                    concurrency = new Concurrency
+                    {
+                        Coin = 0,
+                        Diamond = 100
+                    },
+                    description_Item = "Rare Shirt is name of Item",
+                    image_Item = "Outfit_Image/Shoes/gray_shoes",
+                    name_Item = "Gray Shoes",
+                    rate_Item = 2,
+                    type_Item = (int)TypeItem.Shoes,
+                    numeral_Item =
+                    new NumeralStruct
+                    {
+                        ATK_Numeral = 0,
+                        DEF_Numeral = 0,
+                        HP_Numeral = 0,
+                        SPD_Numeral = 25
+                    }
+                };
 }

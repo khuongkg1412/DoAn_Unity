@@ -33,10 +33,12 @@ public class ModifyPlayerInfor : MonoBehaviour
 
 
         //load outfit
-        GameObject.Find("shirt/body").GetComponent<Image>().sprite = getOutfitImage("SEWnEHmTZSTMWKvAPF8l");
-        //GameObject.Find("accesory/head").GetComponent<Image>().sprite = 
-        //GameObject.Find("accesory/head").GetComponent<Image>().sprite = 
-        //GameObject.Find("accesory/head").GetComponent<Image>().sprite = 
+        GameObject.Find("accesory/head").GetComponent<Image>().sprite = getOutfitImage(player.currentOutfit.currentAccesory);
+        GameObject.Find("shirt/body").GetComponent<Image>().sprite = getOutfitImage(player.currentOutfit.currentShirt);
+        GameObject.Find("shoes/foot").GetComponent<Image>().sprite = getOutfitImage(player.currentOutfit.currentShoes);
+        GameObject.Find("pant/leg").GetComponent<Image>().sprite = getOutfitImage(player.currentOutfit.currentPant);
+
+
     }
     IEnumerator GetImage(string dataImage)
     {
@@ -71,19 +73,19 @@ public class ModifyPlayerInfor : MonoBehaviour
     public static int typeOfOutfit;
     public void openWindowForShirt()
     {
-        typeOfOutfit = 3;
+        typeOfOutfit = 0;
     }
     public void openWindowForPants()
     {
-        typeOfOutfit = 4;
+        typeOfOutfit = 1;
     }
     public void openWindowForShoes()
     {
-        typeOfOutfit = 5;
+        typeOfOutfit = 2;
     }
     public void openWindowForAccessory()
     {
-        typeOfOutfit = 6;
+        typeOfOutfit = 3;
     }
 
     private Sprite getOutfitImage(string ID)

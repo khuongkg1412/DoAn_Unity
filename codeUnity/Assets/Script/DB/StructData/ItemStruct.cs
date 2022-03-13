@@ -50,14 +50,15 @@ public class ItemStruct
 
 public enum TypeItem
 {
-    ItemDaily = 0,
-    ItemWeekly = 1,
-    Chest = 2,
-    Shirt = 3,
-    Pants = 4,
-    Shoes = 5,
-    Accessory = 6,
-    Buff = 7
+    Shirt = 0,
+    Pants = 1,
+    Shoes = 2,
+    Accessory = 3,
+    ItemDaily = 4,
+    ItemWeekly = 5,
+    Chest = 6,
+    Buff = 7,
+    Gun = 8
 }
 
 public struct RateItem
