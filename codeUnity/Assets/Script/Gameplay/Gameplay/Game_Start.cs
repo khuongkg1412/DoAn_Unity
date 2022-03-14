@@ -60,7 +60,6 @@ public class Game_Start : MonoBehaviour
     {
         if (!isStoped)
         {
-            Debug.Log("Game Still Running");
             //Continute runing time whilke game is not oer
             if (isGameOver == false)
             {
@@ -107,8 +106,9 @@ public class Game_Start : MonoBehaviour
         string scenceName = SceneManager.GetActiveScene().name;
         //Calculate the stage
         float stage = float.Parse(scenceName.Substring(5));
-        //Update score to database
+        //Update score and statistic to database
         Player_DataManager.Instance.finishTheStage(score, stage, isVictory);
+        Player_DataManager.Instance.updateStatistic(citizenSaveNumber, enemyNumber);
     }
     //Update score every frame by the score that is hold by object Character
     public void UpdateScore()

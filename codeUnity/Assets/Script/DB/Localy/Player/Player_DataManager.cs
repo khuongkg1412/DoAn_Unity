@@ -28,7 +28,23 @@ public class Player_DataManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
+    public void updateBuffInInventory(ItemStruct itemBuff, float quanity)
+    {
+        //update number of buff after playing game
+        foreach (var i in inventory_Player)
+        {
+            if (i.ID == itemBuff.ID)
+            {
+                Debug.Log("Item Edit is " + itemBuff.name_Item + " with quantiy " + quanity);
+                i.item = new Dictionary<string, float>{
+                    {itemBuff.name_Item,quanity}
+                };
+            }
+        }
+        //inventory_Player.Find(x => x.ID == itemBuff.ID).item[itemBuff.name_Item] = quanity;
+        //Call to update the information off Player
+        Player_Update.UpdatePlayer();
+    }
     public void settingCharacter(NumeralStruct numeralStruct)
     {
         this.playerCharacter = new Character(numeralStruct);
@@ -157,6 +173,20 @@ public class Player_DataManager : MonoBehaviour
         Player_Update.UpdatePlayer();
     }
 
+    public void updateStatistic(float citizenSaved, float virusKilled)
+    {
+        //Citizen Saved and virus killed
+        citizenSaved += Player.statistic["Citizen_Saved"];
+        virusKilled += Player.statistic["Virus_Kill"];
+
+        Player.statistic = new Dictionary<string, float>()
+        {
+            {"Citizen_Saved" ,citizenSaved},
+             {"Virus_Kill" ,virusKilled}
+        };
+        //Call to update the information off Player
+        Player_Update.UpdatePlayer();
+    }
     public void SendLiferequest(string FriendId)
     {
         Notification_Struct lifeRequest = new Notification_Struct()

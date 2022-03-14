@@ -57,9 +57,13 @@ public class Player_Controller : MonoBehaviour
     */
     Camera cameraMain;
 
+    //Buff Item
+    [SerializeField] GameObject buffItem;
     // Start is called before the first frame update
     void Start()
     {
+        buffItem.GetComponent<ItemBuff>().itemBuff = Player_DataManager.Instance.playerCharacter.buffInGame[0];
+        buffItem.GetComponent<ItemBuff>().setDataForBuff();
         settingCharacter();
         //Let Player shoot and move fistly
         Character.setShoot(true);
@@ -127,10 +131,12 @@ public class Player_Controller : MonoBehaviour
         //Cheeck the player is dead
         if (Character.isPlayerDead())
         {
-            canvas.GetComponent<Game_Start>().GameOVer();
-
+            if (canvas.GetComponent<Game_Boss>() != null)
+            {
+                canvas.GetComponent<Game_Boss>().GameOVer();
+            }
             //Split up by 2 modes : Story Mode and Tutorial
-            if (canvas.GetComponent<Game_Start>() != null)
+            else if (canvas.GetComponent<Game_Start>() != null)
             {
                 canvas.GetComponent<Game_Start>().GameOVer();
             }
