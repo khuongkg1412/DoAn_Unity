@@ -37,7 +37,7 @@ public class Game_Boss : MonoBehaviour
         //Set virus type for boss virus
         VirusBoos.GetComponent<Boss1>().virus = new VirusBoss();
         VirusBoos.GetComponent<Boss1>().setNumeral();
-        //VirusBoos.GetComponent<Virus_Numeral>().settingNumeral(new VirusBoss());
+        VirusBoos.GetComponent<Virus_Numeral>().settingNumeral(new VirusBoss());
         //Scale Time is normal
         Time.timeScale = 1f;
         //Convert to landscape mode in gameplay

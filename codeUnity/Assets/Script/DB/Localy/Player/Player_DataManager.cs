@@ -39,6 +39,7 @@ public class Player_DataManager : MonoBehaviour
                 i.item = new Dictionary<string, float>{
                     {itemBuff.name_Item,quanity}
                 };
+                // i.quantiy = quanity;
             }
         }
         //inventory_Player.Find(x => x.ID == itemBuff.ID).item[itemBuff.name_Item] = quanity;

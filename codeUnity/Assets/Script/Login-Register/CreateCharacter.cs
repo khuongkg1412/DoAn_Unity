@@ -73,10 +73,7 @@ public class CreateCharacter : MonoBehaviour
             },
             statistic = new Dictionary<string, float>
             {
-                {"VirusA_Killed",0},
-                {"VirusB_Killed",0},
-                {"VirusC_Killed",0},
-                {"VirusD_Killed",0},
+                {"Virus_Kill",0},
                 {"Citizen_Saved",0}
             },
             currentOutfit = new Outfit()
