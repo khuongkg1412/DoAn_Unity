@@ -28,18 +28,14 @@ public class Player_DataManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    public void updateBuffInInventory(ItemStruct itemBuff, float quanity)
+    public void updateBuffInInventory(ItemStruct itemBuff, int quanity)
     {
         //update number of buff after playing game
         foreach (var i in inventory_Player)
         {
             if (i.ID == itemBuff.ID)
             {
-                Debug.Log("Item Edit is " + itemBuff.name_Item + " with quantiy " + quanity);
-                i.item = new Dictionary<string, float>{
-                    {itemBuff.name_Item,quanity}
-                };
-                // i.quantiy = quanity;
+                i.quantiy = quanity;
             }
         }
         //inventory_Player.Find(x => x.ID == itemBuff.ID).item[itemBuff.name_Item] = quanity;
@@ -65,30 +61,29 @@ public class Player_DataManager : MonoBehaviour
     }
     public void adding_Item(ItemStruct item, int quantityBuy)
     {
-        //quantity of item
-        float quanity = 0;
         bool isFound = false;
-        for (int i = 0; i < Instance.inventory_Player.Count; i++)
+        //Find Item in the invent player
+        foreach (var i in Instance.inventory_Player)
         {
-            if (Instance.inventory_Player[i].item.ContainsKey(item.name_Item))
+            if (item.ID.Equals(i.ID))
             {
-                quanity = Instance.inventory_Player[i].item[item.name_Item];
-                quanity += quantityBuy;
-                Instance.inventory_Player[i].item = new Dictionary<string, float>() { { item.name_Item, quanity } };
+                i.quantiy += quantityBuy;
                 isFound = true;
             }
         }
+        //In case cannot found in exist invent, create new 
         if (isFound == false)
         {
             //adding item to inventory
             Inventory_Player invent = new Inventory_Player()
             {
                 ID = item.ID,
-                item = new Dictionary<string, float>() { { item.name_Item, quanity + quantityBuy } }
+                level = 0,
+                quantiy = quantityBuy
             };
+            //Add to Invent
             Instance.inventory_Player.Add(invent);
         }
-
         //Call to update the information off Player
         Player_Update.UpdatePlayer();
     }

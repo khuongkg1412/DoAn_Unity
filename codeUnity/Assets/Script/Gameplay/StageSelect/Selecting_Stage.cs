@@ -132,7 +132,7 @@ public class Selecting_Stage : MonoBehaviour
                 {
                     if (inventItem.ID.Equals(objectItem.ID))
                     {
-                        Populate(verticalLayout, objectItem, (int)inventItem.item[objectItem.name_Item]);
+                        Populate(verticalLayout, objectItem, (int)inventItem.quantiy);
                     }
                 }
             }
