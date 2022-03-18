@@ -287,7 +287,8 @@ MonoBehaviour:
   isBossStage: 1
   positionSpawn:
   - {fileID: 2118607171}
-  Enemy: {fileID: 946611837}
+  Enemy:
+  - {fileID: 0}
   numberOfEnemies: 1
   numberOfBoss: 0
   spawnedPos: 
@@ -86942,13 +86943,13 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 1
+  m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &571074377
 MonoBehaviour:
@@ -88634,11 +88635,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 904344177}
   m_CullTransparentMesh: 1
---- !u!1 &946611837 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6532921673233310877, guid: 28a54c95b9baaa44ebf266e3b76d76e6, type: 3}
-  m_PrefabInstance: {fileID: 6532921673374073568}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &947614829
 GameObject:
   m_ObjectHideFlags: 0
