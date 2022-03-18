@@ -7,10 +7,9 @@ public class VirusC_Controller : MonoBehaviour
     //Setting up Enemy
     public Enemy virus;
     //Player targetPlayer to enemy move forward
-    public GameObject[] targetCitizen;
-    public Transform targetPlayer;
+    GameObject[] targetCitizen;
+    Transform targetPlayer;
     //The orginal position of enemy, after out of range with player, enemy would comeback here
-    [SerializeField]
     Transform originalPos;
 
     //Decide whether enemy is following player
@@ -29,7 +28,7 @@ public class VirusC_Controller : MonoBehaviour
     //Max Health Point
     float maxHP;
 
-    public GameObject HealthBar;
+    GameObject HealthBar;
 
     float maxHPsize;
 

@@ -89967,6 +89967,67 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1302216711
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3742661656469796482, guid: 00889ad78e7ab1445b7fb261e1cc9d17, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7591102306354517024, guid: 00889ad78e7ab1445b7fb261e1cc9d17, type: 3}
+      propertyPath: m_Name
+      value: VirusB1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7591102306354517027, guid: 00889ad78e7ab1445b7fb261e1cc9d17, type: 3}
+      propertyPath: m_RootOrder
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7591102306354517027, guid: 00889ad78e7ab1445b7fb261e1cc9d17, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2585
+      objectReference: {fileID: 0}
+    - target: {fileID: 7591102306354517027, guid: 00889ad78e7ab1445b7fb261e1cc9d17, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -919
+      objectReference: {fileID: 0}
+    - target: {fileID: 7591102306354517027, guid: 00889ad78e7ab1445b7fb261e1cc9d17, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7591102306354517027, guid: 00889ad78e7ab1445b7fb261e1cc9d17, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7591102306354517027, guid: 00889ad78e7ab1445b7fb261e1cc9d17, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7591102306354517027, guid: 00889ad78e7ab1445b7fb261e1cc9d17, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7591102306354517027, guid: 00889ad78e7ab1445b7fb261e1cc9d17, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7591102306354517027, guid: 00889ad78e7ab1445b7fb261e1cc9d17, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7591102306354517027, guid: 00889ad78e7ab1445b7fb261e1cc9d17, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7591102306354517027, guid: 00889ad78e7ab1445b7fb261e1cc9d17, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 00889ad78e7ab1445b7fb261e1cc9d17, type: 3}
 --- !u!1 &1327838807
 GameObject:
   m_ObjectHideFlags: 0
@@ -104078,7 +104139,7 @@ MonoBehaviour:
   - {fileID: 998119791209683170}
   - {fileID: 5304088535282924907}
   - {fileID: 4695860171038167683}
-  numberOfEnemies: 8
+  numberOfEnemies: 2
   numberOfBoss: 0
   spawnedPos: 
 --- !u!4 &1576777873
@@ -106251,14 +106312,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6825687206126988218, guid: cc692acdda0882c49bd46b3c1461282d, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6825687206126988218, guid: cc692acdda0882c49bd46b3c1461282d, type: 3}
-      propertyPath: targetPlayer
-      value: 
-      objectReference: {fileID: 571074374}
     - target: {fileID: 8314496568217713781, guid: cc692acdda0882c49bd46b3c1461282d, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -106364,10 +106417,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: VirusB
       objectReference: {fileID: 0}
-    - target: {fileID: 5160344071907811827, guid: d9f9eddc4ba35d244af0323c5dc0b646, type: 3}
-      propertyPath: targetPlayer
-      value: 
-      objectReference: {fileID: 571074374}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9f9eddc4ba35d244af0323c5dc0b646, type: 3}
 --- !u!1 &4695860171038167683 stripped
@@ -106520,10 +106569,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: VirusD
       objectReference: {fileID: 0}
-    - target: {fileID: 2389428317469107126, guid: 96837f3b4ee3fa546820b0478b8e7d54, type: 3}
-      propertyPath: targetPlayer
-      value: 
-      objectReference: {fileID: 571074374}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96837f3b4ee3fa546820b0478b8e7d54, type: 3}
 --- !u!1001 &6204861698789194683
@@ -106581,10 +106626,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3629127752460898588, guid: 2978eda9618ecb546a5dcf5e508eeffa, type: 3}
-      propertyPath: targetPlayer
-      value: 
-      objectReference: {fileID: 571074374}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2978eda9618ecb546a5dcf5e508eeffa, type: 3}
 --- !u!1001 &6532921673374073568

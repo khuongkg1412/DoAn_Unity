@@ -157,7 +157,7 @@ GameObject:
   - component: {fileID: 8021248429671606582}
   - component: {fileID: 2151949866317708730}
   - component: {fileID: 1941216779266144721}
-  - component: {fileID: 5160344071907811827}
+  - component: {fileID: 8613661020921829353}
   - component: {fileID: 2451756579279255358}
   - component: {fileID: 7825668028455905683}
   - component: {fileID: 7825668028455905772}
@@ -283,7 +283,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 34.855408, y: 28.411959}
   m_EdgeRadius: 3.9
---- !u!114 &5160344071907811827
+--- !u!114 &8613661020921829353
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -292,14 +292,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4619292543256270243}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e9e792357b58d54ea1c8554d0692caa, type: 3}
+  m_Script: {fileID: 11500000, guid: 719e8b32afa202b468a3522bf20b9d8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetCitizen: []
-  targetPlayer: {fileID: 0}
-  originalPos: {fileID: 3905678856363073341}
   isFollow: 1
-  HealthBar: {fileID: 9163166603269648109}
   isBoss: 0
 --- !u!114 &2451756579279255358
 MonoBehaviour:

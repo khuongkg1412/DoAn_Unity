@@ -11,13 +11,13 @@ public struct Character
         this.isDead = false;
         this.score = 0f;
         this.isRevive = false;
-        this.buffInGame = new List<ItemStruct>();
+        this.buffInGame = new ItemStruct();
     }
     private NumeralStruct numeral;
 
     private NumeralStruct originalNumeral;
 
-    public List<ItemStruct> buffInGame;
+    public ItemStruct buffInGame;
 
     private bool isDead;
     public bool isRevive
@@ -108,7 +108,7 @@ public struct Character
 
     public void addBuff(ItemStruct item)
     {
-        buffInGame.Add(item);
+        this.buffInGame = item;
     }
     public float returnATK()
     {
