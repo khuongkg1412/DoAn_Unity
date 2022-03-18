@@ -106521,6 +106521,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 172402983, guid: 96837f3b4ee3fa546820b0478b8e7d54, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.699405
+      objectReference: {fileID: 0}
+    - target: {fileID: 172402983, guid: 96837f3b4ee3fa546820b0478b8e7d54, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.00000021100236
+      objectReference: {fileID: 0}
+    - target: {fileID: 597409076, guid: 96837f3b4ee3fa546820b0478b8e7d54, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 993678806, guid: 96837f3b4ee3fa546820b0478b8e7d54, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2015445521, guid: 96837f3b4ee3fa546820b0478b8e7d54, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2079805075, guid: 96837f3b4ee3fa546820b0478b8e7d54, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 932883591916156025, guid: 96837f3b4ee3fa546820b0478b8e7d54, type: 3}
       propertyPath: m_RootOrder
       value: 14
@@ -106568,6 +106592,10 @@ PrefabInstance:
     - target: {fileID: 932883591916156026, guid: 96837f3b4ee3fa546820b0478b8e7d54, type: 3}
       propertyPath: m_Name
       value: VirusD
+      objectReference: {fileID: 0}
+    - target: {fileID: 932883592885867420, guid: 96837f3b4ee3fa546820b0478b8e7d54, type: 3}
+      propertyPath: m_SpriteSortPoint
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96837f3b4ee3fa546820b0478b8e7d54, type: 3}

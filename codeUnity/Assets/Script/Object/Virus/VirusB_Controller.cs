@@ -37,7 +37,7 @@ public class VirusB_Controller : MonoBehaviour
     {
         targetPlayer = GameObject.FindWithTag("Player").transform;
         originalPos = transform.parent.gameObject.transform.GetChild(1).gameObject.transform;
-        HealthBar = transform.GetChild(0).gameObject;
+        HealthBar = transform.GetChild(0).gameObject.transform.GetChild(1).gameObject;
         gamePlay = GameObject.Find("Canvas");
         virus = new VirusB();
         setNumeral();
