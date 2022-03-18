@@ -187,22 +187,27 @@ Shooting timer countdown
         */
         if (other.gameObject.tag == "Bullet")
         {
+
             currentHP -= other.gameObject.GetComponent<Bullet>().dameGiven;
+            Debug.Log("currentHP " + currentHP);
             if (currentHP > 0)
             {
+                Debug.Log("Still live");
                 HealthBar.transform.localScale = new Vector3((currentHP / maxHP) * maxHPsize, HealthBar.transform.transform.localScale.y, HealthBar.transform.transform.localScale.z);
             }
             else
             {
+                Debug.Log("Dead");
                 currentHP = 0;
                 HealthBar.transform.localScale =
                     new Vector3(0,
                         HealthBar.transform.transform.localScale.y,
                         HealthBar.transform.transform.localScale.z);
-                Destroy(gameObject);
                 if (gamePlay.GetComponent<Game_Boss>() != null)
                 {
                     GameObject.FindWithTag("Player").GetComponent<Player_Controller>().Character.score += 1000;
+                    gamePlay.GetComponent<Game_Boss>().isGameOver = true;
+                    gamePlay.GetComponent<Game_Boss>().isVictory = true;
                 }
                 else if (gamePlay.GetComponent<Game_Start>() != null)
                 {
@@ -214,6 +219,7 @@ Shooting timer countdown
                     gamePlay.GetComponent<Game_Tutorial>().UpdateScore(10f);
                     gamePlay.GetComponent<Game_Tutorial>().UpdateEnemyNumber(1);
                 }
+                Destroy(gameObject);
 
             }
         }
@@ -254,4 +260,5 @@ Shooting timer countdown
             }
         }
     }
+
 }

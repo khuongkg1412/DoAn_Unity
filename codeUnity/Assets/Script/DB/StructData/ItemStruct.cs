@@ -5,7 +5,7 @@ using Firebase.Firestore;
 using UnityEngine;
 [System.Serializable]
 [FirestoreData]
-public class NumeralStruct
+public struct NumeralStruct
 {
     [FirestoreProperty]
     public float ATK_Numeral { get; set; }
@@ -44,20 +44,31 @@ public class ItemStruct
 
     [FirestoreProperty]
     public int type_Item { get; set; }
+
+    [FirestoreProperty]
+    public int type_Store { get; set; }
     [FirestoreProperty]
     public NumeralStruct numeral_Item { get; set; }
+
+    [FirestoreProperty]
+    public int piece { get; set; }
 }
 
 public enum TypeItem
 {
+    Suit = 0,
+    Accessory = 1,
+    Gun = 2,
+    Buff = 3,
+    Piece = 4
+}
+
+public enum Type_Store
+{
     ItemDaily = 0,
     ItemWeekly = 1,
     Chest = 2,
-    Shirt = 3,
-    Pants = 4,
-    Shoes = 5,
-    Accessory = 6,
-    Buff = 7
+
 }
 
 public struct RateItem

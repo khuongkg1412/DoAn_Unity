@@ -109,7 +109,7 @@ public class LoadingItem : MonoBehaviour
     {
         //Get the current quantity by parse the string in the text field
         int currentQuantity = int.Parse(quantityText.text);
-        if (dataItem.type_Item == (int)TypeItem.Chest)
+        if (dataItem.type_Store == (int)Type_Store.Chest)
         {
             if (dataItem.name_Item.Equals("Common Chest"))
             {
@@ -154,7 +154,7 @@ public class LoadingItem : MonoBehaviour
                     Player_DataManager.Instance.adding_Item(dataItem, int.Parse(quantityText.text));
                     notificationTransaction.color = new Color(0, 1, 0);
                     notificationTransaction.text = "Successful Transaction";
-                    if (dataItem.type_Item == (int)TypeItem.Chest)
+                    if (dataItem.type_Store == (int)Type_Store.Chest)
                     {
                         OpenChest();
                     }
@@ -179,7 +179,7 @@ public class LoadingItem : MonoBehaviour
                     Player_DataManager.Instance.adding_Item(dataItem, int.Parse(quantityText.text));
                     notificationTransaction.color = new Color(0, 1, 0);
                     notificationTransaction.text = "Successful Transaction";
-                    if (dataItem.type_Item == (int)TypeItem.Chest)
+                    if (dataItem.type_Store == (int)Type_Store.Chest)
                     {
                         OpenChest();
                     }
@@ -280,18 +280,18 @@ public class LoadingItem : MonoBehaviour
     {
         quantityText.text = "1";
         nameItem.text = dataItem.name_Item;
-        if (dataItem.type_Item == (int)TypeItem.ItemDaily)
+        if (dataItem.type_Store == (int)Type_Store.ItemDaily)
         {
             type.text = "Item Daily";
         }
-        else if (dataItem.type_Item == (int)TypeItem.ItemWeekly)
+        else if (dataItem.type_Store == (int)Type_Store.ItemWeekly)
         {
             type.text = "Item Weekly";
         }
         description.text = dataItem.description_Item;
         //Load data from Resource folders
         dataImage.texture = dataItem.texture2D;
-        dataImage.SetNativeSize(); //Set native size for image
+        //dataImage.SetNativeSize(); //Set native size for image
         diamondItem.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text = dataItem.concurrency.Diamond.ToString();
         coinItem.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text = dataItem.concurrency.Coin.ToString();
     }
@@ -311,17 +311,17 @@ public class LoadingItem : MonoBehaviour
     */
     public void loadingData()
     {
-        switch (dataItem.type_Item)
+        switch (dataItem.type_Store)
         {
-            case (int)TypeItem.ItemDaily:
+            case (int)Type_Store.ItemDaily:
                 settingObject();
                 dataforItem();
                 break;
-            case (int)TypeItem.ItemWeekly:
+            case (int)Type_Store.ItemWeekly:
                 settingObject();
                 dataforItem();
                 break;
-            case (int)TypeItem.Chest:
+            case (int)Type_Store.Chest:
                 settingObjectForChest();
                 dataforItemChest();
                 break;

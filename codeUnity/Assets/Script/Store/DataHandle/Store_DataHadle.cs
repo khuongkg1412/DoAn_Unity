@@ -31,6 +31,7 @@ public class Store_DataHadle : MonoBehaviour
     {
         //Start load data into the prototype
         setDatatoGO();
+        // AddData();
 
     }
 
@@ -75,7 +76,7 @@ public class Store_DataHadle : MonoBehaviour
         GameObject prefab = GameObject.Find("BoxItem"); // Create GameObject instance
         //Set data in that prototype 
         dataImage.texture = Item.texture2D;
-        dataImage.SetNativeSize();
+        //dataImage.SetNativeSize();
         itemName.text = Item.name_Item;
         //Instaniate the object item
         GameObject item = Instantiate(prefab, verticalObject.transform);
@@ -98,6 +99,7 @@ public class Store_DataHadle : MonoBehaviour
         name_Item = "Revive",
         rate_Item = RateItem.Legendary,
         type_Item = (int)TypeItem.Buff,
+        type_Store = (int)Type_Store.ItemWeekly,
         numeral_Item =
                    new NumeralStruct
                    {
@@ -119,6 +121,7 @@ public class Store_DataHadle : MonoBehaviour
         name_Item = "Heal",
         rate_Item = RateItem.Common,
         type_Item = (int)TypeItem.Buff,
+        type_Store = (int)Type_Store.ItemDaily,
         numeral_Item =
                    new NumeralStruct
                    {
@@ -140,6 +143,7 @@ public class Store_DataHadle : MonoBehaviour
         name_Item = "Shield",
         rate_Item = RateItem.Common,
         type_Item = (int)TypeItem.Buff,
+        type_Store = (int)Type_Store.ItemDaily,
         numeral_Item =
                    new NumeralStruct
                    {
@@ -161,6 +165,7 @@ public class Store_DataHadle : MonoBehaviour
         name_Item = "Speed",
         rate_Item = RateItem.Common,
         type_Item = (int)TypeItem.Buff,
+        type_Store = (int)Type_Store.ItemDaily,
         numeral_Item =
                new NumeralStruct
                {
@@ -182,6 +187,7 @@ public class Store_DataHadle : MonoBehaviour
         name_Item = "Speed",
         rate_Item = RateItem.Common,
         type_Item = (int)TypeItem.Buff,
+        type_Store = (int)Type_Store.ItemDaily,
         numeral_Item =
            new NumeralStruct
            {
@@ -192,151 +198,18 @@ public class Store_DataHadle : MonoBehaviour
            }
     };
 
-    // Data Sample
-    ItemStruct item1 = new ItemStruct
-    {
-        concurrency = new Concurrency
-        {
-            Coin = 100,
-            Diamond = 0
-        },
-        description_Item = "Heal Pills is name of Item",
-        image_Item = "Item_Image/HealPills",
-        name_Item = "Heal Pills",
-        rate_Item = RateItem.Common,
-        type_Item = (int)TypeItem.ItemDaily,
-        numeral_Item =
-                    new NumeralStruct
-                    {
-                        ATK_Numeral = 0,
-                        DEF_Numeral = 0,
-                        HP_Numeral = 10,
-                        SPD_Numeral = 0
-                    }
-    };
-
-    ItemStruct item2 = new ItemStruct
+    ItemStruct itemReal6 = new ItemStruct
     {
         concurrency = new Concurrency
         {
             Coin = 200,
-            Diamond = 0
-        },
-        description_Item = "Energy Pills is name of Item",
-        image_Item = "Item_Image/EnergyPills",
-        name_Item = "Energy Pills",
-        rate_Item = RateItem.Rare,
-        type_Item = (int)TypeItem.ItemDaily,
-        numeral_Item =
-                    new NumeralStruct
-                    {
-                        ATK_Numeral = 0,
-                        DEF_Numeral = 0,
-                        HP_Numeral = 20,
-                        SPD_Numeral = 0
-                    }
-    };
-
-    ItemStruct item3 = new ItemStruct
-    {
-        concurrency = new Concurrency
-        {
-            Coin = 250,
-            Diamond = 0
-        },
-        description_Item = "Pain Killers is name of Item",
-        image_Item = "Item_Image/PainKiller",
-        name_Item = "Pain Killers",
-        rate_Item = RateItem.Epic,
-        type_Item = (int)TypeItem.ItemDaily,
-        numeral_Item =
-                    new NumeralStruct
-                    {
-                        ATK_Numeral = 0,
-                        DEF_Numeral = 0,
-                        HP_Numeral = 30,
-                        SPD_Numeral = 0
-                    }
-    };
-
-    ItemStruct item4 = new ItemStruct
-    {
-        concurrency = new Concurrency
-        {
-            Coin = 250,
-            Diamond = 0
-        },
-        description_Item = "Yellow Tube is name of Item",
-        image_Item = "Item_Image/blood-test (1)",
-        name_Item = "Yellow Tube",
-        rate_Item = RateItem.Common,
-        type_Item = (int)TypeItem.ItemWeekly,
-        numeral_Item =
-                    new NumeralStruct
-                    {
-                        ATK_Numeral = 0,
-                        DEF_Numeral = 0,
-                        HP_Numeral = 30,
-                        SPD_Numeral = 0
-                    }
-    };
-
-    ItemStruct item5 = new ItemStruct
-    {
-        concurrency = new Concurrency
-        {
-            Coin = 250,
-            Diamond = 0
-        },
-        description_Item = "Test Kit is name of Item",
-        image_Item = "Item_Image/image 58",
-        name_Item = "Test Kit",
-        rate_Item = RateItem.Epic,
-        type_Item = (int)TypeItem.ItemWeekly,
-        numeral_Item =
-                    new NumeralStruct
-                    {
-                        ATK_Numeral = 0,
-                        DEF_Numeral = 0,
-                        HP_Numeral = 30,
-                        SPD_Numeral = 0
-                    }
-    };
-
-    ItemStruct item6 = new ItemStruct
-    {
-        concurrency = new Concurrency
-        {
-            Coin = 0,
-            Diamond = 50
-        },
-        description_Item = "Test Sample is name of Item",
-        image_Item = "Item_Image/blood-test",
-        name_Item = "Test Sample",
-        rate_Item = RateItem.Legendary,
-        type_Item = (int)TypeItem.ItemWeekly,
-        numeral_Item =
-                    new NumeralStruct
-                    {
-                        ATK_Numeral = 0,
-                        DEF_Numeral = 0,
-                        HP_Numeral = 30,
-                        SPD_Numeral = 0
-                    }
-    };
-
-    ItemStruct item7 = new ItemStruct
-    {
-        concurrency = new Concurrency
-        {
-            Coin = 0,
             Diamond = 50
         },
         description_Item = "Common Chest is name of Item",
         image_Item = "Item_Image/KitCommon",
         name_Item = "Common Chest",
         rate_Item = 2,
-        type_Item = (int)TypeItem.Chest,
+        type_Store = (int)Type_Store.Chest,
         numeral_Item =
                     new NumeralStruct
                     {
@@ -347,7 +220,7 @@ public class Store_DataHadle : MonoBehaviour
                     }
     };
 
-    ItemStruct item8 = new ItemStruct
+    ItemStruct itemReal7 = new ItemStruct
     {
         concurrency = new Concurrency
         {
@@ -358,7 +231,7 @@ public class Store_DataHadle : MonoBehaviour
         image_Item = "Item_Image/KitRare",
         name_Item = "Rare Chest",
         rate_Item = 2,
-        type_Item = (int)TypeItem.Chest,
+        type_Store = (int)Type_Store.Chest,
         numeral_Item =
                     new NumeralStruct
                     {
@@ -380,20 +253,19 @@ public class Store_DataHadle : MonoBehaviour
 
         //Get Collection And Document
         DocumentReference doc = db.Collection("Item").Document();
-        doc.SetAsync(item1);
         doc = db.Collection("Item").Document();
-        doc.SetAsync(item2);
+        doc.SetAsync(itemReal1);
         doc = db.Collection("Item").Document();
-        doc.SetAsync(item3);
+        doc.SetAsync(itemReal2);
         doc = db.Collection("Item").Document();
-        doc.SetAsync(item4);
+        doc.SetAsync(itemReal3);
         doc = db.Collection("Item").Document();
-        doc.SetAsync(item5);
+        doc.SetAsync(itemReal4);
         doc = db.Collection("Item").Document();
-        doc.SetAsync(item6);
+        doc.SetAsync(itemReal5);
         doc = db.Collection("Item").Document();
-        doc.SetAsync(item7);
+        doc.SetAsync(itemReal6);
         doc = db.Collection("Item").Document();
-        doc.SetAsync(item8);
+        doc.SetAsync(itemReal7);
     }
 }

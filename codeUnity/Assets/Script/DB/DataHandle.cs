@@ -14,13 +14,6 @@ public class DataHandle : MonoBehaviour
     /*
     Player
     */
-    Inventory_Player inventory_Player = new Inventory_Player()
-    {
-        item = new Dictionary<string, float>
-        {
-            {"item", 0 }
-        }
-    };
     SystemNotification systemNotification = new SystemNotification()
     {
         status_Notification = false
@@ -70,10 +63,9 @@ public class DataHandle : MonoBehaviour
             },
         currentOutfit = new Outfit()
         {
-            currentShirt = "SEWnEHmTZSTMWKvAPF8l",
-            currentPant = "",
-            currentAccesory = "",
-            currentShoes = ""
+            currentSuit = "wo7LWsLLKNB3riZdVaAg",
+            currentAccesory = "bj1vVjGVvMiYROHKfrE4",
+            currentGun = "DiK9GKuMVltYg5lc9neE"
         }
     };
 

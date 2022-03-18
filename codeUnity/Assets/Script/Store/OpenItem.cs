@@ -16,23 +16,23 @@ public class OpenItem : MonoBehaviour
 
     public void OpenPannelItem()
     {
-        switch (dataItem.type_Item)
+        switch (dataItem.type_Store)
         {
-            case (int)TypeItem.ItemDaily:
+            case (int)Type_Store.ItemDaily:
                 blurBG.SetActive(true);
                 pannel.SetActive(true);
                 pannel.GetComponent<LoadingItem>().dataItem = dataItem;
                 pannel.GetComponent<LoadingItem>().loadingData();
                 pannelChest.SetActive(false);
                 break;
-            case (int)TypeItem.ItemWeekly:
+            case (int)Type_Store.ItemWeekly:
                 blurBG.SetActive(true);
                 pannel.SetActive(true);
                 pannel.GetComponent<LoadingItem>().dataItem = dataItem;
                 pannel.GetComponent<LoadingItem>().loadingData();
                 pannelChest.SetActive(false);
                 break;
-            case (int)TypeItem.Chest:
+            case (int)Type_Store.Chest:
                 blurBG.SetActive(true);
                 pannel.SetActive(false);
                 pannelChest.SetActive(true);

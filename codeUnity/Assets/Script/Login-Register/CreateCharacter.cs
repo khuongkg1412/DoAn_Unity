@@ -33,21 +33,21 @@ public class CreateCharacter : MonoBehaviour
 
     public void isFemale()
     {
-        male = 2;
+        male = 0;
     }
 
     IEnumerator createPlayer()
     {
         string IDPlayer = AuthController.ID;
         if (IDPlayer == null) IDPlayer = FacebookManager.ID;
-        Debug.Log(IDPlayer);
+
         DocumentReference docRef = db.Collection("Player").Document(IDPlayer);
         PlayerStruct newPlayer = new PlayerStruct()
         {
             generalInformation = new GeneralInformation_Player()
             {
                 username_Player = characterName.text,
-                avatar_Player = "PlayerAvatar/Avatar item.png",
+                avatar_Player = "PlayerAvatar/" + IDPlayer,
                 gender_Player = male
             },
             concurrency = new Concurrency()
@@ -73,18 +73,14 @@ public class CreateCharacter : MonoBehaviour
             },
             statistic = new Dictionary<string, float>
             {
-                {"VirusA_Killed",0},
-                {"VirusB_Killed",0},
-                {"VirusC_Killed",0},
-                {"VirusD_Killed",0},
+                {"Virus_Kill",0},
                 {"Citizen_Saved",0}
             },
             currentOutfit = new Outfit()
             {
-                currentShirt = "SEWnEHmTZSTMWKvAPF8l",
-                currentPant = "",
-                currentAccesory = "",
-                currentShoes = ""
+                currentSuit = "UPkIg3ScX4kpf7gYMpGg",
+                currentAccesory = "r6mtpflH43MJSo42N7JR",
+                currentGun = "1W76WPc2tzUbr1dRLxEM"
             }
         };
 
@@ -101,12 +97,20 @@ public class CreateCharacter : MonoBehaviour
 
     IEnumerator addOtherCollection(string ID)
     {
-        Inventory_Player inventory_Player = new Inventory_Player()
+        Inventory_Player Suit = new Inventory_Player()
         {
-            item = new Dictionary<string, float>
-            {
-                {"Shirt 2", 1 }
-            }
+            quantiy = 1,
+            level = 0
+        };
+        Inventory_Player Accessory = new Inventory_Player()
+        {
+            quantiy = 1,
+            level = 0
+        };
+        Inventory_Player Gun = new Inventory_Player()
+        {
+            quantiy = 1,
+            level = 0
         };
 
         Friend_Player friend_Player = new Friend_Player()
@@ -117,8 +121,12 @@ public class CreateCharacter : MonoBehaviour
 
         FirebaseFirestore db = FirebaseFirestore.DefaultInstance;
 
-        DocumentReference doc = db.Collection("Player").Document(ID).Collection("Inventory_Player").Document("SEWnEHmTZSTMWKvAPF8l");
-        doc.SetAsync(inventory_Player);
+        DocumentReference doc = db.Collection("Player").Document(ID).Collection("Inventory_Player").Document("UPkIg3ScX4kpf7gYMpGg");
+        doc.SetAsync(Suit);
+        doc = db.Collection("Player").Document(ID).Collection("Inventory_Player").Document("r6mtpflH43MJSo42N7JR");
+        doc.SetAsync(Accessory);
+        doc = db.Collection("Player").Document(ID).Collection("Inventory_Player").Document("1W76WPc2tzUbr1dRLxEM");
+        doc.SetAsync(Gun);
 
         doc = db.Collection("Player").Document(ID).Collection("Friend_Player").Document(friend_Player.friendID);
         doc.SetAsync(friend_Player);

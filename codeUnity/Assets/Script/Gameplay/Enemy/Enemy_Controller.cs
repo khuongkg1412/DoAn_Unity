@@ -34,6 +34,8 @@ public class Enemy_Controller : MonoBehaviour
     public GameObject HealthBar;
 
     float maxHPsize;
+
+    public bool isBoss = false;
     private void Start()
     {
         gamePlay = GameObject.Find("Canvas");
@@ -44,7 +46,6 @@ public class Enemy_Controller : MonoBehaviour
         //Stop virus follow player for a secend
         if (!isFollow)
         {
-            Debug.Log("Is nOt follow");
             //Count to follow
             waiToFolllow += Time.deltaTime;
             if (waiToFolllow >= 0.5f)
@@ -57,7 +58,7 @@ public class Enemy_Controller : MonoBehaviour
                 isFollow = true;
             }
         }
-        else if (virus != null)
+        else if (virus != null && !isBoss)
         {
             //Follow if in range
             if (distanceToPlayer())
@@ -86,7 +87,6 @@ public class Enemy_Controller : MonoBehaviour
     }
     bool distanceToPlayer()
     {
-
         if (Vector3.Distance(targetPlayer.position, transform.position) <= virus.detectRange)
         {
             return true;
