@@ -196,7 +196,11 @@ public class Player_Controller : MonoBehaviour
             //Velocity for dragging
             moveVelocity = moveInput.normalized * Character.returnSPD();
             //Move the Player by the Velocity* Time
-            myBody.MovePosition(myBody.position + moveVelocity * Time.deltaTime);
+            //myBody.MovePosition(myBody.position + moveVelocity * Time.deltaTime);
+            Vector2 targetPosition = (Vector2)transform.position + moveVelocity * Time.deltaTime;
+            Vector3 targetPositionVector3 = new Vector3(targetPosition.x, targetPosition.y, transform.position.z);
+            //Move
+            transform.position = Vector3.MoveTowards(transform.position, targetPositionVector3, Character.returnSPD() * Time.deltaTime);
         }
     }
     /*
