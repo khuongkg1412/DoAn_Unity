@@ -8,9 +8,6 @@ using Firebase.Firestore;
 public class Inventory_Player
 {
     public string ID { get; set; }
-
-    [FirestoreProperty]
-    public Dictionary<string, float> item { get; set; }
     [FirestoreProperty]
     public int quantiy { get; set; }
     [FirestoreProperty]
@@ -89,8 +86,8 @@ public class Level
 [FirestoreData]
 public class Outfit
 {
-    [FirestoreProperty] public string currentShirt { get; set; }
-    [FirestoreProperty] public string currentPant { get; set; }
+    [FirestoreProperty] public string currentSuit { get; set; }
+    [FirestoreProperty] public string currentGun { get; set; }
     [FirestoreProperty] public string currentAccesory { get; set; }
-    [FirestoreProperty] public string currentShoes { get; set; }
+
 }
