@@ -120,27 +120,13 @@ public class VirusD : Enemy
             ATKSPD_Numeral = 1
         };
         typeVirus = VirusType.VirusD;
-        image = loadingImageFromFilePath("Virus/D");
+        image = loadingImageFromFilePath("Virus/VirusD");
         detectRange = 300f;
     }
 }
 
 public class VirusBoss : Enemy
 {
-    //public void moveUpDown()
-    //{
-    //    GameObject BossObject = GameObject.Find("Boss");
-    //    Vector3 upwardMove = new Vector3(BossObject.transform.position.x, -385, BossObject.transform.position.z);
-    //    Vector3 downwardMove = new Vector3(BossObject.transform.position.x, -1140, BossObject.transform.position.z);
-    //    //Upward Move
-    //    BossObject.transform.position = Vector3.MoveTowards(BossObject.transform.position, upwardMove, numeral.SPD_Numeral * Time.deltaTime);
-    //    while (BossObject.transform.position != upwardMove)
-    //    {
-    //        Debug.Log("Waiting for moving");
-    //    }
-    //    //Upward Move
-    //    BossObject.transform.position = Vector3.MoveTowards(BossObject.transform.position, downwardMove, numeral.SPD_Numeral * Time.deltaTime);
-    //}
     public VirusBoss()
     {
         numeral = new NumeralStruct()

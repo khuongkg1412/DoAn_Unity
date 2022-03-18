@@ -11,6 +11,11 @@ public class Inventory_Player
 
     [FirestoreProperty]
     public Dictionary<string, float> item { get; set; }
+    [FirestoreProperty]
+    public int quantiy { get; set; }
+    [FirestoreProperty]
+    public int level { get; set; }
+
 }
 
 [FirestoreData]

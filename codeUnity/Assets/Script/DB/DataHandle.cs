@@ -14,13 +14,6 @@ public class DataHandle : MonoBehaviour
     /*
     Player
     */
-    Inventory_Player inventory_Player = new Inventory_Player()
-    {
-        item = new Dictionary<string, float>
-        {
-            {"item", 0 }
-        }
-    };
     SystemNotification systemNotification = new SystemNotification()
     {
         status_Notification = false

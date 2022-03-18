@@ -36,7 +36,7 @@ public class ItemBuff : MonoBehaviour
         //Set image for buff that has been choosed in Selecting Stage
         gameObject.GetComponent<RawImage>().texture = itemBuff.texture2D;
 
-        numberOfBuff = Player_DataManager.Instance.inventory_Player.Find(x => x.ID == itemBuff.ID).item[itemBuff.name_Item];
+        numberOfBuff = Player_DataManager.Instance.inventory_Player.Find(x => x.ID == itemBuff.ID).quantiy;
         gameObject.transform.GetChild(2).GetComponent<TMP_Text>().text = "x" + numberOfBuff;
     }
     public void pressItemInGamePlay()
@@ -68,7 +68,7 @@ public class ItemBuff : MonoBehaviour
             Debug.Log("There no buffs");
         }
         //Update After Pressing The buff
-        Player_DataManager.Instance.updateBuffInInventory(itemBuff, numberOfBuff);
+        Player_DataManager.Instance.updateBuffInInventory(itemBuff, (int)numberOfBuff);
     }
 
     /*
