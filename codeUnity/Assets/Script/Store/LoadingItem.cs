@@ -303,7 +303,7 @@ public class LoadingItem : MonoBehaviour
         type.text = "Chest";
         //Load data from Resource folders
         dataImage.texture = dataItem.texture2D;
-        dataImage.SetNativeSize();//Set native size for image
+        //dataImage.SetNativeSize();//Set native size for image
     }
     /*
     This method is use to determine what type of item is, and what function would be call to process that type
