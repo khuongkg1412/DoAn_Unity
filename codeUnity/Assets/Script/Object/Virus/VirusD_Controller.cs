@@ -7,10 +7,9 @@ public class VirusD_Controller : MonoBehaviour
     //Setting up Enemy
     public Enemy virus;
     //Player targetPlayer to enemy move forward
-    public GameObject[] targetCitizen;
-    public Transform targetPlayer;
+    GameObject[] targetCitizen;
+    Transform targetPlayer;
     //The orginal position of enemy, after out of range with player, enemy would comeback here
-    [SerializeField]
     Transform originalPos;
 
     //Decide whether enemy is following player
@@ -29,20 +28,20 @@ public class VirusD_Controller : MonoBehaviour
     //Max Health Point
     float maxHP;
 
-    public GameObject HealthBar;
+    GameObject HealthBar;
 
     float maxHPsize;
-
-    public bool isBoss = false;
+    Animator anim;
     private void Start()
     {
         targetPlayer = GameObject.FindWithTag("Player").transform;
         originalPos = transform.parent.gameObject.transform.GetChild(1).gameObject.transform;
-        HealthBar = transform.GetChild(0).gameObject;
+        HealthBar = transform.GetChild(0).gameObject.transform.GetChild(1).gameObject;
         gamePlay = GameObject.Find("Canvas");
         virus = new VirusD();
         setNumeral();
         gameObject.GetComponent<Virus_Numeral>().settingNumeral(virus);
+        anim = transform.parent.gameObject.GetComponent<Animator>();
     }
     private void Update()
     {
@@ -61,7 +60,7 @@ public class VirusD_Controller : MonoBehaviour
                 isFollow = true;
             }
         }
-        else if (virus != null && !isBoss)
+        else
         {
             //Follow if in range
             if (distanceToPlayer())
@@ -86,7 +85,7 @@ public class VirusD_Controller : MonoBehaviour
         maxHP = virus.numeral.HP_Numeral;
         currentHP = maxHP;
         maxHPsize = HealthBar.transform.localScale.x;
-        gameObject.GetComponent<SpriteRenderer>().sprite = virus.image;
+        //  gameObject.GetComponent<SpriteRenderer>().sprite = virus.image;
     }
     bool distanceToPlayer()
     {
@@ -140,7 +139,7 @@ public class VirusD_Controller : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, originalPos.position, virus.numeral.SPD_Numeral * Time.deltaTime);
     }
 
-    //Following p;ayer
+    //Following player
     public void followPlayer()
     {
         transform.position = Vector3.MoveTowards(transform.position, targetPlayer.position, virus.numeral.SPD_Numeral * Time.deltaTime);
@@ -160,6 +159,7 @@ public class VirusD_Controller : MonoBehaviour
         // If the object we hit is the enemy
         if (other.gameObject.tag == "Player" || other.gameObject.tag == "Citizen")
         {
+            anim.SetBool("isAttack", true);
             // Calculate Angle Between the collision point and the player
             Vector2 dir = other.contacts[0].point - (Vector2)transform.position;
             // We then get the opposite (-Vector3) and normalize it
@@ -173,6 +173,7 @@ public class VirusD_Controller : MonoBehaviour
             {
                 other.gameObject.GetComponent<Citizen_HP>().isSicked = true;
             }
+
         }
 
         /*

@@ -9,49 +9,35 @@ public class Player_Controller : MonoBehaviour
 {
     //Getting Canvas
     GameObject canvas;
-
     Slider HealthBar;
-
     Text HPText;
-
     //Create a new object for player
     public Character Character;
-
-    NumeralStruct originNumeral;
     /* 
       Moving Part
-  */
+    */
     //Joystick controller (core of joystick)
     //Joystick object
     Joystick moveJoystick;
-
     //Velocity movement for player
     Vector2 moveVelocity;
-
     //Rigid body of Player
     private Rigidbody2D myBody;
-
     /* 
        Shooting Part
     */
     //The fire point, when bullet come out
     public Transform firePoint;
-
     //Bullet Prefab
     [SerializeField] public GameObject bulletPrefab;
-
     //Bullet speed
     float bulletSpeed = 1000;
-
     //Time CD for every shot
     [SerializeField] private float coolDownTime;
-
     //Time Player need to wait for next shot
     private float shootTimer;
-
     //Shoot Joystick object
     Joystick shootJoystick;
-
     /*
     Camera Main
     */
@@ -61,14 +47,7 @@ public class Player_Controller : MonoBehaviour
     [SerializeField] GameObject buffItem;
     // Start is called before the first frame update
     void Start()
-    {
-        buffItem.GetComponent<ItemBuff>().itemBuff = Player_DataManager.Instance.playerCharacter.buffInGame[0];
-        buffItem.GetComponent<ItemBuff>().setDataForBuff();
-        settingCharacter();
-        //Let Player shoot and move fistly
-        Character.setShoot(true);
-        Character.setMove(true);
-        //Setting object for Game object
+    {   //Setting object for Game object
         canvas = GameObject.Find("Canvas");
         HealthBar = GameObject.Find("HealthBar").GetComponent<Slider>();
         HPText = GameObject.Find("HPText").GetComponent<Text>();
@@ -77,6 +56,13 @@ public class Player_Controller : MonoBehaviour
         cameraMain = GameObject.Find("Camera").GetComponent<Camera>();
         //Getting RigidBody
         myBody = GetComponent<Rigidbody2D>();
+        //Setting data for buff and numeral of character
+        buffItem.GetComponent<ItemBuff>().itemBuff = Player_DataManager.Instance.playerCharacter.buffInGame;
+        buffItem.GetComponent<ItemBuff>().setDataForBuff();
+        settingCharacter();
+        //Let Player shoot and move fistly
+        Character.setShoot(true);
+        Character.setMove(true);
         //Set max HP to slider
         HealthBar.maxValue = Character.returnHP();
         //Set Atack speed
@@ -88,18 +74,12 @@ public class Player_Controller : MonoBehaviour
     {
         //Update the HP of Player
         updateProcessHP();
-        //U[date the Movement of Player including Moving, shooting and helping citizen
+        //Update the Movement of Player including Moving, shooting and helping citizen
         updateMovement();
     }
     void settingCharacter()
     {
-        // Debug.Log("Before Setting Player " + Player_DataManager.Instance.Player.numeral.HP_Numeral);
-        // Debug.Log("Before Setting Charac " + Player_DataManager.Instance.playerCharacter.returnHP());
-        //Create Character for gameplay
-        // originNumeral = Player_DataManager.Instance.playerCharacter.returnNumeral();
         Character = new Character(Player_DataManager.Instance.playerCharacter.returnNumeral());
-        // Debug.Log("After Setting Player " + Player_DataManager.Instance.Player.numeral.HP_Numeral);
-        // Debug.Log("After Setting Charac " + Player_DataManager.Instance.playerCharacter.returnHP());
     }
     void updateMovement()
     {
@@ -213,14 +193,16 @@ public class Player_Controller : MonoBehaviour
         {
             //Direction dragging
             moveInput = moveJoystick.InputDir;
-
             //Velocity for dragging
             moveVelocity = moveInput.normalized * Character.returnSPD();
             //Move the Player by the Velocity* Time
-            myBody.MovePosition(myBody.position + moveVelocity * Time.deltaTime);
+            //myBody.MovePosition(myBody.position + moveVelocity * Time.deltaTime);
+            Vector2 targetPosition = (Vector2)transform.position + moveVelocity * Time.deltaTime;
+            Vector3 targetPositionVector3 = new Vector3(targetPosition.x, targetPosition.y, transform.position.z);
+            //Move
+            transform.position = Vector3.MoveTowards(transform.position, targetPositionVector3, Character.returnSPD() * Time.deltaTime);
         }
     }
-
     /*
         Rotation Player by the touch in Shooting Joystick
     */

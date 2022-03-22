@@ -4417,7 +4417,6 @@ MonoBehaviour:
   isGameplay: 0
   imageCoolDown: {fileID: 0}
   coolDownText: {fileID: 0}
-  Canvas: {fileID: 0}
 --- !u!114 &1765239618
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -100188,6 +100188,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6532921673233310878}
     m_Modifications:
+    - target: {fileID: 692494723, guid: 03c20b675f5302f448e46cb6532905f2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 692494724, guid: 03c20b675f5302f448e46cb6532905f2, type: 3}
+      propertyPath: m_SpriteSortPoint
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 791896357, guid: 03c20b675f5302f448e46cb6532905f2, type: 3}
       propertyPath: m_Size.x
       value: 34.855408

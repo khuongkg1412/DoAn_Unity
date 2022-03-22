@@ -86969,13 +86969,13 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 1
+  m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &571074377
 MonoBehaviour:
@@ -88152,7 +88152,11 @@ MonoBehaviour:
   - {fileID: 1802530661}
   - {fileID: 429823983}
   - {fileID: 897382234}
-  Enemy: {fileID: 1968494691}
+  Enemy:
+  - {fileID: 8314496568217713782, guid: cc692acdda0882c49bd46b3c1461282d, type: 3}
+  - {fileID: 3905678857928002382, guid: d9f9eddc4ba35d244af0323c5dc0b646, type: 3}
+  - {fileID: 2272049230329874128, guid: 2978eda9618ecb546a5dcf5e508eeffa, type: 3}
+  - {fileID: 932883591916156026, guid: 96837f3b4ee3fa546820b0478b8e7d54, type: 3}
   numberOfEnemies: 5
   numberOfBoss: 0
   spawnedPos: 
@@ -104235,11 +104239,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1968494691 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6532921673233310877, guid: 28a54c95b9baaa44ebf266e3b76d76e6, type: 3}
-  m_PrefabInstance: {fileID: 6532921673374073568}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2000467064
 GameObject:
   m_ObjectHideFlags: 0

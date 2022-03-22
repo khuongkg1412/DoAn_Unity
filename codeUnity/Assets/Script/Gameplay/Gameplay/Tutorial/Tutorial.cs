@@ -71,12 +71,9 @@ public class Tutorial : MonoBehaviour
                 {
                     //Create object
                     //Random type and set for virus enemy
-                    enemy.transform.GetChild(0).gameObject.GetComponent<Enemy_Controller>().virus = new VirusA();
-                    enemy.transform.GetChild(0).gameObject.GetComponent<Enemy_Controller>().setNumeral();
                     Instantiate(enemy, spwanPos1.position, spwanPos1.rotation);
                     //Decrease number of virus
                     numberOfEnemies -= 1;
-                    Debug.Log("Run here");
                 }
 
                 textContent.text = "The virus has appeared. The icon red on the map represents the virus.";
@@ -114,16 +111,14 @@ public class Tutorial : MonoBehaviour
                 {//Create object
                     gameObjectNew = Instantiate(enemy, SpawnPos2.position, SpawnPos2.rotation);
                     //Random type and set for virus enemy
-                    gameObjectNew.transform.GetChild(0).gameObject.GetComponent<Enemy_Controller>().virus = new VirusA();
-                    gameObjectNew.transform.GetChild(0).gameObject.GetComponent<Enemy_Controller>().setNumeral();
-                    gameObjectNew.transform.GetChild(0).gameObject.GetComponent<Enemy_Controller>().isFollow = false;
+                    gameObjectNew.transform.GetChild(0).gameObject.GetComponent<VirusA_Controller>().isFollow = false;
                     //Decrease number of virus
                     numberOfEnemies -= 1;
                 }
                 break;
             case 8:
                 textContent.text = "You must help them by touching them and holding the help button for 7 seconds. Releasing the button would count from 0.";
-                gameObjectNew.transform.GetChild(0).gameObject.GetComponent<Enemy_Controller>().isFollow = false;
+                gameObjectNew.transform.GetChild(0).gameObject.GetComponent<VirusA_Controller>().isFollow = false;
                 break;
             case 9:
                 player.GetComponent<Player_Controller>().Character.setMove(true);

@@ -80,7 +80,7 @@ public class Selecting_Stage : MonoBehaviour
         for (int i = 0; i < stageArray.Length; i++)
         {
             //Enable the stage by make the lock com invisible
-            if (int.Parse(stageArray[i].transform.GetChild(0).gameObject.GetComponent<TMP_Text>().text) < Player_DataManager.Instance.Player.level.stage)
+            if (int.Parse(stageArray[i].transform.GetChild(0).gameObject.GetComponent<TMP_Text>().text) <= Player_DataManager.Instance.Player.level.stage)
             {
                 stageArray[i].transform.GetChild(1).gameObject.SetActive(false);
             }

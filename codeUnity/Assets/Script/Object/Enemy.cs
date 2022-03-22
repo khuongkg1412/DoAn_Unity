@@ -77,9 +77,9 @@ public class VirusB : Enemy
     {
         numeral = new NumeralStruct()
         {
-            ATK_Numeral = 10,
-            DEF_Numeral = 0,
-            HP_Numeral = 30,
+            ATK_Numeral = 5,
+            DEF_Numeral = 5,
+            HP_Numeral = 50,
             SPD_Numeral = 200,
             ATKSPD_Numeral = 1
         };
@@ -96,10 +96,10 @@ public class VirusC : Enemy
     {
         numeral = new NumeralStruct()
         {
-            ATK_Numeral = 10,
+            ATK_Numeral = 5,
             DEF_Numeral = 0,
-            HP_Numeral = 30,
-            SPD_Numeral = 200,
+            HP_Numeral = 20,
+            SPD_Numeral = 500,
             ATKSPD_Numeral = 1
         };
         typeVirus = VirusType.VirusC;
@@ -120,27 +120,13 @@ public class VirusD : Enemy
             ATKSPD_Numeral = 1
         };
         typeVirus = VirusType.VirusD;
-        image = loadingImageFromFilePath("Virus/D");
+        image = loadingImageFromFilePath("Virus/VirusD");
         detectRange = 300f;
     }
 }
 
 public class VirusBoss : Enemy
 {
-    //public void moveUpDown()
-    //{
-    //    GameObject BossObject = GameObject.Find("Boss");
-    //    Vector3 upwardMove = new Vector3(BossObject.transform.position.x, -385, BossObject.transform.position.z);
-    //    Vector3 downwardMove = new Vector3(BossObject.transform.position.x, -1140, BossObject.transform.position.z);
-    //    //Upward Move
-    //    BossObject.transform.position = Vector3.MoveTowards(BossObject.transform.position, upwardMove, numeral.SPD_Numeral * Time.deltaTime);
-    //    while (BossObject.transform.position != upwardMove)
-    //    {
-    //        Debug.Log("Waiting for moving");
-    //    }
-    //    //Upward Move
-    //    BossObject.transform.position = Vector3.MoveTowards(BossObject.transform.position, downwardMove, numeral.SPD_Numeral * Time.deltaTime);
-    //}
     public VirusBoss()
     {
         numeral = new NumeralStruct()

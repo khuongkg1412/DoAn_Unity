@@ -87139,13 +87139,13 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 1
+  m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!212 &571074378
 SpriteRenderer:
@@ -88744,11 +88744,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 904344177}
   m_CullTransparentMesh: 1
---- !u!1 &946611837 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6532921673233310877, guid: 28a54c95b9baaa44ebf266e3b76d76e6, type: 3}
-  m_PrefabInstance: {fileID: 6532921673374073568}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &947614829
 GameObject:
   m_ObjectHideFlags: 0
@@ -98004,7 +97999,11 @@ MonoBehaviour:
   - {fileID: 807107983}
   - {fileID: 1640926819}
   - {fileID: 1585386527}
-  Enemy: {fileID: 946611837}
+  Enemy:
+  - {fileID: 8314496568217713782, guid: cc692acdda0882c49bd46b3c1461282d, type: 3}
+  - {fileID: 3905678857928002382, guid: d9f9eddc4ba35d244af0323c5dc0b646, type: 3}
+  - {fileID: 2272049230329874128, guid: 2978eda9618ecb546a5dcf5e508eeffa, type: 3}
+  - {fileID: 932883591916156026, guid: 96837f3b4ee3fa546820b0478b8e7d54, type: 3}
   numberOfEnemies: 5
   numberOfBoss: 0
   spawnedPos: 
