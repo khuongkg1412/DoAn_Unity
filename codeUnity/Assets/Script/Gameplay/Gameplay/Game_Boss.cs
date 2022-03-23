@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class Game_Boss : MonoBehaviour
 {
-    public GameObject VirusBoos;
     //Create a new object for player
     private float score;
 
@@ -34,10 +33,6 @@ public class Game_Boss : MonoBehaviour
 
     private void Start()
     {
-        //Set virus type for boss virus
-        VirusBoos.GetComponent<Boss1>().virus = new VirusBoss();
-        VirusBoos.GetComponent<Boss1>().setNumeral();
-        VirusBoos.GetComponent<Virus_Numeral>().settingNumeral(new VirusBoss());
         //Scale Time is normal
         Time.timeScale = 1f;
         //Convert to landscape mode in gameplay

@@ -61,10 +61,7 @@ public class Camera_Follow : MonoBehaviour
                 .Clamp(followTransform.position.x,
                 xMin + cameraRatio,
                 xMax - cameraRatio);
-        smoothPos =
-            Vector3
-                .Lerp(this.transform.position,
-                new Vector3(camX + offSetX, camY + offSetY, this.transform.position.z),
+        smoothPos = Vector3.Lerp(this.transform.position, new Vector3(camX + offSetX, camY + offSetY, this.transform.position.z),
                 smoothSpeed);
         this.transform.position = smoothPos;
     }

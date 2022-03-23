@@ -51,7 +51,8 @@ public enum VirusType
     VirusB,
     VirusC,
     VirusD,
-    Bosss1
+    Boss1,
+    Boss2
 }
 public class VirusA : Enemy
 {
@@ -137,7 +138,25 @@ public class VirusBoss : Enemy
             SPD_Numeral = 100,
             ATKSPD_Numeral = 1
         };
-        typeVirus = VirusType.Bosss1;
+        typeVirus = VirusType.Boss1;
+        image = loadingImageFromFilePath("Virus/Boss1");
+        detectRange = 10000f;
+    }
+}
+
+public class VirusBoss2 : Enemy
+{
+    public VirusBoss2()
+    {
+        numeral = new NumeralStruct()
+        {
+            ATK_Numeral = 10,
+            DEF_Numeral = 0,
+            HP_Numeral = 100,
+            SPD_Numeral = 300,
+            ATKSPD_Numeral = 1
+        };
+        typeVirus = VirusType.Boss2;
         image = loadingImageFromFilePath("Virus/Boss1");
         detectRange = 10000f;
     }

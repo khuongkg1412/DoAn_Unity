@@ -157,6 +157,7 @@ public class Player_Controller : MonoBehaviour
         //Get damage from enemy
         if (other.gameObject.tag == "Enemy")
         {
+            Debug.Log("Hit By Enemy");
             Character.getDamage(other.gameObject.GetComponent<Virus_Numeral>().virusNumeral.ATK_Numeral);
             getDamage();
         }
