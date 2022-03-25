@@ -6,11 +6,12 @@ using Firebase;
 using Firebase.Extensions;
 using Firebase.Firestore;
 using Firebase.Storage;
+using UnityEngine.SceneManagement;
 
 public class chooseOutfit : MonoBehaviour
 {
     FirebaseFirestore db;
-    public GameObject prefab;
+    public GameObject prefab, item_infor;
     public GameObject content;
 
 
@@ -85,6 +86,7 @@ public class chooseOutfit : MonoBehaviour
 
     void Populate(ItemStruct item, bool notHavethisItem)
     {
+        Debug.Log(item.ID);
         Texture2D OutfitImage = item.texture2D;
         Sprite sprite = Sprite.Create(OutfitImage, new Rect(0.0f, 0.0f, OutfitImage.width, OutfitImage.height), new Vector2(0.5f, 0.5f), 100.0f);
         GameObject scrollItemObj = (GameObject)Instantiate(prefab, content.transform);
@@ -93,19 +95,52 @@ public class chooseOutfit : MonoBehaviour
         {
             scrollItemObj.transform.Find("choosed frame").gameObject.GetComponent<Image>().color = Color.black;
             scrollItemObj.transform.Find("Image").gameObject.GetComponent<Image>().sprite = sprite;
+            scrollItemObj.transform.Find("ID").gameObject.GetComponent<Text>().text = item.ID;
             scrollItemObj.transform.Find("choosed frame").gameObject.GetComponentInParent<Button>().enabled = false;
         }
         else
         {
-            scrollItemObj.transform.Find("choosed frame").gameObject.GetComponent<Image>().color = Color.yellow;
+            PlayerStruct player = Player_DataManager.Instance.Player;
+            Color color = Color.white;
+            if (item.ID.Equals(player.currentOutfit.currentSuit) || item.ID.Equals(player.currentOutfit.currentAccesory) || item.ID.Equals(player.currentOutfit.currentGun))
+                color.a = 1;
+            else color.a = 0;
+            scrollItemObj.transform.Find("choosed frame").gameObject.GetComponent<Image>().color = color;
             scrollItemObj.transform.Find("Image").gameObject.GetComponent<Image>().sprite = sprite;
-            scrollItemObj.transform.Find("choosed frame").gameObject.GetComponentInParent<Button>().onClick.AddListener(() => chooseThisItem());
+            scrollItemObj.transform.Find("ID").gameObject.GetComponent<Text>().text = item.ID;
+            scrollItemObj.transform.Find("choosed frame").gameObject.GetComponentInParent<Button>().onClick.AddListener(() => chooseThisItem(scrollItemObj));
         }
     }
 
-    private void chooseThisItem()
+
+    private void chooseThisItem(GameObject obj)
     {
-        Debug.Log("OK");
+        string ID_item = obj.transform.Find("ID").gameObject.GetComponent<Text>().text;
+        GameObject scrollItemObj = (GameObject)Instantiate(item_infor, transform);
+
+        foreach (ItemStruct item in Item_DataManager.Instance.Item)
+        {
+            if (item.ID.Equals(ID_item))
+            {
+                scrollItemObj.transform.Find("Name Item").gameObject.GetComponent<Text>().text = item.name_Item;
+                string stat = "ATK_SPD: " + item.numeral_Item.ATKSPD_Numeral +
+                              "\n  ATK: " + item.numeral_Item.ATK_Numeral +
+                              "\n  DEF: " + item.numeral_Item.DEF_Numeral +
+                              "\n   HP: " + item.numeral_Item.HP_Numeral +
+                              "\n  SPD: " + item.numeral_Item.SPD_Numeral;
+
+                scrollItemObj.transform.Find("infor box/stats").gameObject.GetComponent<Text>().text = stat;
+                scrollItemObj.transform.Find("infor box/ok_btn").gameObject.GetComponent<Button>().onClick.AddListener(() => WearThisItem(ID_item));
+            }
+        }
+    }
+
+    private void WearThisItem(string ID)
+    {
+        Player_DataManager.Instance.changeOutfit(ModifyPlayerInfor.typeOfOutfit, ID);
+
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
     }
 
 
