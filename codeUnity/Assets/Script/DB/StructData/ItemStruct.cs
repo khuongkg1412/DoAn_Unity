@@ -57,10 +57,10 @@ public class ItemStruct
 public enum TypeItem
 {
     Suit = 0,
-    Piece = 1,
-    Accessory = 2,
+    Accessory = 1,
+    Gun = 2,
     Buff = 3,
-    Gun = 4
+    Piece = 4
 }
 
 public enum Type_Store

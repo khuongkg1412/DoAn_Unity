@@ -169,6 +169,15 @@ public class Player_DataManager : MonoBehaviour
         Player_Update.UpdatePlayer();
     }
 
+    public void changeOutfit(int typeOfOutfit, string ID)
+    {
+        if (typeOfOutfit == 0) Player.currentOutfit.currentSuit = ID;
+        else if (typeOfOutfit == 1) Player.currentOutfit.currentAccesory = ID;
+        else if (typeOfOutfit == 2) Player.currentOutfit.currentGun = ID;
+
+        Player_Update.UpdatePlayer();
+    }
+
     public void updateStatistic(float citizenSaved, float virusKilled)
     {
         //Citizen Saved and virus killed
@@ -178,7 +187,7 @@ public class Player_DataManager : MonoBehaviour
         Player.statistic = new Dictionary<string, float>()
         {
             {"Citizen_Saved" ,citizenSaved},
-             {"Virus_Kill" ,virusKilled}
+            {"Virus_Kill" ,virusKilled}
         };
         //Call to update the information off Player
         Player_Update.UpdatePlayer();

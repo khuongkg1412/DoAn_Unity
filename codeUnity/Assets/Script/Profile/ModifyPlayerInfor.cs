@@ -31,14 +31,13 @@ public class ModifyPlayerInfor : MonoBehaviour
         Name.text = player.generalInformation.username_Player;
         Level.text = "LV " + player.level.level;
 
-
         //load outfit
-        GameObject.Find("accesory/head").GetComponent<Image>().sprite = getOutfitImage(player.currentOutfit.currentAccesory);
-        GameObject.Find("shirt/body").GetComponent<Image>().sprite = getOutfitImage(player.currentOutfit.currentShirt);
-        GameObject.Find("shoes/foot").GetComponent<Image>().sprite = getOutfitImage(player.currentOutfit.currentShoes);
-        GameObject.Find("pant/leg").GetComponent<Image>().sprite = getOutfitImage(player.currentOutfit.currentPant);
+        GameObject.Find("Outfit_Grid/accessory_box/Image").GetComponent<Image>().sprite = getOutfitImage(player.currentOutfit.currentAccesory);
+        GameObject.Find("Outfit_Grid/suit_box/Image").GetComponent<Image>().sprite = getOutfitImage(player.currentOutfit.currentSuit);
+        //GameObject.Find("Gun_Grid/Gun/Image").GetComponent<Image>().sprite = getOutfitImage(player.currentOutfit.currentGun);
 
-        //GameObject.Find("character/leg").GetComponent<Image>().sprite =
+        GameObject.Find("Character_Grid/Character/Head").GetComponent<Image>().sprite = getCharacterImage(player.currentOutfit.currentAccesory, player.generalInformation.gender_Player, "Head");
+        GameObject.Find("Character_Grid/Character/Body").GetComponent<Image>().sprite = getCharacterImage(player.currentOutfit.currentSuit, player.generalInformation.gender_Player, "Body");
     }
     IEnumerator GetImage(string dataImage)
     {
@@ -71,21 +70,9 @@ public class ModifyPlayerInfor : MonoBehaviour
     }
 
     public static int typeOfOutfit;
-    public void openWindowForShirt()
+    public void openWindowForOutfit(int typeNumber)
     {
-        typeOfOutfit = 0;
-    }
-    public void openWindowForPants()
-    {
-        typeOfOutfit = 1;
-    }
-    public void openWindowForShoes()
-    {
-        typeOfOutfit = 2;
-    }
-    public void openWindowForAccessory()
-    {
-        typeOfOutfit = 3;
+        typeOfOutfit = typeNumber;
     }
 
     private Sprite getOutfitImage(string ID)
@@ -102,4 +89,23 @@ public class ModifyPlayerInfor : MonoBehaviour
         }
         return null;
     }
+
+    private Sprite getCharacterImage(string ID, int gender, string part)
+    {
+        Sprite sprite = null;
+        foreach (ItemStruct item in Item_DataManager.Instance.Item)
+        {
+            if (item.ID.Equals(ID))
+            {
+                if (part.Equals("Head"))
+                {
+                    sprite = Resources.Load<Sprite>("Character_Image/" + part + '/' + item.name_Item + '_' + gender);
+                }
+                else sprite = Resources.Load<Sprite>("Character_Image/" + part + '/' + item.name_Item);
+                return sprite;
+            }
+        }
+        return null;
+    }
+
 }

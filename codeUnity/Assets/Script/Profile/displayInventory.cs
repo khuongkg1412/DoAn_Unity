@@ -18,7 +18,7 @@ public class displayInventory : MonoBehaviour
         {
             GameObject obj;
             ItemStruct anItem = findItem(item.ID);
-            if (anItem != null && anItem.type_Item < 3)
+            if (anItem != null && anItem.type_Item > 2)
             {
                 slot += 1;
                 obj = GameObject.Find("S" + slot + "/Item");
@@ -27,8 +27,7 @@ public class displayInventory : MonoBehaviour
                 obj.GetComponent<Image>().sprite = sprite;
 
                 obj = GameObject.Find("S" + slot + "/quantity");
-                obj.GetComponent<Text>().text = item.item[anItem.name_Item].ToString();
-                Debug.Log(item.item[anItem.name_Item]);
+                obj.GetComponent<Text>().text = item.quantiy.ToString();
 
             }
         }
