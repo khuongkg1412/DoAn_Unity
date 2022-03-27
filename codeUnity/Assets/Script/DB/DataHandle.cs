@@ -63,10 +63,9 @@ public class DataHandle : MonoBehaviour
             },
         currentOutfit = new Outfit()
         {
-            currentShirt = "SEWnEHmTZSTMWKvAPF8l",
-            currentPant = "",
-            currentAccesory = "",
-            currentShoes = ""
+            currentSuit = "wo7LWsLLKNB3riZdVaAg",
+            currentAccesory = "bj1vVjGVvMiYROHKfrE4",
+            currentGun = "DiK9GKuMVltYg5lc9neE"
         }
     };
 
