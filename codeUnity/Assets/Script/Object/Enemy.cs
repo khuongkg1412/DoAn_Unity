@@ -146,18 +146,49 @@ public class VirusBoss : Enemy
 
 public class VirusBoss2 : Enemy
 {
+    int numberOfBeards;
+    public bool isDead;
     public VirusBoss2()
     {
+        numberOfBeards = 3;
         numeral = new NumeralStruct()
         {
             ATK_Numeral = 10,
             DEF_Numeral = 0,
-            HP_Numeral = 100,
+            HP_Numeral = 30 * numberOfBeards,
             SPD_Numeral = 300,
             ATKSPD_Numeral = 1
         };
         typeVirus = VirusType.Boss2;
         image = loadingImageFromFilePath("Virus/Boss1");
         detectRange = 10000f;
+        isDead = false;
+    }
+    public void getDamage(float dameGiven)
+    {
+        numeral.HP_Numeral -= dameGiven;
+        if (numeral.HP_Numeral <= 0)
+        {
+            numeral.HP_Numeral = 0;
+            numberOfBeards -= 1;
+            isDead = true;
+        }
+    }
+    public void reviveLife()
+    {
+        if (numberOfBeards > 1)
+        {
+            Debug.Log("revive");
+            numeral = new NumeralStruct()
+            {
+                ATK_Numeral = 10,
+                DEF_Numeral = 0,
+                HP_Numeral = 30 * numberOfBeards,
+                SPD_Numeral = 300,
+                ATKSPD_Numeral = 1
+            };
+            isDead = false;
+        }
+
     }
 }

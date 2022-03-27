@@ -25,7 +25,10 @@ public class Bullet : MonoBehaviour
         checkBoundary();
         checkDistanceShooting();
     }
-
+    public void setDameForBullet(float DMG)
+    {
+        dameGiven = DMG;
+    }
     private void checkBoundary()
     {
         if (transform.position.x < -boundX || transform.position.y < -boundY ||

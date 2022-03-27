@@ -5,7 +5,7 @@ using UnityEngine;
 public class Boss2 : MonoBehaviour
 {
     //Setting up Enemy
-    public Enemy virus;
+    public VirusBoss2 virus;
 
     /*
 HP Enemy
@@ -18,12 +18,12 @@ HP Enemy
     public GameObject HealthBar;
     Rigidbody2D rd;
     bool isWalking, isSearching, isAttack = false;
-    float waitTime = 0.5f, walkTime = 2f, walkCounter, waitCounter, waitToRush = 1.5f, turnToSearching = 1f;
+    float waitTime = 0.5f, walkTime = 2f, walkCounter, waitCounter, waitToRush = 1f, turnToSearching = 1f;
     int walkDirection;
     Vector3 reachPosition;
     private void Start()
     {
-        virus = new VirusBoss();
+        virus = new VirusBoss2();
         setNumeral();
         gameObject.GetComponent<Virus_Numeral>().settingNumeral(virus);
         rd = GetComponent<Rigidbody2D>();
@@ -42,6 +42,7 @@ HP Enemy
 
     private void Update()
     {
+        updateHP();
         if (isSearching)
         {
             Movement();
@@ -52,10 +53,22 @@ HP Enemy
             Attack();
         }
     }
+
+    void updateHP()
+    {
+        if (virus.isDead)
+        {
+            virus.reviveLife();
+            maxHP = virus.numeral.HP_Numeral;
+            currentHP = maxHP;
+            Instantiate(gameObject, transform.position, Quaternion.identity);
+        }
+        HealthBar.transform.localScale = new Vector3((virus.numeral.HP_Numeral / maxHP) * maxHPsize, HealthBar.transform.transform.localScale.y, HealthBar.transform.transform.localScale.z);
+    }
     void searchForAttack()
     {
         Transform targetPlayer = GameObject.FindWithTag("Player").transform;
-        if (Vector3.Distance(transform.position, targetPlayer.position) < 500f)
+        if (Vector3.Distance(transform.position, targetPlayer.position) < 700f)
         {
             Debug.Log("Found");
             reachPosition = targetPlayer.position;
@@ -69,7 +82,7 @@ HP Enemy
         waitToRush -= Time.deltaTime;
         if (waitToRush <= 0)
         {
-            transform.position = Vector3.MoveTowards(transform.position, reachPosition, 500f * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, reachPosition, 1000f * Time.deltaTime);
             isAttack = true;
         }
         if (isAttack)
@@ -129,6 +142,9 @@ HP Enemy
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
-
+        if (other.gameObject.tag == "Bullet")
+        {
+            virus.getDamage(other.gameObject.GetComponent<Bullet>().dameGiven);
+        }
     }
 }

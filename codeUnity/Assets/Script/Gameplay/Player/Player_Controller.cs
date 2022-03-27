@@ -252,7 +252,7 @@ public class Player_Controller : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         bullet.GetComponent<Bullet>().setPositionStartShooting(firePoint);
-
+        bullet.GetComponent<Bullet>().setDameForBullet(Character.returnATK());
         //Pull bullet out at fire point
         rb.AddForce(firePoint.up * bulletSpeed, ForceMode2D.Impulse);
     }
