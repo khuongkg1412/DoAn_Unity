@@ -79,8 +79,8 @@ public class VirusB : Enemy
         numeral = new NumeralStruct()
         {
             ATK_Numeral = 5,
-            DEF_Numeral = 5,
-            HP_Numeral = 50,
+            DEF_Numeral = 7,
+            HP_Numeral = 30,
             SPD_Numeral = 200,
             ATKSPD_Numeral = 1
         };
@@ -97,7 +97,7 @@ public class VirusC : Enemy
     {
         numeral = new NumeralStruct()
         {
-            ATK_Numeral = 5,
+            ATK_Numeral = 10,
             DEF_Numeral = 0,
             HP_Numeral = 20,
             SPD_Numeral = 500,
@@ -114,9 +114,9 @@ public class VirusD : Enemy
     {
         numeral = new NumeralStruct()
         {
-            ATK_Numeral = 10,
+            ATK_Numeral = 7,
             DEF_Numeral = 0,
-            HP_Numeral = 30,
+            HP_Numeral = 60,
             SPD_Numeral = 200,
             ATKSPD_Numeral = 1
         };
@@ -133,8 +133,8 @@ public class VirusBoss : Enemy
         numeral = new NumeralStruct()
         {
             ATK_Numeral = 10,
-            DEF_Numeral = 0,
-            HP_Numeral = 100,
+            DEF_Numeral = 5,
+            HP_Numeral = 120,
             SPD_Numeral = 100,
             ATKSPD_Numeral = 1
         };

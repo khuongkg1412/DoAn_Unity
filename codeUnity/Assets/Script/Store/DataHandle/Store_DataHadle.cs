@@ -148,7 +148,7 @@ public class Store_DataHadle : MonoBehaviour
                    new NumeralStruct
                    {
                        ATK_Numeral = 0,
-                       DEF_Numeral = 10,
+                       DEF_Numeral = 5,
                        HP_Numeral = 0,
                        SPD_Numeral = 0
                    }
@@ -170,7 +170,7 @@ public class Store_DataHadle : MonoBehaviour
                new NumeralStruct
                {
                    ATK_Numeral = 0,
-                   DEF_Numeral = 10,
+                   DEF_Numeral = 0,
                    HP_Numeral = 0,
                    SPD_Numeral = 100
                }
@@ -184,7 +184,7 @@ public class Store_DataHadle : MonoBehaviour
         },
         description_Item = "This buff helps players to speed up the Attack Speed in 10 seconds.",
         image_Item = "Item_Image/AttackSpeed",
-        name_Item = "Speed",
+        name_Item = "AttackSpeed",
         rate_Item = RateItem.Common,
         type_Item = (int)TypeItem.Buff,
         type_Store = (int)Type_Store.ItemDaily,
@@ -194,7 +194,8 @@ public class Store_DataHadle : MonoBehaviour
                ATK_Numeral = 0,
                DEF_Numeral = 0,
                HP_Numeral = 0,
-               SPD_Numeral = 0
+               SPD_Numeral = 0,
+               ATKSPD_Numeral = 0.5f
            }
     };
 

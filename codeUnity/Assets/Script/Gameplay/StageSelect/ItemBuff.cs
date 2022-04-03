@@ -210,7 +210,7 @@ public class ItemBuff : MonoBehaviour
         //Store the origin numeral before get buff effect
         originNumeral = player.GetComponent<Player_Controller>().Character.returnATKSPD();
         //The Speed after geting buff
-        double speedUP = player.GetComponent<Player_Controller>().Character.returnATKSPD() + itemBuff.numeral_Item.ATKSPD_Numeral;
+        double speedUP = player.GetComponent<Player_Controller>().Character.returnATKSPD() - itemBuff.numeral_Item.ATKSPD_Numeral;
         Debug.Log("ATKspeedUP _" + speedUP);
         //Set it to Character
         player.GetComponent<Player_Controller>().Character.setATKSPD((float)speedUP);

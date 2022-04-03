@@ -61,7 +61,7 @@ public class CreateCharacter : MonoBehaviour
                 DEF_Numeral = 0,
                 HP_Numeral = 50,
                 SPD_Numeral = 300,
-                ATKSPD_Numeral = 1
+                ATKSPD_Numeral = 1.5f
             },
             level = new Level()
             {
