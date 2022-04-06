@@ -76,7 +76,7 @@ public class Boss1 : MonoBehaviour
 
     public void setNumeral()
     {
-        maxHP = virus.numeral.HP_Numeral;
+        maxHP = virus.returnHP();
         currentHP = maxHP;
         maxHPsize = HealthBar.transform.localScale.x;
     }
@@ -98,7 +98,7 @@ public class Boss1 : MonoBehaviour
                 currentHP = 0;
                 HealthBar.transform.localScale = new Vector3(0, HealthBar.transform.transform.localScale.y, HealthBar.transform.transform.localScale.z);
 
-                GameObject.FindWithTag("Player").GetComponent<Player_Controller>().Character.score += 1000;
+                GameObject.FindWithTag("Player").GetComponent<Player_Controller>().Character.setScore(1000f);
                 gamePlay.GetComponent<Game_Boss>().isGameOver = true;
                 gamePlay.GetComponent<Game_Boss>().isVictory = true;
 
@@ -124,7 +124,7 @@ public class Boss1 : MonoBehaviour
         if (reachUpper)
         {
             //Downward Move
-            transform.position = Vector3.MoveTowards(transform.position, downWard, virus.numeral.SPD_Numeral * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, downWard, virus.returnSPD() * Time.deltaTime);
             if (Vector2.Distance(new Vector2(transform.position.x, transform.position.y), downWard) == 0)
             {
                 reachUpper = false;
@@ -134,7 +134,7 @@ public class Boss1 : MonoBehaviour
         else if (reachLowwe)
         {
             //Upward Move
-            transform.position = Vector3.MoveTowards(transform.position, updWard, virus.numeral.SPD_Numeral * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, updWard, virus.returnSPD() * Time.deltaTime);
             if (Vector2.Distance(new Vector2(transform.position.x, transform.position.y), updWard) == 0)
             {
                 reachUpper = true;

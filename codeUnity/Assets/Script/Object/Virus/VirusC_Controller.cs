@@ -82,7 +82,7 @@ public class VirusC_Controller : MonoBehaviour
 
     public void setNumeral()
     {
-        maxHP = virus.numeral.HP_Numeral;
+        maxHP = virus.returnHP();
         currentHP = maxHP;
         maxHPsize = HealthBar.transform.localScale.x;
         gameObject.GetComponent<SpriteRenderer>().sprite = virus.image;
@@ -136,18 +136,18 @@ public class VirusC_Controller : MonoBehaviour
     //Comeback home position
     public void comeBackPos()
     {
-        transform.position = Vector3.MoveTowards(transform.position, originalPos.position, virus.numeral.SPD_Numeral * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, originalPos.position, virus.returnSPD() * Time.deltaTime);
     }
 
     //Following p;ayer
     public void followPlayer()
     {
-        transform.position = Vector3.MoveTowards(transform.position, targetPlayer.position, virus.numeral.SPD_Numeral * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, targetPlayer.position, virus.returnSPD() * Time.deltaTime);
     }
 
     public void followCitizen(GameObject citizen)
     {
-        transform.position = Vector3.MoveTowards(transform.position, citizen.transform.position, virus.numeral.SPD_Numeral * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, citizen.transform.position, virus.returnSPD() * Time.deltaTime);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -191,13 +191,9 @@ public class VirusC_Controller : MonoBehaviour
                     new Vector3(0,
                         HealthBar.transform.transform.localScale.y,
                         HealthBar.transform.transform.localScale.z);
-                if (gamePlay.GetComponent<Game_Boss>() != null)
+                if (gamePlay.GetComponent<Game_Start>() != null)
                 {
-                    GameObject.FindWithTag("Player").GetComponent<Player_Controller>().Character.score += 1000;
-                }
-                else if (gamePlay.GetComponent<Game_Start>() != null)
-                {
-                    GameObject.FindWithTag("Player").GetComponent<Player_Controller>().Character.score += 10;
+                    GameObject.FindWithTag("Player").GetComponent<Player_Controller>().Character.setScore(10f);
                     gamePlay.GetComponent<Game_Start>().UpdateEnemyNumber(1);
                 }
                 else

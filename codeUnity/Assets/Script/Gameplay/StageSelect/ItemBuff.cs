@@ -272,7 +272,7 @@ public class ItemBuff : MonoBehaviour
         //Get Object Player base on tag
         GameObject player = GameObject.FindWithTag("Player");
         //Store the origin numeral before get buff effect
-        player.GetComponent<Player_Controller>().Character.isRevive = true;
+        player.GetComponent<Player_Controller>().Character.setRevive(true);
         //Cannot click the buff in the cool down time
         gameObject.GetComponent<Button>().interactable = false;
         //Cannot click the buff in the cool down time

@@ -8,6 +8,6 @@ public class Virus_Numeral : MonoBehaviour
 
     public void settingNumeral(Enemy enemy)
     {
-        virusNumeral = enemy.numeral;
+        virusNumeral = enemy.getNumeral();
     }
 }

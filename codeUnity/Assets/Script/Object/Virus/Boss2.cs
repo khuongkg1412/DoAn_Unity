@@ -35,7 +35,7 @@ HP Enemy
     }
     public void setNumeral()
     {
-        maxHP = virus.numeral.HP_Numeral;
+        maxHP = virus.returnSPD();
         currentHP = maxHP;
         maxHPsize = HealthBar.transform.localScale.x;
     }
@@ -59,11 +59,11 @@ HP Enemy
         if (virus.isDead)
         {
             virus.reviveLife();
-            maxHP = virus.numeral.HP_Numeral;
+            maxHP = virus.returnSPD();
             currentHP = maxHP;
             Instantiate(gameObject, transform.position, Quaternion.identity);
         }
-        HealthBar.transform.localScale = new Vector3((virus.numeral.HP_Numeral / maxHP) * maxHPsize, HealthBar.transform.transform.localScale.y, HealthBar.transform.transform.localScale.z);
+        HealthBar.transform.localScale = new Vector3((virus.returnSPD() / maxHP) * maxHPsize, HealthBar.transform.transform.localScale.y, HealthBar.transform.transform.localScale.z);
     }
     void searchForAttack()
     {
@@ -106,16 +106,16 @@ HP Enemy
             switch (walkDirection)
             {
                 case 0:
-                    rd.velocity = new Vector2(0, virus.numeral.SPD_Numeral);
+                    rd.velocity = new Vector2(0, virus.returnSPD());
                     break;
                 case 1:
-                    rd.velocity = new Vector2(virus.numeral.SPD_Numeral, 0);
+                    rd.velocity = new Vector2(virus.returnSPD(), 0);
                     break;
                 case 2:
-                    rd.velocity = new Vector2(0, -virus.numeral.SPD_Numeral);
+                    rd.velocity = new Vector2(0, -virus.returnSPD());
                     break;
                 case 3:
-                    rd.velocity = new Vector2(-virus.numeral.SPD_Numeral, 0);
+                    rd.velocity = new Vector2(-virus.returnSPD(), 0);
                     break;
             }
             if (walkCounter < 0)

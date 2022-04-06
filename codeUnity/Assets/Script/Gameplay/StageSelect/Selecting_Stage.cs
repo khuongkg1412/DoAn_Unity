@@ -160,7 +160,7 @@ public class Selecting_Stage : MonoBehaviour
     {
         //Add buff to Character in instace Player_DataManager
         ItemStruct item = listBuff[indexofBuff].GetComponent<ItemBuff>().itemBuff;
-        Player_DataManager.Instance.playerCharacter.addBuff(item);
+        Player_DataManager.Instance.playerCharacter.setBuff(item);
         //Load Stage 
         Screen.orientation = ScreenOrientation.Landscape;
         SceneManager.LoadScene("Stage" + levelStage);

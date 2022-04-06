@@ -87,17 +87,19 @@ public class Player_DataManager : MonoBehaviour
         //Call to update the information off Player
         Player_Update.UpdatePlayer();
     }
-    public void finishTheStage(float score, float stage, bool isCompleted)
+    public void finishTheStage(float coin, float diamond, int stage)
     {
         //Up the stage if the stage has been complete is greather
-        if (stage == Player.level.stage & isCompleted)
+        if (stage == Player.level.stage)
         {
             Player.level.stage += 1;
         }
         //Calculate the exp point by the score the player get
-        player_LevelUP(score);
+        player_LevelUP(coin);
         //Plus the coin by the score the player get
-        updateCoinConcurrency(score);
+        updateCoinConcurrency(coin);
+        //Plus the Diamond by the score the player get
+        updateDiamondConcurrency(diamond);
         //Call to update the information off Player
         Player_Update.UpdatePlayer();
     }

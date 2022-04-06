@@ -96,24 +96,23 @@ public class Game_Start : MonoBehaviour
         score += timeRemaining;
         //Show Result Pannel
         DisplayResultPannel();
-        //Update score to database
-        totalScore();
+        //Update statistic to database
+        Player_DataManager.Instance.updateStatistic(citizenSaveNumber, enemyNumber);
     }
     //Update score to database
-    void totalScore()
+    void updateTotalScore()
     {
         //Get name of scence to calculate the stage
         string scenceName = SceneManager.GetActiveScene().name;
         //Calculate the stage
-        float stage = float.Parse(scenceName.Substring(5));
+        int stage = int.Parse(scenceName.Substring(5));
         //Update score and statistic to database
-        Player_DataManager.Instance.finishTheStage(score, stage, isVictory);
-        Player_DataManager.Instance.updateStatistic(citizenSaveNumber, enemyNumber);
+        Player_DataManager.Instance.finishTheStage(score, 20f, stage);
     }
     //Update score every frame by the score that is hold by object Character
     public void UpdateScore()
     {
-        float currentPlayerScore = GameObject.FindWithTag("Player").GetComponent<Player_Controller>().Character.score;
+        float currentPlayerScore = GameObject.FindWithTag("Player").GetComponent<Player_Controller>().Character.returnScroe();
         //Set score to the UI on the scence
         score = currentPlayerScore;
         scoreRunning.text = score.ToString();
@@ -149,6 +148,8 @@ public class Game_Start : MonoBehaviour
         //Check victory
         if (isVictory)
         {
+            //Update score to database
+            updateTotalScore();
             gameplayResult.text = "VICTORY";
             Button nextBtn = GameObject.Find("Next_Button").GetComponent<Button>();
             nextBtn.interactable = true;

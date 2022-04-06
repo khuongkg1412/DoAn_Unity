@@ -88199,7 +88199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isVictory: 0
   isGameOver: 0
-  Player: {fileID: 571074373}
+  isStoped: 0
   pannelGameover: {fileID: 1590092558}
   scoreResult: {fileID: 2020350584}
   enemyKillResult: {fileID: 36786544}
@@ -88329,6 +88329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 028771a84840f164197c3ad66e1dfbe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBossStage: 0
   positionSpawn:
   - {fileID: 1053951585}
   - {fileID: 237033429}
@@ -88338,8 +88339,10 @@ MonoBehaviour:
   - {fileID: 1828163136}
   - {fileID: 1622318811}
   - {fileID: 129832665}
-  Enemy: {fileID: 1172515324}
+  Enemy:
+  - {fileID: 0}
   numberOfEnemies: 2
+  numberOfBoss: 0
   spawnedPos: 
 --- !u!4 &903638244
 Transform:
@@ -88496,11 +88499,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 904344177}
   m_CullTransparentMesh: 1
---- !u!1 &946611837 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6532921673233310877, guid: 28a54c95b9baaa44ebf266e3b76d76e6, type: 3}
-  m_PrefabInstance: {fileID: 6532921673374073568}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &947614829
 GameObject:
   m_ObjectHideFlags: 0
@@ -89283,11 +89281,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1150360887}
   m_CullTransparentMesh: 1
---- !u!1 &1172515324 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5399668668997908419, guid: 6080bb2a2cf7c3a44b5aefcf5701690d, type: 3}
-  m_PrefabInstance: {fileID: 5399668670157692479}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1172515328 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5399668668997908417, guid: 6080bb2a2cf7c3a44b5aefcf5701690d, type: 3}
@@ -90871,6 +90864,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 028771a84840f164197c3ad66e1dfbe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBossStage: 0
   positionSpawn:
   - {fileID: 874697255}
   - {fileID: 2024385075}
@@ -90880,8 +90874,10 @@ MonoBehaviour:
   - {fileID: 807107983}
   - {fileID: 1640926819}
   - {fileID: 1585386527}
-  Enemy: {fileID: 946611837}
+  Enemy:
+  - {fileID: 0}
   numberOfEnemies: 2
+  numberOfBoss: 0
   spawnedPos: 
 --- !u!4 &1576777873
 Transform:

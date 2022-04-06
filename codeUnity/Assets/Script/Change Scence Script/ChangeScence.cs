@@ -73,8 +73,7 @@ public class ChangeScence : MonoBehaviour
             {
                 if (i.name_Item.Equals("Heal"))
                 {
-                    Player_DataManager.Instance.playerCharacter.addBuff(i);
-                    Debug.Log("Found" + i.name_Item);
+                    Player_DataManager.Instance.playerCharacter.setBuff(i);
                 }
             }
             SceneManager.LoadScene("Tutorial");

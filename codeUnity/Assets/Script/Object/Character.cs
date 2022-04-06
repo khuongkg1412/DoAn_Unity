@@ -17,14 +17,13 @@ public struct Character
 
     private NumeralStruct originalNumeral;
 
-    public ItemStruct buffInGame;
-
+    private ItemStruct buffInGame;
     private bool isDead;
-    public bool isRevive
+    private bool isRevive
     {
         get; set;
     }
-    public float score
+    private float score
     {
         get; set;
     }
@@ -33,7 +32,26 @@ public struct Character
     {
         get; set;
     }
-
+    private bool isShooting
+    {
+        get; set;
+    }
+    public void setScroe(float score)
+    {
+        this.score = score;
+    }
+    public float returnScroe()
+    {
+        return this.score;
+    }
+    public void setRevive(bool isRevive)
+    {
+        this.isRevive = isRevive;
+    }
+    public bool getRevive()
+    {
+        return isRevive;
+    }
     public bool isMove()
     {
         return isMoving;
@@ -42,12 +60,6 @@ public struct Character
     public void setMove(bool isMove)
     {
         isMoving = isMove;
-    }
-
-
-    private bool isShooting
-    {
-        get; set;
     }
 
     public bool isShoot()
@@ -106,9 +118,13 @@ public struct Character
         }
     }
 
-    public void addBuff(ItemStruct item)
+    public void setBuff(ItemStruct item)
     {
         this.buffInGame = item;
+    }
+    public ItemStruct getItemBuff()
+    {
+        return this.buffInGame;
     }
     public float returnATK()
     {

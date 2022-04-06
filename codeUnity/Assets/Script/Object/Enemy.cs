@@ -20,8 +20,60 @@ public class Enemy
         image = loadingImageFromFilePath("Virus/A");
         detectRange = 300f;
     }
-    public VirusType typeVirus;
-    public NumeralStruct numeral;
+    private VirusType typeVirus;
+
+    private NumeralStruct numeral;
+    public void setNumeral(NumeralStruct numeral)
+    {
+        this.numeral = numeral;
+    }
+    public NumeralStruct getNumeral()
+    {
+        return numeral;
+    }
+    public float returnATK()
+    {
+        return this.numeral.ATK_Numeral;
+    }
+    public void setATK(float ATK)
+    {
+        this.numeral.ATK_Numeral = ATK;
+    }
+
+    public float returnDEF()
+    {
+        return this.numeral.DEF_Numeral;
+    }
+
+    public void setDEF(float DEF)
+    {
+        this.numeral.DEF_Numeral = DEF;
+    }
+    public float returnHP()
+    {
+        return this.numeral.HP_Numeral;
+    }
+
+    public void setHP(float HP)
+    {
+        this.numeral.HP_Numeral = HP;
+    }
+    public float returnSPD()
+    {
+        return this.numeral.SPD_Numeral;
+    }
+    public void setSPD(float SPD)
+    {
+        this.numeral.SPD_Numeral = SPD;
+    }
+    public float returnATKSPD()
+    {
+        return this.numeral.ATKSPD_Numeral;
+    }
+    public void setATKSPD(float ATKSPD)
+    {
+        this.numeral.ATKSPD_Numeral = ATKSPD;
+    }
     public Sprite image;
     public float detectRange;
     public void settingNumeral(NumeralStruct numeral)
@@ -42,6 +94,14 @@ public class Enemy
         this.numeral.HP_Numeral -= damageTaken;
 
     }
+    public void setVirusType(VirusType virusType)
+    {
+        this.typeVirus = virusType;
+    }
+    public VirusType getVirusType()
+    {
+        return typeVirus;
+    }
 }
 
 
@@ -58,15 +118,15 @@ public class VirusA : Enemy
 {
     public VirusA()
     {
-        numeral = new NumeralStruct()
+        setNumeral(new NumeralStruct()
         {
             ATK_Numeral = 10,
             DEF_Numeral = 0,
             HP_Numeral = 30,
             SPD_Numeral = 200,
             ATKSPD_Numeral = 1
-        };
-        typeVirus = VirusType.VirusA;
+        });
+        setVirusType(VirusType.VirusA);
         image = loadingImageFromFilePath("Virus/A");
         detectRange = 300f;
     }
@@ -76,15 +136,15 @@ public class VirusB : Enemy
 {
     public VirusB()
     {
-        numeral = new NumeralStruct()
+        setNumeral(new NumeralStruct()
         {
             ATK_Numeral = 5,
             DEF_Numeral = 7,
             HP_Numeral = 30,
             SPD_Numeral = 200,
             ATKSPD_Numeral = 1
-        };
-        typeVirus = VirusType.VirusB;
+        });
+        setVirusType(VirusType.VirusB);
         image = loadingImageFromFilePath("Virus/B");
         detectRange = 300f;
     }
@@ -95,15 +155,15 @@ public class VirusC : Enemy
 {
     public VirusC()
     {
-        numeral = new NumeralStruct()
+        setNumeral(new NumeralStruct()
         {
             ATK_Numeral = 10,
             DEF_Numeral = 0,
             HP_Numeral = 20,
             SPD_Numeral = 500,
             ATKSPD_Numeral = 1
-        };
-        typeVirus = VirusType.VirusC;
+        });
+        setVirusType(VirusType.VirusC);
         image = loadingImageFromFilePath("Virus/C");
         detectRange = 300f;
     }
@@ -112,15 +172,15 @@ public class VirusD : Enemy
 {
     public VirusD()
     {
-        numeral = new NumeralStruct()
+        setNumeral(new NumeralStruct()
         {
             ATK_Numeral = 7,
             DEF_Numeral = 0,
             HP_Numeral = 60,
             SPD_Numeral = 200,
             ATKSPD_Numeral = 1
-        };
-        typeVirus = VirusType.VirusD;
+        });
+        setVirusType(VirusType.VirusD);
         image = loadingImageFromFilePath("Virus/VirusD");
         detectRange = 300f;
     }
@@ -130,15 +190,15 @@ public class VirusBoss : Enemy
 {
     public VirusBoss()
     {
-        numeral = new NumeralStruct()
+        setNumeral(new NumeralStruct()
         {
             ATK_Numeral = 10,
             DEF_Numeral = 5,
             HP_Numeral = 120,
             SPD_Numeral = 100,
             ATKSPD_Numeral = 1
-        };
-        typeVirus = VirusType.Boss1;
+        });
+        setVirusType(VirusType.Boss1);
         image = loadingImageFromFilePath("Virus/Boss1");
         detectRange = 10000f;
     }
@@ -151,25 +211,26 @@ public class VirusBoss2 : Enemy
     public VirusBoss2()
     {
         numberOfBeards = 3;
-        numeral = new NumeralStruct()
+        setNumeral(new NumeralStruct()
         {
             ATK_Numeral = 10,
             DEF_Numeral = 0,
             HP_Numeral = 30 * numberOfBeards,
             SPD_Numeral = 300,
             ATKSPD_Numeral = 1
-        };
-        typeVirus = VirusType.Boss2;
+        });
+        setVirusType(VirusType.Boss2);
         image = loadingImageFromFilePath("Virus/Boss1");
         detectRange = 10000f;
         isDead = false;
     }
     public void getDamage(float dameGiven)
     {
-        numeral.HP_Numeral -= dameGiven;
-        if (numeral.HP_Numeral <= 0)
+        float currentHP = returnHP();
+        currentHP -= dameGiven;
+        if (currentHP <= 0)
         {
-            numeral.HP_Numeral = 0;
+            setHP(0);
             numberOfBeards -= 1;
             isDead = true;
         }
@@ -178,15 +239,14 @@ public class VirusBoss2 : Enemy
     {
         if (numberOfBeards > 1)
         {
-            Debug.Log("revive");
-            numeral = new NumeralStruct()
+            setNumeral(new NumeralStruct()
             {
                 ATK_Numeral = 10,
                 DEF_Numeral = 0,
                 HP_Numeral = 30 * numberOfBeards,
                 SPD_Numeral = 300,
                 ATKSPD_Numeral = 1
-            };
+            });
             isDead = false;
         }
 

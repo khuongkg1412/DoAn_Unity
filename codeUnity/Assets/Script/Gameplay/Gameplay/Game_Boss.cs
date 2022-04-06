@@ -93,18 +93,16 @@ public class Game_Boss : MonoBehaviour
         UpdateScore(timeRemaining);
         //Show Result Pannel
         DisplayResultPannel();
-        //Update score to database
-        totalScore();
     }
     //Update score to database
-    void totalScore()
+    void updateTotalScore()
     {
         //Get name of scence to calculate the stage
         string scenceName = SceneManager.GetActiveScene().name;
         //Calculate the stage
-        float stage = float.Parse(scenceName.Substring(5));
+        int stage = int.Parse(scenceName.Substring(5));
         //Update score to database
-        Player_DataManager.Instance.finishTheStage(score, stage, isVictory);
+        Player_DataManager.Instance.finishTheStage(score, 50f, stage);
     }
     //Update score
     public void UpdateScore(float scorePlus)
@@ -133,6 +131,8 @@ public class Game_Boss : MonoBehaviour
         //Check victory
         if (isVictory)
         {
+            //Update score to database
+            updateTotalScore();
             enemyNumber += 1;
             gameplayResult.text = "VICTORY";
             Button nextBtn = GameObject.Find("Next_Button").GetComponent<Button>();
