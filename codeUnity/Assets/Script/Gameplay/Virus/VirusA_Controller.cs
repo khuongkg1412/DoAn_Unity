@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VirusB_Controller : MonoBehaviour
+public class VirusA_Controller : MonoBehaviour
 {
     //Setting up Enemy
     public Enemy virus;
@@ -39,7 +39,7 @@ public class VirusB_Controller : MonoBehaviour
         originalPos = transform.parent.gameObject.transform.GetChild(1).gameObject.transform;
         HealthBar = transform.GetChild(0).gameObject.transform.GetChild(1).gameObject;
         gamePlay = GameObject.Find("Canvas");
-        virus = new VirusB();
+        virus = new VirusA();
         setNumeral();
         gameObject.GetComponent<Virus_Numeral>().settingNumeral(virus);
     }
@@ -193,12 +193,12 @@ public class VirusB_Controller : MonoBehaviour
                         HealthBar.transform.transform.localScale.z);
                 if (gamePlay.GetComponent<Game_Start>() != null)
                 {
-                    GameObject.FindWithTag("Player").GetComponent<Player_Controller>().Character.setScore(10f);
+                    GameObject.FindWithTag("Player").GetComponent<Player_Controller>().Character.setScore(20f); ;
                     gamePlay.GetComponent<Game_Start>().UpdateEnemyNumber(1);
                 }
                 else
                 {
-                    gamePlay.GetComponent<Game_Tutorial>().UpdateScore(10f);
+                    gamePlay.GetComponent<Game_Tutorial>().UpdateScore(20f);
                     gamePlay.GetComponent<Game_Tutorial>().UpdateEnemyNumber(1);
                 }
 

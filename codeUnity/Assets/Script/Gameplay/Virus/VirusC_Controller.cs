@@ -193,12 +193,12 @@ public class VirusC_Controller : MonoBehaviour
                         HealthBar.transform.transform.localScale.z);
                 if (gamePlay.GetComponent<Game_Start>() != null)
                 {
-                    GameObject.FindWithTag("Player").GetComponent<Player_Controller>().Character.setScore(10f);
+                    GameObject.FindWithTag("Player").GetComponent<Player_Controller>().Character.setScore(20f);
                     gamePlay.GetComponent<Game_Start>().UpdateEnemyNumber(1);
                 }
                 else
                 {
-                    gamePlay.GetComponent<Game_Tutorial>().UpdateScore(10f);
+                    gamePlay.GetComponent<Game_Tutorial>().UpdateScore(20f);
                     gamePlay.GetComponent<Game_Tutorial>().UpdateEnemyNumber(1);
                 }
 

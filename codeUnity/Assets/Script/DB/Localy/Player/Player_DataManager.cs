@@ -49,13 +49,13 @@ public class Player_DataManager : MonoBehaviour
 
     public void updateCoinConcurrency(float amountUpdate)
     {
-        Player.concurrency.Coin += amountUpdate;
+        Player.concurrency.Coin += Mathf.Round(amountUpdate);
         //Call to update the information off Player
         Player_Update.UpdatePlayer();
     }
     public void updateDiamondConcurrency(float amountUpdate)
     {
-        Player.concurrency.Diamond += amountUpdate;
+        Player.concurrency.Diamond += Mathf.Round(amountUpdate);
         //Call to update the information off Player
         Player_Update.UpdatePlayer();
     }
@@ -95,11 +95,11 @@ public class Player_DataManager : MonoBehaviour
             Player.level.stage += 1;
         }
         //Calculate the exp point by the score the player get
-        player_LevelUP(coin);
+        player_LevelUP(Mathf.Round(coin));
         //Plus the coin by the score the player get
-        updateCoinConcurrency(coin);
+        updateCoinConcurrency(Mathf.Round(coin));
         //Plus the Diamond by the score the player get
-        updateDiamondConcurrency(diamond);
+        updateDiamondConcurrency(Mathf.Round(diamond));
         //Call to update the information off Player
         Player_Update.UpdatePlayer();
     }
@@ -119,9 +119,6 @@ public class Player_DataManager : MonoBehaviour
             Player.level.currentXP = 0;
         }
         Player.level.currentXP += totalExp;
-
-
-
         //Call to update the information off Player
         Player_Update.UpdatePlayer();
     }

@@ -36,9 +36,9 @@ public struct Character
     {
         get; set;
     }
-    public void setScroe(float score)
+    public void setScore(float score)
     {
-        this.score = score;
+        this.score += score;
     }
     public float returnScroe()
     {
@@ -76,10 +76,7 @@ public struct Character
     {
         return this.numeral;
     }
-    public void setScore(float score)
-    {
-        this.score = score;
-    }
+
     public bool isPlayerDead()
     {
         return isDead;

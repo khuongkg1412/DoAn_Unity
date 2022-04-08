@@ -98,7 +98,7 @@ public class Boss1 : MonoBehaviour
                 currentHP = 0;
                 HealthBar.transform.localScale = new Vector3(0, HealthBar.transform.transform.localScale.y, HealthBar.transform.transform.localScale.z);
 
-                GameObject.FindWithTag("Player").GetComponent<Player_Controller>().Character.setScore(1000f);
+                GameObject.FindWithTag("Player").GetComponent<Player_Controller>().Character.setScore(100f);
                 gamePlay.GetComponent<Game_Boss>().isGameOver = true;
                 gamePlay.GetComponent<Game_Boss>().isVictory = true;
 
