@@ -114,7 +114,7 @@ public class Game_Start : MonoBehaviour
     {
         float currentPlayerScore = GameObject.FindWithTag("Player").GetComponent<Player_Controller>().Character.returnScroe();
         //Set score to the UI on the scence
-        score = currentPlayerScore;
+        score = Mathf.Round(currentPlayerScore);
         scoreRunning.text = score.ToString();
         scoreResult.text = score.ToString();
     }

@@ -61,7 +61,7 @@ HP Enemy
             virus.reviveLife();
             maxHP = virus.returnSPD();
             currentHP = maxHP;
-            Instantiate(gameObject, transform.position, Quaternion.identity);
+            //Instantiate(gameObject, transform.position, Quaternion.identity);
         }
         HealthBar.transform.localScale = new Vector3((virus.returnSPD() / maxHP) * maxHPsize, HealthBar.transform.transform.localScale.y, HealthBar.transform.transform.localScale.z);
     }
