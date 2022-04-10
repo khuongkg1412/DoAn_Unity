@@ -13,12 +13,12 @@ public class Citizen_HP : MonoBehaviour
     public float maxHP;
 
     //Helth bar object
-    public GameObject HealthBar;
+    [SerializeField] GameObject HealthBar;
 
     //Helth bar object
-    public GameObject TimeHealingBar;
+    [SerializeField] GameObject TimeHealingBar;
 
-    public TextMeshProUGUI hpText;
+    [SerializeField] TextMeshProUGUI hpText;
 
     //Time to manipulate when people get sick and get heal
     float timerGetSick = 0f;
@@ -46,7 +46,6 @@ public class Citizen_HP : MonoBehaviour
         //Set HP for Citizen
         maxHP = 30f;
         currentHP = maxHP;
-
         //Set Max size for HP bar
         Healthbarmaxsize = HealthBar.transform.localScale.x;
 

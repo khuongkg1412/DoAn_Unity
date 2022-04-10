@@ -30,7 +30,7 @@ public class Citizen_Healing : MonoBehaviour
         player = GameObject.FindWithTag("Player");
     }
 
-    [System.Obsolete]
+
     public void selectedUpdate()
     {
         if (citizen != null)
