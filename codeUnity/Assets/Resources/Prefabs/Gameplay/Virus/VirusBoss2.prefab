@@ -440,7 +440,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: -8644207739394219613, guid: 00f39e55119df7f47a90e326b198a0bb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -523,7 +523,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: -3739119266876564196, guid: 00f39e55119df7f47a90e326b198a0bb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -100674,18 +100674,6 @@ MonoBehaviour:
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
---- !u!114 &4167773345634202800
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5858032700951933109}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb0bd34ee30afa941bde7894c5e685fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &350434609067850256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100698,11 +100686,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edd2b26ddeda8ed4c8c1a047f8fbd123, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetCitizen: []
-  targetPlayer: {fileID: 0}
-  originalPos: {fileID: 0}
-  isFollow: 1
   HealthBar: {fileID: 0}
+--- !u!114 &4167773345634202800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5858032700951933109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb0bd34ee30afa941bde7894c5e685fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7108278598811725832
 GameObject:
   m_ObjectHideFlags: 0
@@ -100774,7 +100770,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: -5604353180590343302, guid: 00f39e55119df7f47a90e326b198a0bb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -100884,19 +100880,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 791896357, guid: 03c20b675f5302f448e46cb6532905f2, type: 3}
       propertyPath: m_Size.x
-      value: 105.13135
+      value: 101.272446
       objectReference: {fileID: 0}
     - target: {fileID: 791896357, guid: 03c20b675f5302f448e46cb6532905f2, type: 3}
       propertyPath: m_Size.y
-      value: 78.48882
+      value: 74.01245
       objectReference: {fileID: 0}
     - target: {fileID: 791896357, guid: 03c20b675f5302f448e46cb6532905f2, type: 3}
       propertyPath: m_Offset.x
-      value: -4.1044064
+      value: -3.0793076
       objectReference: {fileID: 0}
     - target: {fileID: 791896357, guid: 03c20b675f5302f448e46cb6532905f2, type: 3}
       propertyPath: m_Offset.y
-      value: -19.660263
+      value: -17.422073
       objectReference: {fileID: 0}
     - target: {fileID: 791896357, guid: 03c20b675f5302f448e46cb6532905f2, type: 3}
       propertyPath: m_IsTrigger
@@ -100926,6 +100922,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3617683341387958442, guid: 03c20b675f5302f448e46cb6532905f2, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3617683341387958443, guid: 03c20b675f5302f448e46cb6532905f2, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -100940,7 +100940,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3617683341387958443, guid: 03c20b675f5302f448e46cb6532905f2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3617683341387958443, guid: 03c20b675f5302f448e46cb6532905f2, type: 3}
       propertyPath: m_LocalRotation.w
@@ -100975,7 +100975,15 @@ PrefabInstance:
       value: Enemies
       objectReference: {fileID: 0}
     - target: {fileID: 8139301693914824007, guid: 03c20b675f5302f448e46cb6532905f2, type: 3}
+      propertyPath: m_Mass
+      value: 67458.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8139301693914824007, guid: 03c20b675f5302f448e46cb6532905f2, type: 3}
       propertyPath: m_Simulated
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8139301693914824007, guid: 03c20b675f5302f448e46cb6532905f2, type: 3}
+      propertyPath: m_UseAutoMass
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8139301693914824007, guid: 03c20b675f5302f448e46cb6532905f2, type: 3}

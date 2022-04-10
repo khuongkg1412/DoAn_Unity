@@ -84,7 +84,7 @@ public struct Character
     public void getDamage(float damageTaken)
     {
         //Minus damage taken by DEF point
-        damageTaken -= returnDEF();
+        damageTaken -= (returnDEF() / 2);
         //Minus the HP by taken damage  
         numeral.HP_Numeral -= damageTaken;
         //If Hp point is under 0, set it is equal to 0
