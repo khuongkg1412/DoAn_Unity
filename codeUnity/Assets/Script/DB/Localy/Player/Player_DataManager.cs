@@ -59,6 +59,8 @@ public class Player_DataManager : MonoBehaviour
         //Call to update the information off Player
         Player_Update.UpdatePlayer();
     }
+
+    
     public void adding_Item(ItemStruct item, int quantityBuy)
     {
         bool isFound = false;
@@ -78,7 +80,6 @@ public class Player_DataManager : MonoBehaviour
             Inventory_Player invent = new Inventory_Player()
             {
                 ID = item.ID,
-                level = 0,
                 quantiy = quantityBuy
             };
             //Add to Invent

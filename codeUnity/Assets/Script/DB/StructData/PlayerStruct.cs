@@ -10,9 +10,6 @@ public class Inventory_Player
     public string ID { get; set; }
     [FirestoreProperty]
     public int quantiy { get; set; }
-    [FirestoreProperty]
-    public int level { get; set; }
-
 }
 
 [FirestoreData]

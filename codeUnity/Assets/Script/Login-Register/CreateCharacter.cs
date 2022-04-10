@@ -100,17 +100,14 @@ public class CreateCharacter : MonoBehaviour
         Inventory_Player Suit = new Inventory_Player()
         {
             quantiy = 1,
-            level = 0
         };
         Inventory_Player Accessory = new Inventory_Player()
         {
             quantiy = 1,
-            level = 0
         };
         Inventory_Player Gun = new Inventory_Player()
         {
             quantiy = 1,
-            level = 0
         };
 
         Friend_Player friend_Player = new Friend_Player()
