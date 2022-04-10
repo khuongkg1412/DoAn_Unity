@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class openSetting : MonoBehaviour
 {
-    // Start is called before the first frame update
-
     [SerializeField] GameObject settingPrefab;
+
     private bool checkClone = false;
 
+    // Create Prefab when clicking setting button
     public void settingOnClick()
     {
         if (!checkClone)
@@ -17,5 +17,10 @@ public class openSetting : MonoBehaviour
             childOb.transform.parent = GameObject.Find("safeArea").transform;
             checkClone = true;
         }
+    }
+    public void closeOnClick()
+    {
+        Destroy(settingPrefab);
+        checkClone = false;
     }
 }

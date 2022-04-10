@@ -64,4 +64,5 @@ public class sound : MonoBehaviour
     {
         PlayerPrefs.SetInt("soundVolume", isON ? 1 : 0);
     }
+
 }

@@ -14,18 +14,14 @@ public class soundPlay : MonoBehaviour
     {
         if (instance == null)
         {
-            Debug.Log("Dang chay ne");
             instance = this;
             DontDestroyOnLoad(gameObject);
-            //return;
         }
         else
         {
             Destroy(gameObject);
         }
-        // if (instance == this) return;
-        //Destroy(gameObject);
-        //DontDestroyOnLoad(transform.gameObject);
+
     }
 
     void Start()
