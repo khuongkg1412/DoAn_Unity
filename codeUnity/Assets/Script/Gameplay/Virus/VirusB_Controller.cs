@@ -13,7 +13,7 @@ public class VirusB_Controller : MonoBehaviour
     Transform originalPos;
 
     //Decide whether enemy is following player
-    public bool isFollow = true;
+    public bool isFollow;
 
     //Time before enemy continute follow player after a collision
     float waiToFolllow = 0f;
