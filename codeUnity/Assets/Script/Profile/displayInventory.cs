@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class displayInventory : MonoBehaviour
@@ -19,7 +20,7 @@ public class displayInventory : MonoBehaviour
         foreach (Inventory_Player item in Player_DataManager.Instance.inventory_Player)
         {
             GameObject obj;
-            ItemStruct anItem = findItem(item.ID);
+            ItemStruct anItem = findItembyID(item.ID);
             if (anItem != null && anItem.type_Item > 2)
             {
                 slot += 1;
@@ -50,7 +51,7 @@ public class displayInventory : MonoBehaviour
         }
     }
 
-    private ItemStruct findItem(string ID)
+    private ItemStruct findItembyID(string ID)
     {
         foreach (ItemStruct Item in Item_DataManager.Instance.Item)
         {
@@ -59,7 +60,7 @@ public class displayInventory : MonoBehaviour
         return null;
     }
 
-    private string findItems(string nameItem)
+    private string findItembyName(string nameItem)
     {
         foreach (ItemStruct Item in Item_DataManager.Instance.Item)
         {
@@ -80,28 +81,38 @@ public class displayInventory : MonoBehaviour
     public void displayInforItem(GameObject slot)
     {
         string ID = GameObject.Find(slot.name + "/ID").GetComponent<Text>().text;
-        ItemStruct anItem = findItem(ID);
+        ItemStruct anItem = findItembyID(ID);
         Inventory_Player anItemInInventory = findItemInInventory(ID);
 
         GameObject scrollItemObj;
 
         if (anItem.type_Item == 4)
         {
+            Texture2D OutfitImage = anItem.texture2D;
+            Sprite sprite = Sprite.Create(OutfitImage, new Rect(0.0f, 0.0f, OutfitImage.width, OutfitImage.height), new Vector2(0.5f, 0.5f), 100.0f);
+
             scrollItemObj = (GameObject)Instantiate(piece_infor, transform);
+
             scrollItemObj.transform.Find("Name Item").gameObject.GetComponent<Text>().text = "Piece of " + anItem.name_Item;
-            scrollItemObj.transform.Find("infor box/image").gameObject.GetComponent<Text>().text = anItem.image_Item;
+            scrollItemObj.transform.Find("infor box/Image").gameObject.GetComponent<Image>().sprite = sprite;
             scrollItemObj.transform.Find("infor box/piece").gameObject.GetComponent<Text>().text = anItemInInventory.quantiy + " / " + anItem.piece;
+            scrollItemObj.transform.Find("close_btn").gameObject.GetComponent<Button>().onClick.AddListener(() => Destroy(scrollItemObj));
 
             if (anItemInInventory.quantiy == anItem.piece)
             {
-                scrollItemObj.transform.Find("infor box/ok_btn").gameObject.GetComponent<Button>().enabled = true;
-                scrollItemObj.transform.Find("infor box/ok_btn").gameObject.GetComponent<Button>().onClick.AddListener(() => CraftPieceToItem());
+                scrollItemObj.transform.Find("infor box/ok_btn").gameObject.GetComponent<Button>().interactable = true;
+                scrollItemObj.transform.Find("infor box/ok_btn").gameObject.GetComponent<Button>().onClick.AddListener(() => CraftPieceToItem(anItem));
             }
         }
     }
 
-    private void CraftPieceToItem()
+    private void CraftPieceToItem(ItemStruct piece)
     {
-        Debug.Log("OK");
+        string outfitID = findItembyName(piece.name_Item);
+        Inventory_Player anItemInInventory = findItemInInventory(piece.ID);
+
+        Player_DataManager.Instance.CraftItem(outfitID, anItemInInventory);
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
     }
 }

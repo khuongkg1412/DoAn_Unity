@@ -9,6 +9,8 @@ public class Player_DataManager : MonoBehaviour
 
     public PlayerStruct Player = new PlayerStruct();
 
+    public TotalPlusStats stats = new TotalPlusStats();
+
     public Character playerCharacter;
     public List<Inventory_Player> inventory_Player = new List<Inventory_Player>();
     public List<SystemNotification> systemNotification = new List<SystemNotification>();
@@ -60,7 +62,7 @@ public class Player_DataManager : MonoBehaviour
         Player_Update.UpdatePlayer();
     }
 
-    
+
     public void adding_Item(ItemStruct item, int quantityBuy)
     {
         bool isFound = false;
@@ -211,5 +213,26 @@ public class Player_DataManager : MonoBehaviour
         doc.SetAsync(lifeRequest);
     }
 
+    public void CraftItem(string outfitID, Inventory_Player piece)
+    {
+        Inventory_Player i = Instance.inventory_Player.Find(r => r.ID == piece.ID);
+        if (i != null)
+        {
+            //delete crafted piece out player inventory
+            Instance.inventory_Player.Remove(piece);
 
+            //adding item to inventory
+            Inventory_Player invent = new Inventory_Player()
+            {
+                ID = outfitID,
+                quantiy = 1
+            };
+
+            //Add to Invent
+            Instance.inventory_Player.Add(invent);
+        }
+
+        //Call to update the information off Player
+        Player_Update.UpdatePlayer();
+    }
 }

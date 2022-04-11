@@ -131,6 +131,7 @@ public class chooseOutfit : MonoBehaviour
 
                 scrollItemObj.transform.Find("infor box/stats").gameObject.GetComponent<Text>().text = stat;
                 scrollItemObj.transform.Find("infor box/ok_btn").gameObject.GetComponent<Button>().onClick.AddListener(() => WearThisItem(ID_item));
+                scrollItemObj.transform.Find("close_btn").gameObject.GetComponent<Button>().onClick.AddListener(() => Destroy(scrollItemObj));
             }
         }
     }
