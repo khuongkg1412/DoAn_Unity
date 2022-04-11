@@ -5,7 +5,7 @@ using UnityEngine;
 public class VirusA_Controller : MonoBehaviour
 {
     //Setting up Enemy
-    public Enemy virus;
+    Enemy virus;
     //Player targetPlayer to enemy move forward
     GameObject[] targetCitizen;
     Transform targetPlayer;
@@ -32,6 +32,7 @@ public class VirusA_Controller : MonoBehaviour
     public bool isBoss = false;
     private void Start()
     {
+        //Setting object
         targetPlayer = GameObject.FindWithTag("Player").transform;
         originalPos = transform.parent.gameObject.transform.GetChild(1).gameObject.transform;
         HealthBar = transform.GetChild(0).gameObject.transform.GetChild(1).gameObject;

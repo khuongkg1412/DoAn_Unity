@@ -24,7 +24,7 @@ public class Spawn_Enemy : MonoBehaviour
             int randomType = Random.Range(0, Enemy.Length);
             int randSpawnLocation = Random.Range(0, positionSpawn.Length);
             float difficultLevelOfVirus = Enemy[randomType].transform.GetChild(0).gameObject.GetComponent<Virus_Numeral>().returnDifficultLevel();
-            if (difficultLevelOfVirus < difficultLevelsofTotal)
+            if (difficultLevelOfVirus <= difficultLevelsofTotal)
             {
                 //Decrease number of enemies
                 difficultLevelsofTotal -= difficultLevelOfVirus;
