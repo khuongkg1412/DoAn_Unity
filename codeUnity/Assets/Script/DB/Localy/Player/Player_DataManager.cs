@@ -1,13 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Firebase.Firestore;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player_DataManager : MonoBehaviour
 {
     public static Player_DataManager Instance { get; private set; }
 
     public PlayerStruct Player = new PlayerStruct();
+
+    public TotalPlusStats stats = new TotalPlusStats();
 
     public Character playerCharacter;
     public List<Inventory_Player> inventory_Player = new List<Inventory_Player>();
@@ -16,6 +21,7 @@ public class Player_DataManager : MonoBehaviour
     public List<Notification_Struct> notification_Player = new List<Notification_Struct>();
     public List<AchievementStruct> achivementReceived_Player = new List<AchievementStruct>();
 
+    public Text Life, time;
     private void Awake()
     {
         if (Instance == null)
@@ -27,6 +33,7 @@ public class Player_DataManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        TestAsync();
     }
     public void updateBuffInInventory(ItemStruct itemBuff, int quanity)
     {
@@ -59,6 +66,8 @@ public class Player_DataManager : MonoBehaviour
         //Call to update the information off Player
         Player_Update.UpdatePlayer();
     }
+
+
     public void adding_Item(ItemStruct item, int quantityBuy)
     {
         bool isFound = false;
@@ -78,7 +87,6 @@ public class Player_DataManager : MonoBehaviour
             Inventory_Player invent = new Inventory_Player()
             {
                 ID = item.ID,
-                level = 0,
                 quantiy = quantityBuy
             };
             //Add to Invent
@@ -210,5 +218,71 @@ public class Player_DataManager : MonoBehaviour
         doc.SetAsync(lifeRequest);
     }
 
+    public void CraftItem(string outfitID, Inventory_Player piece)
+    {
+        Inventory_Player i = Instance.inventory_Player.Find(r => r.ID == piece.ID);
+        if (i != null)
+        {
+            //delete crafted piece out player inventory
+            Instance.inventory_Player.Remove(piece);
 
+            //adding item to inventory
+            Inventory_Player invent = new Inventory_Player()
+            {
+                ID = outfitID,
+                quantiy = 1
+            };
+
+            //Add to Invent
+            Instance.inventory_Player.Add(invent);
+        }
+
+        //Call to update the information off Player
+        FirebaseFirestore db = FirebaseFirestore.DefaultInstance;
+        DocumentReference doc = db.Collection("Player").Document(Player.ID).Collection("Inventory_Player").Document(piece.ID);
+        doc.DeleteAsync();
+
+        Player_Update.UpdatePlayer();
+    }
+
+    float timeRemaining = 20;
+
+    async void TestAsync()
+    {
+        //int i = 0;
+        while (true)
+        {
+            await Task.Delay(TimeSpan.FromSeconds(1));
+
+            if (Player.level.life < 6)
+            {
+                if (timeRemaining > 0)
+                {
+                    timeRemaining -= 1;
+                    DisplayTime(timeRemaining);
+                    Debug.Log(timeRemaining);
+                }
+                else
+                {
+                    //Time's up
+                    timeRemaining = 0;
+                    Player.level.life += 1;
+                    Life.text = Player.level.life + "/6";
+                    Player_Update.UpdatePlayer();
+                    Debug.Log(timeRemaining);
+                }
+            }
+        }
+    }
+
+    void DisplayTime(float timeToDisplay)
+    {   //Increase time by 1
+        //timeToDisplay += 1;
+        //Convert to minut and second
+        float minutes = Mathf.FloorToInt(timeToDisplay / 60);
+        float seconds = Mathf.FloorToInt(timeToDisplay % 60);
+        //Set to text
+        time.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+
+    }
 }

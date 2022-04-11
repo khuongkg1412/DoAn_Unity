@@ -11,7 +11,7 @@ using UnityEngine.SceneManagement;
 public class chooseOutfit : MonoBehaviour
 {
     FirebaseFirestore db;
-    public GameObject prefab, item_infor;
+    public GameObject prefab, outfit_infor;
     public GameObject content;
 
 
@@ -116,7 +116,7 @@ public class chooseOutfit : MonoBehaviour
     private void chooseThisItem(GameObject obj)
     {
         string ID_item = obj.transform.Find("ID").gameObject.GetComponent<Text>().text;
-        GameObject scrollItemObj = (GameObject)Instantiate(item_infor, transform);
+        GameObject scrollItemObj = (GameObject)Instantiate(outfit_infor, transform);
 
         foreach (ItemStruct item in Item_DataManager.Instance.Item)
         {
@@ -131,6 +131,7 @@ public class chooseOutfit : MonoBehaviour
 
                 scrollItemObj.transform.Find("infor box/stats").gameObject.GetComponent<Text>().text = stat;
                 scrollItemObj.transform.Find("infor box/ok_btn").gameObject.GetComponent<Button>().onClick.AddListener(() => WearThisItem(ID_item));
+                scrollItemObj.transform.Find("close_btn").gameObject.GetComponent<Button>().onClick.AddListener(() => Destroy(scrollItemObj));
             }
         }
     }
@@ -169,20 +170,20 @@ public class chooseOutfit : MonoBehaviour
         //Get Collection And Document
         DocumentReference doc = db.Collection("Item").Document();
         // doc.SetAsync(item1);
-        // doc = db.Collection("Item").Document();
+        //doc = db.Collection("Item").Document();
         doc.SetAsync(item2);
         doc = db.Collection("Item").Document();
         doc.SetAsync(item3);
-        doc = db.Collection("Item").Document();
+        //doc = db.Collection("Item").Document();
         // doc.SetAsync(item7);
-        // doc = db.Collection("Item").Document();
+        doc = db.Collection("Item").Document();
         doc.SetAsync(item8);
         doc = db.Collection("Item").Document();
         doc.SetAsync(item9);
-        doc = db.Collection("Item").Document();
+        //doc = db.Collection("Item").Document();
         // doc.SetAsync(item10);
-        // doc = db.Collection("Item").Document();
-        // doc.SetAsync(item11);
+        doc = db.Collection("Item").Document();
+        doc.SetAsync(item11);
         // doc = db.Collection("Item").Document();
         // doc.SetAsync(item12);
     }
@@ -353,7 +354,7 @@ public class chooseOutfit : MonoBehaviour
                         HP_Numeral = 0,
                         SPD_Numeral = 0
                     }
-            };
+            };*/
 
     ItemStruct
         item11 =
@@ -368,7 +369,7 @@ public class chooseOutfit : MonoBehaviour
                 image_Item = "Outfit_Image/Gun/red_gun",
                 name_Item = "Red Gun",
                 rate_Item = 2,
-                type_Item = (int)TypeItem.Gun,
+                type_Item = (int)TypeItem.Piece,
                 numeral_Item =
                     new NumeralStruct
                     {
@@ -378,7 +379,7 @@ public class chooseOutfit : MonoBehaviour
                         SPD_Numeral = 30
                     }
             };
-    ItemStruct
+    /*ItemStruct
             item12 =
                 new ItemStruct
                 {
