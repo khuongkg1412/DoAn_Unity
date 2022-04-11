@@ -238,7 +238,7 @@ public class VirusBoss2 : Enemy
             ATKSPD_Numeral = 1
         });
         setVirusType(VirusType.Boss2);
-        image = loadingImageFromFilePath("Virus/Boss1");
+        image = loadingImageFromFilePath("Boss2_R" + numberOfBeards);
         detectRange = 10000f;
         isDead = false;
     }
@@ -269,7 +269,7 @@ public class VirusBoss2 : Enemy
                 SPD_Numeral = 300,
                 ATKSPD_Numeral = 1
             });
-            image = loadingImageFromFilePath("Virus/R" + numberOfBeards);
+            image = loadingImageFromFilePath("Boss2_R" + numberOfBeards);
             isDead = false;
         }
 
