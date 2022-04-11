@@ -14,6 +14,7 @@ public class AuthController : MonoBehaviour
     const string AuthKey = "AIzaSyAGYUKR0KqH1JnVG0xkiyxTNhVfLHWZw5o";
     bool isDone;
     GameObject ErrorToast;
+    public static bool TimeisRun = false;
 
     IEnumerator LoginbyEmailandPass(string email, string pass)
     {
