@@ -269,6 +269,7 @@ public class VirusBoss2 : Enemy
                 SPD_Numeral = 300,
                 ATKSPD_Numeral = 1
             });
+            image = loadingImageFromFilePath("Virus/R" + numberOfBeards);
             isDead = false;
         }
 
