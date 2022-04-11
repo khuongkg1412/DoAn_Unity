@@ -1,7 +1,4 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Firebase.Firestore;
 using UnityEngine;
 using UnityEngine.UI;
@@ -33,7 +30,6 @@ public class Player_DataManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        TestAsync();
     }
     public void updateBuffInInventory(ItemStruct itemBuff, int quanity)
     {
@@ -52,6 +48,7 @@ public class Player_DataManager : MonoBehaviour
     public void settingCharacter(NumeralStruct numeralStruct)
     {
         this.playerCharacter = new Character(numeralStruct);
+
     }
 
     public void updateCoinConcurrency(float amountUpdate)
@@ -218,6 +215,17 @@ public class Player_DataManager : MonoBehaviour
         doc.SetAsync(lifeRequest);
     }
 
+    public void addFriend(PlayerStruct friend)
+    {
+        Friend_Player newfriend_Player = new Friend_Player()
+        {
+            accept_Friend = true,
+            friendID = friend.ID
+        };
+        Instance.friend_Player.Add(newfriend_Player);
+        Player_Update.UpdatePlayer();
+    }
+
     public void CraftItem(string outfitID, Inventory_Player piece)
     {
         Inventory_Player i = Instance.inventory_Player.Find(r => r.ID == piece.ID);
@@ -245,44 +253,18 @@ public class Player_DataManager : MonoBehaviour
         Player_Update.UpdatePlayer();
     }
 
-    float timeRemaining = 20;
-
-    async void TestAsync()
-    {
-        //int i = 0;
-        while (true)
-        {
-            await Task.Delay(TimeSpan.FromSeconds(1));
-
-            if (Player.level.life < 6)
-            {
-                if (timeRemaining > 0)
-                {
-                    timeRemaining -= 1;
-                    DisplayTime(timeRemaining);
-                    Debug.Log(timeRemaining);
-                }
-                else
-                {
-                    //Time's up
-                    timeRemaining = 0;
-                    Player.level.life += 1;
-                    Life.text = Player.level.life + "/6";
-                    Player_Update.UpdatePlayer();
-                    Debug.Log(timeRemaining);
-                }
-            }
-        }
-    }
-
-    void DisplayTime(float timeToDisplay)
+    public void DisplayTime(float timeToDisplay)
     {   //Increase time by 1
-        //timeToDisplay += 1;
+        //timeToDisplay += 0.5f;
         //Convert to minut and second
         float minutes = Mathf.FloorToInt(timeToDisplay / 60);
         float seconds = Mathf.FloorToInt(timeToDisplay % 60);
         //Set to text
         time.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-
+    }
+    public void decreaseLife()
+    {
+        Player.level.life -= 1;
+        Player_Update.UpdatePlayer();
     }
 }

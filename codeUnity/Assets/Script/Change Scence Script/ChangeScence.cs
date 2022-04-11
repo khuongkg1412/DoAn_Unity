@@ -1,11 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Firebase.Extensions;
-using Firebase.Firestore;
-using Firebase.Storage;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class ChangeScence : MonoBehaviour
 {

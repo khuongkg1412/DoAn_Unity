@@ -6,11 +6,12 @@ using Firebase;
 using Firebase.Extensions;
 using Firebase.Firestore;
 using Firebase.Storage;
+using UnityEngine.SceneManagement;
 
 public class friendHandler : MonoBehaviour
 {
     FirebaseFirestore db;
-    public GameObject prefab;
+    public GameObject prefab, addFriend_box;
     public ScrollRect friendList;
     public GameObject content;
 
@@ -20,12 +21,6 @@ public class friendHandler : MonoBehaviour
     {
         //friendList.verticalNormalizedPosition = 1;
         StartCoroutine(GetFriendData());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     void OnLifeRequestClick(string FriendId)
@@ -105,5 +100,62 @@ public class friendHandler : MonoBehaviour
                 }
             });
         yield return null;
+    }
+
+    public void findNewFriend(Text name)
+    {
+        PlayerStruct player = ListPlayer_DataManager.Instance.listPlayer.Find(e => e.generalInformation.username_Player.Equals(name.text));
+        StartCoroutine(GetFriendImage(player));
+    }
+
+    IEnumerator GetFriendImage(PlayerStruct friend)
+    {
+        Debug.Log("Image Downloading");
+
+        // Get a reference to the storage service, using the default Firebase App
+        FirebaseStorage storage = FirebaseStorage.DefaultInstance;
+
+        // Create a storage reference from our storage service
+        StorageReference storageRef = storage.GetReference(friend.generalInformation.avatar_Player);
+
+        // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
+        const long maxAllowedSize = 4 * 1024 * 1024;
+        storageRef
+            .GetBytesAsync(maxAllowedSize)
+            .ContinueWithOnMainThread(task =>
+            {
+                if (task.IsFaulted || task.IsCanceled)
+                {
+                    Debug.LogException(task.Exception);
+                }
+                else
+                {
+                    byte[] fileContents = task.Result;
+                    Texture2D texture = new Texture2D(1, 1);
+                    texture.LoadImage(fileContents);
+                    Sprite sprite = Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100.0f);
+
+                    DisplayInfor(sprite, friend);
+                }
+            });
+        yield return null;
+    }
+
+    private void DisplayInfor(Sprite sprite, PlayerStruct friend)
+    {
+        GameObject scrollItemObj = (GameObject)Instantiate(addFriend_box, transform);
+
+        scrollItemObj.transform.Find("Name player").gameObject.GetComponent<Text>().text = friend.generalInformation.username_Player;
+        scrollItemObj.transform.Find("infor box/level").gameObject.GetComponent<Text>().text = "Level " + (int)friend.level.level;
+        scrollItemObj.transform.Find("infor box/Image").gameObject.GetComponent<Image>().sprite = sprite;
+        scrollItemObj.transform.Find("infor box/ok_btn").gameObject.GetComponent<Button>().onClick.AddListener(() => addFriend(friend));
+        scrollItemObj.transform.Find("close_btn").gameObject.GetComponent<Button>().onClick.AddListener(() => Destroy(scrollItemObj));
+    }
+
+    private void addFriend(PlayerStruct friend)
+    {
+        Player_DataManager.Instance.addFriend(friend);
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
     }
 }

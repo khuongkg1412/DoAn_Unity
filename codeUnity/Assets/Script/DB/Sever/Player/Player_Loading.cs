@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Firebase.Extensions;
 using Firebase.Firestore;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Threading.Tasks;
 
 public class Player_Loading : MonoBehaviour
 {
@@ -31,6 +33,7 @@ public class Player_Loading : MonoBehaviour
                 Player_DataManager.Instance.Player = snapshot.ConvertTo<PlayerStruct>();
                 Player_DataManager.Instance.Player.ID = snapshot.Id;
                 Player_DataManager.Instance.settingCharacter(snapshot.ConvertTo<PlayerStruct>().numeral);
+                if (!AuthController.TimeisRun) TestAsync();
             }
             else
             {
@@ -212,5 +215,36 @@ public class Player_Loading : MonoBehaviour
 
         yield return new WaitUntil(() => isDoneAchive && isDoneFriend && isDoneInvent && isDoneNotification && isDoneSystemNoti);
         yield return null;
+    }
+
+    float timeRemaining;
+
+    async void TestAsync()
+    {
+        timeRemaining = 300;
+        AuthController.TimeisRun = true;
+        while (true)
+        {
+            await Task.Delay(TimeSpan.FromSeconds(1));
+
+            if (Player_DataManager.Instance.Player.level.life < 6)
+            {
+                if (timeRemaining > 0)
+                {
+                    timeRemaining -= 1;
+                    if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("MainPage")) Player_DataManager.Instance.DisplayTime(timeRemaining);
+                    Debug.Log(timeRemaining);
+                }
+                else
+                {
+                    //Time's up
+                    timeRemaining = 300;
+                    Player_DataManager.Instance.Player.level.life += 1;
+                    if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("MainPage")) Player_DataManager.Instance.Life.text = Player_DataManager.Instance.Player.level.life + "/6";
+                    Player_Update.UpdatePlayer();
+                }
+            }
+            else AuthController.TimeisRun = false;
+        }
     }
 }
