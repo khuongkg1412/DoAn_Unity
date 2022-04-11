@@ -23,8 +23,7 @@ public class SafeArea : MonoBehaviour
 
         rectTransform.anchorMin = minAnchor;
         rectTransform.anchorMax = maxAnchor;
-        //Debug.Log(Screen.width);
-        // && (Screen.orientation == ScreenOrientation.Portrait)
+        //Check screen width size greater than 1500 on portrait orientation
         if (Screen.width > 1500 && (Screen.orientation == ScreenOrientation.Portrait))
         {
             canvas.GetComponent<CanvasScaler>().referenceResolution = new Vector2(1100, 600);

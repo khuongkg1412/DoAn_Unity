@@ -7,6 +7,8 @@ public class ListPlayer_DataManager : MonoBehaviour
     public static ListPlayer_DataManager Instance { get; private set; }
 
     public List<PlayerStruct> listPlayer = new List<PlayerStruct>();
+    public List<PlayerStruct> listPlayer2 = new List<PlayerStruct>();
+
 
     private void Awake()
     {
