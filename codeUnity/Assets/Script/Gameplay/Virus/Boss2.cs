@@ -8,8 +8,8 @@ public class Boss2 : MonoBehaviour
     public VirusBoss2 virus;
 
     /*
-HP Enemy
-*/
+    HP Enemy
+    */
     GameObject gamePlay;
     //Cureent Health Point
     float currentHP;
@@ -61,7 +61,6 @@ HP Enemy
             virus.reviveLife();
             maxHP = virus.returnHP();
             currentHP = maxHP;
-            //Instantiate(gameObject, transform.position, Quaternion.identity);
         }
         HealthBar.transform.localScale = new Vector3((virus.returnHP() / maxHP) * maxHPsize, HealthBar.transform.transform.localScale.y, HealthBar.transform.transform.localScale.z);
     }
@@ -70,7 +69,6 @@ HP Enemy
         Transform targetPlayer = GameObject.FindWithTag("Player").transform;
         if (Vector3.Distance(transform.position, targetPlayer.position) < 700f)
         {
-            Debug.Log("Found");
             reachPosition = targetPlayer.position;
             isSearching = false;
             rd.velocity = Vector2.zero;
