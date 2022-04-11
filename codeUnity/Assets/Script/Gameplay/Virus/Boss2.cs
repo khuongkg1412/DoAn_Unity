@@ -35,7 +35,7 @@ HP Enemy
     }
     public void setNumeral()
     {
-        maxHP = virus.returnSPD();
+        maxHP = virus.returnHP();
         currentHP = maxHP;
         maxHPsize = HealthBar.transform.localScale.x;
     }
@@ -59,11 +59,11 @@ HP Enemy
         if (virus.isDead)
         {
             virus.reviveLife();
-            maxHP = virus.returnSPD();
+            maxHP = virus.returnHP();
             currentHP = maxHP;
             //Instantiate(gameObject, transform.position, Quaternion.identity);
         }
-        HealthBar.transform.localScale = new Vector3((virus.returnSPD() / maxHP) * maxHPsize, HealthBar.transform.transform.localScale.y, HealthBar.transform.transform.localScale.z);
+        HealthBar.transform.localScale = new Vector3((virus.returnHP() / maxHP) * maxHPsize, HealthBar.transform.transform.localScale.y, HealthBar.transform.transform.localScale.z);
     }
     void searchForAttack()
     {

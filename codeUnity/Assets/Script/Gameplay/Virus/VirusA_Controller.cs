@@ -22,9 +22,6 @@ public class VirusA_Controller : MonoBehaviour
     HP Enemy
     */
     GameObject gamePlay;
-    //Cureent Health Point
-    float currentHP;
-
     //Max Health Point
     float maxHP;
 
@@ -83,7 +80,6 @@ public class VirusA_Controller : MonoBehaviour
     public void setNumeral()
     {
         maxHP = virus.returnHP();
-        currentHP = maxHP;
         maxHPsize = HealthBar.transform.localScale.x;
         gameObject.GetComponent<SpriteRenderer>().sprite = virus.image;
     }
@@ -167,7 +163,7 @@ public class VirusA_Controller : MonoBehaviour
             // This will push back the player
             Rigidbody2D rd = gameObject.GetComponent<Rigidbody2D>();
             rd.AddForce(dir * force);
-            //Hit citizen , then decrease HP from zitizen
+            // Hit citizen , then decrease HP from zitizen
             if (other.gameObject.tag == "Citizen")
             {
                 other.gameObject.GetComponent<Citizen_HP>().isSicked = true;
@@ -179,18 +175,11 @@ public class VirusA_Controller : MonoBehaviour
         */
         if (other.gameObject.tag == "Bullet")
         {
-            currentHP -= other.gameObject.GetComponent<Bullet>().dameGiven;
-            if (currentHP > 0)
+            virus.getDamage(other.gameObject.GetComponent<Bullet>().dameGiven);
+            HealthBar.transform.localScale = new Vector3((virus.returnHP() / maxHP) * maxHPsize, HealthBar.transform.transform.localScale.y, HealthBar.transform.transform.localScale.z);
+            if (virus.getDead())
             {
-                HealthBar.transform.localScale = new Vector3((currentHP / maxHP) * maxHPsize, HealthBar.transform.transform.localScale.y, HealthBar.transform.transform.localScale.z);
-            }
-            else
-            {
-                currentHP = 0;
-                HealthBar.transform.localScale =
-                    new Vector3(0,
-                        HealthBar.transform.transform.localScale.y,
-                        HealthBar.transform.transform.localScale.z);
+                Destroy(gameObject);
                 if (gamePlay.GetComponent<Game_Start>() != null)
                 {
                     GameObject.FindWithTag("Player").GetComponent<Player_Controller>().Character.setScore(20f); ;
@@ -201,9 +190,6 @@ public class VirusA_Controller : MonoBehaviour
                     gamePlay.GetComponent<Game_Tutorial>().UpdateScore(20f);
                     gamePlay.GetComponent<Game_Tutorial>().UpdateEnemyNumber(1);
                 }
-
-                Destroy(gameObject);
-
             }
         }
     }

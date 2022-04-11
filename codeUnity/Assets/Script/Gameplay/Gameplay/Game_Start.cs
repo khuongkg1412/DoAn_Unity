@@ -93,7 +93,7 @@ public class Game_Start : MonoBehaviour
         //Player dead and set active for pannel result
         pannelGameover.SetActive(true);
         //Plus the time left to the score
-        score += timeRemaining;
+        score += Mathf.Round(timeRemaining * 6 / 100);
         //Show Result Pannel
         DisplayResultPannel();
         //Update statistic to database
@@ -165,16 +165,8 @@ public class Game_Start : MonoBehaviour
     //Condition to victory
     void ConditionToVictory()
     {
-        if (GameObject.Find("Spawning Enemy").GetComponent<Spawn_Enemy>().isBossStage)
-        {
-            if (enemyNumber == enemyNumberStart)
-            {
-                isGameOver = true;
-                isVictory = true;
-            }
-        }
         //Check condition victory
-        else if (citizenSaveNumber == citizenNumberStart)
+        if (citizenSaveNumber == citizenNumberStart)
         {
             isGameOver = true;
             isVictory = true;
