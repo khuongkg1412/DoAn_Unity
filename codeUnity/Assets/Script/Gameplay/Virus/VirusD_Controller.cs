@@ -13,7 +13,7 @@ public class VirusD_Controller : MonoBehaviour
     Transform originalPos;
 
     //Decide whether enemy is following player
-    public bool isFollow = true;
+    public bool isFollow;
 
     //Time before enemy continute follow player after a collision
     float waiToFolllow = 0f;
@@ -22,8 +22,6 @@ public class VirusD_Controller : MonoBehaviour
     HP Enemy
     */
     GameObject gamePlay;
-    //Cureent Health Point
-    float currentHP;
 
     //Max Health Point
     float maxHP;
@@ -83,9 +81,7 @@ public class VirusD_Controller : MonoBehaviour
     public void setNumeral()
     {
         maxHP = virus.returnHP();
-        currentHP = maxHP;
         maxHPsize = HealthBar.transform.localScale.x;
-        //  gameObject.GetComponent<SpriteRenderer>().sprite = virus.image;
     }
     bool distanceToPlayer()
     {
@@ -177,25 +173,18 @@ public class VirusD_Controller : MonoBehaviour
         }
 
         /*
-        Enemy HP
-        */
+         Enemy HP
+         */
         if (other.gameObject.tag == "Bullet")
         {
-            currentHP -= other.gameObject.GetComponent<Bullet>().dameGiven;
-            if (currentHP > 0)
+            virus.getDamage(other.gameObject.GetComponent<Bullet>().dameGiven);
+            HealthBar.transform.localScale = new Vector3((virus.returnHP() / maxHP) * maxHPsize, HealthBar.transform.transform.localScale.y, HealthBar.transform.transform.localScale.z);
+            if (virus.getDead())
             {
-                HealthBar.transform.localScale = new Vector3((currentHP / maxHP) * maxHPsize, HealthBar.transform.transform.localScale.y, HealthBar.transform.transform.localScale.z);
-            }
-            else
-            {
-                currentHP = 0;
-                HealthBar.transform.localScale =
-                    new Vector3(0,
-                        HealthBar.transform.transform.localScale.y,
-                        HealthBar.transform.transform.localScale.z);
+                Destroy(gameObject);
                 if (gamePlay.GetComponent<Game_Start>() != null)
                 {
-                    GameObject.FindWithTag("Player").GetComponent<Player_Controller>().Character.setScore(20f);
+                    GameObject.FindWithTag("Player").GetComponent<Player_Controller>().Character.setScore(20f); ;
                     gamePlay.GetComponent<Game_Start>().UpdateEnemyNumber(1);
                 }
                 else
@@ -203,9 +192,6 @@ public class VirusD_Controller : MonoBehaviour
                     gamePlay.GetComponent<Game_Tutorial>().UpdateScore(20f);
                     gamePlay.GetComponent<Game_Tutorial>().UpdateEnemyNumber(1);
                 }
-
-                Destroy(gameObject);
-
             }
         }
     }

@@ -8,7 +8,7 @@ public class Spawn_Citizen : MonoBehaviour
     public Transform[] positionSpawn;
 
     //Enemy object to spawn
-    public GameObject Citizen;
+    public GameObject[] Citizen;
 
     //Number of enemies is spawned
     public float numberOfCitizen;
@@ -21,23 +21,17 @@ public class Spawn_Citizen : MonoBehaviour
         if (numberOfCitizen > 0)
         {
             int randSpawnLocation = Random.Range(0, positionSpawn.Length);
-
+            int randomType = Random.Range(0, Citizen.Length);
             //Check for position has been spawned
             if (!spawnedPos.Contains(randSpawnLocation))
             {
                 //add to pos has spawned
                 spawnedPos.Add(randSpawnLocation);
                 //Create object
-                Instantiate(Citizen,
-                positionSpawn[randSpawnLocation].position,
-                transform.rotation);
+                Instantiate(Citizen[randomType], positionSpawn[randSpawnLocation].position, transform.rotation);
                 //Decrease number of enemies
                 numberOfCitizen -= 1;
             }
-        }
-        else if (numberOfCitizen == 0)
-        {
-            Destroy(Citizen);
         }
     }
 }

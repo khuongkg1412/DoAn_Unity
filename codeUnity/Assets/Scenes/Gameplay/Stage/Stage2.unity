@@ -523,6 +523,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 36786542}
   m_CullTransparentMesh: 1
+--- !u!1 &77238206 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5399668668997908419, guid: 6080bb2a2cf7c3a44b5aefcf5701690d, type: 3}
+  m_PrefabInstance: {fileID: 5399668670157692479}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &112314186
 GameObject:
   m_ObjectHideFlags: 0
@@ -86320,7 +86325,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 412731267}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f36b7462dd23a741ad45d2c37c5cca8, type: 3}
+  m_Script: {fileID: 11500000, guid: e3222264425c0ea42aa9fb438a6529a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   TimeHealingBar: {fileID: 1197690664}
@@ -88510,7 +88515,8 @@ MonoBehaviour:
   - {fileID: 1828163136}
   - {fileID: 1622318811}
   - {fileID: 129832665}
-  Citizen: {fileID: 1172515324}
+  Citizen:
+  - {fileID: 77238206}
   numberOfCitizen: 5
   spawnedPos: 
 --- !u!4 &903638244
@@ -88755,7 +88761,7 @@ GameObject:
   - component: {fileID: 964179817}
   - component: {fileID: 964179816}
   m_Layer: 0
-  m_Name: Text (TMP)
+  m_Name: TextHealingBar_Citizen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -89601,11 +89607,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1150360887}
   m_CullTransparentMesh: 1
---- !u!1 &1172515324 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5399668668997908419, guid: 6080bb2a2cf7c3a44b5aefcf5701690d, type: 3}
-  m_PrefabInstance: {fileID: 5399668670157692479}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1197690664
 GameObject:
   m_ObjectHideFlags: 0
@@ -89617,7 +89618,7 @@ GameObject:
   - component: {fileID: 1197690665}
   - component: {fileID: 1197690666}
   m_Layer: 0
-  m_Name: HealingBar
+  m_Name: HealingBar_Citizen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -89868,7 +89869,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1299645169}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!4 &1299645172
 Transform:
   m_ObjectHideFlags: 0
@@ -99499,7 +99500,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 028771a84840f164197c3ad66e1dfbe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isBossStage: 0
   positionSpawn:
   - {fileID: 874697255}
   - {fileID: 2024385075}
@@ -100343,11 +100343,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1827792769 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5399668669750211594, guid: 6080bb2a2cf7c3a44b5aefcf5701690d, type: 3}
-  m_PrefabInstance: {fileID: 5399668670157692479}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1828163135
 GameObject:
   m_ObjectHideFlags: 0
@@ -101816,18 +101811,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1781046596, guid: 6080bb2a2cf7c3a44b5aefcf5701690d, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5399668668997907519, guid: 6080bb2a2cf7c3a44b5aefcf5701690d, type: 3}
       propertyPath: hpText
       value: 
       objectReference: {fileID: 964179816}
-    - target: {fileID: 5399668668997907519, guid: 6080bb2a2cf7c3a44b5aefcf5701690d, type: 3}
-      propertyPath: HealthBar
-      value: 
-      objectReference: {fileID: 1827792769}
     - target: {fileID: 5399668668997907519, guid: 6080bb2a2cf7c3a44b5aefcf5701690d, type: 3}
       propertyPath: TimeHealingBar
       value: 
@@ -101876,25 +101863,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5399668668997908418, guid: 6080bb2a2cf7c3a44b5aefcf5701690d, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 5d4fea886bd454e408b00c411999309b, type: 3}
     - target: {fileID: 5399668668997908419, guid: 6080bb2a2cf7c3a44b5aefcf5701690d, type: 3}
       propertyPath: m_Name
       value: Citizen
-      objectReference: {fileID: 0}
-    - target: {fileID: 5399668668997908419, guid: 6080bb2a2cf7c3a44b5aefcf5701690d, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5399668669916413910, guid: 6080bb2a2cf7c3a44b5aefcf5701690d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.92
-      objectReference: {fileID: 0}
-    - target: {fileID: 5399668670168487325, guid: 6080bb2a2cf7c3a44b5aefcf5701690d, type: 3}
-      propertyPath: m_SortingOrder
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6080bb2a2cf7c3a44b5aefcf5701690d, type: 3}

@@ -110,6 +110,12 @@ public class CreateCharacter : MonoBehaviour
             quantiy = 1,
         };
 
+        Inventory_Player Buff = new Inventory_Player()
+        {
+            quantiy = 1,
+            level = 0
+        };
+
         Friend_Player friend_Player = new Friend_Player()
         {
             accept_Friend = true,
@@ -124,6 +130,8 @@ public class CreateCharacter : MonoBehaviour
         doc.SetAsync(Accessory);
         doc = db.Collection("Player").Document(ID).Collection("Inventory_Player").Document("1W76WPc2tzUbr1dRLxEM");
         doc.SetAsync(Gun);
+        doc = db.Collection("Player").Document(ID).Collection("Inventory_Player").Document("d8YgPsLzWPeeuJxsD8yv");
+        doc.SetAsync(Buff);
 
         doc = db.Collection("Player").Document(ID).Collection("Friend_Player").Document(friend_Player.friendID);
         doc.SetAsync(friend_Player);

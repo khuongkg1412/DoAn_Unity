@@ -19,10 +19,20 @@ public class Enemy
         typeVirus = VirusType.VirusA;
         image = loadingImageFromFilePath("Virus/A");
         detectRange = 300f;
+        isDead = false;
     }
+    private bool isDead;
     private VirusType typeVirus;
 
     private NumeralStruct numeral;
+    public void setDead(bool isDead)
+    {
+        this.isDead = isDead;
+    }
+    public bool getDead()
+    {
+        return isDead;
+    }
     public void setNumeral(NumeralStruct numeral)
     {
         this.numeral = numeral;
@@ -89,10 +99,18 @@ public class Enemy
         return null;
     }
 
-    public void getDamage(int damageTaken)
+    public void getDamage(float damageTaken)
     {
+        //Calculate the damage taken after decrease it by DEF 50%
+        float damageTakenWithDef = damageTaken - (this.numeral.DEF_Numeral / 2);
+        //Calculate current HP
         this.numeral.HP_Numeral -= damageTaken;
-
+        //If dead
+        if (this.numeral.HP_Numeral <= 0)
+        {
+            isDead = true;
+            this.numeral.HP_Numeral = 0;
+        }
     }
     public void setVirusType(VirusType virusType)
     {
@@ -220,14 +238,18 @@ public class VirusBoss2 : Enemy
             ATKSPD_Numeral = 1
         });
         setVirusType(VirusType.Boss2);
-        image = loadingImageFromFilePath("Virus/Boss1");
+        image = loadingImageFromFilePath("Boss2_R" + numberOfBeards);
         detectRange = 10000f;
         isDead = false;
     }
-    public void getDamage(float dameGiven)
+    public void getDamage(float damageTaken)
     {
+        //Calculate the damage taken after decrease it by DEF
+        float damageTakenWithDef = damageTaken - returnDEF();
         float currentHP = returnHP();
-        currentHP -= dameGiven;
+        currentHP -= damageTakenWithDef;
+        setHP(currentHP);
+        //Boss 2 has revive mechanism, base on the number ofbreads, revice if beards is more than 1
         if (currentHP <= 0)
         {
             setHP(0);
@@ -247,6 +269,7 @@ public class VirusBoss2 : Enemy
                 SPD_Numeral = 300,
                 ATKSPD_Numeral = 1
             });
+            image = loadingImageFromFilePath("Boss2_R" + numberOfBeards);
             isDead = false;
         }
 

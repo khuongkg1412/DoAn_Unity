@@ -127,7 +127,7 @@ public class Tutorial : MonoBehaviour
                 increaseIndex();
                 break;
             case 10:
-                if (GameObject.Find("Canvas").GetComponent<Game_Tutorial>().returnScore() > 100)
+                if (GameObject.Find("Canvas").GetComponent<Game_Tutorial>().returnScore() > 50)
                 {
                     GameObject.Find("Canvas").GetComponent<Game_Tutorial>().isGameOver = true;
                     Player_DataManager.Instance.Player.level.stage += 1;

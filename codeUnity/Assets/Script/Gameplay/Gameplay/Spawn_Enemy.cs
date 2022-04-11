@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Spawn_Enemy : MonoBehaviour
 {
-    public bool isBossStage;
     //Array Location to Spawn Enemy randomly
     public Transform[] positionSpawn;
 
