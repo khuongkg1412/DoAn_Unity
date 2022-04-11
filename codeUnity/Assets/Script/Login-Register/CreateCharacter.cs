@@ -47,7 +47,7 @@ public class CreateCharacter : MonoBehaviour
             generalInformation = new GeneralInformation_Player()
             {
                 username_Player = characterName.text,
-                avatar_Player = "PlayerAvatar/" + IDPlayer,
+                avatar_Player = "PlayerAvatar/Avatar item.png",
                 gender_Player = male
             },
             concurrency = new Concurrency()
