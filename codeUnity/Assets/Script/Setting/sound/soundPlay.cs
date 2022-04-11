@@ -29,11 +29,5 @@ public class soundPlay : MonoBehaviour
         audioSrc = GetComponent<AudioSource>();
         audioSrc.Play();
     }
-    /// <summary>
-    /// This function is called when the MonoBehaviour will be destroyed.
-    /// </summary>
-    void OnDestroy()
-    {
-        Debug.Log("Destroy roi do ban!");
-    }
+
 }
