@@ -155,7 +155,6 @@ public class VirusA_Controller : MonoBehaviour
         // If the object we hit is the enemy
         if (other.gameObject.tag == "Player" || other.gameObject.tag == "Citizen")
         {
-            Debug.Log("Push Forced");
             // Calculate Angle Between the collision point and the player
             Vector2 dir = other.contacts[0].point - (Vector2)transform.position;
             // We then get the opposite (-Vector3) and normalize it
