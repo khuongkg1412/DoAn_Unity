@@ -11,17 +11,30 @@ public class Spawn_Enemy : MonoBehaviour
     public GameObject[] Enemy;
     //Number of enemies is spawned
     public float numberOfEnemies;
-    public float numberOfBoss;
+    [SerializeField] float difficultLevelsofTotal;
 
-    //Pos has been spawned
-    public List<int> spawnedPos;
     private void Start()
     {
         spawningEnemy();
     }
     public void spawningEnemy()
     {
-        while (numberOfEnemies > 0)
+        while (difficultLevelsofTotal > 0)
+        {
+            int randomType = Random.Range(0, Enemy.Length);
+            int randSpawnLocation = Random.Range(0, positionSpawn.Length);
+            float difficultLevelOfVirus = Enemy[randomType].transform.GetChild(0).gameObject.GetComponent<Virus_Numeral>().returnDifficultLevel();
+            if (difficultLevelOfVirus < difficultLevelsofTotal)
+            {
+                //Decrease number of enemies
+                difficultLevelsofTotal -= difficultLevelOfVirus;
+                Instantiate(Enemy[randomType], positionSpawn[randSpawnLocation].position, transform.rotation);
+            }
+        }
+    }
+}
+/*
+while (numberOfEnemies > 0)
         {
             int randomType = Random.Range(0, Enemy.Length);
             int randSpawnLocation = Random.Range(0, positionSpawn.Length);
@@ -29,6 +42,5 @@ public class Spawn_Enemy : MonoBehaviour
             //Decrease number of enemies
             numberOfEnemies -= 1;
         }
+*/
 
-    }
-}

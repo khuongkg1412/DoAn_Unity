@@ -87100,8 +87100,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 571074374}
-  - component: {fileID: 571074376}
   - component: {fileID: 571074378}
+  - component: {fileID: 571074376}
   - component: {fileID: 571074379}
   - component: {fileID: 571074381}
   - component: {fileID: 571074377}
@@ -88188,6 +88188,11 @@ RectTransform:
   m_AnchoredPosition: {x: 50, y: -134.73425}
   m_SizeDelta: {x: 100, y: 44.2937}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &827780125 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2141434145, guid: 788ca5bf0b2a86849835a4742fd8b9b7, type: 3}
+  m_PrefabInstance: {fileID: 350434609067850243}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &833753584
 GameObject:
   m_ObjectHideFlags: 0
@@ -101704,6 +101709,22 @@ PrefabInstance:
       propertyPath: HealthBar
       value: 
       objectReference: {fileID: 453242856}
+    - target: {fileID: 350434609067850256, guid: 788ca5bf0b2a86849835a4742fd8b9b7, type: 3}
+      propertyPath: triggeredBoss
+      value: 
+      objectReference: {fileID: 827780125}
+    - target: {fileID: 1408471805015655774, guid: 788ca5bf0b2a86849835a4742fd8b9b7, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167773345634202800, guid: 788ca5bf0b2a86849835a4742fd8b9b7, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167773345634202831, guid: 788ca5bf0b2a86849835a4742fd8b9b7, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7169588084871846204, guid: 788ca5bf0b2a86849835a4742fd8b9b7, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
       value: 110.20845
