@@ -22,8 +22,5 @@ public class openPause : MonoBehaviour
         GameObject childOb = Instantiate(settingPrefab, new Vector3(xyzPos.x, xyzPos.y, xyzPos.z), transform.rotation);
         childOb.transform.parent = GameObject.Find("Canvas").transform;
         childOb.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-
-
-        childOb.transform.Find("close_btn").gameObject.GetComponent<Button>().onClick.AddListener(() => Destroy(childOb));
     }
 }

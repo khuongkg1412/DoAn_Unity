@@ -4850,8 +4850,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 0
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b56a9c37e94c58c48a24f5e5975e9b7a, type: 2}
-  m_sharedMaterial: {fileID: -2354163435286027573, guid: b56a9c37e94c58c48a24f5e5975e9b7a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4ad22565a81e3f740a9840d55ae64587, type: 2}
+  m_sharedMaterial: {fileID: -7372331129048106729, guid: 4ad22565a81e3f740a9840d55ae64587, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4875,8 +4875,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 28
-  m_fontSizeBase: 28
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -6636,9 +6636,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef78d2d983824374ab2e6c7bc8d53e39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resumeButton: {fileID: 0}
-  pauseButton: {fileID: 0}
-  pausePannel: {fileID: 0}
 --- !u!1 &887637879
 GameObject:
   m_ObjectHideFlags: 0
@@ -9840,7 +9837,6 @@ MonoBehaviour:
   Citizen:
   - {fileID: 5399668670157692480}
   numberOfCitizen: 8
-  spawnedPos: 
 --- !u!4 &1816804850
 Transform:
   m_ObjectHideFlags: 0
@@ -95065,7 +95061,6 @@ MonoBehaviour:
   - {fileID: 1720542802}
   - {fileID: 243702984}
   - {fileID: 2061934363}
-  numberOfEnemies: 2
   difficultLevelsofTotal: 9
 --- !u!4 &2100562606
 Transform:
