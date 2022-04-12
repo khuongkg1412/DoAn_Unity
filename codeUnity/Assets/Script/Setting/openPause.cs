@@ -10,7 +10,8 @@ public class openPause : MonoBehaviour
     // Create Prefab when clicking pause button
     public void pauseOnClick()
     {
-
+        //Pause the time of game
+        Time.timeScale = 0f;
         Vector3 xyzPos = new Vector3();
         //Get position x,y,z of Canvas
         xyzPos.x = canvass.transform.position.x;
