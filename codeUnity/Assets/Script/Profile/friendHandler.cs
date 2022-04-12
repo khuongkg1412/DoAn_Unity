@@ -143,7 +143,7 @@ public class friendHandler : MonoBehaviour
 
     private void DisplayInfor(Sprite sprite, PlayerStruct friend)
     {
-        GameObject scrollItemObj = (GameObject)Instantiate(addFriend_box, transform.parent.parent);
+        GameObject scrollItemObj = (GameObject)Instantiate(addFriend_box, transform);
 
         scrollItemObj.transform.Find("Name player").gameObject.GetComponent<Text>().text = friend.generalInformation.username_Player;
         scrollItemObj.transform.Find("infor box/level").gameObject.GetComponent<Text>().text = "Level " + (int)friend.level.level;
