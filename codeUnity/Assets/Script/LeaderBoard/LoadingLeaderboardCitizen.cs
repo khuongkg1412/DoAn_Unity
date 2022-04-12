@@ -24,16 +24,19 @@ public class LoadingLeaderboardCitizen : MonoBehaviour
             avtImg.GetComponent<RawImage>().texture = item.texture2D;
             namePlayer.GetComponent<Text>().text = item.generalInformation.username_Player;
             citizenSaved.GetComponent<Text>().text = item.statistic["Citizen_Saved"].ToString();
+            //set top image for Rank 1
             if (countTop == 0)
             {
                 topImg.GetComponent<RawImage>().texture = loadingImageFromFilePath("Leaderboard_Image/1");
                 topTxt.SetActive(false);
             }
+            //set top image for Rank 2
             else if (countTop == 1)
             {
                 topImg.GetComponent<RawImage>().texture = loadingImageFromFilePath("Leaderboard_Image/2");
                 topTxt.SetActive(false);
             }
+            //set top image for Rank 3
             else if (countTop == 2)
             {
                 topImg.GetComponent<RawImage>().texture = loadingImageFromFilePath("Leaderboard_Image/3");
