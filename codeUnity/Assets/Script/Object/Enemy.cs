@@ -21,6 +21,17 @@ public class Enemy
         detectRange = 300f;
         isDead = false;
     }
+
+    private float difficultLevelOfVirus;
+    public float getDifficultLevel()
+    {
+        return this.difficultLevelOfVirus;
+    }
+    public void setDifficultLevel(float difficultLevelOfVirus)
+    {
+        this.difficultLevelOfVirus = difficultLevelOfVirus;
+    }
+
     private bool isDead;
     private VirusType typeVirus;
 
@@ -147,6 +158,7 @@ public class VirusA : Enemy
         setVirusType(VirusType.VirusA);
         image = loadingImageFromFilePath("Virus/A");
         detectRange = 300f;
+        setDifficultLevel(1f);
     }
 
 }
@@ -165,6 +177,7 @@ public class VirusB : Enemy
         setVirusType(VirusType.VirusB);
         image = loadingImageFromFilePath("Virus/B");
         detectRange = 300f;
+        setDifficultLevel(2f);
     }
 
 }
@@ -184,6 +197,7 @@ public class VirusC : Enemy
         setVirusType(VirusType.VirusC);
         image = loadingImageFromFilePath("Virus/C");
         detectRange = 300f;
+        setDifficultLevel(3f);
     }
 }
 public class VirusD : Enemy
@@ -201,6 +215,7 @@ public class VirusD : Enemy
         setVirusType(VirusType.VirusD);
         image = loadingImageFromFilePath("Virus/VirusD");
         detectRange = 300f;
+        setDifficultLevel(4f);
     }
 }
 
@@ -238,7 +253,7 @@ public class VirusBoss2 : Enemy
             ATKSPD_Numeral = 1
         });
         setVirusType(VirusType.Boss2);
-        image = loadingImageFromFilePath("Boss2_R" + numberOfBeards);
+        image = loadingImageFromFilePath("Virus/Boss2_R" + numberOfBeards);
         detectRange = 10000f;
         isDead = false;
     }
@@ -269,7 +284,7 @@ public class VirusBoss2 : Enemy
                 SPD_Numeral = 300,
                 ATKSPD_Numeral = 1
             });
-            image = loadingImageFromFilePath("Boss2_R" + numberOfBeards);
+            image = loadingImageFromFilePath("Virus/Boss2_R" + numberOfBeards);
             isDead = false;
         }
 

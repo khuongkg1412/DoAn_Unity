@@ -14,7 +14,7 @@ public class Spawn_Citizen : MonoBehaviour
     public float numberOfCitizen;
 
     //Pos has been spawned
-    public List<int> spawnedPos;
+    List<int> spawnedPos = new List<int>();
 
     private void Update()
     {

@@ -15,7 +15,7 @@ public class Boss2 : MonoBehaviour
     float currentHP;
     //Max Health Point
     float maxHP, maxHPsize;
-    public GameObject HealthBar;
+    [SerializeField] GameObject HealthBar, triggeredBoss;
     Rigidbody2D rd;
     bool isWalking, isSearching, isAttack = false;
     float waitTime = 0.5f, walkTime = 2f, walkCounter, waitCounter, waitToRush = 1f, turnToSearching = 1f;
@@ -24,6 +24,7 @@ public class Boss2 : MonoBehaviour
     private void Start()
     {
         virus = new VirusBoss2();
+        gameObject.GetComponent<SpriteRenderer>().sprite = virus.image;
         setNumeral();
         gameObject.GetComponent<Virus_Numeral>().settingNumeral(virus);
         rd = GetComponent<Rigidbody2D>();
@@ -61,6 +62,7 @@ public class Boss2 : MonoBehaviour
             virus.reviveLife();
             maxHP = virus.returnHP();
             currentHP = maxHP;
+            gameObject.GetComponent<SpriteRenderer>().sprite = virus.image;
         }
         HealthBar.transform.localScale = new Vector3((virus.returnHP() / maxHP) * maxHPsize, HealthBar.transform.transform.localScale.y, HealthBar.transform.transform.localScale.z);
     }
@@ -73,6 +75,7 @@ public class Boss2 : MonoBehaviour
             isSearching = false;
             rd.velocity = Vector2.zero;
             isAttack = false;
+            triggeredBoss.SetActive(true);
         };
     }
     void Attack()
@@ -80,7 +83,7 @@ public class Boss2 : MonoBehaviour
         waitToRush -= Time.deltaTime;
         if (waitToRush <= 0)
         {
-            transform.position = Vector3.MoveTowards(transform.position, reachPosition, 1000f * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, reachPosition, 700f * Time.deltaTime);
             isAttack = true;
         }
         if (isAttack)
@@ -88,6 +91,7 @@ public class Boss2 : MonoBehaviour
             turnToSearching -= Time.deltaTime;
             if (turnToSearching <= 0)
             {
+                triggeredBoss.SetActive(false);
                 turnToSearching = 0.5f;
                 isSearching = true;
                 waitToRush = 1.5f;
