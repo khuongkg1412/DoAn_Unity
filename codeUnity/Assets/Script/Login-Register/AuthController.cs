@@ -15,6 +15,7 @@ public class AuthController : MonoBehaviour
     bool isDone;
     GameObject ErrorToast;
     public static bool TimeisRun = false;
+    public static int LifeisRun = -1;
 
     IEnumerator LoginbyEmailandPass(string email, string pass)
     {

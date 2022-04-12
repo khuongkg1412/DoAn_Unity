@@ -33,8 +33,9 @@ public class Player_Loading : MonoBehaviour
                 Player_DataManager.Instance.Player = snapshot.ConvertTo<PlayerStruct>();
                 Player_DataManager.Instance.Player.ID = snapshot.Id;
                 Player_DataManager.Instance.settingCharacter(snapshot.ConvertTo<PlayerStruct>().numeral);
-
+                if (AuthController.LifeisRun == -1) AuthController.LifeisRun = Player_DataManager.Instance.Player.level.life;
                 if (!AuthController.TimeisRun) TestAsync();
+
             }
             else
             {
@@ -229,7 +230,7 @@ public class Player_Loading : MonoBehaviour
         {
             await Task.Delay(TimeSpan.FromSeconds(1));
 
-            if (Player_DataManager.Instance.Player.level.life < 6)
+            if (AuthController.LifeisRun < 6)
             {
                 if (timeRemaining > 0)
                 {

@@ -2526,6 +2526,7 @@ MonoBehaviour:
   chooseBuffPannel: {fileID: 1503122600}
   verticalLayout: {fileID: 78340682}
   btnPlay: {fileID: 1718457616}
+  Error: {fileID: 1070104861143463753, guid: ec90b15f30ed349469a19fcb10ff1f83, type: 3}
   stageSelected: {fileID: 2095350050}
   buffSelect: {fileID: 49045860}
   stageArray:

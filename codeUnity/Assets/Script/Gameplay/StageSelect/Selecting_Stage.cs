@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class Selecting_Stage : MonoBehaviour
 {
-    [SerializeField] GameObject increaseBtn, decreaseBtn, buffItem, chooseBuffPannel, verticalLayout, btnPlay;
+    [SerializeField] GameObject increaseBtn, decreaseBtn, buffItem, chooseBuffPannel, verticalLayout, btnPlay, Error;
     [SerializeField]
     TMP_Text stageSelected, buffSelect;
     [SerializeField]
@@ -158,12 +158,21 @@ public class Selecting_Stage : MonoBehaviour
 
     public void pressPlayButton()
     {
-        //Add buff to Character in instace Player_DataManager
-        ItemStruct item = listBuff[indexofBuff].GetComponent<ItemBuff>().itemBuff;
-        Player_DataManager.Instance.playerCharacter.setBuff(item);
-        Player_DataManager.Instance.decreaseLife();
-        //Load Stage 
-        Screen.orientation = ScreenOrientation.Landscape;
-        SceneManager.LoadScene("Stage" + levelStage);
+        if (Player_DataManager.Instance.Player.level.life > 0)
+        {
+            //Add buff to Character in instace Player_DataManager
+            ItemStruct item = listBuff[indexofBuff].GetComponent<ItemBuff>().itemBuff;
+            Player_DataManager.Instance.playerCharacter.setBuff(item);
+            Player_DataManager.Instance.decreaseLife();
+            //Load Stage 
+            Screen.orientation = ScreenOrientation.Landscape;
+            SceneManager.LoadScene("Stage" + levelStage);
+        }
+        else
+        {
+            GameObject ErorrToast = (GameObject)Instantiate(Error, transform);
+            ErorrToast.transform.Find("Message").gameObject.GetComponent<Text>().text = "Run out of enery";
+            Destroy(ErorrToast, 2);
+        }
     }
 }
