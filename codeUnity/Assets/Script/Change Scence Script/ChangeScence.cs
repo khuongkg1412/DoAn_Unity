@@ -29,12 +29,12 @@ public class ChangeScence : MonoBehaviour
 
     public void leaderGlobalOpening() //khuong
     {
-        SceneManager.LoadScene("Leaderboard Global");
+        SceneManager.LoadScene("Leaderboard Citizen");
     }
 
     public void leaderLocalOpening() //khuong
     {
-        SceneManager.LoadScene("Leaderboard Local");
+        SceneManager.LoadScene("Leaderboard Level");
     }
 
     public void notificationOpening() //khuong

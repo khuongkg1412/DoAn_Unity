@@ -49,6 +49,7 @@ public class PlayerStruct
 
     public Texture2D texture2D { get; set; }
 
+
 }
 
 [FirestoreData]
