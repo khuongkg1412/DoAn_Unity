@@ -44,16 +44,16 @@ public class Game_Start : MonoBehaviour
         {
             citizenNumberStart = GameObject.Find("Spawning Citizen").GetComponent<Spawn_Citizen>().numberOfCitizen;
         }
-        if (GameObject.Find("Spawning Enemy"))
-        {
-            enemyNumberStart = GameObject.Find("Spawning Enemy").GetComponent<Spawn_Enemy>().numberOfVirus();
-        }
         //Update citizen in Quest pannel
         UpdateCitizen(0);
         UpdateEnemyNumber(0);
         //Set value for two variable which decide game end and victory
         isVictory = false;
         isGameOver = false;
+    }
+    public void settingNumberOfVirus(float enemyNumber)
+    {
+        this.enemyNumberStart = enemyNumber;
     }
 
     void Update()
@@ -93,7 +93,10 @@ public class Game_Start : MonoBehaviour
         //Player dead and set active for pannel result
         pannelGameover.SetActive(true);
         //Plus the time left to the score
-        score += Mathf.Round(timeRemaining * 6 / 100);
+        float plusScore = Mathf.Round(timeRemaining * 6 / 100);
+        Debug.Log("Plus Score " + plusScore);
+        GameObject.FindWithTag("Player").GetComponent<Player_Controller>().Character.setScore(plusScore);
+        UpdateScore();
         //Show Result Pannel
         DisplayResultPannel();
         //Update statistic to database

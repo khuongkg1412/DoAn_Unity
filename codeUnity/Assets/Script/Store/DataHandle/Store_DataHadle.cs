@@ -12,9 +12,9 @@ public class Store_DataHadle : MonoBehaviour
 
     public TMPro.TMP_Text itemName;
 
-    List<ItemStruct> listDataItemDaily = new List<ItemStruct>();
+    List<ItemStruct> listDataItemBuff = new List<ItemStruct>();
 
-    List<ItemStruct> listDataItemWeekly = new List<ItemStruct>();
+    List<ItemStruct> listDataItemPiece = new List<ItemStruct>();
 
     List<ItemStruct> listDataItemChest = new List<ItemStruct>();
 
@@ -47,18 +47,18 @@ public class Store_DataHadle : MonoBehaviour
     private void setDatatoGO()
     {
         //call to static method to load data into list of three type of store item
-        listDataItemDaily = Item_DataManager.Instance.itemDaily();
-        listDataItemWeekly = Item_DataManager.Instance.itemWeekly();
+        listDataItemBuff = Item_DataManager.Instance.itemBuff();
+        listDataItemPiece = Item_DataManager.Instance.itemPieces();
         listDataItemChest = Item_DataManager.Instance.itemChest();
         /*
         Initiate the object in the scence
         */
-        foreach (var objectItem in listDataItemDaily)
+        foreach (var objectItem in listDataItemBuff)
         {
             Populate(verticalDaily, objectItem);
         }
 
-        foreach (var objectItem in listDataItemWeekly)
+        foreach (var objectItem in listDataItemPiece)
         {
             Populate(verticalWeekly, objectItem);
         }

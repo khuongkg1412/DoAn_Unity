@@ -18,6 +18,7 @@ public class Spawn_Enemy : MonoBehaviour
     private void Start()
     {
         spawningEnemy();
+        GameObject.Find("Canvas").GetComponent<Game_Start>().settingNumberOfVirus(numberOfEnemies);
     }
     public void spawningEnemy()
     {
@@ -39,10 +40,6 @@ public class Spawn_Enemy : MonoBehaviour
                 Instantiate(Enemy[randomType], positionSpawn[randSpawnLocation].position, transform.rotation);
             }
         }
-    }
-    public float numberOfVirus()
-    {
-        return this.numberOfEnemies;
     }
 }
 /*

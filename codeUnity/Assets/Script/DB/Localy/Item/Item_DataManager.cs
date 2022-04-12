@@ -33,31 +33,17 @@ public class Item_DataManager : MonoBehaviour
         return null;
     }
 
-
-    public List<ItemStruct> itemDaily()
+    public List<ItemStruct> itemPieces()
     {
-        List<ItemStruct> itemDaily = new List<ItemStruct>();
+        List<ItemStruct> itemPieces = new List<ItemStruct>();
         foreach (var i in Item)
         {
-            if (i.type_Store == (int)Type_Store.ItemDaily)
+            if (i.type_Item == (int)TypeItem.Piece)
             {
-                itemDaily.Add(i);
+                itemPieces.Add(i);
             }
         }
-        return itemDaily;
-    }
-
-    public List<ItemStruct> itemWeekly()
-    {
-        List<ItemStruct> itemWeekly = new List<ItemStruct>();
-        foreach (var i in Item)
-        {
-            if (i.type_Store == (int)Type_Store.ItemWeekly)
-            {
-                itemWeekly.Add(i);
-            }
-        }
-        return itemWeekly;
+        return itemPieces;
     }
 
     public List<ItemStruct> itemChest()
@@ -75,14 +61,14 @@ public class Item_DataManager : MonoBehaviour
 
     public List<ItemStruct> itemBuff()
     {
-        List<ItemStruct> itemDaily = new List<ItemStruct>();
+        List<ItemStruct> itemBuff = new List<ItemStruct>();
         foreach (var i in Item)
         {
             if (i.type_Item == (int)TypeItem.Buff)
             {
-                itemDaily.Add(i);
+                itemBuff.Add(i);
             }
         }
-        return itemDaily;
+        return itemBuff;
     }
 }
