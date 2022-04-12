@@ -10,11 +10,11 @@ public class Spawn_Enemy : MonoBehaviour
     //Enemy object to spawn
     public GameObject[] Enemy;
     //Number of enemies is spawned
-    public float numberOfEnemies;
+    float numberOfEnemies = 0;
     [SerializeField] float difficultLevelsofTotal;
 
     //Pos has been spawned
-    public List<int> spawnedPos;
+    List<int> spawnedPos = new List<int>();
     private void Start()
     {
         spawningEnemy();
@@ -31,6 +31,7 @@ public class Spawn_Enemy : MonoBehaviour
             //Instantiate virus if the difficult level is less than the total level of difficult
             if (difficultLevelOfVirus <= difficultLevelsofTotal && !spawnedPos.Contains(randSpawnLocation))
             {
+                numberOfEnemies += 1;
                 //add to pos has spawned
                 spawnedPos.Add(randSpawnLocation);
                 //Decrease number of enemies
@@ -38,6 +39,10 @@ public class Spawn_Enemy : MonoBehaviour
                 Instantiate(Enemy[randomType], positionSpawn[randSpawnLocation].position, transform.rotation);
             }
         }
+    }
+    public float numberOfVirus()
+    {
+        return this.numberOfEnemies;
     }
 }
 /*

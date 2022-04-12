@@ -12,6 +12,6 @@ public class Game_Pause : MonoBehaviour
     public void resumeGame()
     {
         Time.timeScale = 1f;
-
+        Destroy(gameObject);
     }
 }

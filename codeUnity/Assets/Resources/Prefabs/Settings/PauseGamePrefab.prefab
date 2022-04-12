@@ -91,7 +91,6 @@ GameObject:
   - component: {fileID: 4146467099860547816}
   - component: {fileID: 4146467099860547817}
   - component: {fileID: 4146467099860547822}
-  - component: {fileID: 2101568911442789239}
   m_Layer: 5
   m_Name: resume
   m_TagString: Untagged
@@ -200,7 +199,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2101568911442789239}
+      - m_Target: {fileID: 5412453892306430626}
         m_TargetAssemblyTypeName: Game_Pause, Assembly-CSharp
         m_MethodName: resumeGame
         m_Mode: 1
@@ -212,18 +211,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &2101568911442789239
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4146467099860547820}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef78d2d983824374ab2e6c7bc8d53e39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4146467100002605233
 GameObject:
   m_ObjectHideFlags: 0
@@ -591,6 +578,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4146467100128346028}
   - component: {fileID: 4146467100128346030}
+  - component: {fileID: 5412453892306430626}
   m_Layer: 5
   m_Name: PauseGamePrefab
   m_TagString: Untagged
@@ -632,6 +620,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4146467100128346029}
   m_CullTransparentMesh: 1
+--- !u!114 &5412453892306430626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4146467100128346029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef78d2d983824374ab2e6c7bc8d53e39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5862274429396610462
 GameObject:
   m_ObjectHideFlags: 0

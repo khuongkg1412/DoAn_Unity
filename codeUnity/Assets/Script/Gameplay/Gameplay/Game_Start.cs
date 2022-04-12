@@ -46,7 +46,7 @@ public class Game_Start : MonoBehaviour
         }
         if (GameObject.Find("Spawning Enemy"))
         {
-            enemyNumberStart = GameObject.Find("Spawning Enemy").GetComponent<Spawn_Enemy>().numberOfEnemies;
+            enemyNumberStart = GameObject.Find("Spawning Enemy").GetComponent<Spawn_Enemy>().numberOfVirus();
         }
         //Update citizen in Quest pannel
         UpdateCitizen(0);

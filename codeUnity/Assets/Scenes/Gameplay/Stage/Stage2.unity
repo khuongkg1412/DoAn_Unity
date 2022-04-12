@@ -1072,7 +1072,7 @@ Transform:
   - {fileID: 1484425340}
   - {fileID: 373628959}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &282805514 stripped
 GameObject:
@@ -88194,9 +88194,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef78d2d983824374ab2e6c7bc8d53e39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resumeButton: {fileID: 0}
-  pauseButton: {fileID: 0}
-  pausePannel: {fileID: 0}
 --- !u!1 &899745436
 GameObject:
   m_ObjectHideFlags: 0
@@ -88334,7 +88331,7 @@ Transform:
   - {fileID: 1622318811}
   - {fileID: 129832665}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &947614829
 GameObject:
@@ -98774,7 +98771,6 @@ MonoBehaviour:
   - {fileID: 282805514}
   - {fileID: 566751525}
   - {fileID: 361892407}
-  numberOfEnemies: 3
   difficultLevelsofTotal: 3
 --- !u!4 &1576777873
 Transform:
@@ -98796,7 +98792,7 @@ Transform:
   - {fileID: 1640926819}
   - {fileID: 1585386527}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1585386526
 GameObject:
@@ -100895,7 +100891,7 @@ PrefabInstance:
       objectReference: {fileID: 1197690664}
     - target: {fileID: 5399668668997908417, guid: 6080bb2a2cf7c3a44b5aefcf5701690d, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5399668668997908417, guid: 6080bb2a2cf7c3a44b5aefcf5701690d, type: 3}
       propertyPath: m_LocalPosition.x
