@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class TotalPlusStats
 {
-    private float ATK_Numeral { get; set; }
-    private float DEF_Numeral { get; set; }
-    private float HP_Numeral { get; set; }
-    private float SPD_Numeral { get; set; }
-    private float ATKSPD_Numeral { get; set; }
+    public float ATK_Numeral { get; set; }
+    public float DEF_Numeral { get; set; }
+    public float HP_Numeral { get; set; }
+    public float SPD_Numeral { get; set; }
+    public float ATKSPD_Numeral { get; set; }
 }

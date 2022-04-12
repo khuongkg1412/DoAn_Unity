@@ -139,7 +139,7 @@ public class chooseOutfit : MonoBehaviour
     private void WearThisItem(string ID)
     {
         Player_DataManager.Instance.changeOutfit(ModifyPlayerInfor.typeOfOutfit, ID);
-
+        Player_DataManager.Instance.updateStatPlayer();
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
     }

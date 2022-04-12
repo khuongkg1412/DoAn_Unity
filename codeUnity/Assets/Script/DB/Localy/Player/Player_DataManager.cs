@@ -9,7 +9,7 @@ public class Player_DataManager : MonoBehaviour
 
     public PlayerStruct Player = new PlayerStruct();
 
-    public TotalPlusStats stats = new TotalPlusStats();
+    public TotalPlusStats stats;
 
     public Character playerCharacter;
     public List<Inventory_Player> inventory_Player = new List<Inventory_Player>();
@@ -48,7 +48,22 @@ public class Player_DataManager : MonoBehaviour
     public void settingCharacter(NumeralStruct numeralStruct)
     {
         this.playerCharacter = new Character(numeralStruct);
+    }
 
+    public void updateStatPlayer()
+    {
+        ItemStruct suit = Item_DataManager.Instance.Item.Find(r => r.ID == Instance.Player.currentOutfit.currentSuit);
+        ItemStruct accessory = Item_DataManager.Instance.Item.Find(r => r.ID == Instance.Player.currentOutfit.currentAccesory);
+        ItemStruct gun = Item_DataManager.Instance.Item.Find(r => r.ID == Instance.Player.currentOutfit.currentGun);
+
+        stats = new TotalPlusStats()
+        {
+            ATK_Numeral = suit.numeral_Item.ATK_Numeral + accessory.numeral_Item.ATK_Numeral + gun.numeral_Item.ATK_Numeral,
+            DEF_Numeral = suit.numeral_Item.DEF_Numeral + accessory.numeral_Item.DEF_Numeral + gun.numeral_Item.DEF_Numeral,
+            HP_Numeral = suit.numeral_Item.HP_Numeral + accessory.numeral_Item.HP_Numeral + gun.numeral_Item.HP_Numeral,
+            SPD_Numeral = suit.numeral_Item.SPD_Numeral + accessory.numeral_Item.SPD_Numeral + gun.numeral_Item.SPD_Numeral,
+            ATKSPD_Numeral = suit.numeral_Item.ATKSPD_Numeral + accessory.numeral_Item.ATKSPD_Numeral + gun.numeral_Item.ATKSPD_Numeral,
+        };
     }
 
     public void updateCoinConcurrency(float amountUpdate)
@@ -222,7 +237,8 @@ public class Player_DataManager : MonoBehaviour
             accept_Friend = true,
             friendID = friend.ID
         };
-        Instance.friend_Player.Add(newfriend_Player);
+        Friend_Player i = Instance.friend_Player.Find(r => r.friendID == friend.ID);
+        if (i == null) Instance.friend_Player.Add(newfriend_Player);
         Player_Update.UpdatePlayer();
     }
 

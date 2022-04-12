@@ -33,6 +33,7 @@ public class Player_Loading : MonoBehaviour
                 Player_DataManager.Instance.Player = snapshot.ConvertTo<PlayerStruct>();
                 Player_DataManager.Instance.Player.ID = snapshot.Id;
                 Player_DataManager.Instance.settingCharacter(snapshot.ConvertTo<PlayerStruct>().numeral);
+
                 if (!AuthController.TimeisRun) TestAsync();
             }
             else
@@ -214,6 +215,7 @@ public class Player_Loading : MonoBehaviour
         loadDataSystemNotification();
 
         yield return new WaitUntil(() => isDoneAchive && isDoneFriend && isDoneInvent && isDoneNotification && isDoneSystemNoti);
+        Player_DataManager.Instance.updateStatPlayer();
         yield return null;
     }
 
@@ -221,9 +223,9 @@ public class Player_Loading : MonoBehaviour
 
     async void TestAsync()
     {
-        timeRemaining = 300;
+        timeRemaining = 60;
         AuthController.TimeisRun = true;
-        while (true)
+        while (AuthController.TimeisRun)
         {
             await Task.Delay(TimeSpan.FromSeconds(1));
 
@@ -238,7 +240,7 @@ public class Player_Loading : MonoBehaviour
                 else
                 {
                     //Time's up
-                    timeRemaining = 300;
+                    timeRemaining = 60;
                     Player_DataManager.Instance.Player.level.life += 1;
                     if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("MainPage")) Player_DataManager.Instance.Life.text = Player_DataManager.Instance.Player.level.life + "/6";
                     Player_Update.UpdatePlayer();
