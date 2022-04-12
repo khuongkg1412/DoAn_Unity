@@ -10744,7 +10744,7 @@ MonoBehaviour:
   - {fileID: 1815932853}
   Citizen:
   - {fileID: 5399668670157692480}
-  numberOfCitizen: 2
+  numberOfCitizen: 8
   spawnedPos: 
 --- !u!4 &1816804850
 Transform:
