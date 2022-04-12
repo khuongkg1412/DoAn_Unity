@@ -1820,8 +1820,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 0
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b56a9c37e94c58c48a24f5e5975e9b7a, type: 2}
-  m_sharedMaterial: {fileID: -2354163435286027573, guid: b56a9c37e94c58c48a24f5e5975e9b7a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4ad22565a81e3f740a9840d55ae64587, type: 2}
+  m_sharedMaterial: {fileID: -7372331129048106729, guid: 4ad22565a81e3f740a9840d55ae64587, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1845,8 +1845,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 28
-  m_fontSizeBase: 28
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2345,9 +2345,7 @@ MonoBehaviour:
   - {fileID: 1223151498}
   Enemy:
   - {fileID: 0}
-  numberOfEnemies: 0
-  numberOfBoss: 0
-  spawnedPos: 
+  difficultLevelsofTotal: 0
 --- !u!4 &640455334
 Transform:
   m_ObjectHideFlags: 0
@@ -3378,9 +3376,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef78d2d983824374ab2e6c7bc8d53e39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resumeButton: {fileID: 0}
-  pauseButton: {fileID: 112314186}
-  pausePannel: {fileID: 0}
 --- !u!114 &881436833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3664,9 +3659,7 @@ MonoBehaviour:
   positionSpawn: []
   Enemy:
   - {fileID: 2056861205}
-  numberOfEnemies: 1
-  numberOfBoss: 0
-  spawnedPos: 
+  difficultLevelsofTotal: 0
 --- !u!4 &991177543
 Transform:
   m_ObjectHideFlags: 0
@@ -3942,7 +3935,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.428571}
   m_AnchorMax: {x: 0.5, y: 0.67256457}
-  m_AnchoredPosition: {x: -79.6966, y: 1.6714001}
+  m_AnchoredPosition: {x: -79.696594, y: 1.6714001}
   m_SizeDelta: {x: 233.2587, y: 46.7894}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1092070016
@@ -94116,7 +94109,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e39675d66537d804885b922bf6a90dea, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 476c98906915d77469620feb77f33125, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
