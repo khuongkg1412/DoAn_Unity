@@ -515,7 +515,6 @@ MonoBehaviour:
   Citizen:
   - {fileID: 5399668670157692480}
   numberOfCitizen: 2
-  spawnedPos: 
 --- !u!4 &122300538
 Transform:
   m_ObjectHideFlags: 0
@@ -1314,7 +1313,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 412731267}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f36b7462dd23a741ad45d2c37c5cca8, type: 3}
+  m_Script: {fileID: 11500000, guid: e3222264425c0ea42aa9fb438a6529a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   TimeHealingBar: {fileID: 1197690664}
@@ -18362,9 +18361,7 @@ MonoBehaviour:
   - {fileID: 3905678857928002382, guid: d9f9eddc4ba35d244af0323c5dc0b646, type: 3}
   - {fileID: 2272049230329874128, guid: 2978eda9618ecb546a5dcf5e508eeffa, type: 3}
   - {fileID: 932883591916156026, guid: 96837f3b4ee3fa546820b0478b8e7d54, type: 3}
-  numberOfEnemies: 2
-  numberOfBoss: 0
-  spawnedPos: 
+  difficultLevelsofTotal: 0
 --- !u!4 &621862637
 Transform:
   m_ObjectHideFlags: 0
@@ -19412,9 +19409,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef78d2d983824374ab2e6c7bc8d53e39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resumeButton: {fileID: 0}
-  pauseButton: {fileID: 0}
-  pausePannel: {fileID: 0}
 --- !u!1 &899745436
 GameObject:
   m_ObjectHideFlags: 0
