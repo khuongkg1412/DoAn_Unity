@@ -92,16 +92,11 @@ public class Player_DataManager : MonoBehaviour
 
         stats = new NumeralStruct()
         {
-            ATK_Numeral = 10,
-            DEF_Numeral = 0,
-            HP_Numeral = 50,
-            SPD_Numeral = 300,
-            ATKSPD_Numeral = 1.5f
-            // ATK_Numeral = suit.numeral_Item.ATK_Numeral + accessory.numeral_Item.ATK_Numeral + gun.numeral_Item.ATK_Numeral,
-            // DEF_Numeral = suit.numeral_Item.DEF_Numeral + accessory.numeral_Item.DEF_Numeral + gun.numeral_Item.DEF_Numeral,
-            // HP_Numeral = suit.numeral_Item.HP_Numeral + accessory.numeral_Item.HP_Numeral + gun.numeral_Item.HP_Numeral,
-            // SPD_Numeral = suit.numeral_Item.SPD_Numeral + accessory.numeral_Item.SPD_Numeral + gun.numeral_Item.SPD_Numeral,
-            // ATKSPD_Numeral = suit.numeral_Item.ATKSPD_Numeral + accessory.numeral_Item.ATKSPD_Numeral + gun.numeral_Item.ATKSPD_Numeral,
+            ATK_Numeral = suit.numeral_Item.ATK_Numeral + accessory.numeral_Item.ATK_Numeral + gun.numeral_Item.ATK_Numeral,
+            DEF_Numeral = suit.numeral_Item.DEF_Numeral + accessory.numeral_Item.DEF_Numeral + gun.numeral_Item.DEF_Numeral,
+            HP_Numeral = suit.numeral_Item.HP_Numeral + accessory.numeral_Item.HP_Numeral + gun.numeral_Item.HP_Numeral,
+            SPD_Numeral = suit.numeral_Item.SPD_Numeral + accessory.numeral_Item.SPD_Numeral + gun.numeral_Item.SPD_Numeral,
+            ATKSPD_Numeral = suit.numeral_Item.ATKSPD_Numeral + accessory.numeral_Item.ATKSPD_Numeral + gun.numeral_Item.ATKSPD_Numeral,
 
         };
     }
