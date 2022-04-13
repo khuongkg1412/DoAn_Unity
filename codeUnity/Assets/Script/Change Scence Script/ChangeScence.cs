@@ -63,7 +63,7 @@ public class ChangeScence : MonoBehaviour
         if (Player_DataManager.Instance.Player.level.stage == 0)
         {
             Screen.orientation = ScreenOrientation.Landscape;
-            foreach (var i in Item_DataManager.Instance.itemBuff())
+            foreach (var i in Item_DataManager.Instance.itemBuffC())
             {
                 if (i.name_Item.Equals("Heal"))
                 {

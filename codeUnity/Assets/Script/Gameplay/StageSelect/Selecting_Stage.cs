@@ -117,7 +117,7 @@ public class Selecting_Stage : MonoBehaviour
         //Visible pannel choose buff
         chooseBuffPannel.SetActive(true);
         //Load item type buff
-        listItemBuff = Item_DataManager.Instance.itemBuff();
+        listItemBuff = Item_DataManager.Instance.itemBuffC();
         //Index to set to the index of buff list
 
         /*

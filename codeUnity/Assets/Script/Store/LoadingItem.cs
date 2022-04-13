@@ -8,7 +8,7 @@ public class LoadingItem : MonoBehaviour
     //Store Item that would be loaded into Pannel
     public ItemStruct dataItem;
     //Text content for name, type and description
-    private TMPro.TMP_Text nameItem, type, description;
+    private TMPro.TMP_Text nameItem, description;
     //Get Diamond, coin
     [SerializeField] GameObject diamondItem, coinItem;
     //[SerializeField] GameObject diamondItem, coinChest;
@@ -260,7 +260,6 @@ public class LoadingItem : MonoBehaviour
     {
         /*GeneralInform part*/
         nameItem = transform.GetChild(2).transform.GetChild(0).GetComponent<TMPro.TMP_Text>();
-        type = transform.GetChild(2).transform.GetChild(1).GetComponent<TMPro.TMP_Text>();
         description = transform.GetChild(2).transform.GetChild(2).GetComponent<TMPro.TMP_Text>();
         /*ImagePannel part*/
         dataImage = transform.GetChild(1).gameObject.transform.GetChild(0).GetComponent<RawImage>();
@@ -270,7 +269,6 @@ public class LoadingItem : MonoBehaviour
     {
         /*GeneralInform part*/
         nameItem = transform.GetChild(2).transform.GetChild(0).GetComponent<TMPro.TMP_Text>();
-        type = transform.GetChild(2).transform.GetChild(1).GetComponent<TMPro.TMP_Text>();
         description = transform.GetChild(2).transform.GetChild(2).GetComponent<TMPro.TMP_Text>();
         /*ImagePannel part*/
         dataImage = transform.GetChild(1).gameObject.transform.GetChild(0).GetComponent<RawImage>();
@@ -280,14 +278,6 @@ public class LoadingItem : MonoBehaviour
     {
         quantityText.text = "1";
         nameItem.text = dataItem.name_Item;
-        if (dataItem.type_Store == (int)Type_Store.ItemDaily)
-        {
-            type.text = "Item Daily";
-        }
-        else if (dataItem.type_Store == (int)Type_Store.ItemWeekly)
-        {
-            type.text = "Item Weekly";
-        }
         description.text = dataItem.description_Item;
         //Load data from Resource folders
         dataImage.texture = dataItem.texture2D;
@@ -300,7 +290,6 @@ public class LoadingItem : MonoBehaviour
     {
         nameItem.text = dataItem.name_Item;
         description.text = dataItem.description_Item;
-        type.text = "Chest";
         //Load data from Resource folders
         dataImage.texture = dataItem.texture2D;
         //dataImage.SetNativeSize();//Set native size for image

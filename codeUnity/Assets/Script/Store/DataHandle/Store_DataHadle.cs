@@ -32,7 +32,6 @@ public class Store_DataHadle : MonoBehaviour
         //Start load data into the prototype
         setDatatoGO();
         // AddData();
-
     }
 
     private void Update()
@@ -47,9 +46,9 @@ public class Store_DataHadle : MonoBehaviour
     private void setDatatoGO()
     {
         //call to static method to load data into list of three type of store item
-        listDataItemBuff = Item_DataManager.Instance.itemBuff();
-        listDataItemPiece = Item_DataManager.Instance.itemPieces();
-        listDataItemChest = Item_DataManager.Instance.itemChest();
+        listDataItemBuff = Item_DataManager.Instance.itemBuffC();
+        listDataItemPiece = Item_DataManager.Instance.itemPiecesA();
+        listDataItemChest = Item_DataManager.Instance.itemChestB();
         /*
         Initiate the object in the scence
         */

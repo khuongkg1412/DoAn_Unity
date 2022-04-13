@@ -33,9 +33,8 @@ public class Item_DataManager : MonoBehaviour
         return null;
     }
 
-    public List<ItemStruct> itemPieces()
+    public List<ItemStruct> itemPiecesA()
     {
-        List<ItemStruct> itemPieces = new List<ItemStruct>();
         foreach (var i in Item)
         {
             if (i.type_Item == (int)TypeItem.Piece)
@@ -45,10 +44,12 @@ public class Item_DataManager : MonoBehaviour
         }
         return itemPieces;
     }
-
-    public List<ItemStruct> itemChest()
+    List<ItemStruct> itemChest = new List<ItemStruct>();
+    List<ItemStruct> itemBuff = new List<ItemStruct>();
+    List<ItemStruct> itemPieces = new List<ItemStruct>();
+    public List<ItemStruct> itemChestB()
     {
-        List<ItemStruct> itemChest = new List<ItemStruct>();
+
         foreach (var i in Item)
         {
             if (i.type_Store == (int)Type_Store.Chest)
@@ -56,12 +57,13 @@ public class Item_DataManager : MonoBehaviour
                 itemChest.Add(i);
             }
         }
+        Debug.Log("ItemChest " + itemChest.Count);
         return itemChest;
     }
 
-    public List<ItemStruct> itemBuff()
+    public List<ItemStruct> itemBuffC()
     {
-        List<ItemStruct> itemBuff = new List<ItemStruct>();
+
         foreach (var i in Item)
         {
             if (i.type_Item == (int)TypeItem.Buff)
