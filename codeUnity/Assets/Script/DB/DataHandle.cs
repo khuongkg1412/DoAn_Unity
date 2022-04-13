@@ -12,12 +12,16 @@ using System.Threading.Tasks;
 
 public class DataHandle : MonoBehaviour
 {
-    public Text Coin, Diamond, Life, Name;
-    public Image avatar;
+    [SerializeField] Text Coin, Diamond, Life, Name;
+    [SerializeField] RawImage avatar;
     float timeGetUpdate = 0f;
+    bool isLoadingDataDone = false;
     private void Update()
     {
-        update_Information();
+        if (isLoadingDataDone)
+        {
+            loadDataPlayerOnScence();
+        }
     }
     private void Start()
     {
@@ -25,7 +29,8 @@ public class DataHandle : MonoBehaviour
     }
     IEnumerator startLifeTimeCount()
     {
-        yield return new WaitUntil(() => gameObject.GetComponent<Player_Loading>().loadDataAllDone());
+        yield return new WaitUntil(() => GameObject.Find("DB_LoadingData").GetComponent<Player_Loading>().loadDataAllDone());
+        isLoadingDataDone = true;
         timeRemaining = Player_DataManager.Instance.calculateTimeLifeCountDown();
         countDownLifeTime();
         yield return 0;
@@ -56,54 +61,20 @@ public class DataHandle : MonoBehaviour
         //Set to text
         timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
-    void update_Information()
+    void updateDataOnScence()
     {
-        timeGetUpdate += Time.deltaTime;
-        if (timeGetUpdate > 1f)
-        {
-            timeGetUpdate = 0;
-            loadDataPlayerOnScence();
-        }
+
     }
     void loadDataPlayerOnScence()
     {
         if (Player_DataManager.Instance.Player != null)
         {
             PlayerStruct player = Player_DataManager.Instance.Player;
-
-            StartCoroutine(GetImage(player.generalInformation.avatar_Player));
-
+            avatar.texture = player.texture2D;
             Coin.text = "" + player.concurrency.Coin;
             Diamond.text = "" + player.concurrency.Diamond;
             Life.text = "" + player.level.life + "/6";
             Name.text = "" + player.generalInformation.username_Player + "\n" + "LV." + player.level.level;
         }
-    }
-    IEnumerator GetImage(string dataImage)
-    {
-
-        // Get a reference to the storage service, using the default Firebase App
-        FirebaseStorage storage = FirebaseStorage.DefaultInstance;
-        // Create a storage reference from our storage service
-        StorageReference storageRef = storage.GetReference(dataImage);
-
-        // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
-        const long maxAllowedSize = 1 * 1024 * 1024;
-        storageRef.GetBytesAsync(maxAllowedSize).ContinueWithOnMainThread(task =>
-           {
-               if (task.IsFaulted || task.IsCanceled)
-               {
-                   Debug.LogException(task.Exception);
-               }
-               else
-               {
-                   byte[] fileContents = task.Result;
-                   Texture2D texture = new Texture2D(1, 1);
-                   texture.LoadImage(fileContents);
-                   Sprite sprite = Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100.0f);
-                   avatar.sprite = sprite;
-               }
-           });
-        yield return null;
     }
 }

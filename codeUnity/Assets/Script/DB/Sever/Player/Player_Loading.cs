@@ -6,6 +6,7 @@ using Firebase.Firestore;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
+using Firebase.Storage;
 
 public class Player_Loading : MonoBehaviour
 {
@@ -41,6 +42,7 @@ public class Player_Loading : MonoBehaviour
                 SceneManager.LoadScene("Create Character");
             }
             isDonePlayer = true;
+            StartCoroutine(GetImage(Player_DataManager.Instance.Player));
         });
 
     }
@@ -175,7 +177,7 @@ public class Player_Loading : MonoBehaviour
         //db connection
         db = FirebaseFirestore.DefaultInstance;
         Query allCitiesQuery = db.Collection("Notifcation")
-        // .WhereEqualTo("sentID_Notification", Player_DataManager.Instance.Player.ID)
+         // .WhereEqualTo("sentID_Notification", Player_DataManager.Instance.Player.ID)
          .WhereEqualTo("receivedID_Notification", Player_DataManager.Instance.Player.ID)
         // .OrderBy("dateCreate")
         ;
@@ -201,7 +203,32 @@ public class Player_Loading : MonoBehaviour
             isDoneNotification = true;
         });
     }
+    IEnumerator GetImage(PlayerStruct player)
+    {
 
+        // Get a reference to the storage service, using the default Firebase App
+        FirebaseStorage storage = FirebaseStorage.DefaultInstance;
+        // Create a storage reference from our storage service
+        StorageReference storageRef = storage.GetReference(player.generalInformation.avatar_Player);
+
+        // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
+        const long maxAllowedSize = 1 * 1024 * 1024;
+        storageRef.GetBytesAsync(maxAllowedSize).ContinueWithOnMainThread(task =>
+           {
+               if (task.IsFaulted || task.IsCanceled)
+               {
+                   Debug.LogException(task.Exception);
+               }
+               else
+               {
+                   byte[] fileContents = task.Result;
+                   Texture2D texture = new Texture2D(1, 1);
+                   texture.LoadImage(fileContents);
+                   Player_DataManager.Instance.Player.texture2D = texture;
+               }
+           });
+        yield return null;
+    }
     IEnumerator LoadingDataFromSever()
     {
         yield return new WaitUntil(() => Player_DataManager.Instance != null);
@@ -219,6 +246,6 @@ public class Player_Loading : MonoBehaviour
     }
     public bool loadDataAllDone()
     {
-        return isDoneAchive && isDoneFriend && isDoneInvent && isDoneNotification && isDoneSystemNoti;
+        return isDonePlayer;
     }
 }

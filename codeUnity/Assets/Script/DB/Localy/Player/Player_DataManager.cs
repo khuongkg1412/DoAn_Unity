@@ -48,16 +48,25 @@ public class Player_DataManager : MonoBehaviour
         //float timeCount = currentTime - lastTime;
         TimeSpan different = currentTime.Subtract(lastTime);
         float timeHasBeenCounted = Mathf.Round(float.Parse(different.TotalSeconds.ToString()));
-        float totalTimeWait = (6 - Player.level.level) * 60;
+        float totalTimeWait = (6 - Player.level.life) * 60;
         if (totalTimeWait - timeHasBeenCounted >= 0)
         {
+            Debug.Log("Chua hoi xong");
+            calculateLifeRestored(timeHasBeenCounted);
             return totalTimeWait - timeHasBeenCounted;
         }
         else
         {
+            Debug.Log("Hoi xong");
             fullyRestoreLife();
         }
         return 0;
+    }
+    void calculateLifeRestored(float timeHasBeenCounted)
+    {
+        float numberLifeRestored = timeHasBeenCounted / 60;
+        Player.level.life += Mathf.RoundToInt(numberLifeRestored);
+        Debug.Log("Restore number_" + Mathf.RoundToInt(numberLifeRestored));
     }
     public void updateBuffInInventory(ItemStruct itemBuff, int quanity)
     {
