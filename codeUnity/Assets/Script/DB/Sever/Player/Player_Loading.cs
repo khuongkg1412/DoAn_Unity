@@ -219,11 +219,6 @@ public class Player_Loading : MonoBehaviour
     }
     public bool loadDataAllDone()
     {
-        Debug.Log("isDoneAchive_" + isDoneAchive);
-        Debug.Log("isDoneFriend_" + isDoneFriend);
-        Debug.Log("isDoneInvent_" + isDoneInvent);
-        Debug.Log("isDoneNotification_" + isDoneNotification);
-        Debug.Log("isDoneSystemNoti_" + isDoneSystemNoti);
         return isDoneAchive && isDoneFriend && isDoneInvent && isDoneNotification && isDoneSystemNoti;
     }
 }
