@@ -26,6 +26,7 @@ public class ListPlayer_Loading : MonoBehaviour
                 PlayerStruct objectData = documentSnapshot.ConvertTo<PlayerStruct>();
                 objectData.ID = documentSnapshot.Id;
                 ListPlayer_DataManager.Instance.listPlayer.Add(objectData);
+
             }
             if (task.IsCanceled)
             {
@@ -35,6 +36,7 @@ public class ListPlayer_Loading : MonoBehaviour
             {
                 Debug.LogError("loadDataItem Faulted");
             }
+            Debug.Log("listPlayer_" + ListPlayer_DataManager.Instance.listPlayer.Count);
             //Sort by order of level descending
             ListPlayer_DataManager.Instance.listPlayer.ForEach(item => StartCoroutine(GetImage(item)));
         });

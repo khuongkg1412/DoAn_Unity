@@ -21,7 +21,6 @@ public class Item_Loading : MonoBehaviour
         yield return new WaitUntil(() => isDoneItem);
 
         Item_DataManager.Instance.setTextureForItem();
-
     }
 
     private void loadDataItem()
@@ -41,7 +40,11 @@ public class Item_Loading : MonoBehaviour
             {
                 ItemStruct objectData = documentSnapshot.ConvertTo<ItemStruct>();
                 objectData.ID = documentSnapshot.Id;
-                Item_DataManager.Instance.Item.Add(objectData);
+
+                if (!Item_DataManager.Instance.checkContainsInListItem(objectData))
+                {
+                    Item_DataManager.Instance.Item.Add(objectData);
+                }
             }
             if (task.IsCanceled)
             {

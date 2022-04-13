@@ -20,6 +20,18 @@ public class Item_DataManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    public bool checkContainsInListItem(ItemStruct item)
+    {
+        bool isContain = false;
+        Item.ForEach(x =>
+        {
+            if (x.ID.Equals(item.ID))
+            {
+                isContain = true;
+            }
+        });
+        return isContain;
+    }
     public void setTextureForItem()
     {
         Item.ForEach(item => item.texture2D = loadingImageFromFilePath(item.image_Item));
@@ -33,42 +45,53 @@ public class Item_DataManager : MonoBehaviour
         return null;
     }
 
-    public List<ItemStruct> itemPiecesA()
+    public List<ItemStruct> loadItemPieces()
     {
+        List<ItemStruct> itemPieces = new List<ItemStruct>();
         foreach (var i in Item)
         {
             if (i.type_Item == (int)TypeItem.Piece)
             {
-                itemPieces.Add(i);
+                if (!itemPieces.Contains(i))
+                {
+                    itemPieces.Add(i);
+                }
             }
         }
         return itemPieces;
     }
-    List<ItemStruct> itemChest = new List<ItemStruct>();
-    List<ItemStruct> itemBuff = new List<ItemStruct>();
-    List<ItemStruct> itemPieces = new List<ItemStruct>();
-    public List<ItemStruct> itemChestB()
-    {
 
+
+
+    public List<ItemStruct> loadItemChest()
+    {
+        Debug.Log("Item " + Item.Count);
+        List<ItemStruct> itemChest = new List<ItemStruct>();
         foreach (var i in Item)
         {
             if (i.type_Store == (int)Type_Store.Chest)
             {
-                itemChest.Add(i);
+                if (!itemChest.Contains(i))
+                {
+                    itemChest.Add(i);
+                }
             }
         }
-        Debug.Log("ItemChest " + itemChest.Count);
+
         return itemChest;
     }
 
-    public List<ItemStruct> itemBuffC()
+    public List<ItemStruct> loadItemBuff()
     {
-
+        List<ItemStruct> itemBuff = new List<ItemStruct>();
         foreach (var i in Item)
         {
             if (i.type_Item == (int)TypeItem.Buff)
             {
-                itemBuff.Add(i);
+                if (!itemBuff.Contains(i))
+                {
+                    itemBuff.Add(i);
+                }
             }
         }
         return itemBuff;

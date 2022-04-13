@@ -46,9 +46,9 @@ public class Store_DataHadle : MonoBehaviour
     private void setDatatoGO()
     {
         //call to static method to load data into list of three type of store item
-        listDataItemBuff = Item_DataManager.Instance.itemBuffC();
-        listDataItemPiece = Item_DataManager.Instance.itemPiecesA();
-        listDataItemChest = Item_DataManager.Instance.itemChestB();
+        listDataItemBuff = Item_DataManager.Instance.loadItemBuff();
+        listDataItemPiece = Item_DataManager.Instance.loadItemPieces();
+        listDataItemChest = Item_DataManager.Instance.loadItemChest();
         /*
         Initiate the object in the scence
         */

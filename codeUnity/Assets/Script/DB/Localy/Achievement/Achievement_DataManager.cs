@@ -19,6 +19,7 @@ public class Achievement_DataManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
     /*
      Consider the achievement is reach or not. The action is achieved by comparing Achievement goal and the static of player
     */
