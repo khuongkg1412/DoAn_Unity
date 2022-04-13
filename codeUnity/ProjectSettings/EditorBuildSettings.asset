@@ -74,4 +74,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Gameplay/Stage/Stage10.unity
     guid: 302ce635d88d2c0458411bde84747930
+  - enabled: 1
+    path: Assets/Scenes/Profile/Main screen.unity
+    guid: b0f4c03c06741f946a3b1502a546ad84
   m_configObjects: {}

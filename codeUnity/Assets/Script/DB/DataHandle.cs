@@ -11,164 +11,34 @@ using UnityEngine.UI;
 
 public class DataHandle : MonoBehaviour
 {
-    /*
-    Player
-    */
-    SystemNotification systemNotification = new SystemNotification()
-    {
-        status_Notification = false
-    };
-    Friend_Player friend_Player = new Friend_Player()
-    {
-        accept_Friend = false,
-        friendID = "MINSaf0TpgEPzy5JtEUM"
-    };
-
-    PlayerStruct newPlayer = new PlayerStruct()
-    {
-        generalInformation = new GeneralInformation_Player()
-        {
-            username_Player = "Duy",
-            avatar_Player = "PlayerAvatar/Avatar item.png",
-            gender_Player = 1
-        },
-        concurrency = new Concurrency()
-        {
-            Coin = 50,
-            Diamond = 50
-        },
-        numeral = new NumeralStruct()
-        {
-            ATK_Numeral = 10,
-            DEF_Numeral = 0,
-            HP_Numeral = 50,
-            SPD_Numeral = 300,
-            ATKSPD_Numeral = 1
-        },
-        level = new Level()
-        {
-            currentXP = 0,
-            reachXP = 130,
-            level = 0,
-            stage = 0,
-            life = 6
-        },
-        statistic = new Dictionary<string, float>
-            {
-                {"VirusA_Killed",0},
-                {"VirusB_Killed",0},
-                {"VirusC_Killed",0},
-                {"VirusD_Killed",0},
-                {"Citizen_Saved",0}
-            },
-        currentOutfit = new Outfit()
-        {
-            currentSuit = "wo7LWsLLKNB3riZdVaAg",
-            currentAccesory = "bj1vVjGVvMiYROHKfrE4",
-            currentGun = "DiK9GKuMVltYg5lc9neE"
-        }
-    };
-
-    /*
-     Achievement
-    */
-    AchievementStruct achievementStruct = new AchievementStruct()
-    {
-        title_Achievement = "Kills 10 Virus",
-        APICall = new APICall_Achievement()
-        {
-            APIMethod = "Kill_VirusMethod",
-            goal = 10
-        },
-        concurrency = new Concurrency
-        {
-            Coin = 0,
-            Diamond = 30
-        }
-    };
-    AchievementStruct achievementStruct1 = new AchievementStruct()
-    {
-        title_Achievement = "Save 5 citizens.",
-        APICall = new APICall_Achievement
-        {
-            APIMethod = "Save_CitizenMethod",
-            goal = 5
-        },
-        concurrency = new Concurrency()
-        {
-            Coin = 0,
-            Diamond = 20
-        }
-    };
-    AchievementStruct achievementStruct2 = new AchievementStruct()
-    {
-        title_Achievement = "Kills 50 Virus",
-        APICall = new APICall_Achievement
-        {
-            APIMethod = "Kill_VirusMethod",
-            goal = 50
-        },
-        concurrency = new Concurrency()
-        {
-            Coin = 0,
-            Diamond = 30
-        }
-    };
-    AchievementStruct achievementStruct3 = new AchievementStruct()
-    {
-        title_Achievement = "Save 10 citizen.",
-        APICall = new APICall_Achievement
-        {
-            APIMethod = "Save_CitizenMethod",
-            goal = 10
-
-        },
-        concurrency = new Concurrency()
-        {
-            Coin = 0,
-            Diamond = 50
-        }
-    };
-    /*
-        SystemNotification data
-    */
-    Notification_Struct notificationSystem = new Notification_Struct()
-    {
-        content_Notification = "Welcome to our new game. Wish you could enjoy happily this.",
-        title_Notification = "Welcome to Covid Refuse",
-        isRead_Notification = false,
-        receivedID_Notification = "7xv28G3fCIf2UoO0rV2SFV5tTr62",
-        sentID_Notification = "System_Notification",
-        type_Notification = (int)Notification.SystemUpdate_Notification
-    };
-    Notification_Struct notificationSocial = new Notification_Struct()
-    {
-        content_Notification = "Welcome to our new game. Wish you could enjoy happily this.",
-        title_Notification = "Welcome to Covid Refuse",
-        isRead_Notification = false,
-        receivedID_Notification = "MINSaf0TpgEPzy5JtEUM",
-        sentID_Notification = "7xv28G3fCIf2UoO0rV2SFV5tTr62",
-        type_Notification = (int)Notification.Social_Notifacation
-    };
-    Notification_Struct notificationFriend = new Notification_Struct()
-    {
-        content_Notification = "Welcome to our new game. Wish you could enjoy happily this.",
-        title_Notification = "Welcome to Covid Refuse",
-        isRead_Notification = false,
-        receivedID_Notification = "zDIDUJhwrIgHvXuohXdN",
-        sentID_Notification = "7xv28G3fCIf2UoO0rV2SFV5tTr62",
-        type_Notification = (int)Notification.Friend_Notification
-    };
-
-    public static List<AchievementStruct> listAchievement = new List<AchievementStruct>();
-    public static PlayerStruct playerData;
-
     public Text Coin, Diamond, Life, Name;
     public Image avatar;
     float timeGetUpdate = 0f;
     private void Update()
     {
         update_Information();
+    }
+    private void Start()
+    {
+        countDownLifeTime();
+    }
+    float timeRemaining;
+    [SerializeField] Text timeText;
+    void countDownLifeTime()
+    {
+        timeRemaining = Player_DataManager.Instance.calculateTimeLifeCountDown();
+        Debug.Log("timeRemaining_" + timeRemaining);
+        DisplayTime(timeRemaining);
+    }
+    //Method display time
+    void DisplayTime(float timeToDisplay)
+    {   //Increase time by 1
+        timeToDisplay += 1;
+        //Convert to minut and second
+        float minutes = Mathf.FloorToInt(timeToDisplay / 60);
+        float seconds = Mathf.FloorToInt(timeToDisplay % 60);
+        //Set to text
+        timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
     void update_Information()
     {
@@ -219,12 +89,5 @@ public class DataHandle : MonoBehaviour
                }
            });
         yield return null;
-    }
-
-    public void AdddingItem()
-    {
-        //FirebaseFirestore db = FirebaseFirestore.DefaultInstance;
-        //DocumentReference docRef = db.Collection("Player").Document("5O0aBwYaPUSgJEhDbRlB5AS1xX32");
-        //docRef.SetAsync(newPlayer);
     }
 }

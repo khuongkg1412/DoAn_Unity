@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System;
 using Firebase.Firestore;
 using UnityEngine;
 using UnityEngine.UI;
@@ -30,6 +31,27 @@ public class Player_DataManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+    private void OnApplicationQuit()
+    {
+        timeofLastPlay();
+    }
+    public void timeofLastPlay()
+    {
+        //Savee the current system time as a string in the player prefs class
+        PlayerPrefs.SetString("lastTimePlay", System.DateTime.Now.ToBinary().ToString());
+    }
+    public float calculateTimeLifeCountDown()
+    {
+        //Grab the old time from the player prefs as a long
+        long temp = Convert.ToInt64(PlayerPrefs.GetString("lastTimePlay"));
+
+        //Convert the old time from binary to a DataTime variable
+        DateTime lastTime = DateTime.FromBinary(temp);
+        DateTime currentTime = System.DateTime.Now;
+        //float timeCount = currentTime - lastTime;
+        TimeSpan different = currentTime.Subtract(lastTime);
+        return Mathf.Round(float.Parse(different.TotalSeconds.ToString()));
     }
     public void updateBuffInInventory(ItemStruct itemBuff, int quanity)
     {
@@ -268,19 +290,13 @@ public class Player_DataManager : MonoBehaviour
 
         Player_Update.UpdatePlayer();
     }
-
-    public void DisplayTime(float timeToDisplay)
-    {   //Increase time by 1
-        //timeToDisplay += 0.5f;
-        //Convert to minut and second
-        float minutes = Mathf.FloorToInt(timeToDisplay / 60);
-        float seconds = Mathf.FloorToInt(timeToDisplay % 60);
-        //Set to text
-        time.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-    }
     public void decreaseLife()
     {
         Player.level.life -= 1;
+        if (Player.level.life <= 0)
+        {
+            Player.level.life = 0;
+        }
         Player_Update.UpdatePlayer();
     }
 }

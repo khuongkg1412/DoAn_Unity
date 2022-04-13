@@ -235,7 +235,7 @@ public class Player_Loading : MonoBehaviour
                 if (timeRemaining > 0)
                 {
                     timeRemaining -= 1;
-                    if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("MainPage")) Player_DataManager.Instance.DisplayTime(timeRemaining);
+                    //  if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("MainPage")) Player_DataManager.Instance.DisplayTime(timeRemaining);
                     Debug.Log(timeRemaining);
                 }
                 else
@@ -243,7 +243,7 @@ public class Player_Loading : MonoBehaviour
                     //Time's up
                     timeRemaining = 60;
                     Player_DataManager.Instance.Player.level.life += 1;
-                    if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("MainPage")) Player_DataManager.Instance.Life.text = Player_DataManager.Instance.Player.level.life + "/6";
+                    // if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("MainPage")) Player_DataManager.Instance.Life.text = Player_DataManager.Instance.Player.level.life + "/6";
                     Player_Update.UpdatePlayer();
                 }
             }

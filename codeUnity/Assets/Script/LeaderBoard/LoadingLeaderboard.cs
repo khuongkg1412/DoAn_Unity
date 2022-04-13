@@ -19,7 +19,7 @@ public class LoadingLeaderboard : MonoBehaviour
     void loadLeaderboard()
     {
         int countTop = 0;
-        foreach (var item in ListPlayer_DataManager.Instance.listPlayer)
+        foreach (var item in ListPlayer_DataManager.Instance.returnListPlayerSortByLevel())
         {
             avtImg.GetComponent<RawImage>().texture = item.texture2D;
             namePlayer.GetComponent<Text>().text = item.generalInformation.username_Player;

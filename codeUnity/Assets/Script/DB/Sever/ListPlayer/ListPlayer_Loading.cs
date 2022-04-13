@@ -36,8 +36,6 @@ public class ListPlayer_Loading : MonoBehaviour
             }
             //Sort by order of level descending
             ListPlayer_DataManager.Instance.listPlayer.ForEach(item => StartCoroutine(GetImage(item)));
-            ListPlayer_DataManager.Instance.listPlayer.Sort((p1, p2) => p1.level.level.CompareTo(p2.level.level));
-            ListPlayer_DataManager.Instance.listPlayer.Reverse();
         });
 
     }
