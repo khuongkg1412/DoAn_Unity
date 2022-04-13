@@ -25,6 +25,7 @@ public class Achievement_Loading : MonoBehaviour
 
     private void loadDataAchievement()
     {
+        
         isDoneAchieve = false;
         //FireBase Object
         FirebaseFirestore db;
