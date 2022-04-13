@@ -27,7 +27,9 @@ public class DataHandle : MonoBehaviour
     void countDownLifeTime()
     {
         timeRemaining = Player_DataManager.Instance.calculateTimeLifeCountDown();
+
         Debug.Log("timeRemaining_" + timeRemaining);
+
         DisplayTime(timeRemaining);
     }
     //Method display time

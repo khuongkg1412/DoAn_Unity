@@ -51,7 +51,13 @@ public class Player_DataManager : MonoBehaviour
         DateTime currentTime = System.DateTime.Now;
         //float timeCount = currentTime - lastTime;
         TimeSpan different = currentTime.Subtract(lastTime);
-        return Mathf.Round(float.Parse(different.TotalSeconds.ToString()));
+        float timeHasBeenCounted = Mathf.Round(float.Parse(different.TotalSeconds.ToString()));
+        float totalTimeWait = 6 - Player.level.level * 60;
+        if (totalTimeWait - timeHasBeenCounted >= 0)
+        {
+            return totalTimeWait - timeHasBeenCounted;
+        }
+        return 0;
     }
     public void updateBuffInInventory(ItemStruct itemBuff, int quanity)
     {
