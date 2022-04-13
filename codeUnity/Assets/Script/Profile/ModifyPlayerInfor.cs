@@ -34,7 +34,7 @@ public class ModifyPlayerInfor : MonoBehaviour
         //load outfit
         GameObject.Find("Outfit_Grid/accessory_box/Image").GetComponent<Image>().sprite = getOutfitImage(player.currentOutfit.currentAccesory);
         GameObject.Find("Outfit_Grid/suit_box/Image").GetComponent<Image>().sprite = getOutfitImage(player.currentOutfit.currentSuit);
-        //GameObject.Find("Gun_Grid/Gun/Image").GetComponent<Image>().sprite = getOutfitImage(player.currentOutfit.currentGun);
+        GameObject.Find("Gun_Grid/Gun/Image").GetComponent<Image>().sprite = getOutfitImage(player.currentOutfit.currentGun);
 
         GameObject.Find("Character_Grid/Character/Head").GetComponent<Image>().sprite = getCharacterImage(player.currentOutfit.currentAccesory, player.generalInformation.gender_Player, "Head");
         GameObject.Find("Character_Grid/Character/Body").GetComponent<Image>().sprite = getCharacterImage(player.currentOutfit.currentSuit, player.generalInformation.gender_Player, "Body");

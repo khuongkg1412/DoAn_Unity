@@ -2066,7 +2066,7 @@ GameObject:
   - component: {fileID: 194496088}
   - component: {fileID: 194496087}
   m_Layer: 5
-  m_Name: gun
+  m_Name: Gun
   m_TagString: Outfit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2131,7 +2131,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 194496088}
   m_OnClick:
     m_PersistentCalls:
@@ -11976,8 +11976,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 116, y: 80}
+  m_AnchoredPosition: {x: 0.000011444, y: 20}
+  m_SizeDelta: {x: 405, y: 405}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1409453758
 MonoBehaviour:
@@ -11999,7 +11999,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0e7e768962f6d2e469c3c17b4bb481ca, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ebd6de23e5eb79a48bca7f7131c2b365, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
