@@ -11,6 +11,7 @@ public class ListPlayer_Loading : MonoBehaviour
     void Start()
     {
         listPlayerOrderByLevel();
+
     }
     void listPlayerOrderByLevel()
     {
