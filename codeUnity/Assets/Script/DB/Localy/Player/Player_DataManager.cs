@@ -51,13 +51,11 @@ public class Player_DataManager : MonoBehaviour
         float totalTimeWait = (6 - Player.level.life) * 60;
         if (totalTimeWait - timeHasBeenCounted >= 0)
         {
-            Debug.Log("Chua hoi xong");
             calculateLifeRestored(timeHasBeenCounted);
             return totalTimeWait - timeHasBeenCounted;
         }
         else
         {
-            Debug.Log("Hoi xong");
             fullyRestoreLife();
         }
         return 0;
