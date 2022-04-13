@@ -63,7 +63,10 @@ public class Player_Loading : MonoBehaviour
             {
                 AchievementStruct objectData = documentSnapshot.ConvertTo<AchievementStruct>();
                 objectData.ID = documentSnapshot.Id;
-                Player_DataManager.Instance.achivementReceived_Player.Add(objectData);
+                if (!Player_DataManager.Instance.achivementReceived_Player.Exists(x => x.ID.Equals(objectData.ID)))
+                {
+                    Player_DataManager.Instance.achivementReceived_Player.Add(objectData);
+                }
             }
             if (task.IsCanceled)
             {
@@ -93,7 +96,11 @@ public class Player_Loading : MonoBehaviour
             {
                 Inventory_Player objectData = documentSnapshot.ConvertTo<Inventory_Player>();
                 objectData.ID = documentSnapshot.Id;
-                Player_DataManager.Instance.inventory_Player.Add(objectData);
+                if (!Player_DataManager.Instance.inventory_Player.Exists(x => x.ID.Equals(objectData.ID)))
+                {
+                    Player_DataManager.Instance.inventory_Player.Add(objectData);
+                }
+
             }
             if (task.IsCanceled)
             {
@@ -122,7 +129,10 @@ public class Player_Loading : MonoBehaviour
             foreach (DocumentSnapshot documentSnapshot in allCitiesQuerySnapshot.Documents)
             {
                 SystemNotification objectData = documentSnapshot.ConvertTo<SystemNotification>();
-                Player_DataManager.Instance.systemNotification.Add(objectData);
+                if (!Player_DataManager.Instance.systemNotification.Contains(objectData))
+                {
+                    Player_DataManager.Instance.systemNotification.Add(objectData);
+                }
             }
             if (task.IsCanceled)
             {
@@ -154,7 +164,10 @@ public class Player_Loading : MonoBehaviour
             {
                 Friend_Player objectData = documentSnapshot.ConvertTo<Friend_Player>();
                 objectData.friendID = documentSnapshot.Id;
-                Player_DataManager.Instance.friend_Player.Add(objectData);
+                if (!Player_DataManager.Instance.friend_Player.Exists(x => x.friendID.Equals(objectData.friendID)))
+                {
+                    Player_DataManager.Instance.friend_Player.Add(objectData);
+                }
             }
             if (task.IsCanceled)
             {
@@ -189,8 +202,10 @@ public class Player_Loading : MonoBehaviour
             {
                 Notification_Struct objectData = documentSnapshot.ConvertTo<Notification_Struct>();
                 objectData.ID = documentSnapshot.Id;
-                Player_DataManager.Instance.notification_Player.Add(objectData);
-
+                if (!Player_DataManager.Instance.notification_Player.Exists(x => x.ID.Equals(objectData.ID)))
+                {
+                    Player_DataManager.Instance.notification_Player.Add(objectData);
+                }
             }
             if (task.IsCanceled)
             {

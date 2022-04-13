@@ -25,7 +25,7 @@ public class Achievement_Loading : MonoBehaviour
 
     private void loadDataAchievement()
     {
-        
+
         isDoneAchieve = false;
         //FireBase Object
         FirebaseFirestore db;
@@ -41,7 +41,10 @@ public class Achievement_Loading : MonoBehaviour
             {
                 AchievementStruct objectData = documentSnapshot.ConvertTo<AchievementStruct>();
                 objectData.ID = documentSnapshot.Id;
-                Achievement_DataManager.Instance.Achievement.Add(objectData);
+                if (!Achievement_DataManager.Instance.checkContainsInListItem(objectData))
+                {
+                    Achievement_DataManager.Instance.Achievement.Add(objectData);
+                }
             }
             if (task.IsCanceled)
             {

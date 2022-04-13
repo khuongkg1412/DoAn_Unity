@@ -25,7 +25,11 @@ public class ListPlayer_Loading : MonoBehaviour
             {
                 PlayerStruct objectData = documentSnapshot.ConvertTo<PlayerStruct>();
                 objectData.ID = documentSnapshot.Id;
-                ListPlayer_DataManager.Instance.listPlayer.Add(objectData);
+                if (!ListPlayer_DataManager.Instance.checkContainsInListPlayer(objectData))
+                {
+                    ListPlayer_DataManager.Instance.listPlayer.Add(objectData);
+                }
+
 
             }
             if (task.IsCanceled)

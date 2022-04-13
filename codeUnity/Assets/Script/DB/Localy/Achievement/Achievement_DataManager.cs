@@ -19,7 +19,18 @@ public class Achievement_DataManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
+    public bool checkContainsInListItem(AchievementStruct item)
+    {
+        bool isContain = false;
+        Achievement.ForEach(x =>
+        {
+            if (x.ID.Equals(item.ID))
+            {
+                isContain = true;
+            }
+        });
+        return isContain;
+    }
     /*
      Consider the achievement is reach or not. The action is achieved by comparing Achievement goal and the static of player
     */

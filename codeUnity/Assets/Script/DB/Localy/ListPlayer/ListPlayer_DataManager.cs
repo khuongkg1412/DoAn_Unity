@@ -21,7 +21,18 @@ public class ListPlayer_DataManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
+    public bool checkContainsInListPlayer(PlayerStruct item)
+    {
+        bool isContain = false;
+        listPlayer.ForEach(x =>
+        {
+            if (x.ID.Equals(item.ID))
+            {
+                isContain = true;
+            }
+        });
+        return isContain;
+    }
     public List<PlayerStruct> returnListPlayerSortByLevel()
     {
         //Sort by order of Citizen saved descending
