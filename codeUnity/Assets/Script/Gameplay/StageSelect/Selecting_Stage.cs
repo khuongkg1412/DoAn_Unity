@@ -164,6 +164,7 @@ public class Selecting_Stage : MonoBehaviour
             ItemStruct item = listBuff[indexofBuff].GetComponent<ItemBuff>().itemBuff;
             Player_DataManager.Instance.playerCharacter.setBuff(item);
             Player_DataManager.Instance.decreaseLife();
+            Player_DataManager.Instance.timeofLastPlay();
             //Load Stage 
             Screen.orientation = ScreenOrientation.Landscape;
             SceneManager.LoadScene("Stage" + levelStage);
@@ -171,7 +172,7 @@ public class Selecting_Stage : MonoBehaviour
         else
         {
             GameObject ErorrToast = (GameObject)Instantiate(Error, transform);
-            ErorrToast.transform.Find("Message").gameObject.GetComponent<Text>().text = "Run out of enery";
+            ErorrToast.transform.Find("Message").gameObject.GetComponent<Text>().text = "Run out of energy";
             Destroy(ErorrToast, 2);
         }
     }

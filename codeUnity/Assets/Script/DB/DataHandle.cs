@@ -8,6 +8,7 @@ using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using Firebase.Storage;
 using UnityEngine.UI;
+using System.Threading.Tasks;
 
 public class DataHandle : MonoBehaviour
 {
@@ -20,17 +21,30 @@ public class DataHandle : MonoBehaviour
     }
     private void Start()
     {
+        StartCoroutine(startLifeTimeCount());
+    }
+    IEnumerator startLifeTimeCount()
+    {
+        yield return new WaitUntil(() => gameObject.GetComponent<Player_Loading>().loadDataAllDone());
+        timeRemaining = Player_DataManager.Instance.calculateTimeLifeCountDown();
         countDownLifeTime();
+        yield return 0;
     }
     float timeRemaining;
     [SerializeField] Text timeText;
-    void countDownLifeTime()
+    async void countDownLifeTime()
     {
-        timeRemaining = Player_DataManager.Instance.calculateTimeLifeCountDown();
-
-        Debug.Log("timeRemaining_" + timeRemaining);
-
-        DisplayTime(timeRemaining);
+        while (timeRemaining >= 0)
+        {
+            await Task.Delay(TimeSpan.FromSeconds(1));
+            timeRemaining -= 1;
+            //Increase every 60s
+            if (timeRemaining % 60 == 0)
+            {
+                Player_DataManager.Instance.increaseLife();
+            }
+            DisplayTime(timeRemaining);
+        }
     }
     //Method display time
     void DisplayTime(float timeToDisplay)

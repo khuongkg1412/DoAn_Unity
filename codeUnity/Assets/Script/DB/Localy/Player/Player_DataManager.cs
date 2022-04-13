@@ -32,10 +32,6 @@ public class Player_DataManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    private void OnApplicationQuit()
-    {
-        timeofLastPlay();
-    }
     public void timeofLastPlay()
     {
         //Savee the current system time as a string in the player prefs class
@@ -52,10 +48,14 @@ public class Player_DataManager : MonoBehaviour
         //float timeCount = currentTime - lastTime;
         TimeSpan different = currentTime.Subtract(lastTime);
         float timeHasBeenCounted = Mathf.Round(float.Parse(different.TotalSeconds.ToString()));
-        float totalTimeWait = 6 - Player.level.level * 60;
+        float totalTimeWait = (6 - Player.level.level) * 60;
         if (totalTimeWait - timeHasBeenCounted >= 0)
         {
             return totalTimeWait - timeHasBeenCounted;
+        }
+        else
+        {
+            fullyRestoreLife();
         }
         return 0;
     }
@@ -303,6 +303,20 @@ public class Player_DataManager : MonoBehaviour
         {
             Player.level.life = 0;
         }
+        Player_Update.UpdatePlayer();
+    }
+    public void increaseLife()
+    {
+        Player.level.life += 1;
+        if (Player.level.life >= 6)
+        {
+            Player.level.life = 6;
+        }
+        Player_Update.UpdatePlayer();
+    }
+    public void fullyRestoreLife()
+    {
+        Player.level.life = 6;
         Player_Update.UpdatePlayer();
     }
 }

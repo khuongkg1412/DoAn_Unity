@@ -11,6 +11,7 @@ public class Player_Loading : MonoBehaviour
 {
     private bool isDonePlayer = false, isDoneInvent = false, isDoneAchive = false, isDoneSystemNoti = false, isDoneFriend = false, isDoneNotification = false;
     string IDPlayer;
+
     private void Start()
     {
         StartCoroutine(LoadingDataFromSever());
@@ -33,9 +34,6 @@ public class Player_Loading : MonoBehaviour
                 Player_DataManager.Instance.Player = snapshot.ConvertTo<PlayerStruct>();
                 Player_DataManager.Instance.Player.ID = snapshot.Id;
                 Player_DataManager.Instance.settingCharacter(snapshot.ConvertTo<PlayerStruct>().numeral);
-                if (AuthController.LifeisRun == -1) AuthController.LifeisRun = Player_DataManager.Instance.Player.level.life;
-                if (!AuthController.TimeisRun) TestAsync();
-
             }
             else
             {
@@ -48,7 +46,7 @@ public class Player_Loading : MonoBehaviour
     }
     private void loadDataAchievement()
     {
-        isDoneInvent = false;
+        isDoneAchive = false;
         //FireBase Object
         FirebaseFirestore db;
 
@@ -73,7 +71,7 @@ public class Player_Loading : MonoBehaviour
             {
                 Debug.LogError("loadDataInvetory Faulted");
             }
-            isDoneInvent = true;
+            isDoneAchive = true;
         });
     }
     private void loadDataInvetory()
@@ -219,35 +217,13 @@ public class Player_Loading : MonoBehaviour
         Player_DataManager.Instance.updateStatPlayer();
         yield return null;
     }
-
-    float timeRemaining;
-
-    async void TestAsync()
+    public bool loadDataAllDone()
     {
-        timeRemaining = 60;
-        AuthController.TimeisRun = true;
-        while (AuthController.TimeisRun)
-        {
-            await Task.Delay(TimeSpan.FromSeconds(1));
-
-            if (AuthController.LifeisRun < 6)
-            {
-                if (timeRemaining > 0)
-                {
-                    timeRemaining -= 1;
-                    //  if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("MainPage")) Player_DataManager.Instance.DisplayTime(timeRemaining);
-                    Debug.Log(timeRemaining);
-                }
-                else
-                {
-                    //Time's up
-                    timeRemaining = 60;
-                    Player_DataManager.Instance.Player.level.life += 1;
-                    // if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("MainPage")) Player_DataManager.Instance.Life.text = Player_DataManager.Instance.Player.level.life + "/6";
-                    Player_Update.UpdatePlayer();
-                }
-            }
-            else AuthController.TimeisRun = false;
-        }
+        Debug.Log("isDoneAchive_" + isDoneAchive);
+        Debug.Log("isDoneFriend_" + isDoneFriend);
+        Debug.Log("isDoneInvent_" + isDoneInvent);
+        Debug.Log("isDoneNotification_" + isDoneNotification);
+        Debug.Log("isDoneSystemNoti_" + isDoneSystemNoti);
+        return isDoneAchive && isDoneFriend && isDoneInvent && isDoneNotification && isDoneSystemNoti;
     }
 }
