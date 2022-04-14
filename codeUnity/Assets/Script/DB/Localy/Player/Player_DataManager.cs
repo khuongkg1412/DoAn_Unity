@@ -282,8 +282,16 @@ public class Player_DataManager : MonoBehaviour
         Inventory_Player i = Instance.inventory_Player.Find(r => r.ID == piece.ID);
         if (i != null)
         {
-            //delete crafted piece out player inventory
-            Instance.inventory_Player.Remove(piece);
+            if (i.quantiy == 3)
+            {
+                //delete crafted piece out player inventory
+                Instance.inventory_Player.Remove(piece);
+                Player_Update.deleteItem(Player.ID, piece.ID);
+            }
+            else
+            {
+                i.quantiy -= 3;
+            }
 
             //adding item to inventory
             Inventory_Player invent = new Inventory_Player()
@@ -295,11 +303,6 @@ public class Player_DataManager : MonoBehaviour
             //Add to Invent
             Instance.inventory_Player.Add(invent);
         }
-
-        //Call to update the information off Player
-        FirebaseFirestore db = FirebaseFirestore.DefaultInstance;
-        DocumentReference doc = db.Collection("Player").Document(Player.ID).Collection("Inventory_Player").Document(piece.ID);
-        doc.DeleteAsync();
 
         Player_Update.UpdatePlayer();
     }

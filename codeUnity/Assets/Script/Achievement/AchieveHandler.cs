@@ -31,6 +31,6 @@ public class AchieveHandler : MonoBehaviour
             itemObj.GetComponent<Achie_Item>().Populate(item, item.percentage);
         }
     }
-   
+
 
 }

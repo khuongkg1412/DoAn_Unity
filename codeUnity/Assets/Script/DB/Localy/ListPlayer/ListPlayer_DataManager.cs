@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class ListPlayer_DataManager : MonoBehaviour
 {
@@ -38,6 +39,7 @@ public class ListPlayer_DataManager : MonoBehaviour
         //Sort by order of Citizen saved descending
         listPlayer.Sort((p1, p2) => p1.level.level.CompareTo(p2.level.level));
         listPlayer.Reverse();
+        listPlayer.Take(10);
         return listPlayer;
     }
     public List<PlayerStruct> returnListPlayerSortBySavedCitizen()
@@ -45,6 +47,7 @@ public class ListPlayer_DataManager : MonoBehaviour
         //Sort by order of Citizen saved descending
         listPlayer.Sort((p1, p2) => p1.statistic["Citizen_Saved"].CompareTo(p2.statistic["Citizen_Saved"]));
         listPlayer.Reverse();
+        listPlayer.Take(10);
         return listPlayer;
     }
 

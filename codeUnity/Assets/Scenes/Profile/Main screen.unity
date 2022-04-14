@@ -6049,7 +6049,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 672642646567838838, guid: 348da0a941b898547826bf3f1cc442b6, type: 3}
-  outfit_infor: {fileID: 0}
+  outfit_infor: {fileID: 3712326482230887698, guid: 40fb06597c4d8a64e8f9e40f93ccba93, type: 3}
   content: {fileID: 448037299}
 --- !u!114 &695870620
 MonoBehaviour:

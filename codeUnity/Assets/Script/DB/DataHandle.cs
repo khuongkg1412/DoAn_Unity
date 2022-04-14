@@ -26,6 +26,7 @@ public class DataHandle : MonoBehaviour
     private void Start()
     {
         StartCoroutine(startLifeTimeCount());
+        Achievement_DataManager.Instance.sortTheAchievement();
     }
     IEnumerator startLifeTimeCount()
     {
@@ -60,10 +61,6 @@ public class DataHandle : MonoBehaviour
         float seconds = Mathf.FloorToInt(timeToDisplay % 60);
         //Set to text
         timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-    }
-    void updateDataOnScence()
-    {
-
     }
     void loadDataPlayerOnScence()
     {

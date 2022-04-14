@@ -31,6 +31,13 @@ public class Achievement_DataManager : MonoBehaviour
         });
         return isContain;
     }
+
+    public void sortTheAchievement()
+    {
+        Achievement.Sort((x1, x2) => x1.percentage.CompareTo(x2.percentage));
+        Achievement.Reverse();
+        Achievement.ForEach(x => Debug.Log("Achievement Progess: " + x.percentage));
+    }
     /*
      Consider the achievement is reach or not. The action is achieved by comparing Achievement goal and the static of player
     */

@@ -65,7 +65,6 @@ public class Item_DataManager : MonoBehaviour
 
     public List<ItemStruct> loadItemChest()
     {
-        Debug.Log("Item " + Item.Count);
         List<ItemStruct> itemChest = new List<ItemStruct>();
         foreach (var i in Item)
         {

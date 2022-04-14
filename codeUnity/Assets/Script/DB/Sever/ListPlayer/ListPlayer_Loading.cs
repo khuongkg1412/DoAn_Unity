@@ -40,7 +40,7 @@ public class ListPlayer_Loading : MonoBehaviour
             {
                 Debug.LogError("loadDataItem Faulted");
             }
-            Debug.Log("listPlayer_" + ListPlayer_DataManager.Instance.listPlayer.Count);
+
             //Sort by order of level descending
             ListPlayer_DataManager.Instance.listPlayer.ForEach(item => StartCoroutine(GetImage(item)));
         });

@@ -30,15 +30,7 @@ public class Achie_Item : MonoBehaviour
         //Set title achievement
         ContentAchive.GetComponent<Text>().text = achievement.title_Achievement;
         //Set text concurrency by checking which concurrency is more than 0 
-        Concurrency rewardReceived = achievement.concurrency;
-        if (rewardReceived.Coin > 0 && rewardReceived.Diamond <= 0)
-        {
-            ContentReward.GetComponent<Text>().text = "" + achievement.concurrency.Coin;
-        }
-        else
-        {
-            ContentReward.gameObject.GetComponent<Text>().text = "" + achievement.concurrency.Diamond;
-        }
+        ContentReward.gameObject.GetComponent<Text>().text = "" + achievement.concurrency.Diamond;
         //Set slider value base on percentage of achievement
         if (percentage < 1) //Not complete achievement
         {

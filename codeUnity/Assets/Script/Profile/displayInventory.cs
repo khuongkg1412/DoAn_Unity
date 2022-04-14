@@ -98,7 +98,7 @@ public class displayInventory : MonoBehaviour
             scrollItemObj.transform.Find("infor box/piece").gameObject.GetComponent<Text>().text = anItemInInventory.quantiy + " / " + anItem.piece;
             scrollItemObj.transform.Find("close_btn").gameObject.GetComponent<Button>().onClick.AddListener(() => Destroy(scrollItemObj));
 
-            if (anItemInInventory.quantiy == anItem.piece)
+            if (anItemInInventory.quantiy >= anItem.piece)
             {
                 scrollItemObj.transform.Find("infor box/ok_btn").gameObject.GetComponent<Button>().interactable = true;
                 scrollItemObj.transform.Find("infor box/ok_btn").gameObject.GetComponent<Button>().onClick.AddListener(() => CraftPieceToItem(anItem));

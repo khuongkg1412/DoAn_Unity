@@ -39,7 +39,13 @@ public class Player_Update
             doc = db.Collection("Player").Document(IDPlayer).Collection("Achivement_Player").Document(i.ID);
             doc.SetAsync(i);
         }
-
+    }
+    public static void deleteItem(string ID_Player, string ID_Item)
+    {
+        //Call to update the information off Player
+        FirebaseFirestore db = FirebaseFirestore.DefaultInstance;
+        DocumentReference doc = db.Collection("Player").Document(ID_Player).Collection("Inventory_Player").Document(ID_Item);
+        doc.DeleteAsync();
     }
 
 }
