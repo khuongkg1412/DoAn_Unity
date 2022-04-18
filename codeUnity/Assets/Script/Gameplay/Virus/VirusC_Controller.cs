@@ -14,7 +14,7 @@ public class VirusC_Controller : MonoBehaviour
 
     //Decide whether enemy is following player
     public bool isFollow;
-
+    bool isHit;
     //Time before enemy continute follow player after a collision
     float waiToFolllow = 0f;
 
@@ -29,8 +29,6 @@ public class VirusC_Controller : MonoBehaviour
     GameObject HealthBar;
 
     float maxHPsize;
-
-    public bool isBoss = false;
     private void Start()
     {
         targetPlayer = GameObject.FindWithTag("Player").transform;
@@ -44,7 +42,7 @@ public class VirusC_Controller : MonoBehaviour
     private void Update()
     {
         //Stop virus follow player for a secend
-        if (!isFollow)
+        if (!isHit)
         {
             //Count to follow
             waiToFolllow += Time.deltaTime;
@@ -55,10 +53,10 @@ public class VirusC_Controller : MonoBehaviour
                 Rigidbody2D rd = gameObject.GetComponent<Rigidbody2D>();
                 rd.velocity = Vector2.zero;
                 //Allow it follow player or Citizen
-                isFollow = true;
+                isHit = true;
             }
         }
-        else if (virus != null && !isBoss)
+        else if (virus != null && isFollow)
         {
             //Follow if in range
             if (distanceToPlayer())
@@ -75,7 +73,6 @@ public class VirusC_Controller : MonoBehaviour
                 comeBackPos();
             }
         }
-
     }
 
     public void setNumeral()
@@ -150,7 +147,7 @@ public class VirusC_Controller : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         //When being hit, enemy cannot move around
-        isFollow = false;
+        isHit = false;
         // force is how forcefully we will push the player away from the enemy.
         float force = 10000;
         // If the object we hit is the enemy

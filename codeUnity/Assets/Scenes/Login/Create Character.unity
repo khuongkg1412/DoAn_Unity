@@ -1122,6 +1122,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterName: {fileID: 1355558479}
+  maleImg: {fileID: 21300000, guid: 4c337f3b6d236dc4886acfdb3017a4dc, type: 3}
+  femaleImg: {fileID: 21300000, guid: e7839023ff475f942bd7afbfd90eca2e, type: 3}
+  modelCharacter: {fileID: 1533330286}
 --- !u!1 &1355558477
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System;
 
 public class Selecting_Stage : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class Selecting_Stage : MonoBehaviour
     private int levelStage = 0;
     List<ItemStruct> listItemBuff = new List<ItemStruct>();
     bool isInstaniate = false;
+    List<GameObject> listBuff = new List<GameObject>();
+    public int indexofBuff = 0;
     public void increaseNumberForStage()
     {
         foreach (var i in stageArray)
@@ -139,8 +142,7 @@ public class Selecting_Stage : MonoBehaviour
         }
 
     }
-    List<GameObject> listBuff = new List<GameObject>();
-    public int indexofBuff = 0;
+
     // //Instaniate the object item for each one
     void Populate(GameObject verticalObject, ItemStruct Item, int quantity)
     {
@@ -158,11 +160,21 @@ public class Selecting_Stage : MonoBehaviour
 
     public void pressPlayButton()
     {
-        if (Player_DataManager.Instance.Player.level.life > 0)
+        //Try catch block: cause when player not choose any buff, there would be an error cause the index bound of array
+        try
         {
             //Add buff to Character in instace Player_DataManager
             ItemStruct item = listBuff[indexofBuff].GetComponent<ItemBuff>().itemBuff;
             Player_DataManager.Instance.playerCharacter.setBuff(item);
+        }
+        catch //Set null for item buff
+        {
+            Player_DataManager.Instance.playerCharacter.setBuff(null);
+        }
+        //Check the life of player is enough to play
+        if (Player_DataManager.Instance.Player.level.life > 0)
+        {
+            //Decrease life point and save last time play
             Player_DataManager.Instance.decreaseLife();
             Player_DataManager.Instance.timeofLastPlay();
             //Load Stage 

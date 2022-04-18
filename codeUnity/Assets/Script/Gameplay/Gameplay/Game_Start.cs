@@ -44,9 +44,6 @@ public class Game_Start : MonoBehaviour
         {
             citizenNumberStart = GameObject.Find("Spawning Citizen").GetComponent<Spawn_Citizen>().numberOfCitizen;
         }
-        //Update citizen in Quest pannel
-        UpdateCitizen(0);
-        UpdateEnemyNumber(0);
         //Set value for two variable which decide game end and victory
         isVictory = false;
         isGameOver = false;
@@ -54,6 +51,9 @@ public class Game_Start : MonoBehaviour
     public void settingNumberOfVirus(float enemyNumber)
     {
         this.enemyNumberStart = enemyNumber;
+        //Update citizen in Quest pannel
+        UpdateCitizen(0);
+        UpdateEnemyNumber(0);
     }
 
     void Update()

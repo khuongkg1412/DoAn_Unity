@@ -57,8 +57,16 @@ public class Player_Controller : MonoBehaviour
         //Getting RigidBody
         myBody = GetComponent<Rigidbody2D>();
         //Setting data for buff and numeral of character
-        buffItem.GetComponent<ItemBuff>().itemBuff = Player_DataManager.Instance.playerCharacter.getItemBuff();
-        buffItem.GetComponent<ItemBuff>().setDataForBuff();
+        if (Player_DataManager.Instance.playerCharacter.getItemBuff() == null)
+        {
+            Destroy(buffItem);
+        }
+        else
+        {
+            buffItem.GetComponent<ItemBuff>().itemBuff = Player_DataManager.Instance.playerCharacter.getItemBuff();
+            buffItem.GetComponent<ItemBuff>().setDataForBuff();
+        }
+
         settingCharacter();
         //Let Player shoot and move fistly
         Character.setShoot(true);

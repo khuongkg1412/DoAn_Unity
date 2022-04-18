@@ -6,7 +6,6 @@ public class Boss2 : MonoBehaviour
 {
     //Setting up Enemy
     public VirusBoss2 virus;
-
     /*
     HP Enemy
     */

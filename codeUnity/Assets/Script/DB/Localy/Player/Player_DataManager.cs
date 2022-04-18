@@ -72,7 +72,16 @@ public class Player_DataManager : MonoBehaviour
         {
             if (i.ID == itemBuff.ID)
             {
-                i.quantiy = quanity;
+                if (quanity == 0)
+                {
+                    //delete crafted piece out player inventory
+                    Instance.inventory_Player.Remove(i);
+                    Player_Update.deleteItem(Player.ID, i.ID);
+                }
+                else
+                {
+                    i.quantiy = quanity;
+                }
             }
         }
         //inventory_Player.Find(x => x.ID == itemBuff.ID).item[itemBuff.name_Item] = quanity;

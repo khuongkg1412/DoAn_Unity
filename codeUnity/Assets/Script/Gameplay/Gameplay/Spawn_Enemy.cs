@@ -18,7 +18,6 @@ public class Spawn_Enemy : MonoBehaviour
     private void Start()
     {
         spawningEnemy();
-        GameObject.Find("Canvas").GetComponent<Game_Start>().settingNumberOfVirus(numberOfEnemies);
     }
     public void spawningEnemy()
     {
@@ -40,16 +39,8 @@ public class Spawn_Enemy : MonoBehaviour
                 Instantiate(Enemy[randomType], positionSpawn[randSpawnLocation].position, transform.rotation);
             }
         }
+        GameObject.Find("Canvas").GetComponent<Game_Start>().settingNumberOfVirus(numberOfEnemies);
     }
 }
-/*
-while (numberOfEnemies > 0)
-        {
-            int randomType = Random.Range(0, Enemy.Length);
-            int randSpawnLocation = Random.Range(0, positionSpawn.Length);
-            Instantiate(Enemy[randomType], positionSpawn[randSpawnLocation].position, transform.rotation);
-            //Decrease number of enemies
-            numberOfEnemies -= 1;
-        }
-*/
+
 

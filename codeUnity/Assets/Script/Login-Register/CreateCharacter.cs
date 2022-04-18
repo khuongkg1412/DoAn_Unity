@@ -10,6 +10,8 @@ public class CreateCharacter : MonoBehaviour
 {
     FirebaseFirestore db;
     public InputField characterName;
+    [SerializeField] Sprite maleImg, femaleImg;
+    [SerializeField] Image modelCharacter;
 
     int male = 1;
 
@@ -28,11 +30,13 @@ public class CreateCharacter : MonoBehaviour
 
     public void isMale()
     {
+        modelCharacter.sprite = maleImg;
         male = 1;
     }
 
     public void isFemale()
     {
+        modelCharacter.sprite = femaleImg;
         male = 0;
     }
 

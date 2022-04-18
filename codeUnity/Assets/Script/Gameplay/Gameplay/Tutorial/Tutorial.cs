@@ -108,7 +108,8 @@ public class Tutorial : MonoBehaviour
                 textContent.text = "They are under attack of virus. They would lose by 2 HP for a second, and they'll die if HP is 0. Keep them alive or you would lose.";
                 //Check number of virus has been spawned
                 if (numberOfEnemies == 1)
-                {//Create object
+                {
+                    //Create object
                     gameObjectNew = Instantiate(enemy, SpawnPos2.position, SpawnPos2.rotation);
                     //Random type and set for virus enemy
                     gameObjectNew.transform.GetChild(0).gameObject.GetComponent<VirusA_Controller>().isFollow = false;
@@ -118,9 +119,9 @@ public class Tutorial : MonoBehaviour
                 break;
             case 8:
                 textContent.text = "You must help them by touching them and holding the help button for 7 seconds. Releasing the button would count from 0.";
-                gameObjectNew.transform.GetChild(0).gameObject.GetComponent<VirusA_Controller>().isFollow = false;
                 break;
             case 9:
+                gameObjectNew.transform.GetChild(0).gameObject.GetComponent<VirusA_Controller>().isFollow = true;
                 player.GetComponent<Player_Controller>().Character.setMove(true);
                 player.GetComponent<Player_Controller>().Character.setShoot(true);
                 tutorialPopup.SetActive(false);
