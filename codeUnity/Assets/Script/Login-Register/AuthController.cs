@@ -64,12 +64,12 @@ public class AuthController : MonoBehaviour
         {
             if (email.Length == 0)
             {
-                loadErrorToast("Email cannot be empty! Please input!");
+                loadErrorToast("Email cannot be blank!");
                 return;
             }
             if (pass.Length == 0)
             {
-                loadErrorToast("Password cannot be empty! Please input!");
+                loadErrorToast("Password cannot be blank!");
                 return;
             }
         }
@@ -90,23 +90,23 @@ public class AuthController : MonoBehaviour
         {
             if (email.Length == 0)
             {
-                loadErrorToast("Email cannot be empty! Please input!");
+                loadErrorToast("Email cannot be blank!");
                 return;
             }
             if (password.Length == 0)
             {
-                loadErrorToast("Password cannot be empty! Please input!");
+                loadErrorToast("Password cannot be blank!");
                 return;
             }
             else if (password.Length < 8)
             {
-                loadErrorToast("Password must have 8 characters! Please input more!");
+                loadErrorToast("Password must more than 8 characters!");
                 return;
             }
 
             if (confirmPassword.Length == 0)
             {
-                loadErrorToast("Confirm password cannot be empty! Please input!");
+                loadErrorToast("Confirm Password cannot be blank!");
                 return;
             }
         }
@@ -115,19 +115,19 @@ public class AuthController : MonoBehaviour
 
             if (!Validation.checkEmailFormat(email))
             {
-                loadErrorToast("Email must be in correct format. (Ex: thanh@gmail.com)");
+                loadErrorToast("This Email is invalid (Ex: name@gmail.com)");
                 return;
             }
 
             if (!Validation.checkStrongPassword(password))
             {
-                loadErrorToast("Your password must contain at least 1 uppercase, 1 lowercase letter, 1 digit, 1 special character.");
+                loadErrorToast("Your password is not strong!");
                 return;
             }
 
             if (!Validation.checkConfirmPassword(password, confirmPassword))
             {
-                loadErrorToast("The confirm password did not match.");
+                loadErrorToast("Password and confirm password does not match!");
                 return;
             }
 
