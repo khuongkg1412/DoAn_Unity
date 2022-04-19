@@ -75,6 +75,8 @@ public class Player_Controller : MonoBehaviour
         HealthBar.maxValue = Character.returnHP();
         //Set Atack speed
         coolDownTime = Character.returnATKSPD();
+        //Set avatar for player
+        GameObject.Find("Avatar_Player").GetComponent<RawImage>().texture = Player_DataManager.Instance.Player.texture2D;
     }
 
     // Update is called once per frame

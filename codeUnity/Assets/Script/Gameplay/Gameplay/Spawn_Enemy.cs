@@ -17,7 +17,7 @@ public class Spawn_Enemy : MonoBehaviour
     List<int> spawnedPos = new List<int>();
     private void Start()
     {
-        spawningEnemy();
+        Invoke("spawningEnemy", 1f);
     }
     public void spawningEnemy()
     {
