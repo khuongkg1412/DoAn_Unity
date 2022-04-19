@@ -274,7 +274,7 @@ public class VirusBoss2 : Enemy
     }
     public void reviveLife()
     {
-        if (numberOfBeards > 1)
+        if (numberOfBeards >= 1)
         {
             setNumeral(new NumeralStruct()
             {

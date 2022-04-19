@@ -63,6 +63,15 @@ public class Boss2 : MonoBehaviour
             currentHP = maxHP;
             gameObject.GetComponent<SpriteRenderer>().sprite = virus.image;
         }
+        //Check the second time if the virus is not revive
+        if (virus.isDead)
+        {
+            GameObject.FindWithTag("Player").GetComponent<Player_Controller>().Character.setScore(100f);
+            gamePlay.GetComponent<Game_Boss>().isGameOver = true;
+            gamePlay.GetComponent<Game_Boss>().isVictory = true;
+
+            Destroy(gameObject);
+        }
         HealthBar.transform.localScale = new Vector3((virus.returnHP() / maxHP) * maxHPsize, HealthBar.transform.transform.localScale.y, HealthBar.transform.transform.localScale.z);
     }
     void searchForAttack()

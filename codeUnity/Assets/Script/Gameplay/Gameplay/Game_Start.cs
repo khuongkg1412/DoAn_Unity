@@ -94,7 +94,6 @@ public class Game_Start : MonoBehaviour
         pannelGameover.SetActive(true);
         //Plus the time left to the score
         float plusScore = Mathf.Round(timeRemaining * 6 / 100);
-        Debug.Log("Plus Score " + plusScore);
         GameObject.FindWithTag("Player").GetComponent<Player_Controller>().Character.setScore(plusScore);
         UpdateScore();
         //Show Result Pannel

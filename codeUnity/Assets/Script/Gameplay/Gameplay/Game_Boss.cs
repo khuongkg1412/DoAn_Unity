@@ -107,8 +107,9 @@ public class Game_Boss : MonoBehaviour
     //Update score
     public void UpdateScore(float scorePlus)
     {
+        float currentPlayerScore = GameObject.FindWithTag("Player").GetComponent<Player_Controller>().Character.returnScroe();
         //Set score to the UI on the scence
-        score += scorePlus;
+        score = Mathf.Round(currentPlayerScore);
         scoreRunning.text = score.ToString();
         scoreResult.text = score.ToString();
     }
