@@ -88324,12 +88324,6 @@ MonoBehaviour:
   positionSpawn:
   - {fileID: 1053951585}
   - {fileID: 237033429}
-  - {fileID: 1776211525}
-  - {fileID: 493762670}
-  - {fileID: 1411913999}
-  - {fileID: 1828163136}
-  - {fileID: 1622318811}
-  - {fileID: 129832665}
   Citizen:
   - {fileID: 1893388267}
   numberOfCitizen: 2
@@ -103315,12 +103309,6 @@ MonoBehaviour:
   positionSpawn:
   - {fileID: 874697255}
   - {fileID: 2024385075}
-  - {fileID: 1948698662}
-  - {fileID: 538904318}
-  - {fileID: 1337999307}
-  - {fileID: 807107983}
-  - {fileID: 1640926819}
-  - {fileID: 1585386527}
   Enemy:
   - {fileID: 1546520577}
   - {fileID: 1837807672}
