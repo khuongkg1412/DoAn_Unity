@@ -13,14 +13,18 @@ public class DisplayNoti : MonoBehaviour
 
     public GameObject FriendNotiPanel, SystemNotiPanel, SocialNotiPanel;
 
+    int UnseenFriendNoti, UnseenSystemNoti, UnseenSocialNoti;
     private void Start()
     {
+        avatarSender = null;
         StartCoroutine(LoadNoti());
     }
 
     private IEnumerator LoadNoti()
     {
-        int UnseenFriendNoti = 0, UnseenSystemNoti = 0, UnseenSocialNoti = 0;
+        UnseenFriendNoti = 0;
+        UnseenSystemNoti = 0;
+        UnseenSocialNoti = 0;
 
         foreach (Notification_Struct noti in Player_DataManager.Instance.notification_Player)
         {
@@ -28,25 +32,25 @@ public class DisplayNoti : MonoBehaviour
             {
                 if (!noti.isRead_Notification) UnseenSystemNoti += 1;
 
-                StartCoroutine(Populate(noti, noti.type_Notification));
+                Populate(noti, noti.type_Notification);
             }
             else if (noti.type_Notification == 3)
             {
 
                 if (!noti.isRead_Notification) UnseenFriendNoti += 1;
 
-                StartCoroutine(GetPlayerAvatar(noti.sentID_Notification));
-                yield return new WaitForSeconds(3);
-                StartCoroutine(Populate(noti, noti.type_Notification));
+                GetPlayerAvatar(noti.sentID_Notification);
+                // yield return new WaitForSeconds(0.5f);
+                Populate(noti, noti.type_Notification);
             }
             else
             {
 
                 if (!noti.isRead_Notification) UnseenSocialNoti += 1;
 
-                StartCoroutine(GetPlayerAvatar(noti.sentID_Notification));
-                yield return new WaitForSeconds(3);
-                StartCoroutine(Populate(noti, noti.type_Notification));
+                GetPlayerAvatar(noti.sentID_Notification);
+                // yield return new WaitForSeconds(0.5f);
+                Populate(noti, noti.type_Notification);
             }
         }
         setUnseenNotiNumber(UnseenFriendNoti, UnseenSocialNoti, UnseenSystemNoti);
@@ -90,7 +94,7 @@ public class DisplayNoti : MonoBehaviour
         }
     }
 
-    IEnumerator Populate(Notification_Struct noti, int typeNoti)
+    void Populate(Notification_Struct noti, int typeNoti)
     {
         GameObject Noti;
         switch (typeNoti)
@@ -154,7 +158,6 @@ public class DisplayNoti : MonoBehaviour
                 }
                 break;
         }
-        yield return null;
     }
 
     private Color Hetx2RGB(string hex)
@@ -194,6 +197,8 @@ public class DisplayNoti : MonoBehaviour
         GameObject popupWindow = (GameObject)Instantiate(obj, FriendNotiPanel.transform);
 
         IsreadNoti(CurentNoti_prefab, noti);
+        UnseenFriendNoti -= 1;
+        setUnseenNotiNumber(UnseenFriendNoti, UnseenSocialNoti, UnseenSystemNoti);
     }
     public void OnSocialNotiClick() { Debug.Log("Thanh cong"); }
 
@@ -204,58 +209,17 @@ public class DisplayNoti : MonoBehaviour
         Player_DataManager.Instance.read_Notification(noti);
     }
 
-    FirebaseFirestore db;
     public static Sprite avatarSender;
-    bool IsDoneDownload = false;
-    IEnumerator GetPlayerAvatar(string ID)
+
+    void GetPlayerAvatar(string ID)
     {
-        db = FirebaseFirestore.DefaultInstance;
-
-        DocumentReference docRef = db.Collection("Player").Document(ID);
-        docRef.GetSnapshotAsync().ContinueWithOnMainThread(task =>
+        PlayerStruct player = ListPlayer_DataManager.Instance.listPlayer.Find(e => e.ID.Equals(ID));
+        if (player != null)
         {
-            DocumentSnapshot snapshot = task.Result;
-            if (snapshot.Exists)
-            {
-                PlayerStruct player = snapshot.ConvertTo<PlayerStruct>();
-                IsDoneDownload = false;
-                StartCoroutine(GetImage(player.generalInformation.avatar_Player));
-            }
-            else
-            {
-                Debug.Log(string.Format("Document {0} does not exist!", snapshot.Id));
-            }
-        });
-        yield return null;
-    }
+            Texture2D texture = player.texture2D;
 
-    private IEnumerator GetImage(string dataImage)
-    {
-        // Get a reference to the storage service, using the default Firebase App
-        FirebaseStorage storage = FirebaseStorage.DefaultInstance;
-
-        // Create a storage reference from our storage service
-        StorageReference storageRef = storage.GetReference(dataImage);
-
-        // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
-        const long maxAllowedSize = 4 * 1024 * 1024;
-        storageRef.GetBytesAsync(maxAllowedSize).ContinueWithOnMainThread(task =>
-        {
-            if (task.IsFaulted || task.IsCanceled)
-            {
-                Debug.LogException(task.Exception);
-            }
-            else
-            {
-                byte[] fileContents = task.Result;
-                Texture2D texture = new Texture2D(1, 1);
-                texture.LoadImage(fileContents);
-                Sprite sprite = Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100.0f);
-                avatarSender = sprite;
-                IsDoneDownload = true;
-                Debug.Log("Image Downloaded");
-            }
-        });
-        yield return null;
+            Sprite sprite = Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100.0f);
+            avatarSender = sprite;
+        }
     }
 }
