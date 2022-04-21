@@ -3,6 +3,7 @@ using System;
 using Firebase.Firestore;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Text.RegularExpressions;
 
 public class Player_DataManager : MonoBehaviour
 {
@@ -73,6 +74,15 @@ public class Player_DataManager : MonoBehaviour
         float numberLifeRestored = timeHasBeenCounted / 60;
         Player.level.life += Mathf.RoundToInt(numberLifeRestored);
         Debug.Log("Restore number_" + Mathf.RoundToInt(numberLifeRestored));
+    }
+    public string returnURLCurrentSprite()
+    {
+        string urlCurrentSprite = "";
+        string urlPrefix = Item_DataManager.Instance.Item.Find(x => x.ID.Equals(Instance.Player.currentOutfit.currentSuit)).name_Item;
+        urlCurrentSprite = urlPrefix.Substring(0, urlPrefix.IndexOf(" "));
+        string urlSuffix = Item_DataManager.Instance.Item.Find(x => x.ID.Equals(Instance.Player.currentOutfit.currentGun)).name_Item;
+        urlCurrentSprite += "_" + urlSuffix.Replace(" ", "");
+        return urlCurrentSprite;
     }
     public void updateBuffInInventory(ItemStruct itemBuff, int quanity)
     {
