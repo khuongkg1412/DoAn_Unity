@@ -902,6 +902,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 8901087703511917722, guid: e1b9e48086de45049bd44a7670cfac30, type: 3}
   addFriend_box: {fileID: 3712326482230887698, guid: 89e21927ecfd0584385f83725289e121, type: 3}
+  error: {fileID: 1070104861143463753, guid: ec90b15f30ed349469a19fcb10ff1f83, type: 3}
   friendList: {fileID: 632813853}
   content: {fileID: 1847611191}
 --- !u!1 &661304526

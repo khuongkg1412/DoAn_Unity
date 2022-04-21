@@ -8917,7 +8917,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1068958875}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1800004352}
+        m_TargetAssemblyTypeName: ModifyPlayerInfor, Assembly-CSharp
+        m_MethodName: DisplayStats
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1068958875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14556,6 +14568,7 @@ MonoBehaviour:
   currentAvatar: {fileID: 1367439481}
   Name: {fileID: 1581556672}
   Level: {fileID: 52406826}
+  statsBox: {fileID: 3712326482230887698, guid: 40fb06597c4d8a64e8f9e40f93ccba93, type: 3}
 --- !u!114 &1800004353
 MonoBehaviour:
   m_ObjectHideFlags: 0

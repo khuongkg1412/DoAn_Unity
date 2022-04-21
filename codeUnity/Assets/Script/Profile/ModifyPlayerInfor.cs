@@ -12,13 +12,15 @@ public class ModifyPlayerInfor : MonoBehaviour
 {
     FirebaseFirestore db;
     private PlayerStruct player;
+    private NumeralStruct stst;
     bool isModify = uploadAvatar.isModify;
     bool isUpDone = uploadAvatar.isUpDone;
     public Image currentAvatar;
     public Text Name, Level;
+    public GameObject statsBox;
 
     // Start is called before the first frame update
-    private void Awake()
+    private void Start()
     {
         loadplayerInfor();
     }
@@ -108,5 +110,19 @@ public class ModifyPlayerInfor : MonoBehaviour
         return null;
     }
 
+    public void DisplayStats()
+    {
+        player = Player_DataManager.Instance.Player;
+        stst = Player_DataManager.Instance.stats;
 
+        string stat = "ATK_SPD: " + (stst.ATKSPD_Numeral + player.numeral.ATKSPD_Numeral) +
+                              "\n  ATK: " + (stst.ATK_Numeral + player.numeral.ATK_Numeral) +
+                              "\n  DEF: " + (stst.DEF_Numeral + player.numeral.DEF_Numeral) +
+                              "\n   HP: " + (stst.HP_Numeral + player.numeral.HP_Numeral) +
+                              "\n  SPD: " + (stst.SPD_Numeral + player.numeral.SPD_Numeral);
+
+        GameObject scrollItemObj = (GameObject)Instantiate(statsBox, transform);
+        scrollItemObj.transform.Find("infor box/stats").gameObject.GetComponent<Text>().text = stat;
+        scrollItemObj.transform.Find("close_btn").gameObject.GetComponent<Button>().onClick.AddListener(() => Destroy(scrollItemObj));
+    }
 }
