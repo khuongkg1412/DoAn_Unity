@@ -62,16 +62,25 @@ public class friendHandler : MonoBehaviour
 
     public void findNewFriend(Text name)
     {
-        PlayerStruct player = ListPlayer_DataManager.Instance.listPlayer.Find(e => e.generalInformation.username_Player.Equals(name.text));
+        player = ListPlayer_DataManager.Instance.listPlayer.Find(e => e.generalInformation.username_Player.Equals(name.text));
+
         if (player != null)
         {
-            Texture2D texture = player.texture2D;
+            Friend_Player friend = Player_DataManager.Instance.friend_Player.Find(e => e.friendID.Equals(player.ID));
+            if (friend != null)
+            {
+                loadErrorToast("Player was your friend!");
+            }
+            else
+            {
+                Texture2D texture = player.texture2D;
 
-            Sprite sprite = Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100.0f);
+                Sprite sprite = Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100.0f);
 
-            DisplayInfor(sprite, player);
+                DisplayInfor(sprite, player);
+            }
         }
-        else loadErrorToast("No player have this name");
+        else loadErrorToast("Cannot found that player!");
     }
 
     private void loadErrorToast(string message)

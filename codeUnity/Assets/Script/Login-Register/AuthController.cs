@@ -28,7 +28,7 @@ public class AuthController : MonoBehaviour
             }).Catch(error =>
         {
             Debug.Log(error.Message);
-            loadErrorToast("This account is not Registered or Wrong email and password!");
+            loadErrorToast("Wrong Password and Email!");
         });
         yield return new WaitUntil(() => isDone == true);
         SceneManager.LoadScene("MainPage");
@@ -100,7 +100,7 @@ public class AuthController : MonoBehaviour
             }
             else if (password.Length < 8)
             {
-                loadErrorToast("Password must more than 8 characters!");
+                loadErrorToast("Password must have more than 6 characters, 1 uppercase, 1 special character!");
                 return;
             }
 
@@ -121,7 +121,7 @@ public class AuthController : MonoBehaviour
 
             if (!Validation.checkStrongPassword(password))
             {
-                loadErrorToast("Your password is not strong!");
+                loadErrorToast("Your password is not strong enough!");
                 return;
             }
 

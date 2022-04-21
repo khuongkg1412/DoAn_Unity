@@ -12,6 +12,8 @@ public class CreateCharacter : MonoBehaviour
     public InputField characterName;
     [SerializeField] Sprite maleImg, femaleImg;
     [SerializeField] Image modelCharacter;
+    [SerializeField] GameObject error;
+
 
     int male = 1;
 
@@ -23,7 +25,7 @@ public class CreateCharacter : MonoBehaviour
     {
         if (characterName.text.Length == 0)
         {
-            Debug.Log("chua co ten");
+            loadErrorToast("Username cannot be blank!");
         }
         else StartCoroutine(createPlayer());
     }
@@ -38,6 +40,14 @@ public class CreateCharacter : MonoBehaviour
     {
         modelCharacter.sprite = femaleImg;
         male = 0;
+    }
+
+    private void loadErrorToast(string message)
+    {
+        GameObject ErrorToast;
+        ErrorToast = (GameObject)Instantiate(error, transform.parent);
+        ErrorToast.transform.Find("Message").gameObject.GetComponent<Text>().text = message;
+        Destroy(ErrorToast, 2);
     }
 
     IEnumerator createPlayer()
