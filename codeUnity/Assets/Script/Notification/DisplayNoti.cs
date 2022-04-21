@@ -137,7 +137,7 @@ public class DisplayNoti : MonoBehaviour
 
                 Noti = (GameObject)Instantiate(addFriendRequest_prefab, SocialNoti.transform);
 
-                Noti.transform.Find("Title_noti").gameObject.GetComponentInParent<Button>().onClick.AddListener(() => OnSocialNotiClick());
+                Noti.transform.Find("Title_noti").gameObject.GetComponentInParent<Button>().onClick.AddListener(() => OnSocialNotiClick(Noti, noti));
                 Noti.transform.Find("Title_noti").gameObject.GetComponent<Text>().text = noti.title_Notification;
                 Noti.transform.Find("Mask Circle/SenderAvatar").gameObject.GetComponent<Image>().sprite = avatarSender;
                 if (noti.isRead_Notification)
@@ -149,7 +149,7 @@ public class DisplayNoti : MonoBehaviour
                 break;
             default:
                 Noti = (GameObject)Instantiate(systemUpdate_prefab, SystemNoti.transform);
-                Noti.transform.Find("Title_noti").gameObject.GetComponentInParent<Button>().onClick.AddListener(() => OnSystemUpdateNotiClick());
+                Noti.transform.Find("Title_noti").gameObject.GetComponentInParent<Button>().onClick.AddListener(() => OnSystemUpdateNotiClick(Noti, noti));
                 Noti.transform.Find("Title_noti").gameObject.GetComponent<Text>().text = noti.title_Notification;
                 if (noti.isRead_Notification)
                 {
@@ -187,7 +187,19 @@ public class DisplayNoti : MonoBehaviour
 
     }
 
-    public void OnSystemUpdateNotiClick() { }
+    public void OnSystemUpdateNotiClick(GameObject CurentNoti_prefab, Notification_Struct noti)
+    {
+        GameObject obj = (GameObject)Resources.Load("Prefabs/Notification/Popup window/UpdateSystemWindow", typeof(GameObject));
+
+        GameObject popupWindow = (GameObject)Instantiate(obj, SystemNotiPanel.transform);
+        popupWindow.transform.Find("Title").gameObject.GetComponent<Text>().text = noti.title_Notification;
+        popupWindow.transform.Find("close_btn").gameObject.GetComponent<Button>().onClick.AddListener(() => Destroy(popupWindow));
+        popupWindow.transform.Find("OK").gameObject.GetComponent<Button>().onClick.AddListener(() => Destroy(popupWindow));
+
+        IsreadNoti(CurentNoti_prefab, noti);
+        UnseenSystemNoti -= 1;
+        setUnseenNotiNumber(UnseenFriendNoti, UnseenSocialNoti, UnseenSystemNoti);
+    }
     public void OnSystemGiftNotiClick() { }
     public void OnReachAchiveNotiClick() { }
     public void OnFriendNotiClick(GameObject CurentNoti_prefab, Notification_Struct noti)
@@ -195,12 +207,25 @@ public class DisplayNoti : MonoBehaviour
         GameObject obj = (GameObject)Resources.Load("Prefabs/Notification/Popup window/LifeRequestWindow", typeof(GameObject));
 
         GameObject popupWindow = (GameObject)Instantiate(obj, FriendNotiPanel.transform);
+        popupWindow.transform.Find("close_btn").gameObject.GetComponent<Button>().onClick.AddListener(() => Destroy(popupWindow));
+        popupWindow.transform.Find("GroupButton/Cancel").gameObject.GetComponent<Button>().onClick.AddListener(() => Destroy(popupWindow));
 
         IsreadNoti(CurentNoti_prefab, noti);
         UnseenFriendNoti -= 1;
         setUnseenNotiNumber(UnseenFriendNoti, UnseenSocialNoti, UnseenSystemNoti);
     }
-    public void OnSocialNotiClick() { Debug.Log("Thanh cong"); }
+    public void OnSocialNotiClick(GameObject CurentNoti_prefab, Notification_Struct noti)
+    {
+        GameObject obj = (GameObject)Resources.Load("Prefabs/Notification/Popup window/AddFriendRequestWindow", typeof(GameObject));
+
+        GameObject popupWindow = (GameObject)Instantiate(obj, SocialNotiPanel.transform);
+        popupWindow.transform.Find("close_btn").gameObject.GetComponent<Button>().onClick.AddListener(() => Destroy(popupWindow));
+        popupWindow.transform.Find("GroupButton/NO").gameObject.GetComponent<Button>().onClick.AddListener(() => Destroy(popupWindow));
+
+        IsreadNoti(CurentNoti_prefab, noti);
+        UnseenSocialNoti -= 1;
+        setUnseenNotiNumber(UnseenFriendNoti, UnseenSocialNoti, UnseenSystemNoti);
+    }
 
     private void IsreadNoti(GameObject CurentNoti_prefab, Notification_Struct noti)
     {

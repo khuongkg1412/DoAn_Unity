@@ -132,7 +132,18 @@ public class CreateCharacter : MonoBehaviour
         Friend_Player friend_Player = new Friend_Player()
         {
             accept_Friend = true,
-            friendID = "7xv28G3fCIf2UoO0rV2SFV5tTr62"
+            friendID = "admin"
+        };
+
+        Notification_Struct noti = new Notification_Struct()
+        {
+            content_Notification = "Welcome to game",
+            title_Notification = "Welcome to game",
+            sentID_Notification = "admin",
+            receivedID_Notification = ID,
+            isRead_Notification = false,
+            type_Notification = 0,
+            dateCreate = System.DateTime.Now
         };
 
         FirebaseFirestore db = FirebaseFirestore.DefaultInstance;
@@ -148,6 +159,9 @@ public class CreateCharacter : MonoBehaviour
 
         doc = db.Collection("Player").Document(ID).Collection("Friend_Player").Document(friend_Player.friendID);
         doc.SetAsync(friend_Player);
+
+        doc = db.Collection("Notifcation").Document();
+        doc.SetAsync(noti);
         yield return null;
     }
 }
