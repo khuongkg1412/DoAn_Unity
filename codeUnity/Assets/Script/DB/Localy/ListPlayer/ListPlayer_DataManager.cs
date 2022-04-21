@@ -22,6 +22,17 @@ public class ListPlayer_DataManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    float loadingTimer = 10f;
+    private void Update()
+    {
+        loadingTimer -= Time.deltaTime;
+        if (loadingTimer <= 0f)
+        {
+            loadingTimer = 10f;
+            ListPlayer_Loading a = new ListPlayer_Loading();
+            a.listPlayerOrderByLevel();
+        }
+    }
     public bool checkContainsInListPlayer(PlayerStruct item)
     {
         bool isContain = false;
