@@ -24,9 +24,9 @@ public class Player_Update
             doc = db.Collection("Player").Document(IDPlayer).Collection("Inventory_Player").Document(i.ID);
             doc.SetAsync(i);
         }
-        foreach (var i in Player_DataManager.Instance.systemNotification)
+        foreach (var i in Player_DataManager.Instance.notification_Player)
         {
-            doc = db.Collection("Player").Document(IDPlayer).Collection("SystemNotification").Document();
+            doc = db.Collection("Notifcation").Document(i.ID);
             doc.SetAsync(i);
         }
         foreach (var i in Player_DataManager.Instance.friend_Player)

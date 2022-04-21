@@ -113,38 +113,6 @@ public class Player_Loading : MonoBehaviour
             isDoneInvent = true;
         });
     }
-    private void loadDataSystemNotification()
-    {
-        isDoneSystemNoti = false;
-        //FireBase Object
-        FirebaseFirestore db;
-
-        //db connection
-        db = FirebaseFirestore.DefaultInstance;
-
-        Query allCitiesQuery = db.Collection("Player").Document(IDPlayer).Collection("SystemNotification");
-        allCitiesQuery.GetSnapshotAsync().ContinueWithOnMainThread(task =>
-        {
-            QuerySnapshot allCitiesQuerySnapshot = task.Result;
-            foreach (DocumentSnapshot documentSnapshot in allCitiesQuerySnapshot.Documents)
-            {
-                SystemNotification objectData = documentSnapshot.ConvertTo<SystemNotification>();
-                if (!Player_DataManager.Instance.systemNotification.Contains(objectData))
-                {
-                    Player_DataManager.Instance.systemNotification.Add(objectData);
-                }
-            }
-            if (task.IsCanceled)
-            {
-                Debug.LogError("loadDataSystemNotification Error");
-            }
-            else if (task.IsFaulted)
-            {
-                Debug.LogError("loadDataSystemNotification Faulted");
-            }
-            isDoneSystemNoti = true;
-        });
-    }
 
     private void loadDataFriend()
     {
@@ -181,7 +149,7 @@ public class Player_Loading : MonoBehaviour
         });
     }
 
-    private void loadDataNotification()
+    public void loadDataNotification()
     {
         isDoneNotification = false;
         //FireBase Object
@@ -253,7 +221,6 @@ public class Player_Loading : MonoBehaviour
         loadDataFriend();
         loadDataInvetory();
         loadDataNotification();
-        loadDataSystemNotification();
 
         yield return new WaitUntil(() => isDoneAchive && isDoneFriend && isDoneInvent && isDoneNotification && isDoneSystemNoti);
         Player_DataManager.Instance.updateStatPlayer();

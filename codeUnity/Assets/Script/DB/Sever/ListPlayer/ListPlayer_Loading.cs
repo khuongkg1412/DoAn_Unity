@@ -16,7 +16,6 @@ public class ListPlayer_Loading : MonoBehaviour
     public void listPlayerOrderByLevel()
     {
         FirebaseFirestore db = FirebaseFirestore.DefaultInstance;
-        Debug.Log("Loading lIst player");
         Query allCitiesQuery = db.Collection("Player");
         allCitiesQuery.GetSnapshotAsync().ContinueWithOnMainThread(task =>
         {

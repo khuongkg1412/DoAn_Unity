@@ -14,11 +14,20 @@ public class Player_DataManager : MonoBehaviour
 
     public Character playerCharacter;
     public List<Inventory_Player> inventory_Player = new List<Inventory_Player>();
-    public List<SystemNotification> systemNotification = new List<SystemNotification>();
     public List<Friend_Player> friend_Player = new List<Friend_Player>();
     public List<Notification_Struct> notification_Player = new List<Notification_Struct>();
     public List<AchievementStruct> achivementReceived_Player = new List<AchievementStruct>();
-
+    float loadingTimer = 10f;
+    private void Update()
+    {
+        loadingTimer -= Time.deltaTime;
+        if (loadingTimer <= 0f)
+        {
+            loadingTimer = 10f;
+            Player_Loading a = new Player_Loading();
+            a.loadDataNotification();
+        }
+    }
     private void Awake()
     {
         if (Instance == null)
