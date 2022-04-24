@@ -66,7 +66,7 @@ public class Player_Controller : MonoBehaviour
             buffItem.GetComponent<ItemBuff>().itemBuff = Player_DataManager.Instance.playerCharacter.getItemBuff();
             buffItem.GetComponent<ItemBuff>().setDataForBuff();
         }
-        gameObject.GetComponent<SpriteRenderer>().sprite = ConvertToSprite(loadingImageFromFilePath(Player_DataManager.Instance.returnURLCurrentSprite()));
+        gameObject.GetComponent<SpriteRenderer>().sprite = loadingImageFromFilePath(Player_DataManager.Instance.returnURLCurrentSprite());
         settingCharacter();
         //Let Player shoot and move fistly
         Character.setShoot(true);
@@ -78,10 +78,6 @@ public class Player_Controller : MonoBehaviour
         //Set avatar for player
         GameObject.Find("Avatar_Player").GetComponent<RawImage>().texture = Player_DataManager.Instance.Player.texture2D;
     }
-    Sprite ConvertToSprite(Texture2D texture)
-    {
-        return Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero);
-    }
     // Update is called once per frame
     void Update()
     {
@@ -91,7 +87,7 @@ public class Player_Controller : MonoBehaviour
         updateMovement();
     }
 
-    Texture2D loadingImageFromFilePath(string Filepath)
+    Sprite loadingImageFromFilePath(string Filepath)
     {
         Filepath = "Prefabs/Gameplay/Player/" + Filepath;
         Debug.Log("FilePath: " + Filepath);
@@ -99,7 +95,7 @@ public class Player_Controller : MonoBehaviour
         if (Resources.Load<Sprite>(Filepath) != null)
         {
             //Return image in Texture2D type
-            return Resources.Load<Texture2D>(Filepath);
+            return Resources.Load<Sprite>(Filepath);
         }
         return null;
     }
