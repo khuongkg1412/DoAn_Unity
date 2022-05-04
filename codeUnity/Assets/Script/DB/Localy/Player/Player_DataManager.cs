@@ -129,6 +129,21 @@ public class Player_DataManager : MonoBehaviour
         };
     }
 
+    public NumeralStruct totalStatEquiqedItem()
+    {
+        Player_DataManager.Instance.updateStatPlayer();
+        NumeralStruct totalStat = new NumeralStruct()
+        {
+            ATK_Numeral = stats.ATK_Numeral + Player.numeral.ATK_Numeral,
+            DEF_Numeral = stats.DEF_Numeral + Player.numeral.DEF_Numeral,
+            HP_Numeral = stats.HP_Numeral + Player.numeral.HP_Numeral,
+            SPD_Numeral = stats.SPD_Numeral + Player.numeral.SPD_Numeral,
+            ATKSPD_Numeral = stats.ATKSPD_Numeral + Player.numeral.ATKSPD_Numeral,
+
+        };
+        return totalStat;
+    }
+
     public void updateCoinConcurrency(float amountUpdate)
     {
         Player.concurrency.Coin += Mathf.Round(amountUpdate);
@@ -200,12 +215,37 @@ public class Player_DataManager : MonoBehaviour
             Player.level.reachXP = 100 * Player.level.level * (float)1.3;
             //Set currento 0 after level up
             Player.level.currentXP = 0;
+            player_IncreaseNumeral();
         }
         Player.level.currentXP += totalExp;
         //Call to update the information off Player
         Player_Update.UpdatePlayer();
     }
-
+    public void player_IncreaseNumeral()
+    {
+        if (Player.level.level % 5 == 0)
+        {
+            Player.numeral = new NumeralStruct()
+            {
+                ATK_Numeral = Player.numeral.ATK_Numeral + 1,
+                HP_Numeral = Player.numeral.HP_Numeral + 1,
+                DEF_Numeral = Player.numeral.DEF_Numeral + 1,
+                SPD_Numeral = Player.numeral.SPD_Numeral,
+                ATKSPD_Numeral = Player.numeral.ATKSPD_Numeral
+            };
+        }
+        else
+        {
+            Player.numeral = new NumeralStruct()
+            {
+                ATK_Numeral = Player.numeral.ATK_Numeral,
+                HP_Numeral = Player.numeral.HP_Numeral + 1,
+                DEF_Numeral = Player.numeral.DEF_Numeral,
+                SPD_Numeral = Player.numeral.SPD_Numeral,
+                ATKSPD_Numeral = Player.numeral.ATKSPD_Numeral
+            };
+        }
+    }
 
     public void player_GetRewardAchievement(AchievementStruct achieve)
     {

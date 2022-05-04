@@ -23,6 +23,7 @@ public class Boss2 : MonoBehaviour
     private void Start()
     {
         virus = new VirusBoss2();
+        gamePlay = GameObject.Find("Canvas");
         gameObject.GetComponent<SpriteRenderer>().sprite = virus.image;
         setNumeral();
         gameObject.GetComponent<Virus_Numeral>().settingNumeral(virus);
@@ -66,6 +67,7 @@ public class Boss2 : MonoBehaviour
         //Check the second time if the virus is not revive
         if (virus.isDead)
         {
+            Debug.Log("Dead");
             GameObject.FindWithTag("Player").GetComponent<Player_Controller>().Character.setScore(100f);
             gamePlay.GetComponent<Game_Boss>().isGameOver = true;
             gamePlay.GetComponent<Game_Boss>().isVictory = true;

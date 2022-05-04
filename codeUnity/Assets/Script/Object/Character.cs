@@ -74,6 +74,7 @@ public struct Character
 
     public NumeralStruct returnNumeral()
     {
+        this.numeral = Player_DataManager.Instance.totalStatEquiqedItem();
         return this.numeral;
     }
 
